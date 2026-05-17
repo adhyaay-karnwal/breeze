@@ -9,6 +9,7 @@
  */
 
 import { cn } from "@/lib/display/utils";
+import { useMemo } from "react";
 
 // Re-export LucideIcon type for typed icon props
 export type { LucideIcon } from "lucide-react";
@@ -131,529 +132,433 @@ export function BlocksIcon({ className }: IconProps) {
 	);
 }
 
-/**
- * Animated loading version of the Breeze icon
- * Wave animation radiates outward from center diamond
- */
+const HOVER_FRAMES: [number, number][][] = [
+	[
+		[1, 1],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 1],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+	[
+		[0, 5],
+		[1, 1],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 1],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+	[
+		[0, 5],
+		[1, 1],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 1],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+	[
+		[0, 5],
+		[1, 1],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 1],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+	[
+		[0, 5],
+		[1, 1],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+	[
+		[0, 5],
+		[1, 1],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 5],
+		[8, 8],
+		[9, 5],
+		[9, 9],
+	],
+	[
+		[0, 5],
+		[1, 1],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 8],
+	],
+	[
+		[0, 5],
+		[1, 1],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[9, 1],
+		[9, 5],
+	],
+	[
+		[0, 5],
+		[1, 1],
+		[1, 5],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 1],
+		[9, 5],
+		[10, 5],
+	],
+	[
+		[1, 1],
+		[1, 5],
+		[2, 2],
+		[2, 5],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 1],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+	[
+		[2, 2],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 1],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+	[
+		[1, 5],
+		[1, 9],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 1],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+	[
+		[0, 5],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+	[
+		[0, 5],
+		[1, 1],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 1],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+	[
+		[0, 5],
+		[1, 1],
+		[1, 5],
+		[1, 9],
+		[2, 2],
+		[2, 5],
+		[2, 8],
+		[3, 3],
+		[3, 5],
+		[3, 7],
+		[5, 1],
+		[5, 2],
+		[5, 3],
+		[5, 7],
+		[5, 8],
+		[5, 9],
+		[5, 10],
+		[7, 3],
+		[7, 5],
+		[7, 7],
+		[8, 2],
+		[8, 5],
+		[8, 8],
+		[9, 1],
+		[9, 5],
+		[9, 9],
+		[10, 5],
+	],
+];
+
 export function BlocksLoadingIcon({ className }: IconProps) {
-	const dur = "1.6s";
+	const delay = useMemo(() => Math.random() * -1.6, []);
 	return (
 		<svg viewBox="0 0 11 11" className={className} fill="currentColor">
-			{/* Phase 0: Innermost diagonal blocks (center pulse) */}
-			<rect x="3" y="3" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="1;0.55;1"
-					dur={dur}
-					begin="-0.8s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="7" y="3" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="1;0.55;1"
-					dur={dur}
-					begin="-0.8s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="7" y="7" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="1;0.55;1"
-					dur={dur}
-					begin="-0.8s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="3" y="7" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="1;0.55;1"
-					dur={dur}
-					begin="-0.8s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 1: Inner cross */}
-			<rect x="5" y="3" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="3" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="7" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="5" y="7" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 2: Cross extensions */}
-			<rect x="5" y="2" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.16s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="2" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.16s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="8" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.16s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="5" y="8" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.16s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 3: Mid diagonals */}
-			<rect x="2" y="2" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.32s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="8" y="2" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.32s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="8" y="8" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.32s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="2" y="8" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.32s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 4: Outer cross */}
-			<rect x="5" y="1" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.48s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="1" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.48s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="9" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.48s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="5" y="9" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.48s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 5: Arm tips */}
-			<rect x="5" y="0" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.64s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="0" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.64s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="10" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.64s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="5" y="10" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.64s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 6: Outer diagonals */}
-			<rect x="1" y="1" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.8s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="9" y="1" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.8s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="9" y="9" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.8s"
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="1" y="9" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin="0.8s"
-					repeatCount="indefinite"
-				/>
-			</rect>
+			{HOVER_FRAMES.map((blocks, fi) => (
+				<g key={fi}>
+					<animate
+						attributeName="opacity"
+						values="0; 1; 0"
+						keyTimes={`0; ${fi / 15}; ${(fi + 1) / 15}`}
+						begin={`${delay}s`}
+						dur="1.6s"
+						repeatCount="indefinite"
+						calcMode="discrete"
+					/>
+					{blocks.map(([x, y]) => (
+						<rect key={`${x}-${y}`} x={x} y={y} width="1" height="1" />
+					))}
+				</g>
+			))}
 		</svg>
 	);
 }
-/**
- * Breeze loading icon — CSS keyframe variant
- * Wave animation radiates outward from center diamond
- */
+
 export function BreezeLoadingIcon2({ className }: IconProps) {
-	return (
-		<svg viewBox="0 0 11 11" className={className} fill="currentColor">
-			<style>
-				{`
-					@keyframes ai-pulse-wave {
-						0%, 60%, 100% { opacity: 0.2; transform: scale(0.6); }
-						30% { opacity: 1; transform: scale(1); }
-					}
-					.ai-block {
-						transform-origin: center;
-						transform-box: fill-box;
-						animation: ai-pulse-wave 1.5s infinite ease-in-out;
-					}
-				`}
-			</style>
-			{/* Phase 0: Innermost diagonal (center) */}
-			<rect
-				x="3"
-				y="3"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-1.2s" }}
-			/>
-			<rect
-				x="7"
-				y="3"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-1.2s" }}
-			/>
-			<rect
-				x="7"
-				y="7"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-1.2s" }}
-			/>
-			<rect
-				x="3"
-				y="7"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-1.2s" }}
-			/>
-			{/* Phase 1: Inner cross */}
-			<rect
-				x="5"
-				y="3"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-1.05s" }}
-			/>
-			<rect
-				x="3"
-				y="5"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-1.05s" }}
-			/>
-			<rect
-				x="7"
-				y="5"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-1.05s" }}
-			/>
-			<rect
-				x="5"
-				y="7"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-1.05s" }}
-			/>
-			{/* Phase 2: Cross extensions */}
-			<rect
-				x="5"
-				y="2"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.9s" }}
-			/>
-			<rect
-				x="2"
-				y="5"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.9s" }}
-			/>
-			<rect
-				x="8"
-				y="5"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.9s" }}
-			/>
-			<rect
-				x="5"
-				y="8"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.9s" }}
-			/>
-			{/* Phase 3: Mid diagonals */}
-			<rect
-				x="2"
-				y="2"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.75s" }}
-			/>
-			<rect
-				x="8"
-				y="2"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.75s" }}
-			/>
-			<rect
-				x="8"
-				y="8"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.75s" }}
-			/>
-			<rect
-				x="2"
-				y="8"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.75s" }}
-			/>
-			{/* Phase 4: Outer cross */}
-			<rect
-				x="5"
-				y="1"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.6s" }}
-			/>
-			<rect
-				x="1"
-				y="5"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.6s" }}
-			/>
-			<rect
-				x="9"
-				y="5"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.6s" }}
-			/>
-			<rect
-				x="5"
-				y="9"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.6s" }}
-			/>
-			{/* Phase 5: Arm tips */}
-			<rect
-				x="5"
-				y="0"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.45s" }}
-			/>
-			<rect
-				x="0"
-				y="5"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.45s" }}
-			/>
-			<rect
-				x="10"
-				y="5"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.45s" }}
-			/>
-			<rect
-				x="5"
-				y="10"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.45s" }}
-			/>
-			{/* Phase 6: Outer diagonals */}
-			<rect
-				x="1"
-				y="1"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.3s" }}
-			/>
-			<rect
-				x="9"
-				y="1"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.3s" }}
-			/>
-			<rect
-				x="9"
-				y="9"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.3s" }}
-			/>
-			<rect
-				x="1"
-				y="9"
-				width="1"
-				height="1"
-				className="ai-block"
-				style={{ animationDelay: "-0.3s" }}
-			/>
-		</svg>
-	);
+	return <BlocksLoadingIcon className={className} />;
 }
 
 /**
@@ -1038,276 +943,104 @@ export function MistralIcon({ className }: IconProps) {
 
 /**
  * Animated thinking icon with speed-differentiated animation.
- * Uses the same block pattern as BreezeLoadingIcon but with parameterized duration.
+ * Uses the same blocks pattern as ProliferateLoadingIcon but with parameterized duration.
  */
 export function ThinkingIcon({
 	className,
 	speed = "normal",
 }: IconProps & { speed?: "quick" | "normal" | "deep" }) {
 	const dur = speed === "quick" ? "0.8s" : speed === "deep" ? "2.4s" : "1.4s";
-	const offsets = ["-0.8s", "0s", "0.16s", "0.32s", "0.48s", "0.64s", "0.8s"];
+	const offsets = ["-0.8s", "0s", "0.16s", "0.32s", "0.48s", "0.64s", "0.8s", "0.96s", "1.12s"];
+	// Scale begin offsets proportionally to duration
 	const durNum = Number.parseFloat(dur);
 	const scale = durNum / 1.6;
-	const b = offsets.map((o) => `${Number.parseFloat(o) * scale}s`);
+	const beginValues = offsets.map((o) => `${Number.parseFloat(o) * scale}s`);
 
 	return (
-		<svg viewBox="0 0 11 11" className={className} fill="currentColor">
-			{/* Phase 0: Innermost diagonal (center pulse) */}
-			<rect x="3" y="3" width="1" height="1">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="300 300 200 200"
+			className={className}
+			fill="none"
+		>
+			<rect x="375.00" y="375.00" width="50.00" height="50.00" fill="currentColor">
 				<animate
 					attributeName="opacity"
 					values="1;0.55;1"
 					dur={dur}
-					begin={b[0]}
+					begin={beginValues[0]}
 					repeatCount="indefinite"
 				/>
 			</rect>
-			<rect x="7" y="3" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="1;0.55;1"
-					dur={dur}
-					begin={b[0]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="7" y="7" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="1;0.55;1"
-					dur={dur}
-					begin={b[0]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="3" y="7" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="1;0.55;1"
-					dur={dur}
-					begin={b[0]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 1: Inner cross */}
-			<rect x="5" y="3" width="1" height="1">
+			<rect x="387.67" y="305.00" width="24.67" height="24.67" fill="currentColor">
 				<animate
 					attributeName="opacity"
 					values="0.35;1;0.35"
 					dur={dur}
-					begin={b[1]}
+					begin={beginValues[1]}
 					repeatCount="indefinite"
 				/>
 			</rect>
-			<rect x="3" y="5" width="1" height="1">
+			<rect x="429.00" y="346.33" width="24.67" height="24.67" fill="currentColor">
 				<animate
 					attributeName="opacity"
 					values="0.35;1;0.35"
 					dur={dur}
-					begin={b[1]}
+					begin={beginValues[2]}
 					repeatCount="indefinite"
 				/>
 			</rect>
-			<rect x="7" y="5" width="1" height="1">
+			<rect x="470.33" y="387.67" width="24.67" height="24.67" fill="currentColor">
 				<animate
 					attributeName="opacity"
 					values="0.35;1;0.35"
 					dur={dur}
-					begin={b[1]}
+					begin={beginValues[3]}
 					repeatCount="indefinite"
 				/>
 			</rect>
-			<rect x="5" y="7" width="1" height="1">
+			<rect x="429.00" y="429.00" width="24.67" height="24.67" fill="currentColor">
 				<animate
 					attributeName="opacity"
 					values="0.35;1;0.35"
 					dur={dur}
-					begin={b[1]}
+					begin={beginValues[4]}
 					repeatCount="indefinite"
 				/>
 			</rect>
-			{/* Phase 2: Cross extensions */}
-			<rect x="5" y="2" width="1" height="1">
+			<rect x="387.67" y="470.33" width="24.67" height="24.67" fill="currentColor">
 				<animate
 					attributeName="opacity"
 					values="0.35;1;0.35"
 					dur={dur}
-					begin={b[2]}
+					begin={beginValues[5]}
 					repeatCount="indefinite"
 				/>
 			</rect>
-			<rect x="2" y="5" width="1" height="1">
+			<rect x="346.33" y="429.00" width="24.67" height="24.67" fill="currentColor">
 				<animate
 					attributeName="opacity"
 					values="0.35;1;0.35"
 					dur={dur}
-					begin={b[2]}
+					begin={beginValues[6]}
 					repeatCount="indefinite"
 				/>
 			</rect>
-			<rect x="8" y="5" width="1" height="1">
+			<rect x="305.00" y="387.67" width="24.67" height="24.67" fill="currentColor">
 				<animate
 					attributeName="opacity"
 					values="0.35;1;0.35"
 					dur={dur}
-					begin={b[2]}
+					begin={beginValues[7]}
 					repeatCount="indefinite"
 				/>
 			</rect>
-			<rect x="5" y="8" width="1" height="1">
+			<rect x="346.33" y="346.33" width="24.67" height="24.67" fill="currentColor">
 				<animate
 					attributeName="opacity"
 					values="0.35;1;0.35"
 					dur={dur}
-					begin={b[2]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 3: Mid diagonals */}
-			<rect x="2" y="2" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[3]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="8" y="2" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[3]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="8" y="8" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[3]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="2" y="8" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[3]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 4: Outer cross */}
-			<rect x="5" y="1" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[4]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="1" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[4]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="9" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[4]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="5" y="9" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[4]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 5: Arm tips */}
-			<rect x="5" y="0" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[5]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="0" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[5]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="10" y="5" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[5]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="5" y="10" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[5]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			{/* Phase 6: Outer diagonals */}
-			<rect x="1" y="1" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[6]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="9" y="1" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[6]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="9" y="9" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[6]}
-					repeatCount="indefinite"
-				/>
-			</rect>
-			<rect x="1" y="9" width="1" height="1">
-				<animate
-					attributeName="opacity"
-					values="0.35;1;0.35"
-					dur={dur}
-					begin={b[6]}
+					begin={beginValues[8]}
 					repeatCount="indefinite"
 				/>
 			</rect>

@@ -5,12 +5,12 @@ import { openIntercomMessenger } from "@/components/providers/intercom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
+	BreezeLoadingIcon2,
 	CoworkersIcon,
 	IntegrationsIcon,
 	OpenCodeIcon,
 	SessionsGridIcon,
 	SidebarCollapseIcon,
-	SidebarExpandIcon,
 } from "@/components/ui/icons";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -89,7 +89,7 @@ export function MobileSidebar() {
 
 // Desktop sidebar - hidden on mobile
 export function Sidebar() {
-	const { sidebarCollapsed, toggleSidebar, setActiveSession } = useDashboardStore();
+	const { sidebarCollapsed, toggleSidebar } = useDashboardStore();
 	const pathname = usePathname();
 	const router = useRouter();
 
@@ -118,33 +118,16 @@ export function Sidebar() {
 				<Button
 					variant="ghost"
 					size="icon"
-					className="h-8 w-8 text-muted-foreground hover:text-foreground self-end mr-0.5"
+					className="h-8 w-8 text-muted-foreground hover:text-foreground"
 					onClick={(e) => {
 						e.stopPropagation();
 						toggleSidebar();
 					}}
-					title="Expand sidebar"
+					title="Breeze"
 				>
-					<SidebarExpandIcon className="h-4 w-4" />
+					<BreezeLoadingIcon2 className="h-5 w-5" />
 				</Button>
 				<div className="my-1" />
-				<Button
-					variant="ghost"
-					size="icon"
-					className="h-8 w-8 text-muted-foreground hover:text-foreground"
-					onClick={(e) => {
-						e.stopPropagation();
-						setActiveSession(null);
-						router.push("/sessions");
-					}}
-					title="Sessions"
-				>
-					<img
-						src="https://d1uh4o7rpdqkkl.cloudfront.net/logo.webp"
-						alt="Breeze"
-						className="h-4 w-4 rounded-full"
-					/>
-				</Button>
 				<Button
 					variant={isHomePage ? "secondary" : "ghost"}
 					size="icon"
@@ -264,7 +247,7 @@ export function SidebarShell({
 }) {
 	const handleSignOut = useSignOut();
 	const { data: authSession } = useSession();
-	const { theme, resolvedTheme, setTheme } = useTheme();
+	const { theme, setTheme } = useTheme();
 	const [userMenuOpen, setUserMenuOpen] = useState(false);
 
 	const billing = useBillingState();
@@ -287,15 +270,8 @@ export function SidebarShell({
 			{/* Header: Logo + actions */}
 			<div className="p-3 flex items-center justify-between gap-2">
 				<div className="flex items-center gap-2">
-					<img
-						src={
-							resolvedTheme === "dark"
-								? "https://d1uh4o7rpdqkkl.cloudfront.net/logotype-inverted.webp"
-								: "https://d1uh4o7rpdqkkl.cloudfront.net/logotype.webp"
-						}
-						alt="Breeze"
-						className="h-5"
-					/>
+					<BreezeLoadingIcon2 className="h-6 w-6 shrink-0" />
+					<span className="text-sm font-semibold">Breeze</span>
 				</div>
 				<div className="flex items-center gap-1">
 					{showCollapseButton && (
