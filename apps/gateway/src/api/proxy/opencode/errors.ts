@@ -1,5 +1,5 @@
 import type { ServerResponse } from "http";
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 
 const logger = createLogger({ service: "gateway" }).child({ module: "proxy-opencode" });
 

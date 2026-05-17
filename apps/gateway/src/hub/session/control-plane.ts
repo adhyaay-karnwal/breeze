@@ -1,8 +1,8 @@
-import type { ControlPlaneSnapshotMessage } from "@proliferate/shared";
+import type { ControlPlaneSnapshotMessage } from "@breeze/shared";
 import type {
 	SessionOperatorStatus,
 	SessionRuntimeStatus,
-} from "@proliferate/shared/contracts/sessions";
+} from "@breeze/shared/contracts/sessions";
 import type { SessionRecord } from "./runtime/session-context-store";
 
 export type ControlPlaneSnapshotPayload = ControlPlaneSnapshotMessage["payload"];

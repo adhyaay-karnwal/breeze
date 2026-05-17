@@ -1,5 +1,5 @@
-import type { Logger } from "@proliferate/logger";
-import { sessions } from "@proliferate/services";
+import type { Logger } from "@breeze/logger";
+import { sessions } from "@breeze/services";
 import { getServiceJwt } from "../auth";
 import type { ManagerToolContext } from "../types";
 
@@ -41,7 +41,7 @@ export async function handleSpawnChildTask(
 			});
 		} else {
 			const jwt = await getServiceJwt(ctx);
-			fetch(`${ctx.gatewayUrl}/proliferate/${childSession.id}/eager-start`, {
+			fetch(`${ctx.gatewayUrl}/breeze/${childSession.id}/eager-start`, {
 				method: "POST",
 				headers: {
 					Authorization: `Bearer ${jwt}`,
@@ -157,7 +157,7 @@ export async function handleMessageChild(
 			return JSON.stringify({ ok: true });
 		}
 		const jwt = await getServiceJwt(ctx);
-		const res = await fetch(`${ctx.gatewayUrl}/proliferate/${sessionId}/message`, {
+		const res = await fetch(`${ctx.gatewayUrl}/breeze/${sessionId}/message`, {
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${jwt}`,
@@ -204,7 +204,7 @@ export async function handleCancelChild(
 			return JSON.stringify({ ok: true, session_id: sessionId });
 		}
 		const jwt = await getServiceJwt(ctx);
-		const res = await fetch(`${ctx.gatewayUrl}/proliferate/${sessionId}/cancel`, {
+		const res = await fetch(`${ctx.gatewayUrl}/breeze/${sessionId}/cancel`, {
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${jwt}`,
@@ -244,7 +244,7 @@ export async function handleWakeChild(
 			return JSON.stringify({ ok: true, session_id: sessionId, status: "starting" });
 		}
 		const jwt = await getServiceJwt(ctx);
-		const res = await fetch(`${ctx.gatewayUrl}/proliferate/${sessionId}/eager-start`, {
+		const res = await fetch(`${ctx.gatewayUrl}/breeze/${sessionId}/eager-start`, {
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${jwt}`,

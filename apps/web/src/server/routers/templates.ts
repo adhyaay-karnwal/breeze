@@ -4,8 +4,8 @@
  * Read-only endpoint for serving the automation template catalog.
  */
 
-import { templates } from "@proliferate/services";
-import { AutomationTemplateSchema } from "@proliferate/shared/contracts/templates";
+import { templates } from "@breeze/services";
+import { AutomationTemplateSchema } from "@breeze/shared/contracts/templates";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

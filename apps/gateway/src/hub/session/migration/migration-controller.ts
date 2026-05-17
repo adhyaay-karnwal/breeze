@@ -4,10 +4,10 @@
  * Schedules snapshot-before-expiry and handles sandbox migration.
  */
 
-import type { Logger } from "@proliferate/logger";
-import { notifications, sessions } from "@proliferate/services";
-import type { SandboxProviderType } from "@proliferate/shared";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+import type { Logger } from "@breeze/logger";
+import { notifications, sessions } from "@breeze/services";
+import type { SandboxProviderType } from "@breeze/shared";
+import { getSandboxProvider } from "@breeze/shared/providers";
 import type { GatewayEnv } from "../../../lib/env";
 import { cancelSessionExpiry } from "../../../operations/expiry/queue";
 import type { SessionRuntime } from "../../session-runtime";

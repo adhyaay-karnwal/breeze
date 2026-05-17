@@ -5,7 +5,7 @@
  * Reuses the same pattern as use-coding-session-runtime.ts
  */
 
-import { type SyncClient, createSyncClient } from "@proliferate/gateway-clients";
+import { type SyncClient, createSyncClient } from "@breeze/gateway-clients";
 import { GATEWAY_URL } from "./gateway";
 import { orpc } from "./orpc";
 

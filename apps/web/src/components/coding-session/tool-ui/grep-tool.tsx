@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 type GrepArgs = {
 	pattern?: string;
@@ -23,7 +23,7 @@ export const GrepToolUI = makeAssistantToolUI<GrepArgs, string>({
 		const matchCount = result ? result.split("\n").filter((l) => l.trim()).length : null;
 
 		return (
-			<ProliferateToolCard label="Grep search" status={isRunning ? "running" : "success"}>
+			<BreezeToolCard label="Grep search" status={isRunning ? "running" : "success"}>
 				<Button
 					variant="ghost"
 					onClick={() => result && setIsExpanded(!isExpanded)}
@@ -49,7 +49,7 @@ export const GrepToolUI = makeAssistantToolUI<GrepArgs, string>({
 						{result.length > 3000 && "\n..."}
 					</pre>
 				)}
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

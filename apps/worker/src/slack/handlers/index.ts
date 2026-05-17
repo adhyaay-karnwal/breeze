@@ -4,8 +4,8 @@
  * Defines handler interfaces and exports all handlers.
  */
 
-import type { ServerMessage, SyncClient } from "@proliferate/gateway-clients";
-import type { Logger } from "@proliferate/logger";
+import type { ServerMessage, SyncClient } from "@breeze/gateway-clients";
+import type { Logger } from "@breeze/logger";
 import type { SlackApiClient } from "../api";
 
 /**

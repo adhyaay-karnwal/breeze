@@ -11,8 +11,8 @@
  * - All values (persisted or not) are written to the sandbox for the current session.
  */
 
-import type { SandboxProviderType } from "@proliferate/shared";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+import type { SandboxProviderType } from "@breeze/shared";
+import { getSandboxProvider } from "@breeze/shared/providers";
 import { getServicesLogger } from "../logger";
 import * as secrets from "../secrets";
 import { SessionInvalidStateError, SessionNotFoundError } from "./errors";

@@ -169,7 +169,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "Context7 API key",
 		recommendedSecretKey: "CONTEXT7_API_KEY",
-		docsUrl: "https://docs.proliferate.com/integrations/context7",
+		docsUrl: "https://docs.breeze.engineer/integrations/context7",
 	},
 	{
 		key: "posthog",
@@ -187,7 +187,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "PostHog personal API key",
 		recommendedSecretKey: "POSTHOG_API_KEY",
-		docsUrl: "https://docs.proliferate.com/integrations/posthog-mcp",
+		docsUrl: "https://docs.breeze.engineer/integrations/posthog-mcp",
 	},
 	{
 		key: "firecrawl",
@@ -204,7 +204,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "Firecrawl API key",
 		recommendedSecretKey: "FIRECRAWL_API_KEY",
-		docsUrl: "https://docs.proliferate.com/integrations/firecrawl",
+		docsUrl: "https://docs.breeze.engineer/integrations/firecrawl",
 	},
 	{
 		key: "neon",
@@ -222,7 +222,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "Neon API key",
 		recommendedSecretKey: "NEON_API_KEY",
-		docsUrl: "https://docs.proliferate.com/integrations/neon",
+		docsUrl: "https://docs.breeze.engineer/integrations/neon",
 	},
 	{
 		key: "stripe",
@@ -240,7 +240,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "Stripe secret key",
 		recommendedSecretKey: "STRIPE_SECRET_KEY",
-		docsUrl: "https://docs.proliferate.com/integrations/stripe",
+		docsUrl: "https://docs.breeze.engineer/integrations/stripe",
 	},
 	{
 		key: "zapier",
@@ -258,7 +258,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "Zapier API key",
 		recommendedSecretKey: "ZAPIER_API_KEY",
-		docsUrl: "https://docs.proliferate.com/integrations/zapier",
+		docsUrl: "https://docs.breeze.engineer/integrations/zapier",
 	},
 	{
 		key: "supabase",
@@ -276,7 +276,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "Supabase personal access token",
 		recommendedSecretKey: "SUPABASE_ACCESS_TOKEN",
-		docsUrl: "https://docs.proliferate.com/integrations/supabase",
+		docsUrl: "https://docs.breeze.engineer/integrations/supabase",
 	},
 	{
 		key: "asana",
@@ -294,7 +294,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "Asana personal access token",
 		recommendedSecretKey: "ASANA_ACCESS_TOKEN",
-		docsUrl: "https://docs.proliferate.com/integrations/asana",
+		docsUrl: "https://docs.breeze.engineer/integrations/asana",
 	},
 	{
 		key: "semgrep",
@@ -312,7 +312,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "Semgrep API token",
 		recommendedSecretKey: "SEMGREP_API_TOKEN",
-		docsUrl: "https://docs.proliferate.com/integrations/semgrep",
+		docsUrl: "https://docs.breeze.engineer/integrations/semgrep",
 	},
 	{
 		key: "newrelic",
@@ -349,7 +349,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "DeepWiki API key",
 		recommendedSecretKey: "DEEPWIKI_API_KEY",
-		docsUrl: "https://docs.proliferate.com/integrations/deepwiki",
+		docsUrl: "https://docs.breeze.engineer/integrations/deepwiki",
 	},
 	{
 		key: "apify",
@@ -367,7 +367,7 @@ export const CONNECTOR_PRESETS: ConnectorPreset[] = [
 		quickSetup: true,
 		secretLabel: "Apify API token",
 		recommendedSecretKey: "APIFY_API_TOKEN",
-		docsUrl: "https://docs.proliferate.com/integrations/apify",
+		docsUrl: "https://docs.breeze.engineer/integrations/apify",
 	},
 	{
 		key: "tavily",

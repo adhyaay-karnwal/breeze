@@ -1,7 +1,7 @@
 "use client";
 
 import { orpc } from "@/lib/infra/orpc";
-import type { CheckSecretsInput, CreateSecretInput } from "@proliferate/shared/contracts/secrets";
+import type { CheckSecretsInput, CreateSecretInput } from "@breeze/shared/contracts/secrets";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useSecrets() {

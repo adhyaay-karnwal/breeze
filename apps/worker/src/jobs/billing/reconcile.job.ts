@@ -5,11 +5,11 @@
  * Per-org errors are isolated — one failure does not abort the entire run.
  */
 
-import type { Logger } from "@proliferate/logger";
-import type { Job } from "@proliferate/queue";
-import type { BillingReconcileJob } from "@proliferate/queue";
-import { billing, orgs } from "@proliferate/services";
-import { AUTUMN_FEATURES, METERING_CONFIG, autumnGetBalance } from "@proliferate/shared/billing";
+import type { Logger } from "@breeze/logger";
+import type { Job } from "@breeze/queue";
+import type { BillingReconcileJob } from "@breeze/queue";
+import { billing, orgs } from "@breeze/services";
+import { AUTUMN_FEATURES, METERING_CONFIG, autumnGetBalance } from "@breeze/shared/billing";
 
 export async function processReconcileJob(
 	_job: Job<BillingReconcileJob>,

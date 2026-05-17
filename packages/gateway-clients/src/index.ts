@@ -1,7 +1,7 @@
 /**
  * Gateway Clients
  *
- * Typed client for interacting with the Proliferate Gateway.
+ * Typed client for interacting with the Breeze Gateway.
  * Works in browser, Node workers, and API routes.
  */
 
@@ -19,7 +19,7 @@ export type {
 	ErrorMessage,
 	SnapshotResultMessage,
 	TextPartCompleteMessage,
-} from "@proliferate/shared";
+} from "@breeze/shared";
 
 // Base client interface and type guards
 export {
@@ -70,4 +70,4 @@ export {
 	type OpenCodeClientOptions,
 } from "./clients/external";
 
-// Server-only exports available at "@proliferate/gateway-clients/server"
+// Server-only exports available at "@breeze/gateway-clients/server"

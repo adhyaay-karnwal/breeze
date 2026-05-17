@@ -24,21 +24,21 @@ const {
 	mockSelectConfiguration: vi.fn(),
 }));
 
-vi.mock("@proliferate/environment/server", () => ({
+vi.mock("@breeze/environment/server", () => ({
 	env: {
 		NEXT_PUBLIC_GATEWAY_URL: "http://localhost:3001",
 		SERVICE_TO_SERVICE_AUTH_TOKEN: "test-token",
 	},
 }));
 
-vi.mock("@proliferate/gateway-clients", () => ({
+vi.mock("@breeze/gateway-clients", () => ({
 	createSyncClient: vi.fn(() => ({
 		createSession: mockCreateSession,
 		postMessage: mockPostMessage,
 	})),
 }));
 
-vi.mock("@proliferate/queue", () => ({
+vi.mock("@breeze/queue", () => ({
 	createAutomationEnrichQueue: vi.fn(),
 	createAutomationExecuteQueue: vi.fn(),
 	createAutomationEnrichWorker: vi.fn(),
@@ -48,7 +48,7 @@ vi.mock("@proliferate/queue", () => ({
 	queueAutomationExecute: vi.fn(),
 }));
 
-vi.mock("@proliferate/services", () => ({
+vi.mock("@breeze/services", () => ({
 	outbox: {
 		claimPendingOutbox: vi.fn(),
 		recoverStuckOutbox: vi.fn(),
@@ -160,14 +160,14 @@ describe("handleExecute (target resolution integration)", () => {
 		mockCreateSession.mockResolvedValue({ sessionId: "sess-1" });
 		mockPostMessage.mockResolvedValue({});
 
-		const { createSyncClient } = await import("@proliferate/gateway-clients");
+		const { createSyncClient } = await import("@breeze/gateway-clients");
 		syncClient = (createSyncClient as ReturnType<typeof vi.fn>)() as typeof syncClient;
 
 		// handleExecute is not exported, so we access it through the module's startAutomationWorkers
 		// Instead, we'll test the flow via a re-exported helper or by extracting.
 		// Since handleExecute is private, we need to invoke it through the worker callback.
 		// But in the test pattern, the createAutomationExecuteWorker mock captures the callback.
-		const { createAutomationExecuteWorker } = await import("@proliferate/queue");
+		const { createAutomationExecuteWorker } = await import("@breeze/queue");
 		const mockWorkerFactory = createAutomationExecuteWorker as ReturnType<typeof vi.fn>;
 
 		// We need to trigger startAutomationWorkers to capture the execute callback
@@ -180,7 +180,7 @@ describe("handleExecute (target resolution integration)", () => {
 			trace: vi.fn(),
 			fatal: vi.fn(),
 			child: vi.fn(),
-		} as unknown as import("@proliferate/logger").Logger);
+		} as unknown as import("@breeze/logger").Logger);
 
 		const executeCallback = mockWorkerFactory.mock.calls[0]?.[0];
 		if (!executeCallback) throw new Error("Execute worker callback not captured");

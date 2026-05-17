@@ -35,7 +35,7 @@ const k8sProvider = new k8s.Provider("k8s", {
 });
 
 const appNamespace = new k8s.core.v1.Namespace(
-	"proliferate-namespace",
+	"breeze-namespace",
 	{ metadata: { name: namespace } },
 	{ provider: k8sProvider },
 );
@@ -95,7 +95,7 @@ if (externalSecretsEnabled && externalSecretsStoreEnabled && externalSecretsRele
 	});
 
 	createExternalSecret({
-		name: "proliferate-env",
+		name: "breeze-env",
 		namespace,
 		secretName: appEnvSecretName,
 		k8sProvider,
@@ -103,7 +103,7 @@ if (externalSecretsEnabled && externalSecretsStoreEnabled && externalSecretsRele
 	});
 
 	createExternalSecret({
-		name: "proliferate-llm-proxy-env",
+		name: "breeze-llm-proxy-env",
 		namespace,
 		secretName: llmProxyEnvSecretName,
 		k8sProvider,
@@ -114,7 +114,7 @@ if (externalSecretsEnabled && externalSecretsStoreEnabled && externalSecretsRele
 if (deployApps) {
 	deployApplications({
 		k8sProvider,
-		chartPath: path.resolve(__dirname, "../helm/proliferate"),
+		chartPath: path.resolve(__dirname, "../helm/breeze"),
 		imageRepos: {
 			web: webRepo.repositoryUrl,
 			gateway: gatewayRepo.repositoryUrl,
@@ -122,8 +122,8 @@ if (deployApps) {
 			llmProxy: llmProxyRepo.repositoryUrl,
 			triggerService: triggerRepo.repositoryUrl,
 		},
-		envSecretName: "proliferate-env",
-		llmProxyEnvSecretName: "proliferate-llm-proxy-env",
+		envSecretName: "breeze-env",
+		llmProxyEnvSecretName: "breeze-llm-proxy-env",
 		gatewayServiceAccountName: "gateway",
 		gatewayServiceAccountAnnotations: {
 			"eks.amazonaws.com/role-arn": gatewayRole.arn,

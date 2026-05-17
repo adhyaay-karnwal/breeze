@@ -8,7 +8,7 @@ const { mockSend } = vi.hoisted(() => ({
 	mockSend: vi.fn().mockResolvedValue({}),
 }));
 
-vi.mock("@proliferate/environment/server", () => ({
+vi.mock("@breeze/environment/server", () => ({
 	env: {
 		S3_BUCKET: "test-bucket",
 		S3_REGION: "us-east-1",

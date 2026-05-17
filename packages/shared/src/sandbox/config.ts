@@ -5,25 +5,25 @@
  * These are the "runtime" configurations that get written into sandboxes.
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { z } from "zod";
 import type { ConfigurationServiceCommand, ServiceCommand } from "../providers/types";
 
 /**
- * Proliferate plugin for OpenCode.
+ * Breeze plugin for OpenCode.
  * Minimal plugin - all streaming happens via SSE (DO pulls from OpenCode).
  */
 export const PLUGIN_MJS = `
-// Proliferate Plugin for OpenCode
+// Breeze Plugin for OpenCode
 // This plugin is minimal - all streaming happens via SSE (DO pulls from OpenCode)
 
-console.log("[Proliferate] Plugin loaded (SSE mode - no event pushing)");
+console.log("[Breeze] Plugin loaded (SSE mode - no event pushing)");
 
 // OpenCode plugin - ESM named export (required by OpenCode)
-export const ProliferatePlugin = async ({ project, directory }) => {
-  console.log("[Proliferate] Plugin initialized");
-  console.log("[Proliferate] Project:", project?.name || "unknown");
-  console.log("[Proliferate] Directory:", directory);
+export const BreezePlugin = async ({ project, directory }) => {
+  console.log("[Breeze] Plugin initialized");
+  console.log("[Breeze] Project:", project?.name || "unknown");
+  console.log("[Breeze] Directory:", directory);
 
   // Return empty hooks - all events flow via SSE from OpenCode to DO
   return {};
@@ -39,11 +39,11 @@ export const DEFAULT_CADDYFILE = `{
 }
 
 :20000 {
-    handle_path /_proliferate/mcp/* {
+    handle_path /_breeze/mcp/* {
         reverse_proxy localhost:4000
     }
 
-    handle_path /_proliferate/vscode/* {
+    handle_path /_breeze/vscode/* {
         forward_auth localhost:4000 {
             uri /api/auth/check
             copy_headers Authorization
@@ -61,7 +61,7 @@ export const DEFAULT_CADDYFILE = `{
     }
 
     # Sandbox daemon endpoints: fs, pty, ports, health, events, token refresh
-    handle /_proliferate/* {
+    handle /_breeze/* {
         reverse_proxy localhost:8470
     }
 
@@ -69,7 +69,7 @@ export const DEFAULT_CADDYFILE = `{
     # bare "handle" block intentionally takes priority over the default fallback
     # below, routing all non-devtools traffic to the user's chosen port.
     # Starts as an empty file so the default fallback applies until exposePort is called.
-    import /home/user/.proliferate/caddy/user.caddy
+    import /home/user/.breeze/caddy/user.caddy
 
     # Default fallback: try common dev server ports when no explicit port is exposed.
     handle {
@@ -126,39 +126,39 @@ docker compose up -d
 `;
 
 /**
- * Actions bootstrap hint written to .proliferate/actions-guide.md during sandbox setup.
+ * Actions bootstrap hint written to .breeze/actions-guide.md during sandbox setup.
  * Agents can read this file to discover the actions workflow.
  */
-export const ACTIONS_BOOTSTRAP = `# Proliferate Platform Guide
+export const ACTIONS_BOOTSTRAP = `# Breeze Platform Guide
 
-You are an AI agent running inside Proliferate, authorized to use external integrations on behalf of the user via the \`proliferate\` CLI.
+You are an AI agent running inside Breeze, authorized to use external integrations on behalf of the user via the \`breeze\` CLI.
 
 ## Quick Start
 
 \`\`\`bash
 # Discover what the user has connected to this workspace
-proliferate actions list
+breeze actions list
 
 # Get detailed usage guide for a specific integration
-proliferate actions guide --integration <name>
+breeze actions guide --integration <name>
 
 # Execute an action
-proliferate actions run --integration <name> --action <action> --params '<json>'
+breeze actions run --integration <name> --action <action> --params '<json>'
 \`\`\`
 
 ## How It Works
 
 - Action execution policy is configured by the platform per org/session.
 - Some actions may execute immediately, while others may require user approval.
-- If approval is required, \`proliferate actions run\` blocks until the decision is made in the web UI.
+- If approval is required, \`breeze actions run\` blocks until the decision is made in the web UI.
 - Authentication tokens are resolved server-side — never ask for API keys for connected integrations.
 
 ## Usage
 
 If the user asks you to check Linear issues, look at Sentry errors, or interact with any connected tool, use these commands proactively. You are acting as the user.
 
-Run \`proliferate actions list\` to see which integrations are connected.
-Run \`proliferate actions guide --integration <name>\` for provider-specific examples.
+Run \`breeze actions list\` to see which integrations are connected.
+Run \`breeze actions guide --integration <name>\` for provider-specific examples.
 
 ## Local Development
 
@@ -176,17 +176,17 @@ export const SANDBOX_PATHS = {
 	/** Global plugin directory */
 	globalPluginDir: "/home/user/.config/opencode/plugin",
 	/** Metadata file for session state tracking */
-	metadataFile: "/home/user/.proliferate/metadata.json",
+	metadataFile: "/home/user/.breeze/metadata.json",
 	/** Environment profile file */
-	envProfileFile: "/home/user/.env.proliferate",
+	envProfileFile: "/home/user/.env.breeze",
 	/** Pre-installed tool dependencies */
 	preinstalledToolsDir: "/home/user/.opencode-tools",
 	/** Caddyfile for preview proxy (avoid /tmp - Docker daemon can restrict it) */
 	caddyfile: "/home/user/Caddyfile",
 	/** Directory for user-managed Caddy snippets (imported by main Caddyfile) */
-	userCaddyDir: "/home/user/.proliferate/caddy",
+	userCaddyDir: "/home/user/.breeze/caddy",
 	/** User Caddy config file (written by exposePort, imported by main Caddyfile) */
-	userCaddyFile: "/home/user/.proliferate/caddy/user.caddy",
+	userCaddyFile: "/home/user/.breeze/caddy/user.caddy",
 } as const;
 
 /**

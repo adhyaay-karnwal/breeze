@@ -2,7 +2,7 @@
 
 ## PR 1
 - branch name: `v1/01-schema-data-contracts`
-- PR URL/number: `https://github.com/proliferate-ai/proliferate/pull/251`
+- PR URL/number: `https://github.com/adhyaay-karnwal/breeze/pull/251`
 - scope: Phase 1 contract and schema lock (`workers`, `wake_events`, `worker_runs`, `session_*`, `repo_baseline*`, `resume_intents`, minimal DB service modules and contract tests)
 - check results:
   - `pnpm typecheck` ✅
@@ -20,7 +20,7 @@
   - Added wake-event self-FK for coalescing references.
   - Added missing setup-session FK and baseline-target lookup index.
   - Tightened sessions FK delete semantics for required manager/task linkage.
-  - Switched new service DB helpers to canonical `@proliferate/services/db/client` imports.
+  - Switched new service DB helpers to canonical `@breeze/services/db/client` imports.
   - Hardened worker/session DB helper validation/update semantics.
   - Added org-scoped wake status updates (`wake_events.id` + `organization_id`) to prevent cross-tenant mutation.
   - Added missing `resume_intents.origin_session_id -> sessions.id` FK wiring in modular schema.
@@ -40,7 +40,7 @@
 
 ## PR 2
 - branch name: `v1/02-workers-wakes-runs`
-- PR URL/number: `https://github.com/proliferate-ai/proliferate/pull/252`
+- PR URL/number: `https://github.com/adhyaay-karnwal/breeze/pull/252`
 - scope: Phase 2 worker wake/run orchestration (`workers` + `wakes` DB/service modules, wake claim/coalesce/consume flow, run/event transition guards, state-transition tests)
 - check results:
   - `pnpm typecheck` ✅
@@ -74,7 +74,7 @@
 
 ## PR 3
 - branch name: `v1/03-sessions-messaging`
-- PR URL/number: `https://github.com/proliferate-ai/proliferate/pull/253`
+- PR URL/number: `https://github.com/adhyaay-karnwal/breeze/pull/253`
 - scope: Phase 3 sessions + messaging contracts (unified task session path, follow-up routing semantics, queued delivery helpers, terminal outcome persistence guards)
 - check results:
   - `pnpm typecheck` ✅
@@ -103,7 +103,7 @@
 
 ## PR 4
 - branch name: `v1/04-capabilities-approvals-actions`
-- PR URL/number: `https://github.com/proliferate-ai/proliferate/pull/254`
+- PR URL/number: `https://github.com/adhyaay-karnwal/breeze/pull/254`
 - scope: Phase 4 live capability and approval lifecycle contracts (capability-authoritative invoke resolution, approval transition guards, terminal-outcome resume-intent semantics, session visibility/ACL authority checks)
 - check results:
   - `pnpm -C packages/services test src/actions/service.test.ts` ⚠️ blocked in this worktree (`node_modules` missing; `vitest` not found).
@@ -128,7 +128,7 @@
 
 ## PR 5
 - branch name: `v1/05-harnesses-sandbox-runtime`
-- PR URL/number: `https://github.com/proliferate-ai/proliferate/pull/255`
+- PR URL/number: `https://github.com/adhyaay-karnwal/breeze/pull/255`
 - scope: Phase 5 harness/runtime split scaffolding (coding harness contract, OpenCode adapter module, manager Claude harness module, daemon event bridge, runtime integration points)
 - check results:
   - `pnpm typecheck` ✅
@@ -167,7 +167,7 @@
 
 ## PR 6
 - branch name: `v1/06-gateway-streaming`
-- PR URL/number: `https://github.com/proliferate-ai/proliferate/pull/256`
+- PR URL/number: `https://github.com/adhyaay-karnwal/breeze/pull/256`
 - scope: Phase 6 gateway/streaming authority updates (control-plane snapshot event contract, reconnect metadata exposure, browser isolation from provider-internal tunnel URLs)
 - check results:
   - `pnpm typecheck` ✅
@@ -195,7 +195,7 @@
 
 ## PR 7
 - branch name: `v1/07-ui-navigation`
-- PR URL/number: `https://github.com/proliferate-ai/proliferate/pull/257`
+- PR URL/number: `https://github.com/adhyaay-karnwal/breeze/pull/257`
 - scope: Phase 7 UI/navigation alignment (canonical route surfaces, sidebar IA reduction, coworker route terminology, task-first session list filtering via `kind`)
 - check results:
   - `pnpm typecheck` ✅
@@ -221,7 +221,7 @@
 
 ## PR 8
 - branch name: `v1/08-hardening-rollout`
-- PR URL/number: `https://github.com/proliferate-ai/proliferate/pull/258`
+- PR URL/number: `https://github.com/adhyaay-karnwal/breeze/pull/258`
 - scope: Phase 8 hardening/quality gates (canonical route IA drift guard, V1 naming drift guard, CI lint wiring)
 - check results:
   - `pnpm typecheck` ✅

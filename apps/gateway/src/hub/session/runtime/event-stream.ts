@@ -1,5 +1,5 @@
-import type { Logger } from "@proliferate/logger";
-import type { DaemonStreamEnvelope } from "@proliferate/shared/contracts/harness";
+import type { Logger } from "@breeze/logger";
+import type { DaemonStreamEnvelope } from "@breeze/shared/contracts/harness";
 import type { CodingHarnessAdapter } from "../../../harness/contracts/coding";
 import type { RuntimeDaemonEvent } from "../../../harness/contracts/coding";
 import type { GatewayEnv } from "../../../lib/env";

@@ -4,9 +4,9 @@
  * Handles schedule CRUD operations.
  */
 
+import { schedules } from "@breeze/services";
+import { ScheduleSchema, UpdateScheduleInputSchema } from "@breeze/shared/contracts/schedules";
 import { ORPCError } from "@orpc/server";
-import { schedules } from "@proliferate/services";
-import { ScheduleSchema, UpdateScheduleInputSchema } from "@proliferate/shared/contracts/schedules";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

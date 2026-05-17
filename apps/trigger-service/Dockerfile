@@ -1,5 +1,5 @@
 FROM node:20-slim
-LABEL org.opencontainers.image.source="https://github.com/proliferate-ai/proliferate"
+LABEL org.opencontainers.image.source="https://github.com/adhyaay-karnwal/breeze"
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 RUN corepack enable && corepack prepare pnpm@8.15.1 --activate
@@ -24,14 +24,14 @@ COPY apps/trigger-service ./apps/trigger-service
 RUN pnpm install --frozen-lockfile
 
 # Build workspace packages
-RUN pnpm --filter @proliferate/logger build
-RUN pnpm --filter @proliferate/shared build
-RUN pnpm --filter @proliferate/environment build
-RUN pnpm --filter @proliferate/queue build
-RUN pnpm --filter @proliferate/db build
-RUN pnpm --filter @proliferate/gateway-clients build
-RUN pnpm --filter @proliferate/triggers build
-RUN pnpm --filter @proliferate/services build
+RUN pnpm --filter @breeze/logger build
+RUN pnpm --filter @breeze/shared build
+RUN pnpm --filter @breeze/environment build
+RUN pnpm --filter @breeze/queue build
+RUN pnpm --filter @breeze/db build
+RUN pnpm --filter @breeze/gateway-clients build
+RUN pnpm --filter @breeze/triggers build
+RUN pnpm --filter @breeze/services build
 
 EXPOSE 3001
 

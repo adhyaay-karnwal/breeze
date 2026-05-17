@@ -1,4 +1,4 @@
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { type ConnectionOptions, type Job, type JobsOptions, Queue, Worker } from "bullmq";
 import IORedis from "ioredis";
 

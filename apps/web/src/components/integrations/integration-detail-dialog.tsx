@@ -19,8 +19,8 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getIntegrationScopeMeta } from "@/lib/integrations/scopes";
-import type { ConnectorConfig, ConnectorPreset } from "@proliferate/shared";
-import { CONNECTOR_PRESETS } from "@proliferate/shared";
+import type { ConnectorConfig, ConnectorPreset } from "@breeze/shared";
+import { CONNECTOR_PRESETS } from "@breeze/shared";
 import { CheckCircle2, Database, ExternalLink, Loader2 } from "lucide-react";
 
 // ====================================================================
@@ -95,17 +95,17 @@ export function IntegrationDetailDialog({
 
 	const manageUrl = entry.provider ? getProviderManageUrl(entry.provider) : null;
 
-	const PROLIFERATE_DOCS: Record<string, string> = {
-		github: "https://docs.proliferate.com/integrations/github",
-		slack: "https://docs.proliferate.com/integrations/slack",
-		linear: "https://docs.proliferate.com/integrations/linear",
-		sentry: "https://docs.proliferate.com/integrations/sentry",
-		jira: "https://docs.proliferate.com/integrations/jira",
+	const BREEZE_DOCS: Record<string, string> = {
+		github: "https://docs.breeze.engineer/integrations/github",
+		slack: "https://docs.breeze.engineer/integrations/slack",
+		linear: "https://docs.breeze.engineer/integrations/linear",
+		sentry: "https://docs.breeze.engineer/integrations/sentry",
+		jira: "https://docs.breeze.engineer/integrations/jira",
 	};
-	const proliferateDocsUrl =
-		PROLIFERATE_DOCS[entry.key] ??
+	const breezeDocsUrl =
+		BREEZE_DOCS[entry.key] ??
 		(entry.type === "mcp-preset" || entry.type === "custom-mcp"
-			? "https://docs.proliferate.com/integrations/mcp-connectors"
+			? "https://docs.breeze.engineer/integrations/mcp-connectors"
 			: null);
 
 	// Platform feature notes for product integrations
@@ -217,14 +217,14 @@ export function IntegrationDetailDialog({
 									<p className="text-sm text-muted-foreground">{CATEGORY_LABELS[entry.category]}</p>
 								</div>
 								<div className="flex flex-col gap-2">
-									{proliferateDocsUrl && (
+									{breezeDocsUrl && (
 										<a
-											href={proliferateDocsUrl}
+											href={breezeDocsUrl}
 											target="_blank"
 											rel="noopener noreferrer"
 											className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
 										>
-											Proliferate docs
+											Breeze docs
 											<ExternalLink className="h-3.5 w-3.5" />
 										</a>
 									)}

@@ -76,8 +76,8 @@ export function loadConfig(_argv: string[]): DaemonConfig {
 	const env = process.env;
 	return {
 		port: Number(env.SANDBOX_DAEMON_PORT) || DAEMON_PORT,
-		sessionToken: env.PROLIFERATE_SESSION_TOKEN ?? null,
-		signatureSecret: env.PROLIFERATE_SIGNATURE_SECRET ?? null,
-		workspaceRoot: env.PROLIFERATE_WORKSPACE_ROOT ?? WORKSPACE_ROOT,
+		sessionToken: env.BREEZE_SESSION_TOKEN ?? null,
+		signatureSecret: env.BREEZE_SIGNATURE_SECRET ?? null,
+		workspaceRoot: env.BREEZE_WORKSPACE_ROOT ?? WORKSPACE_ROOT,
 	};
 }

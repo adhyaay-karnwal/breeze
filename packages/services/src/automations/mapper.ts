@@ -4,7 +4,7 @@
  * Transforms DB rows (camelCase) to API types (snake_case).
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import type {
 	Automation,
 	AutomationEvent,
@@ -12,7 +12,7 @@ import type {
 	AutomationListItem,
 	AutomationTrigger,
 	AutomationWithTriggers,
-} from "@proliferate/shared/contracts/automations";
+} from "@breeze/shared/contracts/automations";
 import { toIsoString } from "../db/serialize";
 import type {
 	AutomationRow,

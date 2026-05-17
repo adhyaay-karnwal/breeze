@@ -1,9 +1,9 @@
 blank_issues_enabled: true
 contact_links:
   - name: Questions / ideas
-    url: https://github.com/proliferate-ai/proliferate/discussions
+    url: https://github.com/adhyaay-karnwal/breeze/discussions
     about: Please use Discussions for Q&A and broader ideas.
   - name: Security reports
-    url: https://github.com/proliferate-ai/proliferate/security/policy
+    url: https://github.com/adhyaay-karnwal/breeze/security/policy
     about: Please report security vulnerabilities privately.
 

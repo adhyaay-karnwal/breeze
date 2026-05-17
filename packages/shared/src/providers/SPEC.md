@@ -145,9 +145,9 @@ Notable paths:
 
 - workspace root: `/home/user/workspace`
 - OpenCode global config: `/home/user/.config/opencode/opencode.json`
-- plugin: `/home/user/.config/opencode/plugin/proliferate.mjs`
-- metadata: `/home/user/.proliferate/metadata.json`
-- per-session env profile: `/home/user/.env.proliferate`
+- plugin: `/home/user/.config/opencode/plugin/breeze.mjs`
+- metadata: `/home/user/.breeze/metadata.json`
+- per-session env profile: `/home/user/.env.breeze`
 - preinstalled tool deps: `/home/user/.opencode-tools`
 - Caddy config: `/home/user/Caddyfile`
 

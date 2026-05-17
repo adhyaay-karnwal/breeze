@@ -75,7 +75,7 @@ export interface CreateSandboxOpts {
 	agentConfig?: AgentConfig;
 	/** Current sandbox ID from DB, if any. Used by ensureSandbox to check if existing sandbox is still alive. */
 	currentSandboxId?: string;
-	/** Trigger context to write to .proliferate/trigger-context.json */
+	/** Trigger context to write to .breeze/trigger-context.json */
 	triggerContext?: Record<string, unknown>;
 	/** True if the snapshot includes installed dependencies (configuration/session snapshots). Gates service command auto-start. */
 	snapshotHasDeps?: boolean;
@@ -152,7 +152,7 @@ export interface SandboxProvider {
 
 	/**
 	 * Write environment variables to a file inside the sandbox.
-	 * Variables are written to /tmp/.proliferate_env.json
+	 * Variables are written to /tmp/.breeze_env.json
 	 */
 	writeEnvFile(sandboxId: string, envVars: Record<string, string>): Promise<void>;
 

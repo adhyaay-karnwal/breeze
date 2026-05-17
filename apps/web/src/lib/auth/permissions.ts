@@ -1,5 +1,5 @@
 import "server-only";
-import { orgs } from "@proliferate/services";
+import { orgs } from "@breeze/services";
 import { type OrgRole, type Permission, hasPermission, hasRoleOrHigher } from "./roles";
 
 export {

@@ -1,4 +1,4 @@
-import type { ModelProvider } from "@proliferate/shared/agents";
+import type { ModelProvider } from "@breeze/shared/agents";
 import {
 	Bug,
 	CircleDot,

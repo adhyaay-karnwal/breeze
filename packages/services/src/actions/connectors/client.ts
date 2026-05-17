@@ -14,11 +14,11 @@
  * the client re-initializes once with a fresh connection and retries.
  */
 
+import type { ActionDefinition } from "@breeze/providers";
+import { jsonSchemaToZod } from "@breeze/providers/helpers/schema";
+import type { ConnectorConfig } from "@breeze/shared";
 import { Client } from "@modelcontextprotocol/sdk/client";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
-import type { ActionDefinition } from "@proliferate/providers";
-import { jsonSchemaToZod } from "@proliferate/providers/helpers/schema";
-import type { ConnectorConfig } from "@proliferate/shared";
 import { getServicesLogger } from "../../logger";
 import { deriveRiskLevel } from "./risk";
 import type { ConnectorCallResult, ConnectorToolList } from "./types";
@@ -126,7 +126,7 @@ export async function listConnectorToolsRaw(
 ): Promise<McpRawTool[]> {
 	const log = logger().child({ connectorId: config.id, connectorName: config.name });
 	const transport = createTransport(config, resolvedSecret);
-	const client = new Client({ name: "proliferate-gateway", version: "1.0.0" });
+	const client = new Client({ name: "breeze-gateway", version: "1.0.0" });
 
 	try {
 		await client.connect(transport);
@@ -162,7 +162,7 @@ export async function listConnectorToolsOrThrow(
 ): Promise<ConnectorToolList> {
 	const log = logger().child({ connectorId: config.id, connectorName: config.name });
 	const transport = createTransport(config, resolvedSecret);
-	const client = new Client({ name: "proliferate-gateway", version: "1.0.0" });
+	const client = new Client({ name: "breeze-gateway", version: "1.0.0" });
 
 	try {
 		await client.connect(transport);
@@ -231,7 +231,7 @@ export async function callConnectorTool(
 
 	const attempt = async (mcpSessionId?: string): Promise<ConnectorCallResult> => {
 		const transport = createTransport(config, resolvedSecret, mcpSessionId);
-		const client = new Client({ name: "proliferate-gateway", version: "1.0.0" });
+		const client = new Client({ name: "breeze-gateway", version: "1.0.0" });
 
 		try {
 			await client.connect(transport);

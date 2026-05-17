@@ -1,5 +1,5 @@
 # ===========================================
-# Proliferate - Development Commands
+# Breeze - Development Commands
 # ===========================================
 # Run `make` or `make help` to see all commands
 
@@ -12,7 +12,7 @@ NGROK_CONFIG ?= $(shell if [ -f ngrok.yml ]; then echo ngrok.yml; else echo ngro
 # ===========================================
 
 help:
-	@echo "Proliferate Development Commands"
+	@echo "Breeze Development Commands"
 	@echo ""
 	@echo "Quick Start (2 terminals):"
 	@echo "  make services    - Start Postgres, Redis, LLM Proxy"
@@ -166,10 +166,10 @@ worker:
 
 # Local database (Docker Compose Postgres)
 db-local:
-	@psql "postgresql://postgres:postgres@127.0.0.1:5432/proliferate"
+	@psql "postgresql://postgres:postgres@127.0.0.1:5432/breeze"
 
 db-migrate:
-	@DATABASE_URL="postgresql://postgres:postgres@127.0.0.1:5432/proliferate" pnpm -C packages/db db:migrate
+	@DATABASE_URL="postgresql://postgres:postgres@127.0.0.1:5432/breeze" pnpm -C packages/db db:migrate
 
 # Production database
 # Loads from .env.prod which has DATABASE_URL
@@ -178,14 +178,14 @@ db-prod:
 
 # Quick status checks
 db-local-status:
-	@psql "postgresql://postgres:postgres@127.0.0.1:5432/proliferate" -c "SELECT 'Local DB connected' as status;"
+	@psql "postgresql://postgres:postgres@127.0.0.1:5432/breeze" -c "SELECT 'Local DB connected' as status;"
 
 db-prod-status:
 	@source .env.prod && psql "$$DATABASE_URL" -c "SELECT 'Production DB connected' as status;"
 
 # List tables
 db-local-tables:
-	@psql "postgresql://postgres:postgres@127.0.0.1:5432/proliferate" -c "\dt"
+	@psql "postgresql://postgres:postgres@127.0.0.1:5432/breeze" -c "\dt"
 
 db-prod-tables:
 	@source .env.prod && psql "$$DATABASE_URL" -c "\dt"
@@ -198,7 +198,7 @@ K8S_CLOUD ?= aws
 KUBECONFIG_AWS ?= .tmp/aws-kubeconfig
 KUBECONFIG_GCP ?= .tmp/gcp-kubeconfig
 APP_HOST ?= app.example.com
-EKS_CLUSTER ?= proliferate-prod-eks
+EKS_CLUSTER ?= breeze-prod-eks
 EKS_REGION ?= us-east-1
 
 ifeq ($(K8S_CLOUD),gcp)
@@ -224,39 +224,39 @@ k8s-ns:
 	@$(KUBECTL) get ns
 
 k8s-pods:
-	@$(KUBECTL) -n proliferate get pods
+	@$(KUBECTL) -n breeze get pods
 
 k8s-logs-web:
-	@$(KUBECTL) -n proliferate logs -f deploy/proliferate-web
+	@$(KUBECTL) -n breeze logs -f deploy/breeze-web
 
 k8s-logs-gateway:
-	@$(KUBECTL) -n proliferate logs -f deploy/proliferate-gateway
+	@$(KUBECTL) -n breeze logs -f deploy/breeze-gateway
 
 k8s-logs-worker:
-	@$(KUBECTL) -n proliferate logs -f deploy/proliferate-worker
+	@$(KUBECTL) -n breeze logs -f deploy/breeze-worker
 
 k8s-logs-llm:
-	@$(KUBECTL) -n proliferate logs -f deploy/proliferate-llm-proxy
+	@$(KUBECTL) -n breeze logs -f deploy/breeze-llm-proxy
 
 k8s-logs-all:
-	@$(KUBECTL) -n proliferate logs -f --all-containers --max-log-requests=20 --timestamps
+	@$(KUBECTL) -n breeze logs -f --all-containers --max-log-requests=20 --timestamps
 
 k8s-shell-web:
-	@$(KUBECTL) -n proliferate exec -it deploy/proliferate-web -- sh
+	@$(KUBECTL) -n breeze exec -it deploy/breeze-web -- sh
 
 k8s-shell-gateway:
-	@$(KUBECTL) -n proliferate exec -it deploy/proliferate-gateway -- sh
+	@$(KUBECTL) -n breeze exec -it deploy/breeze-gateway -- sh
 
 k8s-shell-worker:
-	@$(KUBECTL) -n proliferate exec -it deploy/proliferate-worker -- sh
+	@$(KUBECTL) -n breeze exec -it deploy/breeze-worker -- sh
 
 k8s-env-keys:
-	@$(KUBECTL) -n proliferate get secret proliferate-env -o json \
+	@$(KUBECTL) -n breeze get secret breeze-env -o json \
 		| python3 -c 'import json,sys; data=json.load(sys.stdin)["data"]; print("\n".join(sorted(data.keys())))'
 
 k8s-env:
 	@if [ -z "$(KEY)" ]; then echo "Set KEY=... (e.g. KEY=DATABASE_URL)"; exit 1; fi
-	@$(KUBECTL) -n proliferate get secret proliferate-env -o jsonpath="{.data.$(KEY)}" | base64 --decode; echo ""
+	@$(KUBECTL) -n breeze get secret breeze-env -o jsonpath="{.data.$(KEY)}" | base64 --decode; echo ""
 
 k8s-ingress:
 	@HOST=$$($(KUBECTL) -n ingress-nginx get svc -l app.kubernetes.io/component=controller -o jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}'); \
@@ -314,23 +314,23 @@ release-tag:
 push-secrets:
 	@if [ ! -f "secrets/$(ENV)-app.json" ]; then echo "Missing secrets/$(ENV)-app.json"; exit 1; fi
 	@if [ ! -f "secrets/$(ENV)-llm-proxy.json" ]; then echo "Missing secrets/$(ENV)-llm-proxy.json"; exit 1; fi
-	@aws secretsmanager put-secret-value --secret-id proliferate-$(ENV)-app-env --secret-string file://secrets/$(ENV)-app.json
-	@aws secretsmanager put-secret-value --secret-id proliferate-$(ENV)-llm-proxy-env --secret-string file://secrets/$(ENV)-llm-proxy.json
+	@aws secretsmanager put-secret-value --secret-id breeze-$(ENV)-app-env --secret-string file://secrets/$(ENV)-app.json
+	@aws secretsmanager put-secret-value --secret-id breeze-$(ENV)-llm-proxy-env --secret-string file://secrets/$(ENV)-llm-proxy.json
 
 # Restart all deployments to pick up new secrets / config
 restart-pods:
-	@$(KUBECTL) -n proliferate rollout restart deploy/proliferate-web
-	@$(KUBECTL) -n proliferate rollout restart deploy/proliferate-gateway
-	@$(KUBECTL) -n proliferate rollout restart deploy/proliferate-worker
-	@$(KUBECTL) -n proliferate rollout restart deploy/proliferate-llm-proxy
+	@$(KUBECTL) -n breeze rollout restart deploy/breeze-web
+	@$(KUBECTL) -n breeze rollout restart deploy/breeze-gateway
+	@$(KUBECTL) -n breeze rollout restart deploy/breeze-worker
+	@$(KUBECTL) -n breeze rollout restart deploy/breeze-llm-proxy
 	@echo "Rollout restart triggered for all deployments"
 
 # Track rollback marker in SSM
 last-good-sha-set:
 	@if [ -z "$(SHA)" ]; then SHA=$$(git rev-parse --short HEAD); fi; \
-	aws ssm put-parameter --name /proliferate/last-good-sha --value $$SHA --type String --overwrite
+	aws ssm put-parameter --name /breeze/last-good-sha --value $$SHA --type String --overwrite
 
 last-good-sha-get:
-	@aws ssm get-parameter --name /proliferate/last-good-sha --query Parameter.Value --output text
+	@aws ssm get-parameter --name /breeze/last-good-sha --query Parameter.Value --output text
 
 .PHONY: help services services-rebuild llm-proxy llm-proxy-rebuild ngrok ngrok-llm ngrok-web ngrok-gateway docker-nuke stop logs logs-llm web gateway worker db-local db-migrate db-prod db-local-status db-prod-status db-local-tables db-prod-tables k8s-setup k8s-cloud k8s-ns k8s-pods k8s-logs-web k8s-logs-gateway k8s-logs-worker k8s-logs-llm k8s-logs-all k8s-shell-web k8s-shell-gateway k8s-shell-worker k8s-env-keys k8s-env k8s-ingress k8s-health aws-logs-web aws-logs-gateway aws-logs-worker aws-logs-llm aws-logs-all aws-shell-web aws-shell-gateway aws-shell-worker aws-env-keys aws-env aws-ingress aws-health deploy-cloud release-tag push-secrets last-good-sha-set last-good-sha-get

@@ -2,9 +2,9 @@
  * Auth — B7: session-scoped bearer token + signature validation.
  *
  * Gateway issues a session-scoped bearer token during boot, injected
- * as PROLIFERATE_SESSION_TOKEN. The daemon validates:
- *   1. Bearer token on all /_proliferate/* requests.
- *   2. X-Proliferate-Sandbox-Signature (HMAC) on gateway-originated requests.
+ * as BREEZE_SESSION_TOKEN. The daemon validates:
+ *   1. Bearer token on all /_breeze/* requests.
+ *   2. X-Breeze-Sandbox-Signature (HMAC) on gateway-originated requests.
  *
  * Token refresh is daemon-mediated; CLI/harness never hold long-lived
  * refresh credentials.
@@ -108,7 +108,7 @@ export interface SignatureComponents {
 }
 
 /**
- * Parse the X-Proliferate-Sandbox-Signature header.
+ * Parse the X-Breeze-Sandbox-Signature header.
  * Format: `method=GET,path=/...,body_hash=<sha256>,exp=<epoch_s>,nonce=<uuid>,sig=<hmac_hex>`
  */
 export function parseSignatureHeader(header: string): SignatureComponents | null {

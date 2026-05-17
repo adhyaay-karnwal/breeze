@@ -1,12 +1,12 @@
 {
 	"display_information": {
-		"name": "Proliferate",
+		"name": "Breeze",
 		"description": "AI coding agent for your codebase",
 		"background_color": "#000000"
 	},
 	"features": {
 		"bot_user": {
-			"display_name": "Proliferate",
+			"display_name": "Breeze",
 			"always_online": true
 		}
 	},

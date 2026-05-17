@@ -10,7 +10,7 @@
 
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import {
 	DENYLISTED_PORTS,
 	PORT_POLL_INTERVAL_MS,

@@ -16,8 +16,8 @@ import {
 } from "@/components/ui/icons";
 import { ICON_SIZE_CLASSES } from "@/config/icons";
 import { cn } from "@/lib/display/utils";
-import type { ConnectorConfig } from "@proliferate/shared";
-import { CONNECTOR_PRESETS } from "@proliferate/shared";
+import type { ConnectorConfig } from "@breeze/shared";
+import { CONNECTOR_PRESETS } from "@breeze/shared";
 
 /** Best-effort preset key lookup for a connected tool (matches by URL). */
 export function findPresetKey(connector: ConnectorConfig): string {

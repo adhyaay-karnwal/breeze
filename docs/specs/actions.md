@@ -10,7 +10,7 @@
 - User action preferences (source-level and action-level enable/disable) in list/invoke paths.
 - Invocation persistence, expiry sweep, redaction, and truncation.
 - Org inbox query surface for pending approvals.
-- Sandbox bootstrap guidance and CLI contracts (`proliferate actions list|guide|run`).
+- Sandbox bootstrap guidance and CLI contracts (`breeze actions list|guide|run`).
 
 ### Out of Scope
 - Session lifecycle orchestration and WebSocket transport internals (`sessions-gateway.md`).
@@ -22,7 +22,7 @@
 - **Actions are policy-gated side effects, not chat tools.** Every external side effect goes through gateway policy and audit rows (`action_invocations`), even when execution is immediate.
 - **One catalog, two source archetypes.** Sessions see one merged catalog, but runtime execution is polymorphic (`ActionSource`) across static provider adapters and dynamic MCP connectors.
 - **Two independent control planes exist.** User preferences control source/action visibility (`user_action_preferences`), while org/automation mode maps control execution policy (`action_modes` JSONB).
-- **The CLI is synchronous UX over async workflow.** `proliferate actions run` may return immediately (allow), fail immediately (deny), or block with polling while waiting for human approval (require_approval).
+- **The CLI is synchronous UX over async workflow.** `breeze actions run` may return immediately (allow), fail immediately (deny), or block with polling while waiting for human approval (require_approval).
 - **Risk is only a default hint.** `riskLevel` informs inferred defaults; enforcement is always the resolved mode.
 
 ### Things Agents Get Wrong
@@ -68,9 +68,9 @@ Connector risk level precedence (`packages/services/src/actions/connectors/risk.
 4. Fallback `write` (conservative risk classification; policy still resolves via mode cascade)
 
 ### 2.5 Agent Bootstrap and CLI
-- Sandbox setup writes `.proliferate/actions-guide.md` from `ACTIONS_BOOTSTRAP` (`packages/shared/src/sandbox/config.ts`).
-- Actual runtime discovery always comes from `GET /actions/available` via `proliferate actions list`.
-- `proliferate actions run` polls invocation status every 2s while pending (`packages/sandbox-mcp/src/proliferate-cli.ts`).
+- Sandbox setup writes `.breeze/actions-guide.md` from `ACTIONS_BOOTSTRAP` (`packages/shared/src/sandbox/config.ts`).
+- Actual runtime discovery always comes from `GET /actions/available` via `breeze actions list`.
+- `breeze actions run` polls invocation status every 2s while pending (`packages/sandbox-mcp/src/breeze-cli.ts`).
 
 ### 2.6 Slack Action Surface
 - Slack provider actions are `list_channels` (`read`) and `post_message` (`write`).
@@ -127,7 +127,7 @@ Connector risk level precedence (`packages/services/src/actions/connectors/risk.
   - `packages/services/src/actions/service.test.ts`
   - `packages/services/src/actions/connectors/client.test.ts`
   - `packages/services/src/actions/connectors/risk.test.ts`
-- Gateway route-level tests for `apps/gateway/src/api/proliferate/http/actions.ts` are currently absent.
+- Gateway route-level tests for `apps/gateway/src/api/breeze/http/actions.ts` are currently absent.
 
 ---
 
@@ -228,11 +228,11 @@ Connector risk level precedence (`packages/services/src/actions/connectors/risk.
 ## 9. Known Limitations & Tech Debt
 
 - [ ] **In-memory rate limiting**: gateway per-session limit is process-local; multi-instance deployments do not share counters.
-- [x] **Automation override wiring in invoke path**: gateway `/invoke` forwards `session.automationId` to `actions.invokeAction()`, so automation mode overrides now apply in that path (`apps/gateway/src/api/proliferate/http/actions.ts`).
+- [x] **Automation override wiring in invoke path**: gateway `/invoke` forwards `session.automationId` to `actions.invokeAction()`, so automation mode overrides now apply in that path (`apps/gateway/src/api/breeze/http/actions.ts`).
 - [ ] **Connector drift hash persistence gap**: drift checks read `org_connectors.tool_risk_overrides[*].hash`, but there is no first-class write flow in current connector CRUD/permissions UI to persist these hashes.
 - [x] **Inbox "Always Allow" key format**: inbox writes org mode keys as `${integration}:${action}`, matching resolver expectations (`apps/web/src/components/inbox/inbox-item.tsx`).
 - [x] **Connector permission UX gap**: integration settings now fetch connector tools for action-level toggles via `integrations.getConnectorActions` with short-lived server caching.
 - [x] **Action-level user preferences now enforced in gateway and catalog filtering**: both source-level and action-level disabled preferences are applied in available-actions filtering and invoke guards.
-- [ ] **Legacy grant CLI commands remain**: sandbox CLI still exposes `proliferate actions grant*` commands even though gateway grant routes are removed.
-- [ ] **Gateway route test gap**: no route-level automated tests currently cover `apps/gateway/src/api/proliferate/http/actions.ts`.
+- [ ] **Legacy grant CLI commands remain**: sandbox CLI still exposes `breeze actions grant*` commands even though gateway grant routes are removed.
+- [ ] **Gateway route test gap**: no route-level automated tests currently cover `apps/gateway/src/api/breeze/http/actions.ts`.
 - [ ] **Database connectors planned**: provider-backed + MCP connector-backed sources are implemented; DB-native action sources are still planned.

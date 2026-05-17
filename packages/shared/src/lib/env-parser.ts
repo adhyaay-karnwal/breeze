@@ -66,7 +66,7 @@ export function parseEnvFile(text: string): EnvEntry[] {
  * Validate a relative file path for use as an env file target.
  *
  * Rejects absolute paths, `..` traversal, null bytes, and empty strings.
- * Mirrors the safety logic in `proliferate-cli.ts` `safePath()`.
+ * Mirrors the safety logic in `breeze-cli.ts` `safePath()`.
  */
 export function isValidTargetPath(path: string): boolean {
 	if (!path) return false;

@@ -1,6 +1,6 @@
 # E2B Sandbox Template
 
-Cloud sandboxes for Proliferate with full Docker support.
+Cloud sandboxes for Breeze with full Docker support.
 
 ## Quick Start (E2B Cloud)
 
@@ -21,8 +21,8 @@ The fastest way to get started is using E2B's managed cloud service:
 
 For customers who need to run their own E2B infrastructure (data residency, air-gapped environments, etc.), see:
 
-- https://docs.proliferate.com/self-hosting/environment (E2B env vars)
-- https://docs.proliferate.com/self-hosting/deployment-options
+- https://docs.breeze.engineer/self-hosting/environment (E2B env vars)
+- https://docs.breeze.engineer/self-hosting/deployment-options
 
 ### Quick Self-Hosted Setup
 
@@ -104,7 +104,7 @@ The sandbox image includes a complete development environment:
             │ E2B SDK (TypeScript)
             │
 ┌───────────┴─────────────────────────────────────────────────┐
-│                    Proliferate                               │
+│                    Breeze                               │
 │                                                             │
 │  packages/shared/src/providers/e2b.ts                       │
 │  - createSandbox(): Create/resume sandbox                   │

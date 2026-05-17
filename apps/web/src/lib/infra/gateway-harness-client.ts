@@ -1,6 +1,6 @@
 import { GATEWAY_URL } from "@/lib/infra/gateway";
 import { parseJsonResponse } from "@/lib/infra/http";
-import type { FsTreeEntry, PreviewPort } from "@proliferate/shared/contracts/harness";
+import type { FsTreeEntry, PreviewPort } from "@breeze/shared/contracts/harness";
 
 export interface DaemonHealthResponse {
 	ok: boolean;
@@ -35,7 +35,7 @@ function withBearer(token: string): HeadersInit {
 }
 
 function harnessUrl(sessionId: string, path: string): string {
-	return `${GATEWAY_URL}/proliferate/v1/sessions/${sessionId}${path}`;
+	return `${GATEWAY_URL}/breeze/v1/sessions/${sessionId}${path}`;
 }
 
 export async function getDaemonHealth(

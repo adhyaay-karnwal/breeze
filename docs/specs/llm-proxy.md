@@ -3,7 +3,7 @@
 ## 1. Scope & Purpose
 
 ### In Scope
-- LiteLLM integration contract for Proliferate services and sandboxes.
+- LiteLLM integration contract for Breeze services and sandboxes.
 - Virtual key lifecycle (team provisioning, key generation, key revocation).
 - URL contract (`LLM_PROXY_URL`, `LLM_PROXY_ADMIN_URL`, `LLM_PROXY_PUBLIC_URL`) and sandbox-facing base URL rules.
 - Spend ingestion from LiteLLM Admin REST API (`GET /spend/logs/v2`) into billing events.
@@ -17,7 +17,7 @@
 - Session lifecycle orchestration (see `sessions-gateway.md`).
 - Sandbox boot mechanics beyond LLM credential/base URL contract (see `sandbox-providers.md`).
 - Secret storage and encryption lifecycle (see `secrets-environment.md`).
-- LiteLLM internals that are not part of Proliferate-owned integration code.
+- LiteLLM internals that are not part of Breeze-owned integration code.
 
 ### Feature Status
 
@@ -38,7 +38,7 @@
 
 ### Mental Models
 
-The LLM proxy is an external LiteLLM service and this spec is the Proliferate-side contract for using it. The code here defines identity boundaries, billing attribution boundaries, and integration rules. It does not define LiteLLM internals.
+The LLM proxy is an external LiteLLM service and this spec is the Breeze-side contract for using it. The code here defines identity boundaries, billing attribution boundaries, and integration rules. It does not define LiteLLM internals.
 
 Treat the proxy as two planes with different auth models:
 - Control plane: server-side admin/API calls with `LLM_PROXY_MASTER_KEY` for team management, key generation, spend reads, and selected worker-side LLM calls.
@@ -47,7 +47,7 @@ Treat the proxy as two planes with different auth models:
 Spend ingestion is eventually consistent. Billing correctness depends on idempotent event insertion, not on perfect cursor monotonicity from LiteLLM.
 
 Model routing is a three-surface contract:
-- Canonical model IDs in Proliferate (`packages/shared/src/agents.ts`).
+- Canonical model IDs in Breeze (`packages/shared/src/agents.ts`).
 - OpenCode provider config generated in sandbox (`packages/shared/src/sandbox/opencode.ts`).
 - LiteLLM model mapping and aliases in YAML (`apps/llm-proxy/litellm/config.yaml`).
 
@@ -71,7 +71,7 @@ Model routing is a three-surface contract:
 ## 2. Core Concepts
 
 ### Virtual Keys
-LiteLLM virtual keys are short-lived credentials for sandbox data-plane requests. Proliferate mints them per session and org, with `key_alias=sessionId` for deterministic revocation and replacement (`packages/shared/src/llm-proxy.ts:generateVirtualKey`).
+LiteLLM virtual keys are short-lived credentials for sandbox data-plane requests. Breeze mints them per session and org, with `key_alias=sessionId` for deterministic revocation and replacement (`packages/shared/src/llm-proxy.ts:generateVirtualKey`).
 
 ### Team Mapping
 LiteLLM `team_id` is the organization ID. Team creation is idempotent with read-before-create plus duplicate-tolerant create handling (`packages/shared/src/llm-proxy.ts:ensureTeamExists`).

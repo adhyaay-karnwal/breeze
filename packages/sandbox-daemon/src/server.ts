@@ -6,7 +6,7 @@
  */
 
 import { type Server, createServer } from "node:http";
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import type { DaemonConfig } from "./config.js";
 import type { PreviewProxy } from "./preview-proxy.js";
 import type { Router } from "./router.js";
@@ -29,7 +29,7 @@ export function createDaemonServer(options: DaemonServerOptions): Server {
 	// Handle WebSocket upgrades for preview proxy (HMR)
 	server.on("upgrade", (req, socket, head) => {
 		const url = req.url ?? "/";
-		if (url.startsWith("/_proliferate/")) {
+		if (url.startsWith("/_breeze/")) {
 			// Platform routes do not support upgrade currently
 			socket.destroy();
 			return;

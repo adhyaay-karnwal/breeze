@@ -4,8 +4,8 @@ import { BlocksIcon, BlocksLoadingIcon } from "@/components/ui/icons";
 import { OVERALL_WORK_STATE_DISPLAY } from "@/config/sessions";
 import { cn } from "@/lib/display/utils";
 import { formatRelativeTime, getRepoShortName } from "@/lib/display/utils";
-import type { Session } from "@proliferate/shared/contracts/sessions";
-import { deriveOverallWorkState } from "@proliferate/shared/sessions";
+import type { Session } from "@breeze/shared/contracts/sessions";
+import { deriveOverallWorkState } from "@breeze/shared/sessions";
 
 interface SessionRowProps {
 	title: string | null;

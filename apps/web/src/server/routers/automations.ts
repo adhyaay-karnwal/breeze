@@ -5,9 +5,8 @@
  */
 
 import { GATEWAY_INTERNAL_URL, GATEWAY_URL } from "@/lib/infra/gateway";
-import { ORPCError } from "@orpc/server";
-import { env } from "@proliferate/environment/server";
-import { getProviderActions } from "@proliferate/providers/providers/registry";
+import { env } from "@breeze/environment/server";
+import { getProviderActions } from "@breeze/providers/providers/registry";
 import {
 	automations,
 	integrations,
@@ -16,7 +15,7 @@ import {
 	schedules,
 	workerJobs,
 	workers,
-} from "@proliferate/services";
+} from "@breeze/services";
 import {
 	AutomationConnectionSchema,
 	AutomationEventDetailSchema,
@@ -36,9 +35,10 @@ import {
 	CreateAutomationTriggerInputSchema,
 	PendingRunSummarySchema,
 	UpdateAutomationInputSchema,
-} from "@proliferate/shared/contracts/automations";
-import { ScheduleSchema } from "@proliferate/shared/contracts/schedules";
-import type { TriggerProviderSchema } from "@proliferate/shared/contracts/triggers";
+} from "@breeze/shared/contracts/automations";
+import { ScheduleSchema } from "@breeze/shared/contracts/schedules";
+import type { TriggerProviderSchema } from "@breeze/shared/contracts/triggers";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

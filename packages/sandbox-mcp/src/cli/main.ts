@@ -13,7 +13,7 @@ import { parseFlags } from "./flags.js";
 import { writeStderr } from "./output.js";
 
 function usage(): never {
-	writeStderr(`Usage: proliferate <command>
+	writeStderr(`Usage: breeze <command>
 
 Commands:
   services list                                    List all services

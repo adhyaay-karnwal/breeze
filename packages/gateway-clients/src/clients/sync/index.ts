@@ -5,7 +5,7 @@
  * Used by web UI and other real-time consumers.
  */
 
-import type { ClientSource } from "@proliferate/shared";
+import type { ClientSource } from "@breeze/shared";
 import type { GatewayAuth, TokenGetter } from "../../auth";
 import { createTokenGetter } from "../../auth";
 import { createVerificationTools } from "../../capabilities/tools";
@@ -61,35 +61,35 @@ export interface SyncClient extends Client {
 	/**
 	 * Connect to a session via WebSocket
 	 */
-	connect(proliferateSessionId: string, options: WebSocketOptions): SyncWebSocket;
+	connect(breezeSessionId: string, options: WebSocketOptions): SyncWebSocket;
 
 	/**
 	 * Post a message to a session via HTTP
 	 */
-	postMessage(proliferateSessionId: string, options: PostMessageOptions): Promise<void>;
+	postMessage(breezeSessionId: string, options: PostMessageOptions): Promise<void>;
 
 	/**
 	 * Cancel the current operation via HTTP
 	 */
-	postCancel(proliferateSessionId: string, userId?: string): Promise<void>;
+	postCancel(breezeSessionId: string, userId?: string): Promise<void>;
 
 	/**
 	 * Get session/sandbox info via HTTP
 	 */
-	getInfo(proliferateSessionId: string): Promise<SandboxInfo>;
+	getInfo(breezeSessionId: string): Promise<SandboxInfo>;
 
 	/**
 	 * Get session status via HTTP
 	 */
 	getSessionStatus(
-		proliferateSessionId: string,
+		breezeSessionId: string,
 		organizationId?: string,
 	): Promise<SessionStatusResponse>;
 
 	/**
 	 * Trigger eager session start (boot sandbox + send initial prompt)
 	 */
-	eagerStart(proliferateSessionId: string): Promise<void>;
+	eagerStart(breezeSessionId: string): Promise<void>;
 }
 
 /**
@@ -123,31 +123,31 @@ class SyncClientImpl implements SyncClient {
 		return createSession(this.http, request, options);
 	}
 
-	connect(proliferateSessionId: string, options: WebSocketOptions): SyncWebSocket {
-		return new SyncWebSocketImpl(this.baseUrl, proliferateSessionId, this.getToken, options);
+	connect(breezeSessionId: string, options: WebSocketOptions): SyncWebSocket {
+		return new SyncWebSocketImpl(this.baseUrl, breezeSessionId, this.getToken, options);
 	}
 
-	async postMessage(proliferateSessionId: string, options: PostMessageOptions): Promise<void> {
-		return postMessage(this.http, proliferateSessionId, options, this.source);
+	async postMessage(breezeSessionId: string, options: PostMessageOptions): Promise<void> {
+		return postMessage(this.http, breezeSessionId, options, this.source);
 	}
 
-	async postCancel(proliferateSessionId: string, userId?: string): Promise<void> {
-		return postCancel(this.http, proliferateSessionId, userId);
+	async postCancel(breezeSessionId: string, userId?: string): Promise<void> {
+		return postCancel(this.http, breezeSessionId, userId);
 	}
 
-	async getInfo(proliferateSessionId: string): Promise<SandboxInfo> {
-		return getInfo(this.http, proliferateSessionId);
+	async getInfo(breezeSessionId: string): Promise<SandboxInfo> {
+		return getInfo(this.http, breezeSessionId);
 	}
 
 	async getSessionStatus(
-		proliferateSessionId: string,
+		breezeSessionId: string,
 		organizationId?: string,
 	): Promise<SessionStatusResponse> {
-		return getSessionStatus(this.http, proliferateSessionId, organizationId);
+		return getSessionStatus(this.http, breezeSessionId, organizationId);
 	}
 
-	async eagerStart(proliferateSessionId: string): Promise<void> {
-		return eagerStart(this.http, proliferateSessionId);
+	async eagerStart(breezeSessionId: string): Promise<void> {
+		return eagerStart(this.http, breezeSessionId);
 	}
 
 	async checkHealth(): Promise<HealthCheckResult> {

@@ -3,7 +3,7 @@
 import { useOnboarding } from "@/hooks/org/use-onboarding";
 import { orpc } from "@/lib/infra/orpc";
 import { type FlowType, useOnboardingStore } from "@/stores/onboarding";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";

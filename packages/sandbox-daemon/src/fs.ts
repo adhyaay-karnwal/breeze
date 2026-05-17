@@ -18,7 +18,7 @@ import {
 } from "node:fs";
 import { mkdir } from "node:fs/promises";
 import { dirname, join, normalize, resolve } from "node:path";
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import { FS_WRITE_MAX_BYTES } from "./config.js";
 import type { EventBus } from "./event-bus.js";
 

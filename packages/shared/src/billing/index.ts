@@ -1,7 +1,7 @@
 /**
  * Billing module exports.
  *
- * @module @proliferate/shared/billing
+ * @module @breeze/shared/billing
  */
 
 // Types
@@ -31,4 +31,4 @@ export {
 	type AutoTopUpResult,
 } from "./autumn-client";
 
-// Database-backed billing workflows now live in @proliferate/services/billing.
+// Database-backed billing workflows now live in @breeze/services/billing.

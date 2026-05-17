@@ -1,4 +1,4 @@
-import { getProviderActions } from "@proliferate/providers";
+import { getProviderActions } from "@breeze/providers";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 describe("slack provider actions", () => {

@@ -1,8 +1,8 @@
-# Proliferate - Agent Guidelines
+# Breeze - Agent Guidelines
 
 > Code style, patterns, and conventions for AI coding agents working on this codebase.
 
-**Proliferate is fully open source under the MIT license.** Every commit is public. Never commit secrets, credentials, or proprietary material to any branch.
+**Breeze is fully open source under the MIT license.** Every commit is public. Never commit secrets, credentials, or proprietary material to any branch.
 
 ## Core Philosophy
 
@@ -85,18 +85,18 @@ CLAUDE.md             # this file (Claude Code)
 
 **Database operations (must follow)**
 - **All DB reads/writes live in `packages/services/src/**/db.ts`.**
-- Import Drizzle helpers + schema from `@proliferate/services/db/client` (preferred).
-- **Do not** import `@proliferate/db` directly outside the services package (except migrations/tests).
+- Import Drizzle helpers + schema from `@breeze/services/db/client` (preferred).
+- **Do not** import `@breeze/db` directly outside the services package (except migrations/tests).
 - Next.js API routes should call `packages/services` methods, not query DB directly.
 
 ## Frontend Rules
 
 - **Design system is mandatory and blocking**: For any UI/design task, do not write code until `docs/design-system.md` has been read and its rules are actively enforced in the implementation.
 - **Data fetching**: TanStack Query + oRPC. No raw `fetch("/api/..." )` in components.
-- **WebSocket streaming**: use `@proliferate/gateway-clients`.
+- **WebSocket streaming**: use `@breeze/gateway-clients`.
 
 ```ts
-import { createSyncClient } from "@proliferate/gateway-clients";
+import { createSyncClient } from "@breeze/gateway-clients";
 
 const client = createSyncClient({
   baseUrl: GATEWAY_URL,
@@ -128,10 +128,10 @@ ws.sendPrompt(content, userId);
 ## Logging
 
 - Prefer structured logs (JSON) in Node services. Don’t add new `console.*` in `apps/gateway`, `apps/worker`, `apps/trigger-service`, or `packages/services`.
-- Use `@proliferate/logger` (`packages/logger/`) as the default logger:
+- Use `@breeze/logger` (`packages/logger/`) as the default logger:
 
 ```ts
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 
 const logger = createLogger({ service: "gateway" });
 const log = logger.child({ sessionId });
@@ -150,7 +150,7 @@ log.error({ err }, "Failed to handle prompt");
 - Express services should use request logging middleware (`pino-http`) via `createHttpLogger()`:
 
 ```ts
-import { createHttpLogger } from "@proliferate/logger";
+import { createHttpLogger } from "@breeze/logger";
 
 app.use(createHttpLogger({ logger }));
 ```
@@ -164,7 +164,7 @@ app.use(createHttpLogger({ logger }));
 
 ## Workers & Infra (K8s/EKS)
 
-- Prod runs on EKS via Pulumi + Helm (`infra/pulumi-k8s/`, `charts/proliferate/`).
+- Prod runs on EKS via Pulumi + Helm (`infra/pulumi-k8s/`, `infra/helm/breeze/`).
 - ECS workflows are **legacy/manual only**.
 
 Key commands:
@@ -183,7 +183,7 @@ Key commands:
 - Local dev: `.env.local`
 - Cloud runtime: AWS Secrets Manager → External Secrets → K8s
 - App runtime env **overrides Modal secrets** when creating sessions
-- Source of truth for env keys: `packages/environment/src/schema.ts` and https://docs.proliferate.com/self-hosting/environment (source: `~/documentation/self-hosting/environment.mdx`)
+- Source of truth for env keys: `packages/environment/src/schema.ts` and https://docs.breeze.engineer/self-hosting/environment (source: `~/documentation/self-hosting/environment.mdx`)
 - Vercel is optional; if used, avoid `echo` when setting env vars (newline issue)
 
 **`NEXT_PUBLIC_` vars are baked at build time.** Next.js inlines all `NEXT_PUBLIC_` values into the client JavaScript bundle during `next build`. Changing them in AWS Secrets Manager or K8s runtime env has **no effect** on the client — you must also update them in the build environment and rebuild the Docker image.

@@ -1,4 +1,4 @@
-import { sessions } from "@proliferate/services";
+import { sessions } from "@breeze/services";
 import type { SessionLiveState } from "../state/session-live-state";
 import { reconcileRuntimePointers } from "../state/state-reconciler";
 

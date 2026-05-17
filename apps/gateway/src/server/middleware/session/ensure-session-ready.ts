@@ -10,19 +10,19 @@ import { ApiError } from "../errors/api-error";
  */
 export function createEnsureSessionReady(hubManager: HubManager): RequestHandler {
 	return async (req, _res, next) => {
-		const { proliferateSessionId } = req.params;
+		const { breezeSessionId } = req.params;
 
-		if (!proliferateSessionId) {
+		if (!breezeSessionId) {
 			return next(new ApiError(400, "Missing session ID"));
 		}
 
 		try {
-			const hub = await hubManager.getOrCreate(proliferateSessionId);
+			const hub = await hubManager.getOrCreate(breezeSessionId);
 			hub.touchActivity(); // Before ensureRuntimeReady — must not block on migration lock
 			await hub.ensureRuntimeReady();
 
 			req.hub = hub;
-			req.proliferateSessionId = proliferateSessionId;
+			req.breezeSessionId = breezeSessionId;
 			next();
 		} catch (err) {
 			const message = err instanceof Error ? err.message : "Unknown error";

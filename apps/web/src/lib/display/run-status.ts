@@ -1,5 +1,5 @@
 import { type Provider, getProviderDisplayName } from "@/components/integrations/provider-icon";
-import type { AutomationRunStatus } from "@proliferate/shared/contracts/automations";
+import type { AutomationRunStatus } from "@breeze/shared/contracts/automations";
 import {
 	AlertCircle,
 	Ban,

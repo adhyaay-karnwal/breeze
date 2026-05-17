@@ -5,7 +5,7 @@ import { resolveWorkspacePath, safePath } from "../../domain/env/path-policy.js"
 import { sandboxEnv } from "../../env.js";
 import type { EnvFileSpec } from "./types.js";
 
-const PROLIFERATE_ENV_FILE = "/tmp/.proliferate_env.json";
+const BREEZE_ENV_FILE = "/tmp/.breeze_env.json";
 
 function addToGitExclude(repoDir: string, filePath: string): void {
 	const excludeFile = join(repoDir, ".git", "info", "exclude");
@@ -25,8 +25,8 @@ function addToGitExclude(repoDir: string, filePath: string): void {
 
 function loadEnvOverrides(): Record<string, string> {
 	try {
-		if (existsSync(PROLIFERATE_ENV_FILE)) {
-			const data = JSON.parse(readFileSync(PROLIFERATE_ENV_FILE, "utf-8"));
+		if (existsSync(BREEZE_ENV_FILE)) {
+			const data = JSON.parse(readFileSync(BREEZE_ENV_FILE, "utf-8"));
 			if (typeof data === "object" && data !== null) {
 				const overrides: Record<string, string> = {};
 				for (const [key, value] of Object.entries(data)) {

@@ -5,7 +5,7 @@ import { LoadingDots } from "@/components/ui/loading-dots";
 import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/display/utils";
 import { orpc } from "@/lib/infra/orpc";
-import type { EnvStatus, RequirementScope } from "@proliferate/environment";
+import type { EnvStatus, RequirementScope } from "@breeze/environment";
 import { useQuery } from "@tanstack/react-query";
 
 const scopeLabel: Record<RequirementScope, string> = {
@@ -124,12 +124,12 @@ export function ConfigTab() {
 					<Text variant="small" color="muted" className="text-xs">
 						See{" "}
 						<a
-							href="https://docs.proliferate.com/self-hosting/environment"
+							href="https://docs.breeze.engineer/self-hosting/environment"
 							target="_blank"
 							rel="noreferrer"
 							className="underline underline-offset-2"
 						>
-							docs.proliferate.com/self-hosting/environment
+							docs.breeze.engineer/self-hosting/environment
 						</a>{" "}
 						for required variables by deployment mode.
 					</Text>

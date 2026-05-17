@@ -1,4 +1,4 @@
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 
 const logger = createLogger({ service: "gateway" }).child({
 	module: "sandbox-agent-v2-acp",

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { useValidateOrgConnector } from "@/hooks/integrations/use-org-connectors";
 import { useSecrets } from "@/hooks/org/use-secrets";
-import type { ConnectorAuth, ConnectorConfig, ConnectorPreset } from "@proliferate/shared";
+import type { ConnectorAuth, ConnectorConfig, ConnectorPreset } from "@breeze/shared";
 import { Loader2, Plug } from "lucide-react";
 import { useCallback, useState } from "react";
 

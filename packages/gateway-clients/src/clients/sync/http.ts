@@ -1,10 +1,10 @@
 /**
  * SyncClient HTTP Methods
  *
- * HTTP methods for the /proliferate routes.
+ * HTTP methods for the /breeze routes.
  */
 
-import type { ClientSource } from "@proliferate/shared";
+import type { ClientSource } from "@breeze/shared";
 import type { TokenGetter } from "../../auth";
 import type {
 	CreateSessionRequest,
@@ -77,7 +77,7 @@ export function createHttpClient(baseUrl: string, getToken: TokenGetter): HttpCl
  */
 export async function postMessage(
 	http: HttpClient,
-	proliferateSessionId: string,
+	breezeSessionId: string,
 	options: PostMessageOptions,
 	source?: ClientSource,
 ): Promise<void> {
@@ -85,7 +85,7 @@ export async function postMessage(
 		? { "Idempotency-Key": options.idempotencyKey }
 		: undefined;
 	await http.post(
-		`/proliferate/${proliferateSessionId}/message`,
+		`/breeze/${breezeSessionId}/message`,
 		{
 			type: "prompt",
 			content: options.content,
@@ -104,20 +104,17 @@ export async function postMessage(
  */
 export async function postCancel(
 	http: HttpClient,
-	proliferateSessionId: string,
+	breezeSessionId: string,
 	userId?: string,
 ): Promise<void> {
-	await http.post(`/proliferate/${proliferateSessionId}/cancel`, { userId });
+	await http.post(`/breeze/${breezeSessionId}/cancel`, { userId });
 }
 
 /**
  * Get session/sandbox info
  */
-export async function getInfo(
-	http: HttpClient,
-	proliferateSessionId: string,
-): Promise<SandboxInfo> {
-	return http.get(`/proliferate/${proliferateSessionId}`);
+export async function getInfo(http: HttpClient, breezeSessionId: string): Promise<SandboxInfo> {
+	return http.get(`/breeze/${breezeSessionId}`);
 }
 
 /**
@@ -144,14 +141,14 @@ export async function createSession(
 	const headers = options?.idempotencyKey
 		? { "Idempotency-Key": options.idempotencyKey }
 		: undefined;
-	return http.post<CreateSessionResponse>("/proliferate/sessions", request, { headers });
+	return http.post<CreateSessionResponse>("/breeze/sessions", request, { headers });
 }
 
 /**
  * Trigger eager session start (boot sandbox + send initial prompt)
  */
-export async function eagerStart(http: HttpClient, proliferateSessionId: string): Promise<void> {
-	await http.post(`/proliferate/${proliferateSessionId}/eager-start`, {});
+export async function eagerStart(http: HttpClient, breezeSessionId: string): Promise<void> {
+	await http.post(`/breeze/${breezeSessionId}/eager-start`, {});
 }
 
 /**
@@ -159,9 +156,9 @@ export async function eagerStart(http: HttpClient, proliferateSessionId: string)
  */
 export async function getSessionStatus(
 	http: HttpClient,
-	proliferateSessionId: string,
+	breezeSessionId: string,
 	organizationId?: string,
 ): Promise<SessionStatusResponse> {
 	const query = organizationId ? `?organizationId=${encodeURIComponent(organizationId)}` : "";
-	return http.get(`/proliferate/sessions/${proliferateSessionId}/status${query}`);
+	return http.get(`/breeze/sessions/${breezeSessionId}/status${query}`);
 }

@@ -1,6 +1,6 @@
 # ECR Repository
 resource "aws_ecr_repository" "worker" {
-  name                 = "proliferate-worker"
+  name                 = "breeze-worker"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -30,7 +30,7 @@ resource "aws_ecr_lifecycle_policy" "worker" {
 
 # IAM Role for ECS Task Execution
 resource "aws_iam_role" "ecs_execution" {
-  name = "proliferate-ecs-execution"
+  name = "breeze-ecs-execution"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -70,7 +70,7 @@ resource "aws_iam_role_policy" "ecs_execution_secrets" {
 
 # IAM Role for ECS Task
 resource "aws_iam_role" "ecs_task" {
-  name = "proliferate-ecs-task"
+  name = "breeze-ecs-task"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -86,13 +86,13 @@ resource "aws_iam_role" "ecs_task" {
 
 # Secrets Manager for worker secrets
 resource "aws_secretsmanager_secret" "worker" {
-  name        = "proliferate-worker"
-  description = "Secrets for Proliferate worker service"
+  name        = "breeze-worker"
+  description = "Secrets for Breeze worker service"
 }
 
 # Security Group for Worker
 resource "aws_security_group" "worker" {
-  name        = "proliferate-worker"
+  name        = "breeze-worker"
   description = "Security group for worker ECS tasks"
   vpc_id      = aws_vpc.main.id
 
@@ -104,13 +104,13 @@ resource "aws_security_group" "worker" {
   }
 
   tags = {
-    Name = "proliferate-worker"
+    Name = "breeze-worker"
   }
 }
 
 # ECS Task Definition for Worker
 resource "aws_ecs_task_definition" "worker" {
-  family                   = "proliferate-worker"
+  family                   = "breeze-worker"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = 256
@@ -156,7 +156,7 @@ resource "aws_ecs_task_definition" "worker" {
 
 # ECS Service
 resource "aws_ecs_service" "worker" {
-  name            = "proliferate-worker"
+  name            = "breeze-worker"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.worker.arn
   desired_count   = 1

@@ -1,7 +1,7 @@
 import pg from "pg";
 
 const DB_URL =
-	process.env.E2E_DATABASE_URL || "postgresql://postgres:postgres@127.0.0.1:5432/proliferate";
+	process.env.E2E_DATABASE_URL || "postgresql://postgres:postgres@127.0.0.1:5432/breeze";
 
 const SEED_SQL = `
 BEGIN;

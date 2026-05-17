@@ -1,5 +1,5 @@
 {
-	"name": "@proliferate/trigger-service",
+	"name": "@breeze/trigger-service",
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
@@ -10,13 +10,13 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@proliferate/db": "workspace:*",
-		"@proliferate/environment": "workspace:*",
-		"@proliferate/gateway-clients": "workspace:*",
-		"@proliferate/logger": "workspace:*",
-		"@proliferate/queue": "workspace:*",
-		"@proliferate/services": "workspace:*",
-		"@proliferate/triggers": "workspace:*",
+		"@breeze/db": "workspace:*",
+		"@breeze/environment": "workspace:*",
+		"@breeze/gateway-clients": "workspace:*",
+		"@breeze/logger": "workspace:*",
+		"@breeze/queue": "workspace:*",
+		"@breeze/services": "workspace:*",
+		"@breeze/triggers": "workspace:*",
 		"@sentry/node": "^10.34.0",
 		"bullmq": "^5.30.1",
 		"cron-parser": "^5.5.0",

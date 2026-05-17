@@ -24,6 +24,6 @@ export function createOpencodeProxyRoutes(hubManager: HubManager, env: GatewayEn
 		},
 	});
 
-	router.use("/:proliferateSessionId/:token/opencode", requireProxyAuth, ensureSessionReady, proxy);
+	router.use("/:breezeSessionId/:token/opencode", requireProxyAuth, ensureSessionReady, proxy);
 	return router;
 }

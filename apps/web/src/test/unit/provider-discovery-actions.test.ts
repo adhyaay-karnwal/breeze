@@ -1,4 +1,4 @@
-import { getProviderActions } from "@proliferate/providers";
+import { getProviderActions } from "@breeze/providers";
 import { describe, expect, it } from "vitest";
 
 describe("provider discovery actions", () => {

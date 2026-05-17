@@ -30,7 +30,7 @@ import {
 	useSession,
 } from "@/lib/auth/client";
 import { cn } from "@/lib/display/utils";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import { useQueryClient } from "@tanstack/react-query";
 import { CheckCircle2, Mail, Pencil, Plus, Users, X } from "lucide-react";
 import { useState } from "react";

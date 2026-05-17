@@ -4,9 +4,9 @@
  * Creates a snapshot of the session's current state.
  */
 
-import type { SandboxProviderType } from "@proliferate/shared";
-import type { BillingPlan } from "@proliferate/shared/billing";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+import type { SandboxProviderType } from "@breeze/shared";
+import type { BillingPlan } from "@breeze/shared/billing";
+import { getSandboxProvider } from "@breeze/shared/providers";
 import * as billing from "../billing";
 import { prepareForSnapshot } from "../lib/snapshot-scrub";
 import { getServicesLogger } from "../logger";

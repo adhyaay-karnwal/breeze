@@ -6,14 +6,14 @@
  * integration and remain as separate handlers imported here.
  */
 
-import { ORPCError } from "@orpc/server";
-import { notifications, sessions, workers } from "@proliferate/services";
+import { notifications, sessions, workers } from "@breeze/services";
 import {
 	CreateSessionInputSchema,
 	CreateSessionResponseSchema,
 	SessionSchema,
 	SessionStatusSchema,
-} from "@proliferate/shared/contracts/sessions";
+} from "@breeze/shared/contracts/sessions";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { billingGatedProcedure, orgProcedure, publicProcedure } from "./middleware";
 

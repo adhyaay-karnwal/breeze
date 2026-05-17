@@ -5,10 +5,10 @@
  * Supports Slack channel posts and DMs.
  */
 
-import { env } from "@proliferate/environment/server";
-import type { Logger } from "@proliferate/logger";
-import { integrations, notifications, runs, sessions, sideEffects } from "@proliferate/services";
-import { decrypt, getEncryptionKey } from "@proliferate/shared/crypto";
+import { env } from "@breeze/environment/server";
+import type { Logger } from "@breeze/logger";
+import { integrations, notifications, runs, sessions, sideEffects } from "@breeze/services";
+import { decrypt, getEncryptionKey } from "@breeze/shared/crypto";
 
 /** Timeout for outbound Slack API calls (ms). */
 const SLACK_TIMEOUT_MS = 10_000;
@@ -571,7 +571,7 @@ export async function dispatchV1Notification(
 	payload: V1NotificationPayload,
 	logger: Logger,
 ): Promise<void> {
-	const { CATEGORY_ROUTING } = await import("@proliferate/shared/contracts/notifications");
+	const { CATEGORY_ROUTING } = await import("@breeze/shared/contracts/notifications");
 	const category = payload.category as keyof typeof CATEGORY_ROUTING;
 	const routing = CATEGORY_ROUTING[category];
 

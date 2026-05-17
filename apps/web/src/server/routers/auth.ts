@@ -4,10 +4,10 @@
  * Auth-related read endpoints used by the web client.
  */
 
+import { env } from "@breeze/environment/server";
+import { signGatewayToken } from "@breeze/shared";
+import { AuthProvidersSchema } from "@breeze/shared/contracts/auth";
 import { ORPCError } from "@orpc/server";
-import { env } from "@proliferate/environment/server";
-import { signGatewayToken } from "@proliferate/shared";
-import { AuthProvidersSchema } from "@proliferate/shared/contracts/auth";
 import { z } from "zod";
 import { protectedProcedure, publicProcedure } from "./middleware";
 

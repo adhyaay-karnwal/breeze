@@ -8,7 +8,7 @@
  * 4. Safe fallback: "write" (requires approval)
  */
 
-import type { ConnectorRiskPolicy } from "@proliferate/shared";
+import type { ConnectorRiskPolicy } from "@breeze/shared";
 
 export interface McpToolAnnotations {
 	readOnlyHint?: boolean;

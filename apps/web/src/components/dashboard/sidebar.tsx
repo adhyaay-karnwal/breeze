@@ -22,7 +22,7 @@ import { useSignOut } from "@/hooks/ui/use-sign-out";
 import { useSession } from "@/lib/auth/client";
 import { cn } from "@/lib/display/utils";
 import { useDashboardStore } from "@/stores/dashboard";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import {
 	ArrowLeft,
 	Building2,
@@ -141,7 +141,7 @@ export function Sidebar() {
 				>
 					<img
 						src="https://d1uh4o7rpdqkkl.cloudfront.net/logo.webp"
-						alt="Proliferate"
+						alt="Breeze"
 						className="h-4 w-4 rounded-full"
 					/>
 				</Button>
@@ -293,7 +293,7 @@ export function SidebarShell({
 								? "https://d1uh4o7rpdqkkl.cloudfront.net/logotype-inverted.webp"
 								: "https://d1uh4o7rpdqkkl.cloudfront.net/logotype.webp"
 						}
-						alt="Proliferate"
+						alt="Breeze"
 						className="h-5"
 					/>
 				</div>
@@ -360,7 +360,7 @@ export function SidebarShell({
 					className="flex items-center justify-center gap-2 w-full h-8 rounded-lg text-sm font-medium border-border/60 bg-muted/30 text-muted-foreground hover:text-foreground hover:bg-muted hover:border-border"
 					onClick={() => {
 						if (!openIntercomMessenger()) {
-							window.open("https://docs.proliferate.com", "_blank", "noopener,noreferrer");
+							window.open("https://docs.breeze.engineer", "_blank", "noopener,noreferrer");
 						}
 					}}
 				>

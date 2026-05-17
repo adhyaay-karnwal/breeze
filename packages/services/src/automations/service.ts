@@ -10,7 +10,7 @@ import {
 	createPollGroupQueue,
 	createScheduledQueue,
 	removePollGroupJob,
-} from "@proliferate/queue";
+} from "@breeze/queue";
 import type {
 	Automation,
 	AutomationEvent,
@@ -18,7 +18,7 @@ import type {
 	AutomationListItem,
 	AutomationTrigger,
 	AutomationWithTriggers,
-} from "@proliferate/shared/contracts/automations";
+} from "@breeze/shared/contracts/automations";
 import * as configurationsDb from "../configurations";
 import { getServicesLogger } from "../logger";
 import * as pollGroupsDb from "../poll-groups/db";

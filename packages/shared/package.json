@@ -1,5 +1,5 @@
 {
-	"name": "@proliferate/shared",
+	"name": "@breeze/shared",
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
@@ -55,9 +55,9 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
-		"@proliferate/db": "workspace:*",
-		"@proliferate/environment": "workspace:*",
-		"@proliferate/logger": "workspace:*",
+		"@breeze/db": "workspace:*",
+		"@breeze/environment": "workspace:*",
+		"@breeze/logger": "workspace:*",
 		"e2b": "^2.13.0",
 		"ioredis": "^5.4.1",
 		"jose": "^5.2.0",

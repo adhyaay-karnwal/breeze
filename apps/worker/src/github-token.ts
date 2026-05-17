@@ -5,7 +5,7 @@
  * repo-linked integration connections, then falling back to org-wide.
  */
 
-import { integrations } from "@proliferate/services";
+import { integrations } from "@breeze/services";
 
 export async function resolveGitHubToken(orgId: string, repoId: string): Promise<string> {
 	// 1) Prefer repo-linked connections.

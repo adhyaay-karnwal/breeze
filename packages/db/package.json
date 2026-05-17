@@ -1,5 +1,5 @@
 {
-	"name": "@proliferate/db",
+	"name": "@breeze/db",
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
@@ -20,7 +20,7 @@
 		"db:studio": "drizzle-kit studio"
 	},
 	"dependencies": {
-		"@proliferate/environment": "workspace:*",
+		"@breeze/environment": "workspace:*",
 		"drizzle-orm": "^0.44.0",
 		"postgres": "^3.4.5"
 	},

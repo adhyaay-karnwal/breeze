@@ -1,7 +1,7 @@
 import { URL } from "node:url";
 
 export function rewriteVscodeProxyPath(path: string): string {
-	return `/_proliferate/vscode${path || "/"}`;
+	return `/_breeze/vscode${path || "/"}`;
 }
 
 export function rewriteVscodeRedirectLocation(location: string): string {

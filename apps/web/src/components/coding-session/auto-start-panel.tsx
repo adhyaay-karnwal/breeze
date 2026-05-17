@@ -19,7 +19,7 @@ import type {
 	AutoStartOutputEntry,
 	AutoStartOutputMessage,
 	ConfigurationServiceCommand,
-} from "@proliferate/shared";
+} from "@breeze/shared";
 import {
 	CheckCircle2,
 	ChevronDown,

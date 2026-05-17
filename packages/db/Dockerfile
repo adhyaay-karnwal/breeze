@@ -15,8 +15,8 @@ COPY packages/db ./packages/db
 RUN pnpm install --frozen-lockfile
 
 # Build the environment package (required by drizzle config)
-RUN pnpm --filter @proliferate/environment build
-RUN pnpm --filter @proliferate/logger build
-RUN pnpm --filter @proliferate/db build
+RUN pnpm --filter @breeze/environment build
+RUN pnpm --filter @breeze/logger build
+RUN pnpm --filter @breeze/db build
 
-CMD ["pnpm", "--filter", "@proliferate/db", "db:migrate"]
+CMD ["pnpm", "--filter", "@breeze/db", "db:migrate"]

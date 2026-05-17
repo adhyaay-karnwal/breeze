@@ -2,7 +2,7 @@
 
 import type { Provider } from "@/components/integrations/provider-icon";
 import { orpc } from "@/lib/infra/orpc";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import { useCallback, useRef, useState } from "react";
 
 // Feature flag for using Nango for GitHub OAuth (vs GitHub App)

@@ -1,5 +1,5 @@
-import type { DisplayStatus } from "@proliferate/shared/sessions";
-import type { OverallWorkState } from "@proliferate/shared/sessions";
+import type { DisplayStatus } from "@breeze/shared/sessions";
+import type { OverallWorkState } from "@breeze/shared/sessions";
 
 export type FilterTab = "in_progress" | "needs_attention" | "paused" | "completed";
 

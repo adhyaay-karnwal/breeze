@@ -4,8 +4,8 @@
  * Starts the Express server with WebSocket support.
  */
 
-import { nodeEnv } from "@proliferate/environment/runtime";
-import { env as serverEnv } from "@proliferate/environment/server";
+import { nodeEnv } from "@breeze/environment/runtime";
+import { env as serverEnv } from "@breeze/environment/server";
 import * as Sentry from "@sentry/node";
 
 Sentry.init({
@@ -18,10 +18,10 @@ Sentry.init({
 	},
 });
 
-import { getEnvStatus } from "@proliferate/environment";
-import { createLogger } from "@proliferate/logger";
-import { setServicesLogger } from "@proliferate/services/logger";
-import { setSharedLogger } from "@proliferate/shared/logger";
+import { getEnvStatus } from "@breeze/environment";
+import { createLogger } from "@breeze/logger";
+import { setServicesLogger } from "@breeze/services/logger";
+import { setSharedLogger } from "@breeze/shared/logger";
 import { setLockRedisClient } from "./hub/session/migration/lock";
 import { loadGatewayEnv } from "./lib/env";
 import { ensureRedisConnected } from "./lib/redis";

@@ -1,6 +1,6 @@
 import { getBaseUrl, requireIntegrationAdminContext } from "@/lib/integrations/oauth-context";
 import { buildSignedOAuthStateFromRequest } from "@/lib/integrations/oauth-state";
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { type NextRequest, NextResponse } from "next/server";
 
 function sanitizeSentryHost(input: string | undefined): string {

@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { Template, defaultBuildLogger } from "e2b";
 import { template } from "./template";
 

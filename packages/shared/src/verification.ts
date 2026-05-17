@@ -1,8 +1,8 @@
 // Default folder where agents build verification evidence
-export const VERIFICATION_FOLDER = ".proliferate/.verification";
+export const VERIFICATION_FOLDER = ".breeze/.verification";
 
 export interface VerificationArgs {
-	folder?: string; // Defaults to .proliferate/.verification
+	folder?: string; // Defaults to .breeze/.verification
 }
 
 export interface VerificationResult {

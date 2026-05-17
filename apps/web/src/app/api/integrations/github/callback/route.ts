@@ -3,7 +3,7 @@ import { logger } from "@/lib/infra/logger";
 import { listInstallationRepos, verifyInstallation } from "@/lib/integrations/github-app";
 import { getBaseUrl } from "@/lib/integrations/oauth-context";
 import { sanitizeOAuthReturnUrl, verifySignedOAuthState } from "@/lib/integrations/oauth-state";
-import { integrations, orgs, repos } from "@proliferate/services";
+import { integrations, orgs, repos } from "@breeze/services";
 import { type NextRequest, NextResponse } from "next/server";
 
 const log = logger.child({ route: "integrations/github/callback" });

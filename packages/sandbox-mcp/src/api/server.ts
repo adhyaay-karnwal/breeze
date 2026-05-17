@@ -1,4 +1,4 @@
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 import { createApiApp } from "./create-api-app.js";
 
 const logger = createLogger({ service: "sandbox-mcp" }).child({ module: "api-server" });

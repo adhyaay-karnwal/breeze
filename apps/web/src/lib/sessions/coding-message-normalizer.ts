@@ -1,8 +1,5 @@
-import type { ServerMessage } from "@proliferate/gateway-clients";
-import type {
-	DaemonStreamEnvelope,
-	WorkspaceStateInfo,
-} from "@proliferate/shared/contracts/harness";
+import type { ServerMessage } from "@breeze/gateway-clients";
+import type { DaemonStreamEnvelope, WorkspaceStateInfo } from "@breeze/shared/contracts/harness";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
 	return typeof value === "object" && value !== null;

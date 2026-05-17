@@ -91,7 +91,7 @@ export function getOpencodeConfig(
     "port": 4096,
     "hostname": "0.0.0.0"
   },
-  "plugin": ["${SANDBOX_PATHS.globalPluginDir}/proliferate.mjs"],
+  "plugin": ["${SANDBOX_PATHS.globalPluginDir}/breeze.mjs"],
   "permission": {
     "*": "allow",
     "question": "deny"

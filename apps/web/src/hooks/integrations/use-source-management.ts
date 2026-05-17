@@ -5,7 +5,7 @@ import {
 	useDisabledSourceIds,
 	useToggleActionPreference,
 } from "@/hooks/actions/use-action-preferences";
-import type { ConnectorConfig } from "@proliferate/shared";
+import type { ConnectorConfig } from "@breeze/shared";
 import { useCallback } from "react";
 
 export function useSourceManagement(connectors: ConnectorConfig[] | undefined) {

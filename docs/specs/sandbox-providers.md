@@ -13,8 +13,8 @@
 - Base snapshot version key + Modal base/configuration snapshot build paths
 - sandbox-mcp sidecar (`api-server`, terminal WS, service manager, in-sandbox CLI)
 - Sandbox auth token wiring (`SANDBOX_MCP_AUTH_TOKEN`)
-- Caddy preview/proxy integration (`/_proliferate/mcp/*`, `/_proliferate/vscode/*`)
-- sandbox-daemon runtime bridge endpoints (`/_proliferate/v1/runtime/session/*`) used by gateway coding runtime and the planned Pi manager runtime cutover
+- Caddy preview/proxy integration (`/_breeze/mcp/*`, `/_breeze/vscode/*`)
+- sandbox-daemon runtime bridge endpoints (`/_breeze/v1/runtime/session/*`) used by gateway coding runtime and the planned Pi manager runtime cutover
 
 ### Out of Scope
 - Session lifecycle orchestration, hub ownership, SSE runtime state machine — see `sessions-gateway.md`
@@ -42,7 +42,7 @@ Boot is intentionally split into two phases:
 
 State is intentionally split:
 - Durable session metadata in DB (`sessions` row and linked records).
-- In-sandbox operational metadata at `/home/user/.proliferate/metadata.json`.
+- In-sandbox operational metadata at `/home/user/.breeze/metadata.json`.
 - For Pi manager runtime, hidden runtime-private transcript/session state must remain in hidden sandbox storage separate from the agent-managed `$MANAGER_MEMORY_DIR` working-memory root.
 - Provider instances themselves are ephemeral/stateless across calls.
 
@@ -59,7 +59,7 @@ State is intentionally split:
 - `checkSandboxes()` must be side-effect free; E2B must not use `Sandbox.connect()` there (`packages/shared/src/providers/provider-contract.test.ts`, `packages/shared/src/providers/e2b.ts`, `packages/shared/src/providers/e2b/*.ts`).
 - Snapshot restore freshness is cadence-gated and metadata-aware; cadence advances only when all pulls succeed (`packages/shared/src/sandbox/git-freshness.ts`, `packages/shared/src/providers/pull-on-restore.test.ts`).
 - For Pi manager runtime, hidden runtime-private transcript/session state is not the same surface as `$MANAGER_MEMORY_DIR`; transcript state is runtime-private, while the memory root is agent-managed working memory.
-- Gateway callback tools (`verify`, `save_snapshot`, etc.) require `PROLIFERATE_GATEWAY_URL`, `PROLIFERATE_SESSION_ID`, and `SANDBOX_MCP_AUTH_TOKEN` in sandbox env (`packages/shared/src/opencode-tools/index.ts`).
+- Gateway callback tools (`verify`, `save_snapshot`, etc.) require `BREEZE_GATEWAY_URL`, `BREEZE_SESSION_ID`, and `SANDBOX_MCP_AUTH_TOKEN` in sandbox env (`packages/shared/src/opencode-tools/index.ts`).
 - Direct provider instantiation is valid for snapshot workers, not for session runtime code paths (`apps/worker/src/base-snapshots/index.ts`, `apps/worker/src/configuration-snapshots/index.ts`, `packages/shared/src/providers/index.ts`).
 
 ---
@@ -97,14 +97,14 @@ Default model is `claude-sonnet-4.6` (not Opus) (`packages/shared/src/agents.ts`
 OpenCode config and readiness are shared utilities (`getOpencodeConfig`, `waitForOpenCodeReady`) used by both providers (`packages/shared/src/sandbox/opencode.ts`).
 
 ### Metadata + Freshness
-Providers maintain `SessionMetadata` in `/home/user/.proliferate/metadata.json` for repo directory and freshness cadence tracking (`packages/shared/src/sandbox/opencode.ts`, `packages/shared/src/providers/*.ts`).
+Providers maintain `SessionMetadata` in `/home/user/.breeze/metadata.json` for repo directory and freshness cadence tracking (`packages/shared/src/sandbox/opencode.ts`, `packages/shared/src/providers/*.ts`).
 
 `shouldPullOnRestore()` is the shared policy function. Providers own actual git credential rewrite/pull execution and metadata timestamp updates (`packages/shared/src/sandbox/git-freshness.ts`).
 
 ### sandbox-mcp Sidecar
 sandbox-mcp provides in-sandbox HTTP/WS APIs for service management, terminal access, and git introspection (`packages/sandbox-mcp/src/index.ts`, `packages/sandbox-mcp/src/api-server.ts`, `packages/sandbox-mcp/src/terminal.ts`).
 
-It is reachable externally through Caddy’s `/_proliferate/mcp/*` path (`packages/shared/src/sandbox/config.ts`).
+It is reachable externally through Caddy’s `/_breeze/mcp/*` path (`packages/shared/src/sandbox/config.ts`).
 
 ---
 
@@ -128,7 +128,7 @@ It is reachable externally through Caddy’s `/_proliferate/mcp/*` path (`packag
 
 ### Reliability Notes
 - OpenCode readiness probes are bounded and best-effort on create; runtime recovery should tolerate transient failure and reconnect (`packages/shared/src/sandbox/opencode.ts`, `packages/shared/src/providers/*.ts`).
-- sandbox-mcp CLI retries transient local API connection errors (`packages/sandbox-mcp/src/proliferate-cli.ts`).
+- sandbox-mcp CLI retries transient local API connection errors (`packages/sandbox-mcp/src/breeze-cli.ts`).
 
 ---
 
@@ -186,9 +186,9 @@ References: `packages/shared/src/providers/modal-libmodal.ts`, `packages/shared/
 ### 6.6 Service Boot + Env File Invariants — `Implemented`
 - Env files must be applied before tracked service autostart commands run.
 - Service autostart requires both `snapshotHasDeps=true` and non-empty resolved service commands.
-- Services started via `proliferate services start` are expected to be tracked by service-manager state/log APIs.
+- Services started via `breeze services start` are expected to be tracked by service-manager state/log APIs.
 
-References: `packages/shared/src/providers/modal-libmodal.ts`, `packages/shared/src/providers/e2b.ts`, `packages/shared/src/providers/e2b/*.ts`, `packages/sandbox-mcp/src/proliferate-cli.ts`, `packages/sandbox-mcp/src/service-manager.ts`.
+References: `packages/shared/src/providers/modal-libmodal.ts`, `packages/shared/src/providers/e2b.ts`, `packages/shared/src/providers/e2b/*.ts`, `packages/sandbox-mcp/src/breeze-cli.ts`, `packages/sandbox-mcp/src/service-manager.ts`.
 
 ### 6.7 Freshness Invariants — `Implemented`
 - Pull-on-restore must be policy-driven (`SANDBOX_GIT_PULL_ON_RESTORE`, cadence, snapshot presence, repo count).
@@ -215,20 +215,20 @@ References: `packages/shared/src/snapshot-resolution.ts`, `packages/shared/src/s
 References: `packages/sandbox-mcp/src/index.ts`, `packages/sandbox-mcp/src/api-server.ts`, `packages/sandbox-mcp/src/terminal.ts`, `packages/sandbox-mcp/src/auth.ts`.
 
 ### 6.10 Service Manager Invariants — `Implemented`
-- Service state is persisted in `/tmp/proliferate/state.json`; logs in `/tmp/proliferate/logs/`.
+- Service state is persisted in `/tmp/breeze/state.json`; logs in `/tmp/breeze/logs/`.
 - Starting a service with an existing name must replace prior process ownership.
 - Process group termination semantics must be used when possible to avoid orphan children.
-- Exposed port routing must be written to `/home/user/.proliferate/caddy/user.caddy` and reloaded via Caddy signal.
+- Exposed port routing must be written to `/home/user/.breeze/caddy/user.caddy` and reloaded via Caddy signal.
 
 References: `packages/sandbox-mcp/src/service-manager.ts`, `packages/shared/src/sandbox/config.ts`.
 
-### 6.11 Proliferate CLI Invariants — `Implemented`
+### 6.11 Breeze CLI Invariants — `Implemented`
 - `services` commands are sandbox-mcp API clients and require auth token.
 - `env apply` is two-pass (validate then write) and path-constrained to workspace.
 - `env scrub` removes secret-mode files and local override file.
 - `actions` commands call gateway APIs and must support approval-polling flow.
 
-References: `packages/sandbox-mcp/src/proliferate-cli.ts`, `packages/sandbox-mcp/src/proliferate-cli-env.test.ts`, `packages/sandbox-mcp/src/actions-grants.ts`.
+References: `packages/sandbox-mcp/src/breeze-cli.ts`, `packages/sandbox-mcp/src/breeze-cli-env.test.ts`, `packages/sandbox-mcp/src/actions-grants.ts`.
 
 ### 6.12 Base + Configuration Snapshot Build Invariants — `Implemented`
 - Base snapshot version key must deterministically hash runtime-baked files/config + image version salt.
@@ -248,7 +248,7 @@ References: `packages/shared/src/sandbox/version-key.ts`, `apps/worker/src/base-
 | Repos/Configurations | Workers -> Modal provider | `createBaseSnapshot`, `createConfigurationSnapshot` | Build scheduling/ownership is in `repos-prebuilds.md`. |
 | Secrets/Environment | Services/Gateway -> Provider | `CreateSandboxOpts.envVars`, env files spec | Secret CRUD and schema ownership is in `secrets-environment.md`. |
 | LLM proxy | Services -> Provider/Sandbox | `LLM_PROXY_API_KEY`, `ANTHROPIC_BASE_URL` | Key issuance/routing policy is in `llm-proxy.md`. |
-| Actions | sandbox CLI -> Gateway | `/proliferate/:sessionId/actions/*` | Approval/risk/grants logic is in `actions.md`; provider responsibility is env wiring and CLI availability. |
+| Actions | sandbox CLI -> Gateway | `/breeze/:sessionId/actions/*` | Approval/risk/grants logic is in `actions.md`; provider responsibility is env wiring and CLI availability. |
 
 ### Security & Auth
 - sandbox-mcp auth is bearer-token based and deny-by-default when token is absent (`packages/sandbox-mcp/src/auth.ts`).
@@ -276,7 +276,7 @@ References: `packages/shared/src/sandbox/version-key.ts`, `apps/worker/src/base-
 
 - [ ] **Modal pause is unsupported** — Modal sessions cannot use native pause semantics and rely on snapshot + recreate paths (`packages/shared/src/providers/modal-libmodal.ts`).
 - [ ] **E2B resume fallback is silent** — failed `Sandbox.connect(snapshotId)` falls back to fresh sandbox creation without user-visible warning (`packages/shared/src/providers/e2b.ts`, `packages/shared/src/providers/e2b/create/initialize.ts`).
-- [ ] **Immediate sandbox creation path does not inject gateway callback env vars by default** — `session-creator` direct `provider.createSandbox()` path omits `SANDBOX_MCP_AUTH_TOKEN`, `PROLIFERATE_GATEWAY_URL`, and `PROLIFERATE_SESSION_ID`, while tool callbacks/sandbox-mcp auth depend on them (`apps/gateway/src/lib/session-creator.ts`, `apps/gateway/src/hub/session-runtime.ts`, `packages/shared/src/opencode-tools/index.ts`, `packages/shared/src/providers/*.ts`).
+- [ ] **Immediate sandbox creation path does not inject gateway callback env vars by default** — `session-creator` direct `provider.createSandbox()` path omits `SANDBOX_MCP_AUTH_TOKEN`, `BREEZE_GATEWAY_URL`, and `BREEZE_SESSION_ID`, while tool callbacks/sandbox-mcp auth depend on them (`apps/gateway/src/lib/session-creator.ts`, `apps/gateway/src/hub/session-runtime.ts`, `packages/shared/src/opencode-tools/index.ts`, `packages/shared/src/providers/*.ts`).
 - [ ] **Freshness logic is duplicated across layers** — providers run cadence-aware pull-on-restore, and runtime also runs a best-effort pull from `/home/user/workspace`; this creates overlap and uneven multi-repo behavior (`packages/shared/src/providers/*.ts`, `apps/gateway/src/hub/session-runtime.ts`).
 - [ ] **E2B setup parity gap** — E2B provider currently does not write SSH authorized keys or trigger context files, unlike Modal (`packages/shared/src/providers/e2b.ts`, `packages/shared/src/providers/e2b/*.ts`, `packages/shared/src/providers/modal-libmodal.ts`).
 - [ ] **`resolveSnapshotId()` is currently not on the primary session-start path** — runtime/session-creator consume snapshot IDs directly from resolved configuration/session state, leaving this utility as a pure helper/test surface (`packages/shared/src/snapshot-resolution.ts`, `apps/gateway/src/lib/configuration-resolver.ts`, `apps/gateway/src/lib/session-creator.ts`).

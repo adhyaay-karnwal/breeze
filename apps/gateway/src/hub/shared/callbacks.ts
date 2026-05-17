@@ -1,4 +1,4 @@
-import type { ServerMessage } from "@proliferate/shared";
+import type { ServerMessage } from "@breeze/shared";
 import type { RuntimeDaemonEvent } from "../../harness/contracts/coding";
 
 export type DisconnectCallback = (reason: string) => void;

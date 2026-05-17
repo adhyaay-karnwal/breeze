@@ -4,7 +4,7 @@
  * Posts completed text segments to Slack, converting markdown to mrkdwn.
  */
 
-import type { TextPartCompleteMessage } from "@proliferate/gateway-clients";
+import type { TextPartCompleteMessage } from "@breeze/gateway-clients";
 import { slackifyMarkdown } from "slackify-markdown";
 import type { EventHandler, HandlerContext } from "./index";
 

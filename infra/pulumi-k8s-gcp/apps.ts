@@ -42,7 +42,7 @@ export function deployApplications(inputs: AppReleaseInputs): k8s.helm.v3.Releas
 	);
 
 	return new k8s.helm.v3.Release(
-		"proliferate-apps",
+		"breeze-apps",
 		{
 			chart: inputs.chartPath,
 			namespace: appNamespace,

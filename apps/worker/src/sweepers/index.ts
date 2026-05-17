@@ -4,8 +4,8 @@
  * Periodically marks stale pending action invocations as expired.
  */
 
-import type { Logger } from "@proliferate/logger";
-import { actions } from "@proliferate/services";
+import type { Logger } from "@breeze/logger";
+import { actions } from "@breeze/services";
 
 const SWEEP_INTERVAL_MS = 60_000; // Every 60 seconds
 

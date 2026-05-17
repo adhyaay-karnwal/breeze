@@ -4,8 +4,7 @@
  * Handles organization operations including members and invitations.
  */
 
-import { ORPCError } from "@orpc/server";
-import { orgs } from "@proliferate/services";
+import { orgs } from "@breeze/services";
 import {
 	DomainSuggestionSchema,
 	InvitationSchema,
@@ -13,7 +12,8 @@ import {
 	OrgRoleSchema,
 	OrganizationSchema,
 	OrganizationWithRoleSchema,
-} from "@proliferate/shared/contracts/orgs";
+} from "@breeze/shared/contracts/orgs";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { orgProcedure, protectedProcedure } from "./middleware";
 

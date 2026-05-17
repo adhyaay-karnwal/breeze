@@ -4,8 +4,8 @@
  * Business logic for billing page and checkout flows.
  */
 
-import { env } from "@proliferate/environment/server";
-import { createBillingFastReconcileQueue } from "@proliferate/queue";
+import { env } from "@breeze/environment/server";
+import { createBillingFastReconcileQueue } from "@breeze/queue";
 import {
 	AUTUMN_FEATURES,
 	AUTUMN_PRODUCTS,
@@ -21,7 +21,7 @@ import {
 	getStateMessage,
 	normalizeBillingState,
 	parseBillingSettings,
-} from "@proliferate/shared/billing";
+} from "@breeze/shared/billing";
 import type {
 	ActivatePlanResponse,
 	BillingInfo,
@@ -29,7 +29,7 @@ import type {
 	BuyCreditsResponse,
 	SetupPaymentResponse,
 	UpdateBillingSettingsResponse,
-} from "@proliferate/shared/contracts/billing";
+} from "@breeze/shared/contracts/billing";
 import { getServicesLogger } from "../logger";
 import {
 	getBillingInfo,

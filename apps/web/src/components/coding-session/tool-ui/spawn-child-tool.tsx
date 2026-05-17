@@ -3,7 +3,7 @@
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { ExternalLink, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 type SpawnChildArgs = {
 	title?: string;
@@ -35,7 +35,7 @@ export const SpawnChildToolUI = makeAssistantToolUI<SpawnChildArgs, string>({
 		const title = args.title || parsed?.title || "Child session";
 
 		return (
-			<ProliferateToolCard label="Spawn coding session" status={isRunning ? "running" : "success"}>
+			<BreezeToolCard label="Spawn coding session" status={isRunning ? "running" : "success"}>
 				<div className="flex flex-col gap-1.5">
 					<div className="flex items-center gap-2">
 						<span className="font-medium text-foreground">{title}</span>
@@ -59,7 +59,7 @@ export const SpawnChildToolUI = makeAssistantToolUI<SpawnChildArgs, string>({
 						</Link>
 					)}
 				</div>
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

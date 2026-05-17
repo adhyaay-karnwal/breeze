@@ -16,7 +16,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
 				<div className="flex w-full max-w-[380px] flex-col items-center">
 					{/* Logo */}
 					{/* eslint-disable-next-line @next/next/no-img-element */}
-					<img src="/proliferate-logo-inverted.svg" alt="Proliferate" className="mb-8 h-8 w-8" />
+					<img src="/breeze-logo-inverted.svg" alt="Breeze" className="mb-8 h-8 w-8" />
 
 					{/* Auth form */}
 					{children}
@@ -41,16 +41,16 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
 			{/* Footer — pinned to bottom, doesn't affect centering */}
 			<div className="relative z-10 flex shrink-0 items-center justify-center gap-3 pb-6 text-xs text-muted-foreground/60">
 				<a
-					href="https://proliferate.com"
+					href="https://breeze.engineer"
 					target="_blank"
 					rel="noopener noreferrer"
 					className="transition-colors hover:text-muted-foreground"
 				>
-					proliferate.com
+					breeze.engineer
 				</a>
 				<span>&middot;</span>
 				<a
-					href="https://proliferate.com/privacy"
+					href="https://breeze.engineer/privacy"
 					target="_blank"
 					rel="noopener noreferrer"
 					className="transition-colors hover:text-muted-foreground"
@@ -59,7 +59,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
 				</a>
 				<span>&middot;</span>
 				<a
-					href="https://proliferate.com/terms"
+					href="https://breeze.engineer/terms"
 					target="_blank"
 					rel="noopener noreferrer"
 					className="transition-colors hover:text-muted-foreground"

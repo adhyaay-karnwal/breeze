@@ -4,7 +4,7 @@ import { ConnectorForm } from "@/components/integrations/connector-form";
 import { Button } from "@/components/ui/button";
 import { useUpdateOrgConnector } from "@/hooks/integrations/use-org-connectors";
 import { cn } from "@/lib/display/utils";
-import type { ConnectorConfig } from "@proliferate/shared";
+import type { ConnectorConfig } from "@breeze/shared";
 import { useState } from "react";
 
 interface ConnectorConnectionTabProps {

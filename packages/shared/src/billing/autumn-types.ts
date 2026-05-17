@@ -211,7 +211,7 @@ export interface AutumnCreateCustomerResponse {
 }
 
 // ============================================
-// Feature IDs used in Proliferate
+// Feature IDs used in Breeze
 // ============================================
 
 /**

@@ -1,4 +1,4 @@
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 import type { Request, Response } from "express";
 import { Router, type Router as RouterType } from "express";
 import type { GatewayEnv } from "../../../lib/env";
@@ -11,7 +11,7 @@ export function createPreviewHealthRoutes(env: GatewayEnv): RouterType {
 	const requireProxyAuth = createRequireProxyAuth(env);
 
 	router.get(
-		"/:proliferateSessionId/:token/health-check",
+		"/:breezeSessionId/:token/health-check",
 		requireProxyAuth,
 		async (req: Request, res: Response) => {
 			const url = req.query.url;
@@ -28,7 +28,7 @@ export function createPreviewHealthRoutes(env: GatewayEnv): RouterType {
 				res.json({ ready: upstream.ok, status: upstream.status });
 			} catch (error) {
 				logger.debug(
-					{ err: error, url, sessionId: req.proliferateSessionId },
+					{ err: error, url, sessionId: req.breezeSessionId },
 					"Preview health-check not ready",
 				);
 				res.json({ ready: false, status: 0 });

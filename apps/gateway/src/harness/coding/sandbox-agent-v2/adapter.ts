@@ -1,4 +1,4 @@
-import type { DaemonStreamEnvelope } from "@proliferate/shared/contracts/harness";
+import type { DaemonStreamEnvelope } from "@breeze/shared/contracts/harness";
 import { SseClient } from "../../../hub/session/runtime/sse-client";
 import type {
 	CodingHarnessAdapter,
@@ -26,7 +26,7 @@ import {
 import { type AcpJsonRpcEvent, mapAcpJsonRpcEvent } from "./event-mapper";
 
 // ---------------------------------------------------------------------------
-// Daemon SSE envelope (platform events from /_proliferate/events)
+// Daemon SSE envelope (platform events from /_breeze/events)
 // ---------------------------------------------------------------------------
 
 interface DaemonInitEvent {
@@ -190,13 +190,13 @@ export class SandboxAgentV2CodingHarnessAdapter implements CodingHarnessAdapter 
 		disconnectors.push(() => acpSseClient.disconnect());
 
 		// ------------------------------------------------------------------
-		// SSE 2: Platform events (PTY, FS, ports) from /_proliferate/events
+		// SSE 2: Platform events (PTY, FS, ports) from /_breeze/events
 		// ------------------------------------------------------------------
 		const afterSeqQuery =
 			typeof input.afterSeq === "number" && input.afterSeq > 0
 				? `?last_seq=${encodeURIComponent(String(input.afterSeq))}`
 				: "";
-		const platformEventPath = `/_proliferate/events${afterSeqQuery}`;
+		const platformEventPath = `/_breeze/events${afterSeqQuery}`;
 
 		const platformSseClient = new SseClient<DaemonSseEvent>({
 			env: input.env,

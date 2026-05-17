@@ -2,7 +2,7 @@
 
 import { useSession } from "@/lib/auth/client";
 import { orpc } from "@/lib/infra/orpc";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 

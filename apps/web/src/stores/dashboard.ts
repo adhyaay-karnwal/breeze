@@ -1,7 +1,7 @@
 "use client";
 
-import type { ModelId, ReasoningEffort } from "@proliferate/shared";
-import { modelSupportsReasoning } from "@proliferate/shared/agents";
+import type { ModelId, ReasoningEffort } from "@breeze/shared";
+import { modelSupportsReasoning } from "@breeze/shared/agents";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 

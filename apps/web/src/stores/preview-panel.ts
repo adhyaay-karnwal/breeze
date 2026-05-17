@@ -1,6 +1,6 @@
 "use client";
 
-import type { VerificationFile } from "@proliferate/shared";
+import type { VerificationFile } from "@breeze/shared";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 

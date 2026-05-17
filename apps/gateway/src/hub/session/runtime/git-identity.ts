@@ -1,5 +1,5 @@
-import { createLogger } from "@proliferate/logger";
-import { users } from "@proliferate/services";
+import { createLogger } from "@breeze/logger";
+import { users } from "@breeze/services";
 
 const logger = createLogger({ service: "gateway" }).child({ module: "git-identity" });
 
@@ -21,7 +21,7 @@ function buildGitIdentity(
 		return null;
 	}
 
-	const localPart = normalizedEmail.split("@")[0] || "Proliferate User";
+	const localPart = normalizedEmail.split("@")[0] || "Breeze User";
 	const normalizedName = normalizeWhitespace(name ?? "") || localPart;
 
 	return {

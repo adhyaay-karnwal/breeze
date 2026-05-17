@@ -37,7 +37,7 @@ const k8sProvider = new k8s.Provider("k8s", {
 });
 
 const appNamespace = new k8s.core.v1.Namespace(
-	"proliferate-namespace",
+	"breeze-namespace",
 	{ metadata: { name: namespace } },
 	{ provider: k8sProvider },
 );
@@ -48,7 +48,7 @@ const repo = new gcp.artifactregistry.Repository("artifact-repo", {
 	repositoryId: artifactRepositoryId,
 	format: "DOCKER",
 	location: region,
-	description: "Proliferate images",
+	description: "Breeze images",
 });
 
 const repoBaseUrl = pulumi.interpolate`${region}-docker.pkg.dev/${projectId}/${repo.repositoryId}`;
@@ -98,18 +98,18 @@ if (externalSecretsEnabled && externalSecretsStoreEnabled && externalSecretsRele
 	});
 
 	createExternalSecret({
-		externalSecretName: "proliferate-env",
+		externalSecretName: "breeze-env",
 		namespace,
-		targetSecretName: "proliferate-env",
+		targetSecretName: "breeze-env",
 		remoteSecretName: appEnvSecretName,
 		k8sProvider,
 		dependsOn: [clusterSecretStore, appNamespace],
 	});
 
 	createExternalSecret({
-		externalSecretName: "proliferate-llm-proxy-env",
+		externalSecretName: "breeze-llm-proxy-env",
 		namespace,
-		targetSecretName: "proliferate-llm-proxy-env",
+		targetSecretName: "breeze-llm-proxy-env",
 		remoteSecretName: llmProxyEnvSecretName,
 		k8sProvider,
 		dependsOn: [clusterSecretStore, appNamespace],
@@ -119,7 +119,7 @@ if (externalSecretsEnabled && externalSecretsStoreEnabled && externalSecretsRele
 if (deployApps) {
 	deployApplications({
 		k8sProvider,
-		chartPath: path.resolve(__dirname, "../helm/proliferate"),
+		chartPath: path.resolve(__dirname, "../helm/breeze"),
 		imageRepos: {
 			web: webRepoUrl,
 			gateway: gatewayRepoUrl,
@@ -127,8 +127,8 @@ if (deployApps) {
 			llmProxy: llmProxyRepoUrl,
 			triggerService: triggerServiceRepoUrl,
 		},
-		envSecretName: "proliferate-env",
-		llmProxyEnvSecretName: "proliferate-llm-proxy-env",
+		envSecretName: "breeze-env",
+		llmProxyEnvSecretName: "breeze-llm-proxy-env",
 		gatewayServiceAccountName: "gateway",
 		gatewayServiceAccountAnnotations: {
 			"iam.gke.io/gcp-service-account": data.gcsAccessServiceAccount.email,

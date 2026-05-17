@@ -4,7 +4,7 @@
  * Pure functions for wake payload parsing and coalescing logic.
  */
 
-import { isRecord } from "@proliferate/shared/type-guards";
+import { isRecord } from "@breeze/shared/type-guards";
 import type { WakeEventRow } from "./db";
 
 export function extractWakeDedupeKey(payload: unknown): string | null {

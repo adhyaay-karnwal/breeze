@@ -4,7 +4,7 @@ import { useBilling, useUpdateBillingSettings } from "@/hooks/org/use-billing";
 import { useCurrentUserRole } from "@/hooks/org/use-current-user-role";
 import { useActiveOrganization } from "@/lib/auth/client";
 import type { BillingInfo } from "@/types/billing";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

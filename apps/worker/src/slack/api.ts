@@ -5,8 +5,8 @@
  * This is used by handlers to post messages, upload files, etc.
  */
 
-import type { Logger } from "@proliferate/logger";
-import { decrypt, getEncryptionKey } from "@proliferate/shared/crypto";
+import type { Logger } from "@breeze/logger";
+import { decrypt, getEncryptionKey } from "@breeze/shared/crypto";
 
 export interface SlackBlock {
 	type: string;

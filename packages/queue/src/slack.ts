@@ -6,7 +6,7 @@
  * - SlackReceiverJob: Per-session - listens for Gateway events and posts to Slack
  */
 
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 import type { ConnectionOptions, Job, JobsOptions } from "bullmq";
 import { Queue, Worker } from "bullmq";
 import { getConnectionOptions } from "./index";

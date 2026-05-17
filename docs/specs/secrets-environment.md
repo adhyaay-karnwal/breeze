@@ -189,7 +189,7 @@ Secret reads are scope-sensitive:
 - The stored spec must remain declarative (no secret plaintext).
 - Tool callback idempotency must use `tool_call_id` for retry safety.
 
-**Files:** `apps/gateway/src/hub/capabilities/tools/save-env-files.ts`, `apps/gateway/src/api/proliferate/http/tools.ts`, `packages/services/src/configurations/db.ts`, `apps/gateway/src/lib/session-creator.ts`.
+**Files:** `apps/gateway/src/hub/capabilities/tools/save-env-files.ts`, `apps/gateway/src/api/breeze/http/tools.ts`, `packages/services/src/configurations/db.ts`, `apps/gateway/src/lib/session-creator.ts`.
 
 ### 6.7 Secret Files (`Implemented`)
 **What it does:** Stores encrypted file-content blobs keyed by configuration and path.
@@ -220,7 +220,7 @@ Secret reads are scope-sensitive:
 **Rules the system must follow:**
 - Connector secret values must never be exposed in API responses or logs.
 
-**Files:** `packages/services/src/secrets/service.ts:resolveSecretValue`, `apps/gateway/src/api/proliferate/http/actions.ts`, `apps/web/src/server/routers/integrations.ts`.
+**Files:** `packages/services/src/secrets/service.ts:resolveSecretValue`, `apps/gateway/src/api/breeze/http/actions.ts`, `apps/web/src/server/routers/integrations.ts`.
 
 ---
 

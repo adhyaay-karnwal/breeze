@@ -1,5 +1,5 @@
-import { createLogger } from "@proliferate/logger";
-import { configurations, integrations, sessions } from "@proliferate/services";
+import { createLogger } from "@breeze/logger";
+import { configurations, integrations, sessions } from "@breeze/services";
 import {
 	type AgentConfig,
 	type ModelId,
@@ -11,14 +11,14 @@ import {
 	getSetupSystemPrompt,
 	isValidModelId,
 	parseModelId,
-} from "@proliferate/shared";
-import type { ConfigurationServiceCommand } from "@proliferate/shared";
+} from "@breeze/shared";
+import type { ConfigurationServiceCommand } from "@breeze/shared";
 import type {
 	SessionOperatorStatus,
 	SessionRuntimeStatus,
 	SessionVisibility,
-} from "@proliferate/shared/contracts/sessions";
-import { parseServiceCommands, resolveServiceCommands } from "@proliferate/shared/sandbox";
+} from "@breeze/shared/contracts/sessions";
+import { parseServiceCommands, resolveServiceCommands } from "@breeze/shared/sandbox";
 import type { GatewayEnv } from "../../../lib/env";
 import { type GitIdentity, resolveGitIdentity, toGitIdentityEnv } from "./git-identity";
 import { type GitHubIntegration, getGitHubTokenForIntegration } from "./github-auth";

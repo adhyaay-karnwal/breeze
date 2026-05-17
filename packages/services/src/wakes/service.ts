@@ -9,7 +9,7 @@ import {
 	type WakeEventStatus,
 	isTerminalWakeEventStatus,
 	isValidWakeEventTransition,
-} from "@proliferate/shared/contracts/workers";
+} from "@breeze/shared/contracts/workers";
 import type { CreateWakeEventInput, WakeEventRow } from "./db";
 import * as wakesDb from "./db";
 

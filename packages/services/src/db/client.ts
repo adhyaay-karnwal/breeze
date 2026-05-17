@@ -4,8 +4,8 @@
  * Drizzle ORM is the database layer.
  */
 
-// Re-export Drizzle client and utilities from @proliferate/db
-export { getDb, resetDb, type Database } from "@proliferate/db";
+// Re-export Drizzle client and utilities from @breeze/db
+export { getDb, resetDb, type Database } from "@breeze/db";
 
 // Re-export common Drizzle utilities
 export {
@@ -25,8 +25,8 @@ export {
 	sql,
 	desc,
 	asc,
-} from "@proliferate/db";
-export type { InferSelectModel, SQL } from "@proliferate/db";
+} from "@breeze/db";
+export type { InferSelectModel, SQL } from "@breeze/db";
 
 // Re-export schema
-export * from "@proliferate/db/schema";
+export * from "@breeze/db/schema";

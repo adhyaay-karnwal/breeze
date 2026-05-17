@@ -5,11 +5,11 @@ const mockGetSlackInstallationForNotifications = vi.fn();
 const mockFindSideEffect = vi.fn();
 const mockRecordOrReplaySideEffect = vi.fn();
 
-vi.mock("@proliferate/environment/server", () => ({
+vi.mock("@breeze/environment/server", () => ({
 	env: { NEXT_PUBLIC_APP_URL: "https://app.test" },
 }));
 
-vi.mock("@proliferate/services", () => ({
+vi.mock("@breeze/services", () => ({
 	integrations: {
 		getSlackInstallationForNotifications: (...args: unknown[]) =>
 			mockGetSlackInstallationForNotifications(...args),
@@ -23,7 +23,7 @@ vi.mock("@proliferate/services", () => ({
 	},
 }));
 
-vi.mock("@proliferate/shared/crypto", () => ({
+vi.mock("@breeze/shared/crypto", () => ({
 	decrypt: () => "xoxb-decrypted-token",
 	getEncryptionKey: () => "test-key",
 }));
@@ -34,7 +34,7 @@ const mockLogger = {
 	error: vi.fn(),
 	debug: vi.fn(),
 	child: vi.fn().mockReturnThis(),
-} as unknown as import("@proliferate/logger").Logger;
+} as unknown as import("@breeze/logger").Logger;
 
 function makeRun(overrides: Record<string, unknown> = {}) {
 	return {

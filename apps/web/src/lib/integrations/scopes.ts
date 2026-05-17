@@ -1,4 +1,4 @@
-import type { IntegrationCategory } from "@proliferate/shared";
+import type { IntegrationCategory } from "@breeze/shared";
 
 import type { IntegrationScopeMeta } from "@/config/integration-scopes";
 

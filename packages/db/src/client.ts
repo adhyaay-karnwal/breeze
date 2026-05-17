@@ -5,8 +5,8 @@
  * Uses postgres.js driver with Drizzle ORM.
  */
 
-import { nodeEnv } from "@proliferate/environment/runtime";
-import { env } from "@proliferate/environment/server";
+import { nodeEnv } from "@breeze/environment/runtime";
+import { env } from "@breeze/environment/server";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import * as schema from "./schema";

@@ -5,7 +5,7 @@ import { useLayoutGate } from "@/hooks/ui/use-layout-gate";
 import { cn } from "@/lib/display/utils";
 import { getStepInfo, getStepSequence } from "@/lib/onboarding/step-sequence";
 import { useOnboardingStore } from "@/stores/onboarding";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 
 export function OnboardingLayoutInner({ children }: { children: React.ReactNode }) {
 	const { ready, session } = useLayoutGate();

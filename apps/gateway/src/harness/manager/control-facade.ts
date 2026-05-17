@@ -1,4 +1,4 @@
-import type { ClientSource } from "@proliferate/shared";
+import type { ClientSource } from "@breeze/shared";
 
 export interface ManagerControlFacade {
 	eagerStartSession(sessionId: string): Promise<void>;

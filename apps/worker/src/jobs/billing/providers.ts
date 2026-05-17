@@ -2,8 +2,8 @@
  * Shared provider utilities for billing jobs.
  */
 
-import type { SandboxProvider } from "@proliferate/shared";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+import type { SandboxProvider } from "@breeze/shared";
+import { getSandboxProvider } from "@breeze/shared/providers";
 
 /**
  * Build a providers map for sandbox operations (liveness checks, termination).

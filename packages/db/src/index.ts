@@ -1,5 +1,5 @@
 /**
- * @proliferate/db - Database layer using Drizzle ORM
+ * @breeze/db - Database layer using Drizzle ORM
  *
  * Provides type-safe database access with relational queries.
  */

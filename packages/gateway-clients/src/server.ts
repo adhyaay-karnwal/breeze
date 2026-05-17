@@ -1,7 +1,7 @@
 /**
  * Server-only exports (Node.js only - uses BullMQ)
  *
- * Import from "@proliferate/gateway-clients/server"
+ * Import from "@breeze/gateway-clients/server"
  */
 
 export {

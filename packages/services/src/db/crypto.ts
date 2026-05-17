@@ -5,7 +5,7 @@
  */
 
 import { createCipheriv, createDecipheriv, randomBytes } from "crypto";
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 
 /**
  * Encrypt a string using AES-256-GCM.

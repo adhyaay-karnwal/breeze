@@ -23,7 +23,7 @@ import { cn, getSnapshotDisplayName } from "@/lib/display/utils";
 import { orpc } from "@/lib/infra/orpc";
 import { useDashboardStore } from "@/stores/dashboard";
 import type { GitHubRepo, Snapshot } from "@/types";
-import { getSetupInitialPrompt } from "@proliferate/shared/prompts";
+import { getSetupInitialPrompt } from "@breeze/shared/prompts";
 import * as Popover from "@radix-ui/react-popover";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Globe, Lock, Pencil, Plus, Search, Star } from "lucide-react";

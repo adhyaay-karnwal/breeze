@@ -1,13 +1,13 @@
 /**
  * Domain billing gate (Iron Door).
  *
- * DB-backed gating that wraps the pure gate from @proliferate/shared/billing/gating.
+ * DB-backed gating that wraps the pure gate from @breeze/shared/billing/gating.
  * Single enforcement point for all session lifecycle operations.
  *
  * Fail-closed: on any error, the operation is denied.
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import {
 	BillingGateError,
 	type BillingGateResult,
@@ -19,7 +19,7 @@ import {
 	checkBillingGate,
 	normalizeBillingState,
 	parseBillingSettings,
-} from "@proliferate/shared/billing";
+} from "@breeze/shared/billing";
 import { getServicesLogger } from "../logger";
 import { expireGraceForOrg, getBillingInfoV2 } from "../orgs/service";
 import { getSessionCountsByOrganization } from "../sessions/service";
@@ -30,7 +30,7 @@ export {
 	BillingGateError,
 	type BillingGateResult,
 	type BillingErrorCode,
-} from "@proliferate/shared/billing";
+} from "@breeze/shared/billing";
 
 // ============================================
 // Helpers

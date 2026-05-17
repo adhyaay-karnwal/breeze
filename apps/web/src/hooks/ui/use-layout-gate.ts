@@ -3,7 +3,7 @@
 import { useBilling } from "@/hooks/org/use-billing";
 import { useOnboarding } from "@/hooks/org/use-onboarding";
 import { useRequireAuth } from "@/hooks/ui/use-require-auth";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

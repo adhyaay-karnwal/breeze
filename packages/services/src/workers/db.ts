@@ -20,13 +20,13 @@ import {
 	workerRunEvents,
 	workerRuns,
 	workers,
-} from "@proliferate/services/db/client";
+} from "@breeze/services/db/client";
 import type {
 	WakeEventSource,
 	WorkerRunEventType,
 	WorkerRunStatus,
 	WorkerStatus,
-} from "@proliferate/shared/contracts/workers";
+} from "@breeze/shared/contracts/workers";
 
 // ============================================
 // Transaction Helpers

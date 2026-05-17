@@ -5,9 +5,9 @@
  * This worker now just marks non-snapshot configurations as default.
  */
 
-import type { Logger } from "@proliferate/logger";
-import { createConfigurationSnapshotBuildWorker } from "@proliferate/queue";
-import { configurations } from "@proliferate/services";
+import type { Logger } from "@breeze/logger";
+import { createConfigurationSnapshotBuildWorker } from "@breeze/queue";
+import { configurations } from "@breeze/services";
 import type { Worker } from "bullmq";
 
 interface ConfigurationSnapshotWorkers {

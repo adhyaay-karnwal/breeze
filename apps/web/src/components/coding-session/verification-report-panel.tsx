@@ -10,7 +10,7 @@ import {
 	useVerificationMediaUrl,
 } from "@/hooks/sessions/use-verification-media-url";
 import { formatBytes } from "@/lib/display/utils";
-import type { VerificationFile } from "@proliferate/shared";
+import type { VerificationFile } from "@breeze/shared";
 import { Download, ExternalLink, File, FileText, Image, Loader2, Video } from "lucide-react";
 import { useEffect, useState } from "react";
 

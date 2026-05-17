@@ -45,7 +45,7 @@ test("create session and chat with agent", async ({ page }) => {
 	test.setTimeout(5 * 60 * 1000);
 
 	// 1. Create session via gateway HTTP API
-	const createRes = await fetch(`${GATEWAY_URL}/proliferate/sessions`, {
+	const createRes = await fetch(`${GATEWAY_URL}/breeze/sessions`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -67,7 +67,7 @@ test("create session and chat with agent", async ({ page }) => {
 	// 2. Send message via gateway HTTP API
 	// The ensureSessionReady middleware will wait for the sandbox to be ready
 	// before processing the message, so this handles the startup delay.
-	const messageRes = await fetch(`${GATEWAY_URL}/proliferate/${sessionId}/message`, {
+	const messageRes = await fetch(`${GATEWAY_URL}/breeze/${sessionId}/message`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

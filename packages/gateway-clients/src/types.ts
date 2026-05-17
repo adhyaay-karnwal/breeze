@@ -2,7 +2,7 @@
  * Gateway SDK Shared Types
  */
 
-import type { ClientSource, ServerMessage } from "@proliferate/shared";
+import type { ClientSource, ServerMessage } from "@breeze/shared";
 
 /**
  * Verification file metadata
@@ -135,7 +135,7 @@ export interface CreateSessionRequest {
 	automationId?: string;
 	triggerId?: string;
 	triggerEventId?: string;
-	/** Trigger context written to .proliferate/trigger-context.json in sandbox */
+	/** Trigger context written to .breeze/trigger-context.json in sandbox */
 	triggerContext?: Record<string, unknown>;
 
 	// SSH access (can be enabled on any session type)

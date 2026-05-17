@@ -37,8 +37,8 @@ import {
 } from "@/hooks/sessions/use-sessions";
 import { parsePrUrl } from "@/lib/display/session-display";
 import { cn } from "@/lib/display/utils";
-import type { PendingRunSummary } from "@proliferate/shared/contracts/automations";
-import type { Session } from "@proliferate/shared/contracts/sessions";
+import type { PendingRunSummary } from "@breeze/shared/contracts/automations";
+import type { Session } from "@breeze/shared/contracts/sessions";
 import { formatDistanceToNowStrict } from "date-fns";
 import {
 	Archive,

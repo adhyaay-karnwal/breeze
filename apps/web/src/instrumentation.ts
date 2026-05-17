@@ -1,4 +1,4 @@
-import { nextRuntime } from "@proliferate/environment/runtime";
+import { nextRuntime } from "@breeze/environment/runtime";
 import * as Sentry from "@sentry/nextjs";
 
 export async function register() {

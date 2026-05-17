@@ -27,7 +27,7 @@ import { startSnapshotProgressToast } from "@/lib/display/snapshot-progress-toas
 import { cn } from "@/lib/display/utils";
 import { usePreviewPanelStore } from "@/stores/preview-panel";
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
-import { deriveOverallWorkState } from "@proliferate/shared/sessions";
+import { deriveOverallWorkState } from "@breeze/shared/sessions";
 import { ArrowLeft, ArrowRightLeft, MoreHorizontal, PanelRight, Pin } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

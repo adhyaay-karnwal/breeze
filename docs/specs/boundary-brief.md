@@ -111,7 +111,7 @@ Use these terms consistently. Do not introduce synonyms.
 When spawning an agent to write a spec, use this structure:
 
 ```
-You are writing a system spec for the Proliferate codebase.
+You are writing a system spec for the Breeze codebase.
 
 READ THESE FILES FIRST (in order):
 1. docs/specs/boundary-brief.md — boundary rules and glossary (MANDATORY)

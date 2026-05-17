@@ -4,10 +4,10 @@
  * Runs every 30s. Bills all running sessions for elapsed compute time.
  */
 
-import type { Logger } from "@proliferate/logger";
-import type { Job } from "@proliferate/queue";
-import type { BillingMeteringJob } from "@proliferate/queue";
-import { billing } from "@proliferate/services";
+import type { Logger } from "@breeze/logger";
+import type { Job } from "@breeze/queue";
+import type { BillingMeteringJob } from "@breeze/queue";
+import { billing } from "@breeze/services";
 import { getProvidersMap } from "./providers";
 
 export async function processMeteringJob(

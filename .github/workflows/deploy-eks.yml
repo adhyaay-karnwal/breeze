@@ -27,7 +27,7 @@ jobs:
       PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
       PULUMI_STACK_SALT: ${{ secrets.PULUMI_STACK_SALT }}
       PULUMI_STACK: ${{ vars.PULUMI_STACK || 'prod' }}
-      APP_ENV_SECRET_ID: ${{ vars.APP_ENV_SECRET_ID || 'proliferate-prod-app-env' }}
+      APP_ENV_SECRET_ID: ${{ vars.APP_ENV_SECRET_ID || 'breeze-prod-app-env' }}
       DEPLOY_SHA: ${{ inputs.sha || github.sha }}
       SKIP_BUILD: ${{ inputs.skip_build }}
       DRY_RUN: ${{ inputs.dry_run }}

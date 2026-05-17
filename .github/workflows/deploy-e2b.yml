@@ -15,7 +15,7 @@ jobs:
     env:
       E2B_API_KEY: ${{ secrets.E2B_API_KEY }}
       E2B_DOMAIN: ${{ vars.E2B_DOMAIN || '' }}
-      E2B_TEMPLATE_ALIAS: ${{ vars.E2B_TEMPLATE_ALIAS || 'proliferate-base' }}
+      E2B_TEMPLATE_ALIAS: ${{ vars.E2B_TEMPLATE_ALIAS || 'breeze-base' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Bundle sandbox-daemon
-        run: pnpm --filter @proliferate/sandbox-daemon bundle
+        run: pnpm --filter @breeze/sandbox-daemon bundle
 
       - name: Copy sandbox-daemon bundle
         run: |
@@ -49,7 +49,7 @@ jobs:
       - name: Bundle and copy sandbox-memory
         run: |
           set -euo pipefail
-          pnpm --filter @proliferate/sandbox-memory bundle
+          pnpm --filter @breeze/sandbox-memory bundle
           MEMORY_PATH="packages/sandbox-memory/dist/sandbox-memory.cjs"
           if [[ ! -f "$MEMORY_PATH" ]]; then
             echo "ERROR: sandbox-memory bundle not found at $MEMORY_PATH" >&2

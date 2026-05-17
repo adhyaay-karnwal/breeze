@@ -8,12 +8,12 @@ Set once, don't change.
 
 | Placement | Link |
 |-----------|------|
-| Twitter/X bio | `proliferate.com?utm_source=twitter&utm_medium=social&utm_campaign=bio` |
-| LinkedIn personal bio | `proliferate.com?utm_source=linkedin&utm_medium=social&utm_campaign=personal-bio` |
-| LinkedIn company bio | `proliferate.com?utm_source=linkedin&utm_medium=social&utm_campaign=company-bio` |
-| GitHub README | `proliferate.com?utm_source=github&utm_medium=social&utm_campaign=readme` |
-| Docs site | `proliferate.com?utm_source=docs&utm_medium=referral&utm_campaign=docs` |
-| YC company page | `proliferate.com?utm_source=yc&utm_medium=referral&utm_campaign=profile` |
+| Twitter/X bio | `breeze.engineer?utm_source=twitter&utm_medium=social&utm_campaign=bio` |
+| LinkedIn personal bio | `breeze.engineer?utm_source=linkedin&utm_medium=social&utm_campaign=personal-bio` |
+| LinkedIn company bio | `breeze.engineer?utm_source=linkedin&utm_medium=social&utm_campaign=company-bio` |
+| GitHub README | `breeze.engineer?utm_source=github&utm_medium=social&utm_campaign=readme` |
+| Docs site | `breeze.engineer?utm_source=docs&utm_medium=referral&utm_campaign=docs` |
+| YC company page | `breeze.engineer?utm_source=yc&utm_medium=referral&utm_campaign=profile` |
 
 ## Launches
 
@@ -21,11 +21,11 @@ Unique campaign per event — high-signal moments worth tracking individually.
 
 | Placement | Link |
 |-----------|------|
-| Launch HN post | `proliferate.com?utm_source=hackernews&utm_medium=social&utm_campaign=launch-hn` |
-| Launch YC post | `proliferate.com?utm_source=yc&utm_medium=social&utm_campaign=launch-yc` |
-| BF post | `proliferate.com?utm_source=bf&utm_medium=social&utm_campaign=launch-bf` |
-| Launch tweet | `proliferate.com?utm_source=twitter&utm_medium=social&utm_campaign=launch-tweet` |
-| Launch LinkedIn post | `proliferate.com?utm_source=linkedin&utm_medium=social&utm_campaign=launch-post` |
+| Launch HN post | `breeze.engineer?utm_source=hackernews&utm_medium=social&utm_campaign=launch-hn` |
+| Launch YC post | `breeze.engineer?utm_source=yc&utm_medium=social&utm_campaign=launch-yc` |
+| BF post | `breeze.engineer?utm_source=bf&utm_medium=social&utm_campaign=launch-bf` |
+| Launch tweet | `breeze.engineer?utm_source=twitter&utm_medium=social&utm_campaign=launch-tweet` |
+| Launch LinkedIn post | `breeze.engineer?utm_source=linkedin&utm_medium=social&utm_campaign=launch-post` |
 
 ## Comments
 
@@ -33,9 +33,9 @@ Generic per platform — tracking which platform a comment came from is 90% of t
 
 | Placement | Link |
 |-----------|------|
-| Twitter comments | `proliferate.com?utm_source=twitter&utm_medium=social&utm_campaign=comment` |
-| LinkedIn comments | `proliferate.com?utm_source=linkedin&utm_medium=social&utm_campaign=comment` |
-| HN comments | `proliferate.com?utm_source=hackernews&utm_medium=social&utm_campaign=comment` |
+| Twitter comments | `breeze.engineer?utm_source=twitter&utm_medium=social&utm_campaign=comment` |
+| LinkedIn comments | `breeze.engineer?utm_source=linkedin&utm_medium=social&utm_campaign=comment` |
+| HN comments | `breeze.engineer?utm_source=hackernews&utm_medium=social&utm_campaign=comment` |
 
 ## Conventions
 

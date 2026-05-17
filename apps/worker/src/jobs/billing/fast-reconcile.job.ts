@@ -5,10 +5,10 @@
  * Reconciles a single org's shadow balance with Autumn (< 5 min SLO).
  */
 
-import type { Logger } from "@proliferate/logger";
-import type { BillingFastReconcileJob, Job } from "@proliferate/queue";
-import { billing, orgs } from "@proliferate/services";
-import { AUTUMN_FEATURES, METERING_CONFIG, autumnGetBalance } from "@proliferate/shared/billing";
+import type { Logger } from "@breeze/logger";
+import type { BillingFastReconcileJob, Job } from "@breeze/queue";
+import { billing, orgs } from "@breeze/services";
+import { AUTUMN_FEATURES, METERING_CONFIG, autumnGetBalance } from "@breeze/shared/billing";
 
 export async function processFastReconcileJob(
 	job: Job<BillingFastReconcileJob>,

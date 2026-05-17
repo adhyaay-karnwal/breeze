@@ -33,7 +33,7 @@
 - Assuming gateway remains the provider-specific manager loop. The freeze locks manager execution inside `sandbox-agent /v1`; gateway only chooses binding and mediates policy. References: `apps/gateway/src/hub/session/runtime/manager/manager-runtime-service.ts`, `docs/specs/sessions-gateway.md`.
 - Assuming `$MANAGER_MEMORY_DIR` can hold authoritative transcript/runtime state. It cannot; that directory is the public working-memory surface. References: `apps/gateway/src/harness/manager/wake-cycle/prompts.ts`, `docs/specs/sandbox-providers.md`.
 - Assuming Postgres should own the authoritative manager thread. It should not; DB is a mirror/projection store. References: `docs/specs/sessions-gateway.md`, `docs/specs/boundary-brief.md`.
-- Assuming `approval_result` or `child_update` are manager inbox kinds in v1. They are intentionally excluded. References: `apps/gateway/src/api/proliferate/http/session/actions/routes.ts`, `apps/gateway/src/hub/session-hub.ts`, `docs/specs/sessions-gateway.md`.
+- Assuming `approval_result` or `child_update` are manager inbox kinds in v1. They are intentionally excluded. References: `apps/gateway/src/api/breeze/http/session/actions/routes.ts`, `apps/gateway/src/hub/session-hub.ts`, `docs/specs/sessions-gateway.md`.
 - Assuming scheduler wakes may interrupt an active manager run. Only `user_prompt` may preempt in v1. References: `docs/specs/sessions-gateway.md`, `docs/specs/boundary-brief.md`.
 - Assuming manager may spawn manager children. V1 allows coding child sessions only. References: `apps/gateway/src/harness/manager/tools/handlers/child-sessions.ts`, `docs/specs/boundary-brief.md`.
 - Assuming orchestration work relaxes repository-quality rules. Direct edits and delegated child work must still obey repo-local instructions and relevant subsystem specs. References: `CLAUDE.md`, `AGENTS.md`, `docs/specs/boundary-brief.md`.
@@ -101,7 +101,7 @@ Implications:
 - approvals stay on gateway/action surfaces rather than waking manager as a special inbox kind
 - child completion/progress is checked through manager supervision tools rather than automatic child-update wakes
 
-Current gateway code already has approval-result messaging surfaces outside the manager inbox contract, which is why the frozen manager spec keeps those concerns separate. References: `apps/gateway/src/api/proliferate/http/session/actions/routes.ts`, `apps/gateway/src/hub/session-hub.ts`, `docs/specs/sessions-gateway.md`, `docs/specs/boundary-brief.md`.
+Current gateway code already has approval-result messaging surfaces outside the manager inbox contract, which is why the frozen manager spec keeps those concerns separate. References: `apps/gateway/src/api/breeze/http/session/actions/routes.ts`, `apps/gateway/src/hub/session-hub.ts`, `docs/specs/sessions-gateway.md`, `docs/specs/boundary-brief.md`.
 
 ### Preemption + Concurrency
 V1 manager concurrency rules are strict:
@@ -209,7 +209,7 @@ Canonical manager event semantics must include the same binding/dedupe fields us
 - V1 inbox kinds are `user_prompt` and `scheduler_wake` only.
 - Only `user_prompt` may preempt an active manager run.
 - `scheduler_wake` must queue or coalesce instead of interrupting.
-- `approval_result` and `child_update` are intentionally outside the v1 manager inbox contract. References: `apps/gateway/src/api/proliferate/http/session/actions/routes.ts`, `apps/gateway/src/hub/session-hub.ts`, `docs/specs/sessions-gateway.md`, `docs/specs/boundary-brief.md`.
+- `approval_result` and `child_update` are intentionally outside the v1 manager inbox contract. References: `apps/gateway/src/api/breeze/http/session/actions/routes.ts`, `apps/gateway/src/hub/session-hub.ts`, `docs/specs/sessions-gateway.md`, `docs/specs/boundary-brief.md`.
 
 ### 4.4 Child Coding-Session Topology Invariants — `Partial`
 - Manager child work must run as independent coding sessions linked back to the manager session/run.

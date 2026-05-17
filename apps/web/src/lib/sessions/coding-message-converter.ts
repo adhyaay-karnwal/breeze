@@ -1,5 +1,5 @@
 import type { ThreadMessageLike } from "@assistant-ui/react";
-import type { Message, TaskToolSummaryItem } from "@proliferate/shared";
+import type { Message, TaskToolSummaryItem } from "@breeze/shared";
 
 export interface TaskToolMetadata {
 	title?: string;

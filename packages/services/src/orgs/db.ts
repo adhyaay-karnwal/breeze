@@ -4,7 +4,7 @@
  * Raw Drizzle queries - no business logic.
  */
 
-import type { OrgBillingSettings } from "@proliferate/shared/billing";
+import type { OrgBillingSettings } from "@breeze/shared/billing";
 import {
 	type InferSelectModel,
 	and,

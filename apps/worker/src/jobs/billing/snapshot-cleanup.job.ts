@@ -5,10 +5,10 @@
  * using the global SNAPSHOT_RETENTION_DAYS cap.
  */
 
-import { env } from "@proliferate/environment/server";
-import type { Logger } from "@proliferate/logger";
-import type { BillingSnapshotCleanupJob, Job } from "@proliferate/queue";
-import { billing } from "@proliferate/services";
+import { env } from "@breeze/environment/server";
+import type { Logger } from "@breeze/logger";
+import type { BillingSnapshotCleanupJob, Job } from "@breeze/queue";
+import { billing } from "@breeze/services";
 
 export async function processSnapshotCleanupJob(
 	_job: Job<BillingSnapshotCleanupJob>,

@@ -1,4 +1,4 @@
-import type { RuntimeDaemonEvent } from "@proliferate/shared/contracts/harness";
+import type { RuntimeDaemonEvent } from "@breeze/shared/contracts/harness";
 
 // ---------------------------------------------------------------------------
 // ACP JSON-RPC event types (actual format from sandbox-agent SSE)

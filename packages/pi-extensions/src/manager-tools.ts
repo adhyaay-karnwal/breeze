@@ -6,9 +6,9 @@
  * ~/.pi/agent/extensions/.
  *
  * Environment variables consumed at runtime inside the sandbox:
- *   PROLIFERATE_GATEWAY_URL        — Gateway base URL
- *   PROLIFERATE_GATEWAY_AUTH_TOKEN  — Bearer token for control-plane API
- *   PROLIFERATE_MANAGER_SESSION_ID  — Session ID
+ *   BREEZE_GATEWAY_URL        — Gateway base URL
+ *   BREEZE_GATEWAY_AUTH_TOKEN  — Bearer token for control-plane API
+ *   BREEZE_MANAGER_SESSION_ID  — Session ID
  */
 
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";

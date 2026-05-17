@@ -13,10 +13,10 @@
  * Runs every 15 minutes within the gateway process.
  */
 
-import type { Logger } from "@proliferate/logger";
-import { notifications, sessions } from "@proliferate/services";
-import type { SandboxProviderType } from "@proliferate/shared";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+import type { Logger } from "@breeze/logger";
+import { notifications, sessions } from "@breeze/services";
+import type { SandboxProviderType } from "@breeze/shared";
+import { getSandboxProvider } from "@breeze/shared/providers";
 import type { HubManager } from "../../hub";
 import { runWithMigrationLock } from "../../hub/session/migration/lock";
 import { prepareForSnapshot } from "../../hub/session/migration/snapshot-scrub";

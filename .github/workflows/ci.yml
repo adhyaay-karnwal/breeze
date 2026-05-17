@@ -55,7 +55,7 @@ jobs:
       - name: Enforce no raw local /api fetch
         run: pnpm lint:no-raw-api-fetch
 
-      - name: Enforce no direct @proliferate/db imports
+      - name: Enforce no direct @breeze/db imports
         run: pnpm lint:no-direct-db-import
 
       - name: Enforce DB boundary in services
@@ -103,7 +103,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run tests
-        run: pnpm --filter @proliferate/web test
+        run: pnpm --filter @breeze/web test
         env:
           USER_SECRETS_ENCRYPTION_KEY: "0000000000000000000000000000000000000000000000000000000000000000"
 

@@ -5,15 +5,15 @@
  * lastVisibleUpdateAt writes, and session event recording.
  */
 
-import type { Logger } from "@proliferate/logger";
-import { sessions } from "@proliferate/services";
+import type { Logger } from "@breeze/logger";
+import { sessions } from "@breeze/services";
 import type {
 	SessionAgentState,
 	SessionOutcome,
 	SessionSandboxState,
 	SessionStateReason,
 	SessionTerminalState,
-} from "@proliferate/shared/contracts/sessions";
+} from "@breeze/shared/contracts/sessions";
 import {
 	SESSION_LIFECYCLE_EVENT,
 	type SessionLifecycleEventType,

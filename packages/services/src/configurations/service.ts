@@ -5,16 +5,16 @@
  */
 
 import { randomUUID } from "crypto";
-import { env } from "@proliferate/environment/server";
-import { createConfigurationSnapshotBuildQueue } from "@proliferate/queue";
-import type { ConfigurationServiceCommand, SandboxProviderType } from "@proliferate/shared";
-import type { Configuration } from "@proliferate/shared/contracts/configurations";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+import { env } from "@breeze/environment/server";
+import { createConfigurationSnapshotBuildQueue } from "@breeze/queue";
+import type { ConfigurationServiceCommand, SandboxProviderType } from "@breeze/shared";
+import type { Configuration } from "@breeze/shared/contracts/configurations";
+import { getSandboxProvider } from "@breeze/shared/providers";
 import {
 	parseConfigurationServiceCommands,
 	parseServiceCommands,
 	resolveServiceCommands,
-} from "@proliferate/shared/sandbox";
+} from "@breeze/shared/sandbox";
 import { encrypt, getEncryptionKey } from "../db/crypto";
 import { getServicesLogger } from "../logger";
 import * as repos from "../repos";

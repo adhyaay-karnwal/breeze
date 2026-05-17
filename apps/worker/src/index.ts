@@ -9,8 +9,8 @@
  * in _archived/ folder - functionality is incomplete.
  */
 
-import { nodeEnv } from "@proliferate/environment/runtime";
-import { env as sentryEnv } from "@proliferate/environment/server";
+import { nodeEnv } from "@breeze/environment/runtime";
+import { env as sentryEnv } from "@breeze/environment/server";
 import * as Sentry from "@sentry/node";
 
 Sentry.init({
@@ -25,23 +25,23 @@ Sentry.init({
 
 import { createServer } from "node:http";
 import type { Server } from "node:http";
-import { getEnvStatus } from "@proliferate/environment";
-import { env } from "@proliferate/environment/server";
-import { createSyncClient } from "@proliferate/gateway-clients";
-import { createLogger } from "@proliferate/logger";
-import type { Logger } from "@proliferate/logger";
+import { getEnvStatus } from "@breeze/environment";
+import { env } from "@breeze/environment/server";
+import { createSyncClient } from "@breeze/gateway-clients";
+import { createLogger } from "@breeze/logger";
+import type { Logger } from "@breeze/logger";
 import {
 	SLACK_MESSAGE_JOB_OPTIONS,
 	SLACK_RECEIVER_JOB_OPTIONS,
 	closeRedisClient,
 	getConnectionOptions,
 	getRedisClient,
-} from "@proliferate/queue";
-import { sessions } from "@proliferate/services";
-import { getDb } from "@proliferate/services/db/client";
-import { setLockRedisClient } from "@proliferate/services/lock";
-import { setServicesLogger } from "@proliferate/services/logger";
-import { setSharedLogger } from "@proliferate/shared/logger";
+} from "@breeze/queue";
+import { sessions } from "@breeze/services";
+import { getDb } from "@breeze/services/db/client";
+import { setLockRedisClient } from "@breeze/services/lock";
+import { setServicesLogger } from "@breeze/services/logger";
+import { setSharedLogger } from "@breeze/shared/logger";
 import { startAutomationWorkers, stopAutomationWorkers } from "./automation";
 import { startBaseSnapshotWorkers, stopBaseSnapshotWorkers } from "./base-snapshots";
 import { isBillingWorkerHealthy, startBillingWorker, stopBillingWorker } from "./billing";

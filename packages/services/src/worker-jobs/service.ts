@@ -11,7 +11,7 @@ import * as workerJobsDb from "./db";
 import { WorkerJobNotFoundError, WorkerJobValidationError } from "./errors";
 
 export { WorkerJobNotFoundError, WorkerJobValidationError } from "./errors";
-export { SYSTEM_JOB_TICK_USER_ID } from "@proliferate/shared/contracts/workers";
+export { SYSTEM_JOB_TICK_USER_ID } from "@breeze/shared/contracts/workers";
 
 const logger = getServicesLogger().child({ module: "worker-jobs" });
 

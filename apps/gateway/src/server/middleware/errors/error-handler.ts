@@ -1,5 +1,5 @@
-import { createLogger } from "@proliferate/logger";
-import { BillingGateError } from "@proliferate/shared/billing";
+import { createLogger } from "@breeze/logger";
+import { BillingGateError } from "@breeze/shared/billing";
 /**
  * Error handler middleware.
  */

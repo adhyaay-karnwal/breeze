@@ -1,7 +1,7 @@
 "use client";
 
 import { makeAssistantToolUI } from "@assistant-ui/react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 interface SaveSnapshotArgs {
 	message?: string;
@@ -18,14 +18,14 @@ export const SaveSnapshotToolUI = makeAssistantToolUI<SaveSnapshotArgs, string>(
 		const isSuccess = result && !result.toLowerCase().includes("failed");
 
 		return (
-			<ProliferateToolCard
+			<BreezeToolCard
 				label={isRunning ? "Saving snapshot..." : "Save snapshot"}
 				status={isRunning ? "running" : isSuccess ? "success" : "error"}
 				errorMessage={!isRunning && !isSuccess && result ? result : undefined}
 			>
 				{isRunning && <span>{args?.message || "Capturing current workspace state..."}</span>}
 				{!isRunning && isSuccess && <span>Snapshot saved successfully.</span>}
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

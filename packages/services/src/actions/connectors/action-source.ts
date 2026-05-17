@@ -14,9 +14,9 @@ import type {
 	ActionExecutionContext,
 	ActionResult,
 	ActionSource,
-} from "@proliferate/providers";
-import { jsonSchemaToZod } from "@proliferate/providers/helpers/schema";
-import type { ConnectorConfig } from "@proliferate/shared";
+} from "@breeze/providers";
+import { jsonSchemaToZod } from "@breeze/providers/helpers/schema";
+import type { ConnectorConfig } from "@breeze/shared";
 import { getServicesLogger } from "../../logger";
 import { callConnectorTool, listConnectorToolsRaw } from "./client";
 import { deriveRiskLevel } from "./risk";

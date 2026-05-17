@@ -15,9 +15,9 @@ export class GatewayActionsClient {
 
 	private getUrl(path: string): string {
 		if (!this.gatewayUrl || !this.sessionId) {
-			throw new Error("Actions require PROLIFERATE_GATEWAY_URL and PROLIFERATE_SESSION_ID");
+			throw new Error("Actions require BREEZE_GATEWAY_URL and BREEZE_SESSION_ID");
 		}
-		return `${this.gatewayUrl}/proliferate/${this.sessionId}/actions${path}`;
+		return `${this.gatewayUrl}/breeze/${this.sessionId}/actions${path}`;
 	}
 
 	private getHeaders(): Record<string, string> {

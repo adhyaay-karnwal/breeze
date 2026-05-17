@@ -29,7 +29,7 @@ import {
 	type ReasoningEffort,
 	getModel,
 	getModelsForAgent,
-} from "@proliferate/shared/agents";
+} from "@breeze/shared/agents";
 import { Check, ChevronRight } from "lucide-react";
 import type { FC } from "react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";

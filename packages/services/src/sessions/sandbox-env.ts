@@ -5,8 +5,8 @@
  * and default Git token setup so both web and gateway use identical behavior.
  */
 
-import { type RepoSpec, isValidTargetPath } from "@proliferate/shared";
-import { generateSessionAPIKey } from "@proliferate/shared/llm-proxy";
+import { type RepoSpec, isValidTargetPath } from "@breeze/shared";
+import { generateSessionAPIKey } from "@breeze/shared/llm-proxy";
 import { decrypt, getEncryptionKey } from "../db/crypto";
 import { getServicesLogger } from "../logger";
 import { getBillingInfoV2 } from "../orgs/service";

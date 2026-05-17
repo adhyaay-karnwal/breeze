@@ -1,4 +1,4 @@
-import { TOP_UP_PACKS } from "@proliferate/shared/billing";
+import { TOP_UP_PACKS } from "@breeze/shared/billing";
 
 export const AUTO_RECHARGE_CAP_OPTIONS = [
 	{ value: "5000", label: "$50" },

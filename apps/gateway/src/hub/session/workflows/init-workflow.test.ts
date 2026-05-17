@@ -1,4 +1,4 @@
-import type { Message } from "@proliferate/shared";
+import type { Message } from "@breeze/shared";
 import { describe, expect, it, vi } from "vitest";
 import type { SessionRecord } from "../runtime/session-context-store";
 import { type InitWorkflowDeps, buildInitMessages } from "./init-workflow";

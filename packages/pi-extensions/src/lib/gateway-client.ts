@@ -6,16 +6,16 @@
  */
 
 // biome-ignore lint/nursery/noProcessEnv: runs inside sandbox, not in app
-const GATEWAY_URL = process.env.PROLIFERATE_GATEWAY_URL;
+const GATEWAY_URL = process.env.BREEZE_GATEWAY_URL;
 // biome-ignore lint/nursery/noProcessEnv: runs inside sandbox, not in app
-const AUTH_TOKEN = process.env.PROLIFERATE_GATEWAY_AUTH_TOKEN;
+const AUTH_TOKEN = process.env.BREEZE_GATEWAY_AUTH_TOKEN;
 // biome-ignore lint/nursery/noProcessEnv: runs inside sandbox, not in app
-const SESSION_ID = process.env.PROLIFERATE_MANAGER_SESSION_ID;
+const SESSION_ID = process.env.BREEZE_MANAGER_SESSION_ID;
 
 export function requireEnv(): void {
 	if (!GATEWAY_URL || !AUTH_TOKEN || !SESSION_ID) {
 		throw new Error(
-			"Missing required environment variables: PROLIFERATE_GATEWAY_URL, PROLIFERATE_GATEWAY_AUTH_TOKEN, PROLIFERATE_MANAGER_SESSION_ID",
+			"Missing required environment variables: BREEZE_GATEWAY_URL, BREEZE_GATEWAY_AUTH_TOKEN, BREEZE_MANAGER_SESSION_ID",
 		);
 	}
 }
@@ -26,7 +26,7 @@ export async function executeToolViaGateway(
 ): Promise<string> {
 	requireEnv();
 
-	const url = `${GATEWAY_URL}/proliferate/${SESSION_ID}/manager/tools/execute`;
+	const url = `${GATEWAY_URL}/breeze/${SESSION_ID}/manager/tools/execute`;
 	const response = await fetch(url, {
 		method: "POST",
 		headers: {

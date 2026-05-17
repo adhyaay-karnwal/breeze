@@ -4,13 +4,10 @@
  * Processes async title generation jobs using an LLM (Haiku).
  */
 
-import type { Logger } from "@proliferate/logger";
-import type { Job, Worker } from "@proliferate/queue";
-import {
-	type SessionTitleGenerationJob,
-	createSessionTitleGenerationWorker,
-} from "@proliferate/queue";
-import { sessions } from "@proliferate/services";
+import type { Logger } from "@breeze/logger";
+import type { Job, Worker } from "@breeze/queue";
+import { type SessionTitleGenerationJob, createSessionTitleGenerationWorker } from "@breeze/queue";
+import { sessions } from "@breeze/services";
 
 interface SessionTitleWorkers {
 	worker: Worker<SessionTitleGenerationJob>;

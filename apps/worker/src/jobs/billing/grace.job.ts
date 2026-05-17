@@ -4,10 +4,10 @@
  * Runs every 60s. Checks for expired grace periods and enforces exhausted state.
  */
 
-import type { Logger } from "@proliferate/logger";
-import type { Job } from "@proliferate/queue";
-import type { BillingGraceJob } from "@proliferate/queue";
-import { billing, orgs } from "@proliferate/services";
+import type { Logger } from "@breeze/logger";
+import type { Job } from "@breeze/queue";
+import type { BillingGraceJob } from "@breeze/queue";
+import { billing, orgs } from "@breeze/services";
 
 export async function processGraceJob(_job: Job<BillingGraceJob>, logger: Logger): Promise<void> {
 	const graceLog = logger.child({ op: "grace" });

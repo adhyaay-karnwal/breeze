@@ -1,4 +1,4 @@
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 import type { Request, Response } from "express";
 import { Router, type Router as RouterType } from "express";
 import { createProxyMiddleware, fixRequestBody } from "http-proxy-middleware";
@@ -27,7 +27,7 @@ export function createDevtoolsMcpProxyRoutes(hubManager: HubManager, env: Gatewa
 			proxyReq: (proxyReq, req) => {
 				proxyReq.removeHeader("origin");
 				proxyReq.removeHeader("referer");
-				const sessionId = (req as Request).proliferateSessionId;
+				const sessionId = (req as Request).breezeSessionId;
 				if (sessionId) {
 					const token = deriveSandboxMcpToken(env.serviceToken, sessionId);
 					proxyReq.setHeader("Authorization", `Bearer ${token}`);
@@ -46,11 +46,6 @@ export function createDevtoolsMcpProxyRoutes(hubManager: HubManager, env: Gatewa
 		},
 	});
 
-	router.use(
-		"/:proliferateSessionId/:token/devtools/mcp",
-		requireProxyAuth,
-		ensureSessionReady,
-		proxy,
-	);
+	router.use("/:breezeSessionId/:token/devtools/mcp", requireProxyAuth, ensureSessionReady, proxy);
 	return router;
 }

@@ -9,15 +9,15 @@ import type {
 	ToolEndMessage,
 	ToolMetadataMessage,
 	ToolStartMessage,
-} from "@proliferate/gateway-clients";
+} from "@breeze/gateway-clients";
 import type {
 	ActionApprovalRequestMessage,
 	AutoStartOutputMessage,
 	GitDiffMessage,
 	GitResultMessage,
 	GitState,
-} from "@proliferate/shared";
-import type { WorkspaceStateInfo } from "@proliferate/shared/contracts/harness";
+} from "@breeze/shared";
+import type { WorkspaceStateInfo } from "@breeze/shared/contracts/harness";
 import { type EnvRequest, type ServerPart, convertServerParts } from "./types";
 
 // Using 'any' for SDK payloads since types don't align perfectly between SDK and frontend.

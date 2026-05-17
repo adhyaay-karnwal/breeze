@@ -1,5 +1,5 @@
 /**
- * @proliferate/providers — Core provider interfaces for the vNext architecture.
+ * @breeze/providers — Core provider interfaces for the vNext architecture.
  *
  * These types define the contracts between integration providers, trigger sources,
  * and action sources. All provider implementations must conform to these interfaces.

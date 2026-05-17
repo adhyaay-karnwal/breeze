@@ -5,12 +5,9 @@
  * for async title generation at session creation time.
  */
 
-import { env } from "@proliferate/environment/server";
-import {
-	type SessionTitleGenerationJob,
-	createSessionTitleGenerationQueue,
-} from "@proliferate/queue";
-import type { Queue } from "@proliferate/queue";
+import { env } from "@breeze/environment/server";
+import { type SessionTitleGenerationJob, createSessionTitleGenerationQueue } from "@breeze/queue";
+import type { Queue } from "@breeze/queue";
 import { getServicesLogger } from "../logger";
 
 const MAX_TITLE_LENGTH = 50;

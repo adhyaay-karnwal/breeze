@@ -6,11 +6,11 @@
  * for async delivery.
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import type {
 	NotificationCategory,
 	NotificationPayload,
-} from "@proliferate/shared/contracts/notifications";
+} from "@breeze/shared/contracts/notifications";
 import { enqueueOutbox } from "../outbox/service";
 
 interface NotificationHookContext {
@@ -22,7 +22,7 @@ interface NotificationHookContext {
 }
 
 function buildAppUrl(): string {
-	return env.NEXT_PUBLIC_APP_URL ?? "https://app.proliferate.com";
+	return env.NEXT_PUBLIC_APP_URL ?? "https://app.breeze.engineer";
 }
 
 /**

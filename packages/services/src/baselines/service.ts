@@ -7,7 +7,7 @@
 import {
 	type RepoBaselineStatus,
 	isValidRepoBaselineTransition,
-} from "@proliferate/shared/contracts/baselines";
+} from "@breeze/shared/contracts/baselines";
 import { getServicesLogger } from "../logger";
 import * as baselinesDb from "./db";
 import type { RepoBaselineRow, RepoBaselineTargetRow } from "./db";

@@ -41,7 +41,7 @@ declare global {
 		interface Request {
 			auth?: AuthResult;
 			hub?: SessionHub;
-			proliferateSessionId?: string;
+			breezeSessionId?: string;
 		}
 	}
 }

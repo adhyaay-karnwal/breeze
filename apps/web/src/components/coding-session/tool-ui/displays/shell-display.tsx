@@ -1,8 +1,8 @@
 "use client";
 
-import { ProliferateBashDisplay } from "@/components/coding-session/tool-ui/proliferate/proliferate-bash-display";
+import { BreezeBashDisplay } from "@/components/coding-session/tool-ui/breeze/breeze-bash-display";
 import { Button } from "@/components/ui/button";
-import { parseProliferateCommand } from "@/lib/sessions/proliferate/command-parser";
+import { parseBreezeCommand } from "@/lib/sessions/breeze/command-parser";
 import { ChevronRight, Loader2 } from "lucide-react";
 import { useState } from "react";
 
@@ -17,11 +17,9 @@ export function ShellDisplay({ args, result, status }: ShellDisplayProps) {
 	const isRunning = status?.type === "running";
 	const command = (args.command as string) ?? "";
 
-	const parsed = parseProliferateCommand(command);
+	const parsed = parseBreezeCommand(command);
 	if (parsed) {
-		return (
-			<ProliferateBashDisplay parsed={parsed} result={result} status={status} command={command} />
-		);
+		return <BreezeBashDisplay parsed={parsed} result={result} status={status} command={command} />;
 	}
 
 	const displayCmd = command.length > 60 ? `${command.slice(0, 57)}...` : command;

@@ -1,5 +1,5 @@
 /**
- * @proliferate/services
+ * @breeze/services
  *
  * Server-side business logic and database operations.
  * Organized by feature with db/service/mapper pattern.

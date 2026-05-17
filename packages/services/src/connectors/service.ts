@@ -4,8 +4,8 @@
  * Business logic for org-level MCP connector management.
  */
 
-import type { ConnectorAuth, ConnectorConfig, ConnectorRiskPolicy } from "@proliferate/shared";
-import { getConnectorPresetByKey } from "@proliferate/shared";
+import type { ConnectorAuth, ConnectorConfig, ConnectorRiskPolicy } from "@breeze/shared";
+import { getConnectorPresetByKey } from "@breeze/shared";
 import { listConnectorToolsOrThrow } from "../actions/connectors/client";
 import { encrypt, getEncryptionKey } from "../db/crypto";
 import { resolveSecretValue } from "../secrets/service";
@@ -201,7 +201,7 @@ export async function validateConnector(
 			};
 		}
 
-		const { zodToJsonSchema } = await import("@proliferate/providers/helpers/schema");
+		const { zodToJsonSchema } = await import("@breeze/providers/helpers/schema");
 		const tools: ConnectorValidationTool[] = result.actions.map((action) => {
 			const schema = zodToJsonSchema(action.params);
 			const properties = (schema.properties ?? {}) as Record<string, Record<string, unknown>>;

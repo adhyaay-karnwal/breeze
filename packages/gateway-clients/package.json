@@ -1,5 +1,5 @@
 {
-	"name": "@proliferate/gateway-clients",
+	"name": "@breeze/gateway-clients",
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
@@ -20,8 +20,8 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@proliferate/db": "workspace:*",
-		"@proliferate/shared": "workspace:*",
+		"@breeze/db": "workspace:*",
+		"@breeze/shared": "workspace:*",
 		"bullmq": "^5.30.1",
 		"ws": "^8.18.0"
 	},

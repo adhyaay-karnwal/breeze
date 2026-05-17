@@ -4,8 +4,8 @@
  * Business logic that orchestrates DB operations.
  */
 
-import type { Secret } from "@proliferate/shared/contracts/secrets";
-import { parseEnvFile } from "@proliferate/shared";
+import type { Secret } from "@breeze/shared/contracts/secrets";
+import { parseEnvFile } from "@breeze/shared";
 import { decrypt, encrypt, getEncryptionKey } from "../db/crypto";
 import type { SecretForSessionRow, UpsertSecretInput } from "../types/secrets";
 import * as secretsDb from "./db";

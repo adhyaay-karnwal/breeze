@@ -5,18 +5,18 @@
  */
 
 import { logger } from "@/lib/infra/logger";
-import { ORPCError } from "@orpc/server";
-import { configurations, repos } from "@proliferate/services";
+import { configurations, repos } from "@breeze/services";
 import {
 	ConfigurationSchema,
 	CreateConfigurationInputSchema,
 	UpdateConfigurationInputSchema,
 	UpdateRefreshSettingsInputSchema,
-} from "@proliferate/shared/contracts/configurations";
+} from "@breeze/shared/contracts/configurations";
 import {
 	FinalizeSetupInputSchema,
 	FinalizeSetupResponseSchema,
-} from "@proliferate/shared/contracts/repos";
+} from "@breeze/shared/contracts/repos";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

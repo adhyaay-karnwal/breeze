@@ -13,7 +13,7 @@ function extractBearerToken(authHeader: string | undefined): string | null {
 
 /**
  * Create auth middleware for header-based authentication (Bearer token).
- * Used by /proliferate routes.
+ * Used by /breeze routes.
  */
 export function createRequireAuth(env: GatewayEnv): RequestHandler {
 	return async (req, _res, next) => {

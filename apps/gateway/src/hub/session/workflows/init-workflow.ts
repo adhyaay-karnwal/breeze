@@ -1,4 +1,4 @@
-import type { ClientSource, Message, ServerMessage } from "@proliferate/shared";
+import type { ClientSource, Message, ServerMessage } from "@breeze/shared";
 import { buildControlPlaneSnapshot, buildInitConfig } from "../control-plane";
 import type { SessionRecord } from "../runtime/session-context-store";
 
@@ -27,7 +27,7 @@ export interface InitWorkflowDeps {
 	logError: (message: string, error?: unknown) => void;
 	reconnectGeneration: number;
 	mapHubStatusToControlPlaneRuntime: () =>
-		| import("@proliferate/shared/contracts/sessions").SessionRuntimeStatus
+		| import("@breeze/shared/contracts/sessions").SessionRuntimeStatus
 		| null;
 }
 

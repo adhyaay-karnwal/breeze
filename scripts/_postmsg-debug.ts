@@ -1,5 +1,5 @@
-import { env } from "@proliferate/environment/server";
-import { createSyncClient } from "@proliferate/gateway-clients";
+import { env } from "@breeze/environment/server";
+import { createSyncClient } from "@breeze/gateway-clients";
 
 async function main() {
 	const sessionId = process.argv[2];

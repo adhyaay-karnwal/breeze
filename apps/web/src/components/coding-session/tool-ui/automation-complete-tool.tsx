@@ -1,7 +1,7 @@
 "use client";
 
 import { makeAssistantToolUI } from "@assistant-ui/react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 interface AutomationCompleteArgs {
 	run_id?: string;
@@ -44,19 +44,19 @@ function renderAutomationComplete({
 	const isRunning = status.type === "running";
 
 	if (isRunning) {
-		return <ProliferateToolCard label="Completing automation..." status="running" />;
+		return <BreezeToolCard label="Completing automation..." status="running" />;
 	}
 
 	const toolError = isError(result);
 	const outcome = args?.outcome;
 
 	if (toolError) {
-		return <ProliferateToolCard label="Automation complete" status="error" errorMessage={result} />;
+		return <BreezeToolCard label="Automation complete" status="error" errorMessage={result} />;
 	}
 
 	const isFailed = outcome === "failed";
 	return (
-		<ProliferateToolCard label={getOutcomeLabel(outcome)} status={isFailed ? "error" : "success"} />
+		<BreezeToolCard label={getOutcomeLabel(outcome)} status={isFailed ? "error" : "success"} />
 	);
 }
 

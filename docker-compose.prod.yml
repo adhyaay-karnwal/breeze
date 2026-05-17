@@ -1,4 +1,4 @@
-# Proliferate Self-Hosting - Production (Pre-built Images)
+# Breeze Self-Hosting - Production (Pre-built Images)
 #
 # Uses pre-built images from GitHub Container Registry (except db-migrate,
 # which builds a lightweight migration runner from the repo checkout).
@@ -16,7 +16,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: proliferate
+      POSTGRES_DB: breeze
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -55,9 +55,9 @@ services:
     build:
       context: .
       dockerfile: packages/db/Dockerfile
-    command: ["pnpm", "--filter", "@proliferate/db", "db:migrate"]
+    command: ["pnpm", "--filter", "@breeze/db", "db:migrate"]
     environment:
-      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/proliferate?sslmode=disable
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/breeze?sslmode=disable
       - SKIP_ENV_VALIDATION=true
     depends_on:
       postgres:
@@ -68,7 +68,7 @@ services:
   # Gateway (WebSocket server for real-time streaming)
   # ==========================================================================
   gateway:
-    image: ghcr.io/proliferate-ai/gateway:latest
+    image: ghcr.io/adhyaay-karnwal/gateway:latest
     platform: linux/amd64
     ports:
       - "8787:8787"
@@ -78,7 +78,7 @@ services:
       - STRICT_ENV=true
       - DEFAULT_SANDBOX_PROVIDER=${DEFAULT_SANDBOX_PROVIDER:-modal}
       - REDIS_URL=redis://redis:6379
-      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/proliferate?sslmode=disable
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/breeze?sslmode=disable
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - SERVICE_TO_SERVICE_AUTH_TOKEN=${SERVICE_TO_SERVICE_AUTH_TOKEN}
       - GATEWAY_JWT_SECRET=${GATEWAY_JWT_SECRET}
@@ -127,14 +127,14 @@ services:
   # Web App (Next.js frontend + API routes)
   # ==========================================================================
   web:
-    image: ghcr.io/proliferate-ai/web:latest
+    image: ghcr.io/adhyaay-karnwal/web:latest
     platform: linux/amd64
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
       - DEPLOYMENT_PROFILE=self_host
-      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/proliferate?sslmode=disable
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/breeze?sslmode=disable
       - REDIS_URL=redis://redis:6379
       - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
@@ -187,7 +187,7 @@ services:
       - EMAIL_FROM=${EMAIL_FROM:-}
       # Admin + Slack Connect (optional)
       - SUPER_ADMIN_EMAILS=${SUPER_ADMIN_EMAILS:-}
-      - PROLIFERATE_SLACK_CONNECT_EMAILS=${PROLIFERATE_SLACK_CONNECT_EMAILS:-}
+      - BREEZE_SLACK_CONNECT_EMAILS=${BREEZE_SLACK_CONNECT_EMAILS:-}
       # Storage (optional)
       - S3_BUCKET=${S3_BUCKET:-}
       - S3_REGION=${S3_REGION:-}
@@ -218,14 +218,14 @@ services:
   # Worker (background job processor)
   # ==========================================================================
   worker:
-    image: ghcr.io/proliferate-ai/worker:latest
+    image: ghcr.io/adhyaay-karnwal/worker:latest
     platform: linux/amd64
     environment:
       - DEPLOYMENT_PROFILE=self_host
       - STRICT_ENV=true
       - DEFAULT_SANDBOX_PROVIDER=${DEFAULT_SANDBOX_PROVIDER:-modal}
       - REDIS_URL=redis://redis:6379
-      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/proliferate?sslmode=disable
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/breeze?sslmode=disable
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - SERVICE_TO_SERVICE_AUTH_TOKEN=${SERVICE_TO_SERVICE_AUTH_TOKEN}
       - GATEWAY_JWT_SECRET=${GATEWAY_JWT_SECRET}
@@ -276,12 +276,12 @@ services:
   # LLM Proxy (LiteLLM for secure API key management)
   # ==========================================================================
   llm-proxy:
-    image: ghcr.io/proliferate-ai/llm-proxy:latest
+    image: ghcr.io/adhyaay-karnwal/llm-proxy:latest
     platform: linux/amd64
     ports:
       - "4000:4000"
     environment:
-      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/proliferate?schema=litellm&sslmode=disable
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/breeze?schema=litellm&sslmode=disable
       - LITELLM_MASTER_KEY=${LLM_PROXY_MASTER_KEY:-sk-local-master-key}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - LITELLM_MIGRATION_DIR=/tmp/litellm-migrations
@@ -328,7 +328,7 @@ services:
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
-      S3_BUCKET: ${S3_BUCKET:-proliferate-verification}
+      S3_BUCKET: ${S3_BUCKET:-breeze-verification}
     entrypoint: ["/bin/sh", "-c"]
     command: >
       /usr/bin/mc alias set local http://minio:9000 "$${MINIO_ROOT_USER}" "$${MINIO_ROOT_PASSWORD}" &&

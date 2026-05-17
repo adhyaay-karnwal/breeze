@@ -6,7 +6,7 @@ import {
 	useOrgConnectors,
 	useUpdateOrgConnector,
 } from "@/hooks/integrations/use-org-connectors";
-import type { ConnectorConfig } from "@proliferate/shared";
+import type { ConnectorConfig } from "@breeze/shared";
 import { useCallback, useState } from "react";
 
 export function useIntegrationActions() {

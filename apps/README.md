@@ -1,6 +1,6 @@
 # Apps
 
-Runnable services (containers) that make up the Proliferate stack.
+Runnable services (containers) that make up the Breeze stack.
 
 - `web`: Next.js app + API routes (session lifecycle, auth, repo management). Not in the streaming path.
 - `gateway`: WebSocket gateway for real-time streaming Client ↔ Gateway ↔ Sandbox.
@@ -10,8 +10,8 @@ Runnable services (containers) that make up the Proliferate stack.
 
 ## Docs
 
-- https://docs.proliferate.com
-- Local setup: https://docs.proliferate.com/self-hosting/local
+- https://docs.breeze.engineer
+- Local setup: https://docs.breeze.engineer/self-hosting/local
 
 ## Specs
 

@@ -25,7 +25,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: proliferate
+          POSTGRES_DB: breeze
         ports:
           - 5432:5432
         options: >-
@@ -45,8 +45,8 @@ jobs:
 
     env:
       # Database
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/proliferate
-      POSTGRES_CONNECTION_STRING: postgresql://postgres:postgres@localhost:5432/proliferate
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/breeze
+      POSTGRES_CONNECTION_STRING: postgresql://postgres:postgres@localhost:5432/breeze
       REDIS_URL: redis://localhost:6379
 
       # URL routing:
@@ -66,7 +66,7 @@ jobs:
 
       # Sandbox provider
       DEFAULT_SANDBOX_PROVIDER: modal
-      MODAL_APP_NAME: proliferate-sandbox
+      MODAL_APP_NAME: breeze-sandbox
 
       # LLM
       LLM_PROXY_URL: ""

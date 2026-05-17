@@ -5,9 +5,9 @@ import { getImpersonationCookie, isSuperAdmin } from "@/lib/auth/super-admin";
 import { logger } from "@/lib/infra/logger";
 
 const log = logger.child({ module: "auth-helpers" });
-import { nodeEnv } from "@proliferate/environment/runtime";
-import { env } from "@proliferate/environment/server";
-import { orgs, users } from "@proliferate/services";
+import { nodeEnv } from "@breeze/environment/runtime";
+import { env } from "@breeze/environment/server";
+import { orgs, users } from "@breeze/services";
 import { headers } from "next/headers";
 
 export interface SessionResult {
@@ -75,7 +75,7 @@ async function getApiKeyUser(): Promise<SessionResult | null> {
 
 	const apiKey = authorization.replace("Bearer ", "");
 
-	// CLI can pass org ID in X-Org-Id header (from ~/.proliferate/token)
+	// CLI can pass org ID in X-Org-Id header (from ~/.breeze/token)
 	const orgIdHeader = headersList.get("x-org-id");
 
 	try {

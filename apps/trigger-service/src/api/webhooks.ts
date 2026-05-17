@@ -10,7 +10,7 @@
  * All processing happens asynchronously in the webhook inbox worker.
  */
 
-import { webhookInbox } from "@proliferate/services";
+import { webhookInbox } from "@breeze/services";
 import { type IRouter, Router } from "express";
 import { logger as rootLogger } from "../lib/logger.js";
 import { dispatchIntegrationWebhook } from "../lib/webhook-dispatcher.js";

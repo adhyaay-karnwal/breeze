@@ -68,7 +68,7 @@ export function ConnectionsTab({ connect, disconnect, loadingProvider }: Connect
 
 		try {
 			await slackConnect.mutateAsync({
-				channelName: `proliferate-${slackConnectChannelName.trim()}`,
+				channelName: `breeze-${slackConnectChannelName.trim()}`,
 			});
 			setShowSlackConnectForm(false);
 			setSlackConnectChannelName("");
@@ -162,7 +162,7 @@ export function ConnectionsTab({ connect, disconnect, loadingProvider }: Connect
 								</Text>
 								<div className="flex items-center gap-0">
 									<span className="bg-muted px-3 h-9 flex items-center text-sm text-muted-foreground border border-r-0 border-input rounded-l-md">
-										proliferate-
+										breeze-
 									</span>
 									<Input
 										placeholder="your-company"

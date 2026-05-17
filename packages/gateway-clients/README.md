@@ -1,6 +1,6 @@
-# Gateway Clients (`@proliferate/gateway-clients`)
+# Gateway Clients (`@breeze/gateway-clients`)
 
-Typed clients for interacting with the Proliferate Gateway (WebSocket + HTTP, plus server-side async/BullMQ).
+Typed clients for interacting with the Breeze Gateway (WebSocket + HTTP, plus server-side async/BullMQ).
 
 - Spec: `SPEC.md`
-- Docs: https://docs.proliferate.com/introduction/core-concepts
+- Docs: https://docs.breeze.engineer/introduction/core-concepts

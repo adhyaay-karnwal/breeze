@@ -5,12 +5,12 @@
  * Both Modal and E2B providers use these.
  *
  * vNext: Intercepted tools make synchronous HTTP callbacks to the Gateway
- * (POST /proliferate/:sessionId/tools/:toolName) instead of being stubs.
+ * (POST /breeze/:sessionId/tools/:toolName) instead of being stubs.
  * The Gateway executes the tool and returns the result.
  * Tool wrappers retry on ECONNRESET (Snapshot TCP Drop).
  */
 
-export const ENV_FILE = "/tmp/.proliferate_env.json";
+export const ENV_FILE = "/tmp/.breeze_env.json";
 
 /**
  * Shared HTTP callback helper injected into tool execute() functions.
@@ -18,8 +18,8 @@ export const ENV_FILE = "/tmp/.proliferate_env.json";
  * tool_call_id so the Gateway returns the cached result on thaw.
  */
 export const TOOL_CALLBACK_HELPER = `
-const GATEWAY_URL = process.env.PROLIFERATE_GATEWAY_URL;
-const SESSION_ID = process.env.PROLIFERATE_SESSION_ID;
+const GATEWAY_URL = process.env.BREEZE_GATEWAY_URL;
+const SESSION_ID = process.env.BREEZE_SESSION_ID;
 const AUTH_TOKEN = process.env.SANDBOX_MCP_AUTH_TOKEN;
 const MAX_RETRIES = 5;
 const RETRY_BASE_MS = 500;
@@ -29,7 +29,7 @@ async function callGatewayTool(toolName, toolCallId, args) {
     return { success: false, result: "Missing gateway environment variables" };
   }
 
-  const url = GATEWAY_URL.replace(/\\/$/, "") + "/proliferate/" + SESSION_ID + "/tools/" + toolName;
+  const url = GATEWAY_URL.replace(/\\/$/, "") + "/breeze/" + SESSION_ID + "/tools/" + toolName;
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
@@ -88,15 +88,15 @@ export default {
   name: "verify",
   description: \`Upload verification evidence to S3 for display in the UI.
 
-Before calling this tool, collect evidence in .proliferate/.verification/:
+Before calling this tool, collect evidence in .breeze/.verification/:
 - Screenshots (use Playwright MCP to capture)
 - Test output logs
 - Any files proving your changes work
 
 Example:
-1. mkdir -p .proliferate/.verification
-2. Take screenshots, save to .proliferate/.verification/
-3. npm test > .proliferate/.verification/test.log 2>&1
+1. mkdir -p .breeze/.verification
+2. Take screenshots, save to .breeze/.verification/
+3. npm test > .breeze/.verification/test.log 2>&1
 4. Call verify()\`,
 
   parameters: {
@@ -104,7 +104,7 @@ Example:
     properties: {
       folder: {
         type: "string",
-        description: "Folder with evidence. Defaults to .proliferate/.verification/",
+        description: "Folder with evidence. Defaults to .breeze/.verification/",
       },
     },
   },
@@ -121,18 +121,18 @@ Example:
  * Verify Tool Description (for .txt file)
  */
 export const VERIFY_TOOL_DESCRIPTION = `
-Use the verify tool to upload verification evidence for display in the Proliferate UI.
+Use the verify tool to upload verification evidence for display in the Breeze UI.
 
 ## How it works
 
-1. **Collect evidence** in the \`.proliferate/.verification/\` folder (or a custom folder)
+1. **Collect evidence** in the \`.breeze/.verification/\` folder (or a custom folder)
 2. **Call verify()** to upload all files to S3
-3. **View in UI** - the evidence appears in the Proliferate dashboard
+3. **View in UI** - the evidence appears in the Breeze dashboard
 
 ## What to include
 
 - **Screenshots**: Browser screenshots showing your changes work
-- **Test output**: \`npm test > .proliferate/.verification/test-output.log 2>&1\`
+- **Test output**: \`npm test > .breeze/.verification/test-output.log 2>&1\`
 - **Build logs**: Save build output if relevant
 - **Any files**: Anything that proves your changes work correctly
 
@@ -140,10 +140,10 @@ Use the verify tool to upload verification evidence for display in the Prolifera
 
 ### Basic usage (default folder)
 \`\`\`bash
-mkdir -p .proliferate/.verification
+mkdir -p .breeze/.verification
 playwright_browser_navigate({ url: "http://localhost:3000" })
-playwright_browser_take_screenshot({ path: ".proliferate/.verification/homepage.png" })
-npm test > .proliferate/.verification/test-output.log 2>&1
+playwright_browser_take_screenshot({ path: ".breeze/.verification/homepage.png" })
+npm test > .breeze/.verification/test-output.log 2>&1
 verify()
 \`\`\`
 

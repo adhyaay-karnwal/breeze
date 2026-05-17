@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "@/lib/auth/client";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

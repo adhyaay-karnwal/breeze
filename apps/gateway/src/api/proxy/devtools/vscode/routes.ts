@@ -1,4 +1,4 @@
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 import type { Request, Response } from "express";
 import { Router, type Router as RouterType } from "express";
 import { createProxyMiddleware, fixRequestBody } from "http-proxy-middleware";
@@ -32,7 +32,7 @@ export function createVscodeProxyRoutes(hubManager: HubManager, env: GatewayEnv)
 			proxyReq: (proxyReq, req) => {
 				proxyReq.removeHeader("origin");
 				proxyReq.removeHeader("referer");
-				const sessionId = (req as Request).proliferateSessionId;
+				const sessionId = (req as Request).breezeSessionId;
 				if (sessionId) {
 					const token = deriveSandboxMcpToken(env.serviceToken, sessionId);
 					proxyReq.setHeader("Authorization", `Bearer ${token}`);
@@ -59,7 +59,7 @@ export function createVscodeProxyRoutes(hubManager: HubManager, env: GatewayEnv)
 	});
 
 	router.use(
-		"/:proliferateSessionId/:token/devtools/vscode",
+		"/:breezeSessionId/:token/devtools/vscode",
 		requireProxyAuth,
 		ensureSessionReady,
 		proxy,
@@ -69,5 +69,5 @@ export function createVscodeProxyRoutes(hubManager: HubManager, env: GatewayEnv)
 }
 
 export function createVscodeWsProxy(): never {
-	throw new ApiError(500, "createVscodeWsProxy moved to proliferate/ws/devtools/vscode");
+	throw new ApiError(500, "createVscodeWsProxy moved to breeze/ws/devtools/vscode");
 }

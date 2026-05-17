@@ -1,5 +1,5 @@
 import type { ServerResponse } from "node:http";
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 
 const logger = createLogger({ service: "gateway" }).child({ module: "proxy-devtools-mcp" });
 

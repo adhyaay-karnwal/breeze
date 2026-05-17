@@ -9,8 +9,8 @@
  *   const configuration = await getOrCreateManagedConfiguration({ organizationId, gateway: syncClient });
  */
 
-import type { SyncClient } from "@proliferate/gateway-clients";
-import { BillingGateError } from "@proliferate/shared/billing";
+import type { SyncClient } from "@breeze/gateway-clients";
+import { BillingGateError } from "@breeze/shared/billing";
 import { assertBillingGateForOrg, getOrgPlanLimits } from "./billing/gate";
 import * as configurationsDb from "./configurations";
 import { getServicesLogger } from "./logger";

@@ -4,15 +4,10 @@
  * Runs every 30s. Queries active orgs and enqueues a per-org sync job for each.
  */
 
-import { env } from "@proliferate/environment/server";
-import type { Logger } from "@proliferate/logger";
-import type {
-	BillingLLMSyncDispatchJob,
-	BillingLLMSyncOrgJob,
-	Job,
-	Queue,
-} from "@proliferate/queue";
-import { billing } from "@proliferate/services";
+import { env } from "@breeze/environment/server";
+import type { Logger } from "@breeze/logger";
+import type { BillingLLMSyncDispatchJob, BillingLLMSyncOrgJob, Job, Queue } from "@breeze/queue";
+import { billing } from "@breeze/services";
 
 export async function processLLMSyncDispatchJob(
 	_job: Job<BillingLLMSyncDispatchJob>,

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { usePreviewPanelStore } from "@/stores/preview-panel";
-import type { VerificationFile } from "@proliferate/shared";
+import type { VerificationFile } from "@breeze/shared";
 import { ArrowLeft, Grid } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ActionsContent } from "./actions-panel";

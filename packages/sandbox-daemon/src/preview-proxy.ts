@@ -1,7 +1,7 @@
 /**
  * Preview proxy — B5: HTTP/WebSocket reverse proxy to preview app ports.
  *
- * Routes all non-/_proliferate/* requests to the active preview port.
+ * Routes all non-/_breeze/* requests to the active preview port.
  * Supports HTTP upgrade and bidirectional WebSocket proxying for HMR
  * (Vite/Next.js/Fast Refresh).
  * Preserves Host and forwarding headers.
@@ -9,7 +9,7 @@
 
 import { type IncomingMessage, type ServerResponse, request as httpRequest } from "node:http";
 import type { Duplex } from "node:stream";
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import type { PortWatcher } from "./ports.js";
 
 export interface PreviewProxyOptions {

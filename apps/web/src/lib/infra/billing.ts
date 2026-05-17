@@ -2,13 +2,13 @@ import "server-only";
 /**
  * Billing utilities for web API routes.
  *
- * Session gating is handled by the domain gate in @proliferate/services/billing.
+ * Session gating is handled by the domain gate in @breeze/services/billing.
  * This file provides helpers for billing configuration checks and dashboard queries.
  */
 
 import { logger } from "@/lib/infra/logger";
-import { env } from "@proliferate/environment/server";
-import { orgs } from "@proliferate/services";
+import { env } from "@breeze/environment/server";
+import { orgs } from "@breeze/services";
 
 const log = logger.child({ module: "billing" });
 
@@ -51,7 +51,7 @@ export async function getOrgBillingStatus(orgId: string): Promise<{
 	}
 
 	try {
-		const { autumnGetCustomer } = await import("@proliferate/shared/billing");
+		const { autumnGetCustomer } = await import("@breeze/shared/billing");
 
 		const customer = await autumnGetCustomer(org.autumnCustomerId);
 

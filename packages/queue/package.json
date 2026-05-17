@@ -1,5 +1,5 @@
 {
-	"name": "@proliferate/queue",
+	"name": "@breeze/queue",
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
@@ -12,8 +12,8 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@proliferate/environment": "workspace:*",
-		"@proliferate/logger": "workspace:*",
+		"@breeze/environment": "workspace:*",
+		"@breeze/logger": "workspace:*",
 		"bullmq": "^5.30.1",
 		"ioredis": "^5.4.1"
 	},

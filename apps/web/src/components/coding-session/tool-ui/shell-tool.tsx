@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { parseProliferateCommand } from "@/lib/sessions/proliferate/command-parser";
+import { parseBreezeCommand } from "@/lib/sessions/breeze/command-parser";
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 type ShellArgs = {
 	command?: string;
@@ -21,7 +21,7 @@ export const ShellToolUI = makeAssistantToolUI<ShellArgs, string>({
 		// Truncate long commands for display
 		const displayCommand = command.length > 50 ? `${command.slice(0, 47)}...` : command;
 
-		const parsed = parseProliferateCommand(command);
+		const parsed = parseBreezeCommand(command);
 		if (parsed) {
 			return null;
 		}
@@ -29,7 +29,7 @@ export const ShellToolUI = makeAssistantToolUI<ShellArgs, string>({
 		const trimmedResult = result?.trim();
 
 		return (
-			<ProliferateToolCard
+			<BreezeToolCard
 				label="Bash"
 				status={isRunning ? "running" : "success"}
 				errorMessage={trimmedResult?.toLowerCase().includes("error") ? trimmedResult : undefined}
@@ -56,7 +56,7 @@ export const ShellToolUI = makeAssistantToolUI<ShellArgs, string>({
 						{trimmedResult.length > 3000 && "\n..."}
 					</pre>
 				)}
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

@@ -14,18 +14,18 @@ const {
 	mockCompleteEnrichment: vi.fn(),
 }));
 
-vi.mock("@proliferate/environment/server", () => ({
+vi.mock("@breeze/environment/server", () => ({
 	env: {
 		NEXT_PUBLIC_GATEWAY_URL: "http://localhost:3001",
 		SERVICE_TO_SERVICE_AUTH_TOKEN: "test-token",
 	},
 }));
 
-vi.mock("@proliferate/gateway-clients", () => ({
+vi.mock("@breeze/gateway-clients", () => ({
 	createSyncClient: vi.fn(() => ({})),
 }));
 
-vi.mock("@proliferate/queue", () => ({
+vi.mock("@breeze/queue", () => ({
 	createAutomationEnrichQueue: vi.fn(),
 	createAutomationExecuteQueue: vi.fn(),
 	createAutomationEnrichWorker: vi.fn(),
@@ -35,7 +35,7 @@ vi.mock("@proliferate/queue", () => ({
 	queueAutomationExecute: vi.fn(),
 }));
 
-vi.mock("@proliferate/services", () => ({
+vi.mock("@breeze/services", () => ({
 	outbox: {
 		claimPendingOutbox: vi.fn(),
 		recoverStuckOutbox: vi.fn(),

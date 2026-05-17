@@ -11,15 +11,15 @@ import {
 	type ToolMetadataMessage,
 	type ToolStartMessage,
 	createSyncClient,
-} from "@proliferate/gateway-clients";
+} from "@breeze/gateway-clients";
 import type {
 	ActionApprovalRequestMessage,
 	AutoStartOutputMessage,
 	GitDiffMessage,
 	GitResultMessage,
 	GitState,
-} from "@proliferate/shared";
-import type { WorkspaceStateInfo } from "@proliferate/shared/contracts/harness";
+} from "@breeze/shared";
+import type { WorkspaceStateInfo } from "@breeze/shared/contracts/harness";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
 	type MessageHandlerContext,
@@ -64,7 +64,7 @@ interface UseSessionWebSocketReturn {
 	sendRunAutoStart: (
 		runId: string,
 		mode?: "test" | "start",
-		commands?: import("@proliferate/shared").ConfigurationServiceCommand[],
+		commands?: import("@breeze/shared").ConfigurationServiceCommand[],
 	) => void;
 	sendGetGitStatus: (workspacePath?: string) => void;
 	sendGetGitDiff: (
@@ -351,7 +351,7 @@ export function useSessionWebSocket({
 		(
 			runId: string,
 			mode?: "test" | "start",
-			commands?: import("@proliferate/shared").ConfigurationServiceCommand[],
+			commands?: import("@breeze/shared").ConfigurationServiceCommand[],
 		) => {
 			setAutoStartOutput(null);
 			wsRef.current?.sendRunAutoStart(runId, mode, commands);

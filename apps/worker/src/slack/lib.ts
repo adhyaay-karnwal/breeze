@@ -2,8 +2,8 @@
  * Shared Slack utilities
  */
 
-import type { Logger } from "@proliferate/logger";
-import { decrypt, getEncryptionKey } from "@proliferate/shared/crypto";
+import type { Logger } from "@breeze/logger";
+import { decrypt, getEncryptionKey } from "@breeze/shared/crypto";
 
 /**
  * Download an image from Slack and convert to base64
@@ -123,7 +123,7 @@ export async function postWelcomeMessage(
 			type: "section",
 			text: {
 				type: "mrkdwn",
-				text: "*Proliferate will respond in this thread.*\nFeel free to chat here or check out the web-app & live app preview.",
+				text: "*Breeze will respond in this thread.*\nFeel free to chat here or check out the web-app & live app preview.",
 			},
 		},
 		{
@@ -154,7 +154,7 @@ export async function postWelcomeMessage(
 			channel: channelId,
 			thread_ts: threadTs,
 			blocks,
-			text: "Talk to Proliferate in this thread", // Fallback for notifications
+			text: "Talk to Breeze in this thread", // Fallback for notifications
 		}),
 	});
 

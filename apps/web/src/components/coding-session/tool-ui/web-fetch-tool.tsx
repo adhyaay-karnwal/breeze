@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 type WebFetchArgs = {
 	url?: string;
@@ -28,7 +28,7 @@ export const WebFetchToolUI = makeAssistantToolUI<WebFetchArgs, string>({
 		}
 
 		return (
-			<ProliferateToolCard label="Web fetch" status={isRunning ? "running" : "success"}>
+			<BreezeToolCard label="Web fetch" status={isRunning ? "running" : "success"}>
 				<Button
 					variant="ghost"
 					onClick={() => result && setIsExpanded(!isExpanded)}
@@ -49,7 +49,7 @@ export const WebFetchToolUI = makeAssistantToolUI<WebFetchArgs, string>({
 						{result.length > 3000 && "\n..."}
 					</pre>
 				)}
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

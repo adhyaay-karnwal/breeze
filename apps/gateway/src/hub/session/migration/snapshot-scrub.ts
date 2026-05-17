@@ -2,4 +2,4 @@ export {
 	prepareForSnapshot,
 	type PrepareForSnapshotOptions,
 	type SnapshotCleanup,
-} from "@proliferate/services";
+} from "@breeze/services";

@@ -1,5 +1,5 @@
 /**
- * Core billing types for the Proliferate billing system.
+ * Core billing types for the Breeze billing system.
  *
  * Credit System: 1 credit = $1.00
  * - Compute: 1 credit per hour (~67% margin on E2B costs)

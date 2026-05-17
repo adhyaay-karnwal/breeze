@@ -5,8 +5,8 @@
  * Used by Slack, Discord, Teams, etc.
  */
 
-import type { Database } from "@proliferate/db";
-import type { ClientSource, ServerMessage, WakeOptions } from "@proliferate/shared";
+import type { Database } from "@breeze/db";
+import type { ClientSource, ServerMessage, WakeOptions } from "@breeze/shared";
 import type { Job } from "bullmq";
 import { Queue, Worker } from "bullmq";
 import type { Client, ClientTools } from "../../client";
@@ -22,7 +22,7 @@ import type { AsyncClientDeps, AsyncClientSetupOptions } from "./types";
 export interface WakeableClient {
 	readonly clientType: ClientSource;
 	wake(
-		proliferateSessionId: string,
+		breezeSessionId: string,
 		metadata: unknown,
 		source: ClientSource,
 		options?: WakeOptions,
@@ -107,7 +107,7 @@ export abstract class AsyncClient<
 	 * Override in subclass to handle the message content (e.g., post to Slack immediately).
 	 */
 	async wake(
-		proliferateSessionId: string,
+		breezeSessionId: string,
 		metadata: TMetadata,
 		source: ClientSource,
 		_options?: WakeOptions,
@@ -120,19 +120,17 @@ export abstract class AsyncClient<
 		// Check for existing active receiver
 		const existingJobs = await this.receiverQueue.getJobs(["waiting", "active", "delayed"]);
 		const hasActiveReceiver = existingJobs.some(
-			(j) => (j.data as TReceiverJob & { sessionId: string }).sessionId === proliferateSessionId,
+			(j) => (j.data as TReceiverJob & { sessionId: string }).sessionId === breezeSessionId,
 		);
 
 		if (hasActiveReceiver) {
-			console.log(
-				`[${this.clientType}] Active receiver exists for session ${proliferateSessionId}`,
-			);
+			console.log(`[${this.clientType}] Active receiver exists for session ${breezeSessionId}`);
 			return;
 		}
 
 		// Create receiver job
-		const jobData = { sessionId: proliferateSessionId, ...metadata } as TReceiverJob;
-		const jobId = `${proliferateSessionId}_${Date.now()}`;
+		const jobData = { sessionId: breezeSessionId, ...metadata } as TReceiverJob;
+		const jobId = `${breezeSessionId}_${Date.now()}`;
 		// @ts-expect-error BullMQ's complex generic name types don't play well with our generics
 		await this.receiverQueue.add("receiver", jobData, { jobId });
 		console.log(`[${this.clientType}] Created receiver job ${jobId}`);
@@ -169,7 +167,7 @@ export abstract class AsyncClient<
 	 * @returns "continue" to keep listening, "stop" to close connection
 	 */
 	abstract handleEvent(
-		proliferateSessionId: string,
+		breezeSessionId: string,
 		metadata: TMetadata,
 		event: ServerMessage,
 	): Promise<"continue" | "stop">;

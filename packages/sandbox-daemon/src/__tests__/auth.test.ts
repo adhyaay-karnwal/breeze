@@ -44,11 +44,11 @@ describe("Auth", () => {
 
 		it("parses valid signature header", () => {
 			const header =
-				"method=GET,path=/_proliferate/health,body_hash=abc123,exp=9999999999,nonce=uuid-1,sig=deadbeef";
+				"method=GET,path=/_breeze/health,body_hash=abc123,exp=9999999999,nonce=uuid-1,sig=deadbeef";
 			const result = parseSignatureHeader(header);
 			expect(result).not.toBeNull();
 			expect(result!.method).toBe("GET");
-			expect(result!.path).toBe("/_proliferate/health");
+			expect(result!.path).toBe("/_breeze/health");
 			expect(result!.bodyHash).toBe("abc123");
 			expect(result!.nonce).toBe("uuid-1");
 		});
@@ -59,7 +59,7 @@ describe("Auth", () => {
 
 		it("validates correct HMAC signature", () => {
 			const method = "GET";
-			const path = "/_proliferate/health";
+			const path = "/_breeze/health";
 			const bodyHash = "e3b0c44298fc1c149afbf4c8996fb924";
 			const expiry = String(Math.floor(Date.now() / 1000) + 300);
 			const nonce = "unique-nonce-1";
@@ -81,7 +81,7 @@ describe("Auth", () => {
 
 		it("rejects expired signature", () => {
 			const method = "GET";
-			const path = "/_proliferate/health";
+			const path = "/_breeze/health";
 			const bodyHash = "abc";
 			const expiry = "1000000000"; // far in the past
 			const nonce = "nonce-expired";
@@ -102,7 +102,7 @@ describe("Auth", () => {
 
 		it("rejects nonce replay", () => {
 			const method = "GET";
-			const path = "/_proliferate/health";
+			const path = "/_breeze/health";
 			const bodyHash = "abc";
 			const expiry = String(Math.floor(Date.now() / 1000) + 300);
 			const nonce = "replay-nonce";
@@ -120,7 +120,7 @@ describe("Auth", () => {
 
 		it("rejects mismatched method", () => {
 			const method = "GET";
-			const path = "/_proliferate/health";
+			const path = "/_breeze/health";
 			const bodyHash = "abc";
 			const expiry = String(Math.floor(Date.now() / 1000) + 300);
 			const nonce = "nonce-method";

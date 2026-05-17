@@ -17,7 +17,7 @@ import type {
 	AvailableSessionIntegration,
 } from "@/hooks/actions/use-actions";
 import { cn } from "@/lib/display/utils";
-import { CONNECTOR_PRESETS } from "@proliferate/shared";
+import { CONNECTOR_PRESETS } from "@breeze/shared";
 import { ChevronDown, ChevronRight, Loader2, Plug } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 

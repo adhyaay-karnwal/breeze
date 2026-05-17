@@ -11,7 +11,7 @@
  * for proper signal handling and child process reaping.
  */
 
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 import { setSessionToken, setSignatureSecret } from "./auth.js";
 import { TOKEN_TTL_MINUTES, loadConfig } from "./config.js";
 import { EventBus } from "./event-bus.js";

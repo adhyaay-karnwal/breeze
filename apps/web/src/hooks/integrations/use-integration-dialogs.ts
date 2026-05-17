@@ -1,6 +1,6 @@
 import type { CatalogEntry } from "@/components/integrations/integration-picker-dialog";
 import type { Provider } from "@/components/integrations/provider-icon";
-import type { ConnectorConfig } from "@proliferate/shared";
+import type { ConnectorConfig } from "@breeze/shared";
 import { useCallback, useMemo, useState } from "react";
 
 interface UseIntegrationDialogsOptions {

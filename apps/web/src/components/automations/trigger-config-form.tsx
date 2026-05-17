@@ -27,7 +27,7 @@ import type {
 	PostHogTriggerConfig,
 	SentryTriggerConfig,
 	TriggerConfig,
-} from "@proliferate/shared/contracts/trigger-configs";
+} from "@breeze/shared/contracts/trigger-configs";
 import cronstrue from "cronstrue";
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";

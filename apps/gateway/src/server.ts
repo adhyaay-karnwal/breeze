@@ -5,7 +5,7 @@
  */
 
 import http from "http";
-import { type Logger, createHttpLogger } from "@proliferate/logger";
+import { type Logger, createHttpLogger } from "@breeze/logger";
 import express, { type Express } from "express";
 import { mountRoutes, setupWebSocket } from "./api";
 import { HubManager } from "./hub";

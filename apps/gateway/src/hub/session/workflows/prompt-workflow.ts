@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import type { Message, SessionEventMessage } from "@proliferate/shared";
+import type { Message, SessionEventMessage } from "@breeze/shared";
 import { publishSessionEvent } from "../../../lib/redis";
 import type { PromptOptions } from "../../shared/types";
 

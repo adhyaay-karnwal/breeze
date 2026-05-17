@@ -5,7 +5,7 @@
  */
 
 import { randomUUID } from "crypto";
-import type { Repo, SearchRepo } from "@proliferate/shared/contracts/repos";
+import type { Repo, SearchRepo } from "@breeze/shared/contracts/repos";
 import * as configurationsService from "../configurations/service";
 import { getServicesLogger } from "../logger";
 import type { CreateRepoInput, CreateRepoResult } from "../types/repos";
@@ -181,7 +181,7 @@ export async function createRepoWithConfiguration(
 
 const GITHUB_API_HEADERS = {
 	Accept: "application/vnd.github.v3+json",
-	"User-Agent": "Proliferate-App",
+	"User-Agent": "Breeze-App",
 };
 
 function mapSearchRepo(repo: {

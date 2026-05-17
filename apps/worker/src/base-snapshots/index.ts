@@ -5,8 +5,8 @@
  * E2B uses templates instead. This worker is a no-op stub retained for queue compatibility.
  */
 
-import type { Logger } from "@proliferate/logger";
-import { createBaseSnapshotBuildWorker } from "@proliferate/queue";
+import type { Logger } from "@breeze/logger";
+import { createBaseSnapshotBuildWorker } from "@breeze/queue";
 import type { Worker } from "bullmq";
 
 interface BaseSnapshotWorkers {

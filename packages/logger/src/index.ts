@@ -1,4 +1,4 @@
-import { nodeEnv, runtimeEnv } from "@proliferate/environment/runtime";
+import { nodeEnv, runtimeEnv } from "@breeze/environment/runtime";
 import pino, { type LevelWithSilent, type Logger, type LoggerOptions } from "pino";
 import pinoHttp, { type Options as PinoHttpOptions } from "pino-http";
 

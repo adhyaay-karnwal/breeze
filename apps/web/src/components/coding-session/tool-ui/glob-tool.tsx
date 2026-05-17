@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 type GlobArgs = {
 	pattern?: string;
@@ -22,7 +22,7 @@ export const GlobToolUI = makeAssistantToolUI<GlobArgs, string>({
 		const fileCount = result ? result.split("\n").filter((l) => l.trim()).length : null;
 
 		return (
-			<ProliferateToolCard label="Glob search" status={isRunning ? "running" : "success"}>
+			<BreezeToolCard label="Glob search" status={isRunning ? "running" : "success"}>
 				<Button
 					variant="ghost"
 					onClick={() => result && setIsExpanded(!isExpanded)}
@@ -47,7 +47,7 @@ export const GlobToolUI = makeAssistantToolUI<GlobArgs, string>({
 						{result}
 					</pre>
 				)}
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

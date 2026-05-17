@@ -2,4 +2,4 @@ export type {
 	ManagerHarnessAdapter,
 	ManagerHarnessStartInput,
 	ManagerHarnessState,
-} from "@proliferate/shared/contracts";
+} from "@breeze/shared/contracts";

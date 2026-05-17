@@ -5,17 +5,17 @@
  */
 
 import { logger } from "@/lib/infra/logger";
-import { ORPCError } from "@orpc/server";
-import { env } from "@proliferate/environment/server";
-import { billing } from "@proliferate/services";
-import { TOP_UP_PACKS, type TopUpPackId } from "@proliferate/shared/billing";
+import { env } from "@breeze/environment/server";
+import { billing } from "@breeze/services";
+import { TOP_UP_PACKS, type TopUpPackId } from "@breeze/shared/billing";
 import {
 	ActivatePlanResponseSchema,
 	BillingInfoSchema,
 	BuyCreditsResponseSchema,
 	SetupPaymentResponseSchema,
 	UpdateBillingSettingsResponseSchema,
-} from "@proliferate/shared/contracts/billing";
+} from "@breeze/shared/contracts/billing";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

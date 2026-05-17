@@ -17,7 +17,7 @@ const DEFAULT_CONNECT_TIMEOUT_MS = 30000;
  */
 export async function runReceiver<TMetadata>(
 	client: AsyncClient<TMetadata>,
-	proliferateSessionId: string,
+	breezeSessionId: string,
 	metadata: TMetadata,
 	options?: ReceiverOptions,
 ): Promise<void> {
@@ -26,18 +26,18 @@ export async function runReceiver<TMetadata>(
 	return new Promise<void>((resolve, reject) => {
 		let connectTimeout: NodeJS.Timeout | null = setTimeout(() => {
 			connectTimeout = null;
-			console.error(`[Receiver] Connection timeout for session ${proliferateSessionId}`);
+			console.error(`[Receiver] Connection timeout for session ${breezeSessionId}`);
 			ws.close();
 			reject(new Error("WebSocket connection timeout"));
 		}, connectTimeoutMs);
 
-		const ws = client.syncClient.connect(proliferateSessionId, {
+		const ws = client.syncClient.connect(breezeSessionId, {
 			onEvent: async (event) => {
 				let action: "continue" | "stop";
 				try {
-					action = await client.handleEvent(proliferateSessionId, metadata, event);
+					action = await client.handleEvent(breezeSessionId, metadata, event);
 				} catch (err) {
-					console.error(`[Receiver] handleEvent error for session ${proliferateSessionId}:`, err);
+					console.error(`[Receiver] handleEvent error for session ${breezeSessionId}:`, err);
 					action = "continue"; // Don't stop on handler errors
 				}
 
@@ -52,13 +52,13 @@ export async function runReceiver<TMetadata>(
 					clearTimeout(connectTimeout);
 					connectTimeout = null;
 				}
-				console.log(`[Receiver] Connected for session ${proliferateSessionId}`);
+				console.log(`[Receiver] Connected for session ${breezeSessionId}`);
 				options?.onOpen?.();
 			},
 
 			onClose: (code, reason) => {
 				console.log(
-					`[Receiver] Closed for session ${proliferateSessionId}: ${code} - ${reason || "no reason"}`,
+					`[Receiver] Closed for session ${breezeSessionId}: ${code} - ${reason || "no reason"}`,
 				);
 				options?.onClose?.(code, reason);
 				resolve();
@@ -66,13 +66,13 @@ export async function runReceiver<TMetadata>(
 
 			onReconnect: (attempt) => {
 				console.log(
-					`[Receiver] Reconnecting for session ${proliferateSessionId} (attempt ${attempt})...`,
+					`[Receiver] Reconnecting for session ${breezeSessionId} (attempt ${attempt})...`,
 				);
 				options?.onReconnect?.(attempt);
 			},
 
 			onReconnectFailed: () => {
-				console.error(`[Receiver] Reconnection failed for session ${proliferateSessionId}`);
+				console.error(`[Receiver] Reconnection failed for session ${breezeSessionId}`);
 				options?.onReconnectFailed?.();
 				reject(new Error("WebSocket reconnection failed"));
 			},

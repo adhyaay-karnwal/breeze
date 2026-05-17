@@ -1,4 +1,4 @@
-import { nodeEnv } from "@proliferate/environment/runtime";
+import { nodeEnv } from "@breeze/environment/runtime";
 
 const DEV_DEBUG = nodeEnv !== "production";
 

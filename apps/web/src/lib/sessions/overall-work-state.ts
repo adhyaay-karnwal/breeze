@@ -1,7 +1,7 @@
 import type { CreatorFilter, FilterTab, OriginFilter } from "@/config/sessions";
-import type { PendingRunSummary } from "@proliferate/shared/contracts/automations";
-import type { Session } from "@proliferate/shared/contracts/sessions";
-import { type OverallWorkState, deriveOverallWorkState } from "@proliferate/shared/sessions";
+import type { PendingRunSummary } from "@breeze/shared/contracts/automations";
+import type { Session } from "@breeze/shared/contracts/sessions";
+import { type OverallWorkState, deriveOverallWorkState } from "@breeze/shared/sessions";
 
 export interface DerivedSessionState {
 	overallWorkState: OverallWorkState;

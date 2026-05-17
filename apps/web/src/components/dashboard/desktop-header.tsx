@@ -31,7 +31,7 @@ export function DesktopHeader({ pageTitle, backHref, backLabel }: DesktopHeaderP
 					className="h-8 gap-1.5 rounded-lg text-muted-foreground"
 					asChild
 				>
-					<Link href="https://docs.proliferate.com" target="_blank" rel="noopener noreferrer">
+					<Link href="https://docs.breeze.engineer" target="_blank" rel="noopener noreferrer">
 						<BookOpen className="h-3.5 w-3.5" />
 						<span className="text-xs">Docs</span>
 					</Link>

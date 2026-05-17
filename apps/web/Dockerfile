@@ -1,5 +1,5 @@
 FROM node:20-slim AS builder
-LABEL org.opencontainers.image.source="https://github.com/proliferate-ai/proliferate"
+LABEL org.opencontainers.image.source="https://github.com/adhyaay-karnwal/breeze"
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 RUN corepack enable && corepack prepare pnpm@8.15.1 --activate
@@ -23,14 +23,14 @@ COPY apps/web ./apps/web
 RUN pnpm install --frozen-lockfile
 
 # Build shared packages first
-RUN pnpm --filter @proliferate/environment build
-RUN pnpm --filter @proliferate/logger build
-RUN pnpm --filter @proliferate/shared build
-RUN pnpm --filter @proliferate/queue build
-RUN pnpm --filter @proliferate/db build
-RUN pnpm --filter @proliferate/gateway-clients build
-RUN pnpm --filter @proliferate/triggers build
-RUN pnpm --filter @proliferate/services build
+RUN pnpm --filter @breeze/environment build
+RUN pnpm --filter @breeze/logger build
+RUN pnpm --filter @breeze/shared build
+RUN pnpm --filter @breeze/queue build
+RUN pnpm --filter @breeze/db build
+RUN pnpm --filter @breeze/gateway-clients build
+RUN pnpm --filter @breeze/triggers build
+RUN pnpm --filter @breeze/services build
 
 # Build Next.js with standalone output
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -77,7 +77,7 @@ ENV SERVICE_TO_SERVICE_AUTH_TOKEN=${SERVICE_TO_SERVICE_AUTH_TOKEN}
 ENV GATEWAY_JWT_SECRET=${GATEWAY_JWT_SECRET}
 ENV USER_SECRETS_ENCRYPTION_KEY=${USER_SECRETS_ENCRYPTION_KEY}
 
-RUN pnpm --filter @proliferate/web build
+RUN pnpm --filter @breeze/web build
 
 # Production image
 FROM node:20-slim AS runner

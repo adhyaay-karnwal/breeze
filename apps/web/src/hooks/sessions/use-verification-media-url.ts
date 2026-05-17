@@ -1,7 +1,7 @@
 "use client";
 
 import { gatewayClient } from "@/lib/infra/gateway-client";
-import type { VerificationFile } from "@proliferate/shared";
+import type { VerificationFile } from "@breeze/shared";
 import { useEffect, useState } from "react";
 
 // Global cache for verification media URLs

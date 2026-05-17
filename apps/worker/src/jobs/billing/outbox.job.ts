@@ -4,10 +4,10 @@
  * Runs every 60s. Retries failed Autumn API calls.
  */
 
-import type { Logger } from "@proliferate/logger";
-import type { Job } from "@proliferate/queue";
-import type { BillingOutboxJob } from "@proliferate/queue";
-import { billing } from "@proliferate/services";
+import type { Logger } from "@breeze/logger";
+import type { Job } from "@breeze/queue";
+import type { BillingOutboxJob } from "@breeze/queue";
+import { billing } from "@breeze/services";
 
 export async function processOutboxJob(_job: Job<BillingOutboxJob>, logger: Logger): Promise<void> {
 	try {

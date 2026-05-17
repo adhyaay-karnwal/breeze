@@ -1,7 +1,7 @@
 "use client";
 
 import { orpc } from "@/lib/infra/orpc";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 /**

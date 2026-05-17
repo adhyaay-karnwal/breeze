@@ -1,6 +1,6 @@
 # Gateway Clients
 
-Typed clients for interacting with the Proliferate Gateway.
+Typed clients for interacting with the Breeze Gateway.
 
 ## Overview
 
@@ -47,16 +47,16 @@ src/
 
 ```
 WebSocket:
-  /proliferate/:proliferateSessionId
+  /breeze/:breezeSessionId
 
 HTTP:
-  GET  /proliferate/:proliferateSessionId
-  POST /proliferate/:proliferateSessionId/message
-  POST /proliferate/:proliferateSessionId/cancel
-  GET  /proliferate/:proliferateSessionId/verification-media
+  GET  /breeze/:breezeSessionId
+  POST /breeze/:breezeSessionId/message
+  POST /breeze/:breezeSessionId/cancel
+  GET  /breeze/:breezeSessionId/verification-media
 
 Proxy:
-  /proxy/:proliferateSessionId/:token/opencode/*
+  /proxy/:breezeSessionId/:token/opencode/*
 ```
 
 ## Client Interface
@@ -71,9 +71,9 @@ interface Client {
 
   readonly tools: {
     verification: {
-      list(proliferateSessionId: string, options?: { prefix?: string }): Promise<VerificationFile[]>;
-      getUrl(proliferateSessionId: string, key: string): Promise<string>;
-      getStream(proliferateSessionId: string, key: string): Promise<{ data: ArrayBuffer; contentType: string }>;
+      list(breezeSessionId: string, options?: { prefix?: string }): Promise<VerificationFile[]>;
+      getUrl(breezeSessionId: string, key: string): Promise<string>;
+      getStream(breezeSessionId: string, key: string): Promise<{ data: ArrayBuffer; contentType: string }>;
     };
   };
 }
@@ -86,7 +86,7 @@ Type guards: `isSyncClient()`, `isAsyncClient()`, `isExternalClient()`
 Real-time WebSocket + HTTP client. Browser-safe.
 
 ```typescript
-import { createSyncClient } from "@proliferate/gateway-clients";
+import { createSyncClient } from "@breeze/gateway-clients";
 
 const client = createSyncClient({
   baseUrl: "https://gateway.example.com",
@@ -95,7 +95,7 @@ const client = createSyncClient({
 });
 
 // WebSocket
-const ws = client.connect(proliferateSessionId, {
+const ws = client.connect(breezeSessionId, {
   onEvent: (event) => console.log(event),
   onOpen: () => console.log("connected"),
   onClose: (code, reason) => console.log("closed"),
@@ -110,13 +110,13 @@ ws.sendSaveSnapshot("checkpoint");
 ws.close();
 
 // HTTP
-await client.postMessage(proliferateSessionId, { content: "Hello" });
-await client.postCancel(proliferateSessionId);
-const info = await client.getInfo(proliferateSessionId);
+await client.postMessage(breezeSessionId, { content: "Hello" });
+await client.postCancel(breezeSessionId);
+const info = await client.getInfo(breezeSessionId);
 
 // Verification files
-const files = await client.tools.verification.list(proliferateSessionId, { prefix: "screenshots/" });
-const url = await client.tools.verification.getUrl(proliferateSessionId, key);
+const files = await client.tools.verification.list(breezeSessionId, { prefix: "screenshots/" });
+const url = await client.tools.verification.getUrl(breezeSessionId, key);
 ```
 
 ### Auth Options
@@ -134,7 +134,7 @@ const url = await client.tools.verification.getUrl(proliferateSessionId, key);
 Passthrough to OpenCode via gateway proxy. Browser-safe.
 
 ```typescript
-import { createOpenCodeClient } from "@proliferate/gateway-clients";
+import { createOpenCodeClient } from "@breeze/gateway-clients";
 
 const client = createOpenCodeClient({
   baseUrl: "https://gateway.example.com",
@@ -142,7 +142,7 @@ const client = createOpenCodeClient({
 });
 
 // Get proxy URL
-const url = await client.getUrl(proliferateSessionId);
+const url = await client.getUrl(breezeSessionId);
 // → "https://gateway.example.com/proxy/{id}/{token}/opencode"
 
 // Use directly
@@ -150,7 +150,7 @@ const response = await fetch(`${url}/session`);
 const eventSource = new EventSource(`${url}/events`);
 
 // Verification still works
-const files = await client.tools.verification.list(proliferateSessionId);
+const files = await client.tools.verification.list(breezeSessionId);
 ```
 
 ## AsyncClient
@@ -158,8 +158,8 @@ const files = await client.tools.verification.list(proliferateSessionId);
 BullMQ-based client for async platforms. Server-only.
 
 ```typescript
-import { AsyncClient } from "@proliferate/gateway-clients/server";
-import { createSyncClient } from "@proliferate/gateway-clients";
+import { AsyncClient } from "@breeze/gateway-clients/server";
+import { createSyncClient } from "@breeze/gateway-clients";
 
 class SlackClient extends AsyncClient<SlackMetadata, SlackInbound, SlackReceiver> {
   readonly clientType = "slack";
@@ -170,12 +170,12 @@ class SlackClient extends AsyncClient<SlackMetadata, SlackInbound, SlackReceiver
   }
 
   async handleEvent(
-    proliferateSessionId: string,
+    breezeSessionId: string,
     metadata: SlackMetadata,
     event: ServerMessage
   ): Promise<"continue" | "stop"> {
     // Handle gateway event, post to Slack
-    const files = await this.tools.verification.list(proliferateSessionId);
+    const files = await this.tools.verification.list(breezeSessionId);
     return "continue"; // or "stop" to close receiver
   }
 }
@@ -190,12 +190,12 @@ slackClient.setup({
 });
 
 // Wake receiver for a session
-await slackClient.wake(proliferateSessionId, metadata, source);
+await slackClient.wake(breezeSessionId, metadata, source);
 ```
 
 ## Exports
 
-### `@proliferate/gateway-clients` (browser-safe)
+### `@breeze/gateway-clients` (browser-safe)
 
 ```typescript
 // Clients
@@ -215,11 +215,11 @@ VerificationFile, ConnectionOptions, ReconnectOptions
 PostMessageOptions, HealthCheckResult, SandboxInfo
 SyncWebSocket, WebSocketOptions
 
-// Message types (from @proliferate/shared)
+// Message types (from @breeze/shared)
 ServerMessage, ClientMessage, Message, InitMessage, TokenMessage, ...
 ```
 
-### `@proliferate/gateway-clients/server` (Node.js only)
+### `@breeze/gateway-clients/server` (Node.js only)
 
 ```typescript
 AsyncClient
@@ -234,14 +234,14 @@ When the agent runs the `verify` tool (screenshots), files are uploaded to S3. T
 
 ```typescript
 // List files with optional prefix filter
-const files = await client.tools.verification.list(proliferateSessionId, {
+const files = await client.tools.verification.list(breezeSessionId, {
   prefix: "screenshots/step-1/",
 });
 // → [{ key, name, path, contentType, size, lastModified }, ...]
 
 // Get presigned URL (1-hour expiry)
-const url = await client.tools.verification.getUrl(proliferateSessionId, key);
+const url = await client.tools.verification.getUrl(breezeSessionId, key);
 
 // Get file content directly
-const { data, contentType } = await client.tools.verification.getStream(proliferateSessionId, key);
+const { data, contentType } = await client.tools.verification.getStream(breezeSessionId, key);
 ```

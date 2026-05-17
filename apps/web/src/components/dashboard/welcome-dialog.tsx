@@ -104,7 +104,7 @@ export function WelcomeDialog({ joinedOrgName, onJoinedDismiss }: WelcomeDialogP
 			<Dialog open={!hasSeenWelcome} onOpenChange={(open) => !open && markWelcomeSeen()}>
 				<DialogContent className="max-w-lg border-border bg-card">
 					<DialogHeader>
-						<DialogTitle className="text-2xl">Welcome to Proliferate</DialogTitle>
+						<DialogTitle className="text-2xl">Welcome to Breeze</DialogTitle>
 						<DialogDescription>
 							AI agents that code in fully configured cloud environments.
 						</DialogDescription>

@@ -6,8 +6,8 @@
  * 2. Refresh worker — processes one configuration: boot from snapshot → git pull → install → re-snapshot.
  */
 
-import { env } from "@proliferate/environment/server";
-import type { Logger } from "@proliferate/logger";
+import { env } from "@breeze/environment/server";
+import type { Logger } from "@breeze/logger";
 import {
 	type Queue,
 	type SnapshotRefreshJob,
@@ -15,8 +15,8 @@ import {
 	createSnapshotRefreshTickQueue,
 	createSnapshotRefreshTickWorker,
 	createSnapshotRefreshWorker,
-} from "@proliferate/queue";
-import { configurations } from "@proliferate/services";
+} from "@breeze/queue";
+import { configurations } from "@breeze/services";
 import type { Worker } from "bullmq";
 import { Sandbox } from "e2b";
 import { resolveGitHubToken } from "../github-token";

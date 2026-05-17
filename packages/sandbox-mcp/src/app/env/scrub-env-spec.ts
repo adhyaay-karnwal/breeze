@@ -3,7 +3,7 @@ import { resolveWorkspacePath, safePath } from "../../domain/env/path-policy.js"
 import { sandboxEnv } from "../../env.js";
 import type { EnvFileSpec } from "./types.js";
 
-const PROLIFERATE_ENV_FILE = "/tmp/.proliferate_env.json";
+const BREEZE_ENV_FILE = "/tmp/.breeze_env.json";
 
 export function scrubEnvSpec(spec: EnvFileSpec[]): { scrubbed: string[] } {
 	const scrubbed: string[] = [];
@@ -18,9 +18,9 @@ export function scrubEnvSpec(spec: EnvFileSpec[]): { scrubbed: string[] } {
 		scrubbed.push(entry.path);
 	}
 
-	if (existsSync(PROLIFERATE_ENV_FILE)) {
-		unlinkSync(PROLIFERATE_ENV_FILE);
-		scrubbed.push(PROLIFERATE_ENV_FILE);
+	if (existsSync(BREEZE_ENV_FILE)) {
+		unlinkSync(BREEZE_ENV_FILE);
+		scrubbed.push(BREEZE_ENV_FILE);
 	}
 
 	return { scrubbed };

@@ -1,4 +1,4 @@
-import { type Logger, createLogger } from "@proliferate/logger";
+import { type Logger, createLogger } from "@breeze/logger";
 
 let _logger: Logger = createLogger({ service: "shared" });
 

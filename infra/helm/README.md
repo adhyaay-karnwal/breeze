@@ -2,5 +2,5 @@
 
 Helm charts used for Kubernetes deployments.
 
-- Chart: `proliferate/`
-- Docs: https://docs.proliferate.com/self-hosting/overview
+- Chart: `breeze/`
+- Docs: https://docs.breeze.engineer/self-hosting/overview

@@ -5,7 +5,7 @@
  * used by session list rows, peek drawer, and my-work pages.
  */
 
-import type { DisplayStatus } from "@proliferate/shared/sessions";
+import type { DisplayStatus } from "@breeze/shared/sessions";
 
 /** Format activeSeconds → "12 min" or "1h 23m" or "< 1 min" */
 export function formatActiveTime(seconds: number): string {

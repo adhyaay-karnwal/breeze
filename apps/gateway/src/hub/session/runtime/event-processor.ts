@@ -6,14 +6,14 @@
  * so the EventProcessor is a pure pass-through for SSE events.
  */
 
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import type {
 	Message,
 	ServerMessage,
 	ToolEndMessage,
 	ToolMetadataMessage,
 	ToolStartMessage,
-} from "@proliferate/shared";
+} from "@breeze/shared";
 import type {
 	MessageUpdateProperties,
 	OpenCodeEvent,

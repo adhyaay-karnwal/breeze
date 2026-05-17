@@ -1,5 +1,5 @@
-import type { AgentConfig, RepoSpec } from "@proliferate/shared";
-import type { ConfigurationServiceCommand } from "@proliferate/shared";
+import type { AgentConfig, RepoSpec } from "@breeze/shared";
+import type { ConfigurationServiceCommand } from "@breeze/shared";
 import type { GitIdentity } from "../git-identity";
 import type { RepoRecord, SessionContext, SessionRecord } from "../session-context-store";
 

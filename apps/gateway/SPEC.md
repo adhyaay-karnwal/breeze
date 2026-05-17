@@ -1,14 +1,14 @@
 # Gateway Specification (Current)
 
-Real-time runtime orchestration service for Proliferate sessions.  
+Real-time runtime orchestration service for Breeze sessions.  
 Gateway owns session runtime readiness, WebSocket delivery, proxy surfaces, tool callbacks, and expiry/orphan safety.
 
 ## 1) Architecture
 
 ```
 Client (web/worker/cli)
-   ├─ WS /proliferate/:sessionId
-   ├─ HTTP /proliferate/*
+   ├─ WS /breeze/:sessionId
+   ├─ HTTP /breeze/*
    └─ HTTP/WS /proxy/*
             │
             ▼
@@ -19,7 +19,7 @@ Client (web/worker/cli)
    ├─ BullMQ expiry worker
    └─ Orphan sweeper
             │
-            ├─ PostgreSQL via @proliferate/services (session metadata, actions, telemetry)
+            ├─ PostgreSQL via @breeze/services (session metadata, actions, telemetry)
             ├─ Redis (leases, locks, expiry queue)
             └─ Sandbox provider (Modal/E2B) + OpenCode/manager harness
 ```
@@ -67,7 +67,7 @@ Unified auth middleware supports:
 
 Rules:
 
-- `/proliferate/*` uses bearer token middleware.
+- `/breeze/*` uses bearer token middleware.
 - `/proxy/*` uses path token middleware (`/:sessionId/:token/...`).
 - Tool callback routes require `source === "sandbox"`.
 - Session mutations derive identity from auth context; client-supplied `userId` is never trusted for user-auth flows.
@@ -77,17 +77,17 @@ Rules:
 ### Core HTTP
 
 - `GET /health`
-- `POST /proliferate/sessions`
-- `GET /proliferate/sessions/:sessionId/status`
-- `GET /proliferate/:sessionId/verification-media`
-- `POST /proliferate/:sessionId/heartbeat`
-- `POST /proliferate/:sessionId/eager-start` (service auth only)
-- `GET /proliferate/:sessionId`
-- `POST /proliferate/:sessionId/message`
-- `POST /proliferate/:sessionId/cancel`
-- `POST /proliferate/:sessionId/tools/:toolName`
+- `POST /breeze/sessions`
+- `GET /breeze/sessions/:sessionId/status`
+- `GET /breeze/:sessionId/verification-media`
+- `POST /breeze/:sessionId/heartbeat`
+- `POST /breeze/:sessionId/eager-start` (service auth only)
+- `GET /breeze/:sessionId`
+- `POST /breeze/:sessionId/message`
+- `POST /breeze/:sessionId/cancel`
+- `POST /breeze/:sessionId/tools/:toolName`
 
-### Actions Plane (under `/proliferate/:sessionId/actions`)
+### Actions Plane (under `/breeze/:sessionId/actions`)
 
 - `GET /available`
 - `GET /guide/:integration`
@@ -97,7 +97,7 @@ Rules:
 - `POST /invocations/:invocationId/deny`
 - `GET /invocations`
 
-### Source Read Plane (under `/proliferate/:sessionId/source`)
+### Source Read Plane (under `/breeze/:sessionId/source`)
 
 - `GET /bindings`
 - `GET /query`
@@ -110,19 +110,19 @@ Rules:
 - `ALL /proxy/:sessionId/:token/devtools/vscode/*`
 - `GET /proxy/:sessionId/:token/health-check?url=...`
 
-### Daemon Proxy HTTP (mounted under `/proliferate`)
+### Daemon Proxy HTTP (mounted under `/breeze`)
 
-- `GET /proliferate/v1/sessions/:sessionId/fs/tree`
-- `GET /proliferate/v1/sessions/:sessionId/fs/read`
-- `POST /proliferate/v1/sessions/:sessionId/fs/write`
-- `GET /proliferate/v1/sessions/:sessionId/pty/replay`
-- `POST /proliferate/v1/sessions/:sessionId/pty/write`
-- `GET /proliferate/v1/sessions/:sessionId/preview/ports`
-- `GET /proliferate/v1/sessions/:sessionId/daemon/health`
+- `GET /breeze/v1/sessions/:sessionId/fs/tree`
+- `GET /breeze/v1/sessions/:sessionId/fs/read`
+- `POST /breeze/v1/sessions/:sessionId/fs/write`
+- `GET /breeze/v1/sessions/:sessionId/pty/replay`
+- `POST /breeze/v1/sessions/:sessionId/pty/write`
+- `GET /breeze/v1/sessions/:sessionId/preview/ports`
+- `GET /breeze/v1/sessions/:sessionId/daemon/health`
 
 ### WebSocket
 
-- `WS /proliferate/:sessionId` (primary session protocol)
+- `WS /breeze/:sessionId` (primary session protocol)
 - `WS /proxy/:sessionId/:token/devtools/terminal`
 - `WS /proxy/:sessionId/:token/devtools/vscode/*`
 
@@ -161,7 +161,7 @@ WebSocket upgrades are routed by `WsMultiplexer`.
 
 ## 7) Session Creation Flow
 
-`POST /proliferate/sessions`:
+`POST /breeze/sessions`:
 
 - Requires exactly one configuration mode:
 	- `configurationId`
@@ -230,7 +230,7 @@ Automation sessions with terminal outcomes have a no-resume fallback transcript 
 
 Sandbox invokes:
 
-- `POST /proliferate/:sessionId/tools/:toolName`
+- `POST /breeze/:sessionId/tools/:toolName`
 
 Behavior:
 
@@ -332,7 +332,7 @@ src/
 │   ├── health.ts
 │   ├── index.ts
 │   ├── ws-multiplexer.ts
-│   ├── proliferate/
+│   ├── breeze/
 │   │   ├── ws/
 │   │   └── http/
 │   │       ├── sessions.ts

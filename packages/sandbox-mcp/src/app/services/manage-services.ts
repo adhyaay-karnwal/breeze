@@ -5,8 +5,8 @@ import { deleteProcess, getProcess, setProcess } from "../../infra/services/proc
 import { loadState, saveState } from "../../infra/services/state-store.js";
 import type { ServiceInfo } from "../../types.js";
 
-const LOG_DIR = "/tmp/proliferate/logs";
-const USER_CADDY_DIR = "/home/user/.proliferate/caddy";
+const LOG_DIR = "/tmp/breeze/logs";
+const USER_CADDY_DIR = "/home/user/.breeze/caddy";
 const USER_CADDY_FILE = `${USER_CADDY_DIR}/user.caddy`;
 
 export function getServices(): ServiceInfo[] {

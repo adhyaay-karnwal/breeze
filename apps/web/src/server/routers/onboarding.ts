@@ -9,16 +9,16 @@ import { logger } from "@/lib/infra/logger";
 import { listGitHubRepos } from "@/lib/integrations/github";
 
 const log = logger.child({ handler: "onboarding" });
-import { ORPCError } from "@orpc/server";
-import { env } from "@proliferate/environment/server";
-import { onboarding } from "@proliferate/services";
+import { env } from "@breeze/environment/server";
+import { onboarding } from "@breeze/services";
 import {
 	FinalizeOnboardingInputSchema,
 	FinalizeOnboardingResponseSchema,
 	OnboardingStatusSchema,
 	SaveQuestionnaireInputSchema,
 	SaveToolSelectionsInputSchema,
-} from "@proliferate/shared/contracts/onboarding";
+} from "@breeze/shared/contracts/onboarding";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { orgProcedure, protectedProcedure } from "./middleware";
 

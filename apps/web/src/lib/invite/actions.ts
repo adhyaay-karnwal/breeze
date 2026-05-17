@@ -1,7 +1,7 @@
 "use server";
 
 import { getSession } from "@/lib/auth/server/session";
-import { orgs } from "@proliferate/services";
+import { orgs } from "@breeze/services";
 
 export async function getBasicInviteInfo(id: string) {
 	return orgs.getBasicInvitationInfo(id);

@@ -4,14 +4,14 @@
  * Baseline lifecycle, target management, and setup session invariant.
  */
 
-import { ORPCError } from "@orpc/server";
-import { baselines } from "@proliferate/services";
-import type { baselines as baselinesTypes } from "@proliferate/services";
+import { baselines } from "@breeze/services";
+import type { baselines as baselinesTypes } from "@breeze/services";
 import {
 	RepoBaselineSchema,
 	type RepoBaselineStatus,
 	RepoBaselineTargetSchema,
-} from "@proliferate/shared/contracts/baselines";
+} from "@breeze/shared/contracts/baselines";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

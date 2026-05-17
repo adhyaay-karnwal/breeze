@@ -1,4 +1,4 @@
-const cookieName = "proliferate_utm";
+const cookieName = "breeze_utm";
 const cookieMaxAge = 30 * 24 * 60 * 60; // 30 days in seconds
 
 const utmParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const;
@@ -9,9 +9,9 @@ export type UtmData = Partial<Record<UtmKey, string>>;
 export function getCookieDomain(): string | undefined {
 	if (typeof window === "undefined") return undefined;
 	const host = window.location.hostname;
-	// Only set cross-subdomain cookie on proliferate.com domains
-	if (host === "proliferate.com" || host.endsWith(".proliferate.com")) {
-		return ".proliferate.com";
+	// Only set cross-subdomain cookie on breeze.engineer domains
+	if (host === "breeze.engineer" || host.endsWith(".breeze.engineer")) {
+		return ".breeze.engineer";
 	}
 	return undefined;
 }

@@ -1,11 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-	ProliferateIconDeep,
-	ProliferateIconNormal,
-	ProliferateIconQuick,
-} from "@/components/ui/icons";
+import { BreezeIconDeep, BreezeIconNormal, BreezeIconQuick } from "@/components/ui/icons";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { EFFORT_OPTIONS } from "@/config/reasoning";
 import { cn } from "@/lib/display/utils";
@@ -14,7 +10,7 @@ import {
 	type ModelId,
 	type ReasoningEffort,
 	getModel,
-} from "@proliferate/shared/agents";
+} from "@breeze/shared/agents";
 import { Check } from "lucide-react";
 import type { FC } from "react";
 import { useState } from "react";
@@ -31,9 +27,9 @@ interface IconProps {
 }
 
 const EFFORT_ICONS: Record<ReasoningEffort, FC<IconProps>> = {
-	quick: ProliferateIconQuick,
-	normal: ProliferateIconNormal,
-	deep: ProliferateIconDeep,
+	quick: BreezeIconQuick,
+	normal: BreezeIconNormal,
+	deep: BreezeIconDeep,
 };
 
 export function ReasoningSelector({ modelId, effort, onChange, disabled }: ReasoningSelectorProps) {

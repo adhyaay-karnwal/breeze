@@ -4,11 +4,11 @@
  * Raw Drizzle queries - no business logic.
  */
 
-import type { ClientSource } from "@proliferate/shared";
+import type { ClientSource } from "@breeze/shared";
 import type {
 	SessionMessageDeliveryState,
 	SessionMessageDirection,
-} from "@proliferate/shared/contracts/sessions";
+} from "@breeze/shared/contracts/sessions";
 import {
 	type InferSelectModel,
 	actionInvocations,

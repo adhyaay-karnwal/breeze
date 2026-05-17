@@ -66,7 +66,7 @@ export function useSessionActions(sessionId: string, token: string | null) {
 		queryKey: ["session-actions", sessionId],
 		queryFn: async (): Promise<ActionInvocation[]> => {
 			if (!GATEWAY_URL || !token) throw new Error("Not ready");
-			const res = await fetch(`${GATEWAY_URL}/proliferate/${sessionId}/actions/invocations`, {
+			const res = await fetch(`${GATEWAY_URL}/breeze/${sessionId}/actions/invocations`, {
 				headers: { Authorization: `Bearer ${token}` },
 			});
 			if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -85,7 +85,7 @@ export function useSessionAvailableActions(sessionId: string, token: string | nu
 			if (!GATEWAY_URL || !token) {
 				throw new Error("Not ready");
 			}
-			const response = await fetch(`${GATEWAY_URL}/proliferate/${sessionId}/actions/available`, {
+			const response = await fetch(`${GATEWAY_URL}/breeze/${sessionId}/actions/available`, {
 				headers: { Authorization: `Bearer ${token}` },
 			});
 			if (!response.ok) {
@@ -134,7 +134,7 @@ export function useApproveAction() {
 			grant?: { scope?: "session" | "org"; maxCalls?: number | null };
 		}) => {
 			const res = await fetch(
-				`${GATEWAY_URL}/proliferate/${sessionId}/actions/invocations/${invocationId}/approve`,
+				`${GATEWAY_URL}/breeze/${sessionId}/actions/invocations/${invocationId}/approve`,
 				{
 					method: "POST",
 					headers: {
@@ -175,7 +175,7 @@ export function useDenyAction() {
 			token: string;
 		}) => {
 			const res = await fetch(
-				`${GATEWAY_URL}/proliferate/${sessionId}/actions/invocations/${invocationId}/deny`,
+				`${GATEWAY_URL}/breeze/${sessionId}/actions/invocations/${invocationId}/deny`,
 				{
 					method: "POST",
 					headers: {

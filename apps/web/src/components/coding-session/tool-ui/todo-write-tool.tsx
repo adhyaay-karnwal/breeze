@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { Check, ChevronDown, ChevronRight, Circle, Loader2 } from "lucide-react";
 import { useState } from "react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 type TodoItem = {
 	id?: string;
@@ -31,14 +31,14 @@ export const TodoWriteToolUI = makeAssistantToolUI<TodoWriteArgs, string>({
 		// Initial loading state - no todos yet
 		if (isRunning && totalCount === 0) {
 			return (
-				<ProliferateToolCard label="Todo plan" status="running">
+				<BreezeToolCard label="Todo plan" status="running">
 					Planning tasks...
-				</ProliferateToolCard>
+				</BreezeToolCard>
 			);
 		}
 
 		return (
-			<ProliferateToolCard label="Todo plan" status={isRunning ? "running" : "success"}>
+			<BreezeToolCard label="Todo plan" status={isRunning ? "running" : "success"}>
 				<Button
 					variant="ghost"
 					onClick={() => setIsExpanded(!isExpanded)}
@@ -58,7 +58,7 @@ export const TodoWriteToolUI = makeAssistantToolUI<TodoWriteArgs, string>({
 						))}
 					</div>
 				)}
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

@@ -1,4 +1,4 @@
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { Sandbox } from "e2b";
 import { getSharedLogger } from "../logger";
 import { SandboxProviderError, capOutput, shellEscape } from "../sandbox";

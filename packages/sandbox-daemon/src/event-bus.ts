@@ -2,11 +2,11 @@
  * Event bus — multiplexed event stream with sequence numbers.
  *
  * All daemon subsystems emit events through this bus.
- * The /_proliferate/events SSE endpoint reads from it.
- * Uses the RuntimeDaemonEvent envelope from @proliferate/shared.
+ * The /_breeze/events SSE endpoint reads from it.
+ * Uses the RuntimeDaemonEvent envelope from @breeze/shared.
  */
 
-import type { RuntimeDaemonEvent } from "@proliferate/shared/contracts/harness";
+import type { RuntimeDaemonEvent } from "@breeze/shared/contracts/harness";
 
 // ---------------------------------------------------------------------------
 // Unified daemon event envelope (extends RuntimeDaemonEvent with seq/ts)

@@ -1,6 +1,6 @@
 import "server-only";
-import { nodeEnv } from "@proliferate/environment/runtime";
-import { env } from "@proliferate/environment/server";
+import { nodeEnv } from "@breeze/environment/runtime";
+import { env } from "@breeze/environment/server";
 import { cookies } from "next/headers";
 
 export interface ImpersonationData {

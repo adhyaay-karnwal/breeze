@@ -2,7 +2,7 @@
  * Types for the MCP connector client module.
  */
 
-import type { ActionDefinition } from "@proliferate/providers";
+import type { ActionDefinition } from "@breeze/providers";
 
 /** Tool list result from a single connector. */
 export interface ConnectorToolList {

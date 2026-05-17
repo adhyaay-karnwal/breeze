@@ -1,5 +1,5 @@
-import { nodeEnv, runtimeEnv } from "@proliferate/environment/runtime";
-import { env } from "@proliferate/environment/server";
+import { nodeEnv, runtimeEnv } from "@breeze/environment/runtime";
+import { env } from "@breeze/environment/server";
 import * as Sentry from "@sentry/node";
 
 Sentry.init({
@@ -11,8 +11,8 @@ Sentry.init({
 		return event;
 	},
 });
-import { setServicesLogger } from "@proliferate/services/logger";
-import { registerDefaultTriggers } from "@proliferate/triggers";
+import { setServicesLogger } from "@breeze/services/logger";
+import { registerDefaultTriggers } from "@breeze/triggers";
 import { startInboxGcWorker } from "./gc/inbox-gc.js";
 import { startJobTickScheduleSync, startJobTickWorker } from "./job-ticks/scheduler.js";
 import { logger } from "./lib/logger.js";

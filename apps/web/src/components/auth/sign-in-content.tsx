@@ -44,7 +44,7 @@ export function SignInContent() {
 			<div className="w-full max-w-[380px]">
 				<div className="mb-8 text-center">
 					<h1 className="text-xl font-semibold tracking-tight text-foreground">
-						Welcome Back to Proliferate
+						Welcome Back to Breeze
 					</h1>
 					<p className="mt-1.5 text-sm text-muted-foreground">
 						Sign in to your account to continue

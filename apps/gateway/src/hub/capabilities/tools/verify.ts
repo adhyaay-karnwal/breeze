@@ -13,7 +13,7 @@ export const verifyHandler: InterceptedToolHandler = {
 	name: "verify",
 
 	async execute(hub: SessionHub, args: Record<string, unknown>): Promise<InterceptedToolResult> {
-		const folder = (args.folder as string) || ".proliferate/.verification";
+		const folder = (args.folder as string) || ".breeze/.verification";
 
 		try {
 			const { uploadedCount, prefix } = await hub.uploadVerificationFiles(folder);

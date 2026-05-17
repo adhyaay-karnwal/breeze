@@ -1,8 +1,8 @@
-# DB (`@proliferate/db`)
+# DB (`@breeze/db`)
 
 Drizzle schema + migrations for Postgres (metadata only).
 
-- Docs: https://docs.proliferate.com/self-hosting/environment
+- Docs: https://docs.breeze.engineer/self-hosting/environment
 
 ## Common commands
 

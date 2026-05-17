@@ -6,8 +6,8 @@
  * default retention of 7 days.
  */
 
-import { type InboxGcJob, createInboxGcQueue, createInboxGcWorker } from "@proliferate/queue";
-import { webhookInbox } from "@proliferate/services";
+import { type InboxGcJob, createInboxGcQueue, createInboxGcWorker } from "@breeze/queue";
+import { webhookInbox } from "@breeze/services";
 import type { Job } from "bullmq";
 import { logger as rootLogger } from "../lib/logger.js";
 

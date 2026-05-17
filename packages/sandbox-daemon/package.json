@@ -1,5 +1,5 @@
 {
-	"name": "@proliferate/sandbox-daemon",
+	"name": "@breeze/sandbox-daemon",
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
@@ -20,8 +20,8 @@
 	},
 	"dependencies": {
 		"@anthropic-ai/sdk": "^0.71.2",
-		"@proliferate/logger": "workspace:*",
-		"@proliferate/shared": "workspace:*"
+		"@breeze/logger": "workspace:*",
+		"@breeze/shared": "workspace:*"
 	},
 	"devDependencies": {
 		"@types/node": "^25.1.0",

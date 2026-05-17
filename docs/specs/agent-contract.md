@@ -12,7 +12,7 @@
 	- `automation.complete`
 	- `request_env_variables`
 - Capability injection rules (which files must be written into sandboxes, and when)
-- Gateway callback contract for intercepted tools (`POST /proliferate/:sessionId/tools/:toolName`)
+- Gateway callback contract for intercepted tools (`POST /breeze/:sessionId/tools/:toolName`)
 - Agent/model configuration contract (canonical IDs, OpenCode IDs, provider mapping)
 
 ### Out of Scope
@@ -83,10 +83,10 @@ Primary references:
 
 ### Gateway Callback Contract — `Implemented`
 - Sandbox wrappers call:
-	- `POST /proliferate/:sessionId/tools/:toolName`
+	- `POST /breeze/:sessionId/tools/:toolName`
 	- Body: `{ tool_call_id: string, args: Record<string, unknown> }`
 	- Auth: `Authorization: Bearer <SANDBOX_MCP_AUTH_TOKEN>`
-- Router behavior in `apps/gateway/src/api/proliferate/http/tools.ts`:
+- Router behavior in `apps/gateway/src/api/breeze/http/tools.ts`:
 	- Reject non-sandbox sources (`403`).
 	- Deduplicate by `tool_call_id` via in-memory inflight + completed caches.
 	- Completed cache retention is 5 minutes.
@@ -101,8 +101,8 @@ Primary references:
 - Both providers write:
 	- Tool `.ts` + `.txt` pairs in `{repoDir}/.opencode/tool/`
 	- OpenCode config to both global and repo-local paths
-	- Plugin at `/home/user/.config/opencode/plugin/proliferate.mjs`
-	- `.opencode/instructions.md` and `.proliferate/actions-guide.md`
+	- Plugin at `/home/user/.config/opencode/plugin/breeze.mjs`
+	- `.opencode/instructions.md` and `.breeze/actions-guide.md`
 	- Preinstalled tool deps (`package.json`, `node_modules`) into `.opencode/tool/`
 - Setup-only tool files are removed in non-setup sessions to prevent setup snapshot leakage.
 
@@ -192,13 +192,13 @@ Primary references:
 - OpenCode config must be written to both global and repo-local paths.
 - Provider boot must set callback-critical env vars in sandbox runtime:
 	- `SANDBOX_MCP_AUTH_TOKEN`
-	- `PROLIFERATE_GATEWAY_URL`
-	- `PROLIFERATE_SESSION_ID`
+	- `BREEZE_GATEWAY_URL`
+	- `BREEZE_SESSION_ID`
 - Provider restore paths must remove setup-only tools in non-setup sessions to prevent snapshot contamination.
 
 ### 6.5 OpenCode Runtime Configuration Invariants — `Implemented`
 - OpenCode server must bind to `0.0.0.0:4096`.
-- Plugin path must reference the global Proliferate plugin file.
+- Plugin path must reference the global Breeze plugin file.
 - Permission policy must continue to deny `question` while allowing command execution (`"*": "allow"`).
 - Canonical model IDs must remain transformable into:
 	- OpenCode model ID (`toOpencodeModelId`)
@@ -208,7 +208,7 @@ Primary references:
 ### 6.6 Environment Request and Persistence Invariants — `Implemented`
 - `request_env_variables` must remain sandbox-local and non-blocking from gateway callback perspective.
 - UI env-request state depends on streamed tool events (`tool_start`) and must remain compatible with `request_env_variables` payload shape.
-- User env submissions must merge into `/tmp/.proliferate_env.json` via provider `writeEnvFile()` implementations.
+- User env submissions must merge into `/tmp/.breeze_env.json` via provider `writeEnvFile()` implementations.
 - Secret persistence policy is controlled by submission inputs (`persist` per key, fallback `saveToConfiguration`) and is not owned by the tool schema itself.
 - `save_env_files` must persist env-file generation spec (not secret values) and remain setup-session-gated.
 
@@ -218,13 +218,13 @@ Primary references:
 
 | Dependency | Direction | Interface | Notes |
 |---|---|---|---|
-| `sessions-gateway.md` | This -> Gateway | `POST /proliferate/:sessionId/tools/:toolName` | Tool callbacks are part of gateway runtime lifecycle |
+| `sessions-gateway.md` | This -> Gateway | `POST /breeze/:sessionId/tools/:toolName` | Tool callbacks are part of gateway runtime lifecycle |
 | `sandbox-providers.md` | This -> Providers | Tool/config injection contract | Providers materialize tool files and OpenCode config defined here |
 | `automations-runs.md` | Runs -> This | `automation.complete` payload contract | Run completion depends on this tool schema and idempotency rules |
 | `repos-prebuilds.md` | This -> Configurations | `save_service_commands`, `save_env_files` writes | Setup tools persist reusable configuration metadata |
 | `secrets-environment.md` | This <-> Secrets | `request_env_variables`, submit-env write path | Tool requests values; secrets subsystem persists optional org secrets |
 | `llm-proxy.md` | Proxy -> This | OpenCode provider options | Proxy URL/key populate OpenCode provider options |
-| `actions.md` | This -> Actions | Prompt + actions bootstrap guidance | Prompts and bootstrap file document `proliferate actions` usage |
+| `actions.md` | This -> Actions | Prompt + actions bootstrap guidance | Prompts and bootstrap file document `breeze actions` usage |
 
 ### Security & Auth
 - Gateway-mediated tools execute with server-side credentials; sandbox code does not receive direct DB/S3/provider credentials.

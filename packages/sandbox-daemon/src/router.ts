@@ -1,28 +1,28 @@
 /**
  * HTTP router — platform transport APIs.
  *
- * /_proliferate/* -> platform transport APIs (PTY, FS, ports, health, events)
+ * /_breeze/* -> platform transport APIs (PTY, FS, ports, health, events)
  * /*              -> dynamic reverse proxy to preview app
  *
  * Agent session routes are handled by Sandbox Agent on port 2468,
  * proxied via Caddy at /v1/*.
  *
  * Routes:
- *   GET  /_proliferate/health          -> health check
- *   GET  /_proliferate/events          -> SSE event stream
- *   GET  /_proliferate/pty/list        -> list PTY processes
- *   GET  /_proliferate/pty/replay      -> replay PTY output
- *   POST /_proliferate/pty/write       -> write to PTY
- *   GET  /_proliferate/fs/tree         -> file tree
- *   GET  /_proliferate/fs/read         -> read file
- *   POST /_proliferate/fs/write        -> write file
- *   GET  /_proliferate/ports           -> list active preview ports
- *   POST /_proliferate/token/refresh   -> token refresh
+ *   GET  /_breeze/health          -> health check
+ *   GET  /_breeze/events          -> SSE event stream
+ *   GET  /_breeze/pty/list        -> list PTY processes
+ *   GET  /_breeze/pty/replay      -> replay PTY output
+ *   POST /_breeze/pty/write       -> write to PTY
+ *   GET  /_breeze/fs/tree         -> file tree
+ *   GET  /_breeze/fs/read         -> read file
+ *   POST /_breeze/fs/write        -> write file
+ *   GET  /_breeze/ports           -> list active preview ports
+ *   POST /_breeze/token/refresh   -> token refresh
  */
 
 import { createHash } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import {
 	authenticateRequest,
 	parseSignatureHeader,
@@ -104,7 +104,7 @@ export class Router {
 		const url = req.url ?? "/";
 		const pathname = getPathname(url);
 
-		if (pathname.startsWith("/_proliferate/")) {
+		if (pathname.startsWith("/_breeze/")) {
 			this.handlePlatformRoute(req, res, pathname, url);
 		} else {
 			this.handlePreviewRoute(req, res);
@@ -112,7 +112,7 @@ export class Router {
 	}
 
 	// -----------------------------------------------------------------------
-	// Platform routes (/_proliferate/*)
+	// Platform routes (/_breeze/*)
 	// -----------------------------------------------------------------------
 
 	private async handlePlatformRoute(
@@ -122,14 +122,14 @@ export class Router {
 		url: string,
 	): Promise<void> {
 		// Health endpoint does NOT require auth
-		if (pathname === "/_proliferate/health" && req.method === "GET") {
+		if (pathname === "/_breeze/health" && req.method === "GET") {
 			this.handleHealth(res);
 			return;
 		}
 
 		// Token refresh does NOT require auth — only accessible from inside the
 		// sandbox (localhost) and needed to rotate the token after snapshot resume.
-		if (pathname === "/_proliferate/token/refresh" && req.method === "POST") {
+		if (pathname === "/_breeze/token/refresh" && req.method === "POST") {
 			this.handleTokenRefresh(req, res);
 			return;
 		}
@@ -140,7 +140,7 @@ export class Router {
 		}
 
 		// Validate signature if present (gateway-signed requests)
-		const sigHeader = req.headers["x-proliferate-sandbox-signature"] as string | undefined;
+		const sigHeader = req.headers["x-breeze-sandbox-signature"] as string | undefined;
 		if (sigHeader) {
 			const components = parseSignatureHeader(sigHeader);
 			if (components) {
@@ -166,49 +166,49 @@ export class Router {
 		const query = parseQuery(url);
 
 		switch (pathname) {
-			case "/_proliferate/events":
+			case "/_breeze/events":
 				if (req.method === "GET") {
 					this.handleEventsStream(req, res, query);
 					return;
 				}
 				break;
-			case "/_proliferate/pty/list":
+			case "/_breeze/pty/list":
 				if (req.method === "GET") {
 					this.handlePtyList(res);
 					return;
 				}
 				break;
-			case "/_proliferate/pty/replay":
+			case "/_breeze/pty/replay":
 				if (req.method === "GET") {
 					this.handlePtyReplay(res, query);
 					return;
 				}
 				break;
-			case "/_proliferate/pty/write":
+			case "/_breeze/pty/write":
 				if (req.method === "POST") {
 					this.handlePtyWrite(req, res);
 					return;
 				}
 				break;
-			case "/_proliferate/fs/tree":
+			case "/_breeze/fs/tree":
 				if (req.method === "GET") {
 					this.handleFsTree(res, query);
 					return;
 				}
 				break;
-			case "/_proliferate/fs/read":
+			case "/_breeze/fs/read":
 				if (req.method === "GET") {
 					this.handleFsRead(res, query);
 					return;
 				}
 				break;
-			case "/_proliferate/fs/write":
+			case "/_breeze/fs/write":
 				if (req.method === "POST") {
 					this.handleFsWrite(req, res);
 					return;
 				}
 				break;
-			case "/_proliferate/ports":
+			case "/_breeze/ports":
 				if (req.method === "GET") {
 					this.handlePorts(res);
 					return;

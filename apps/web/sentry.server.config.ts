@@ -1,5 +1,5 @@
-import { nodeEnv } from "@proliferate/environment/runtime";
-import { env } from "@proliferate/environment/server";
+import { nodeEnv } from "@breeze/environment/runtime";
+import { env } from "@breeze/environment/server";
 import * as Sentry from "@sentry/nextjs";
 
 const sentryDsn = env.NEXT_PUBLIC_SENTRY_DSN ?? "";

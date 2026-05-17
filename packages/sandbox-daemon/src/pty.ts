@@ -7,7 +7,7 @@
  * Cold restart resets buffer; client falls back to DB history.
  */
 
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import { PTY_MAX_BYTES, PTY_MAX_LINES, PTY_MAX_LINE_LENGTH } from "./config.js";
 import type { EventBus } from "./event-bus.js";
 

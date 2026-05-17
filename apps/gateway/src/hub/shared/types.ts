@@ -4,7 +4,7 @@
  * Types specific to the hub module.
  */
 
-import type { ClientSource } from "@proliferate/shared";
+import type { ClientSource } from "@breeze/shared";
 
 /**
  * Options for sending a prompt

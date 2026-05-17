@@ -4,7 +4,7 @@
  * Uploads verification media to Slack and posts a summary with dashboard link.
  */
 
-import type { VerificationFile } from "@proliferate/gateway-clients";
+import type { VerificationFile } from "@breeze/gateway-clients";
 import type { HandlerContext, ToolHandler } from "./index";
 
 export const verifyToolHandler: ToolHandler = {

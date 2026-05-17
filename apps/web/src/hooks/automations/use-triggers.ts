@@ -1,10 +1,7 @@
 "use client";
 
 import { orpc } from "@/lib/infra/orpc";
-import type {
-	CreateTriggerInput,
-	UpdateTriggerInput,
-} from "@proliferate/shared/contracts/triggers";
+import type { CreateTriggerInput, UpdateTriggerInput } from "@breeze/shared/contracts/triggers";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useTriggers() {

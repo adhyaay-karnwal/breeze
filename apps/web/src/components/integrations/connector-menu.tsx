@@ -6,7 +6,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { ConnectorConfig } from "@proliferate/shared";
+import type { ConnectorConfig } from "@breeze/shared";
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 
 interface ConnectorMenuProps {

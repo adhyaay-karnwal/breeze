@@ -1,8 +1,8 @@
 import type { CatalogEntry } from "@/components/integrations/integration-picker-dialog";
 import type { Provider } from "@/components/integrations/provider-icon";
 import { LinearIcon, SentryIcon, SlackIcon } from "@/components/ui/icons";
-import type { IntegrationCategory } from "@proliferate/shared";
-import { CONNECTOR_PRESETS } from "@proliferate/shared";
+import type { IntegrationCategory } from "@breeze/shared";
+import { CONNECTOR_PRESETS } from "@breeze/shared";
 
 const quickPresets = CONNECTOR_PRESETS.filter((p) => p.quickSetup);
 const advancedPresets = CONNECTOR_PRESETS.filter((p) => !p.quickSetup && p.key !== "custom");

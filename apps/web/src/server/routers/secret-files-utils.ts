@@ -3,7 +3,7 @@
  *
  * Pure path validation extracted here so unit tests can import it
  * without pulling in the full services dependency tree.
- * The canonical service-layer version lives in @proliferate/services secret-files service.
+ * The canonical service-layer version lives in @breeze/services secret-files service.
  */
 
 import path from "node:path";

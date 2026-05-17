@@ -6,10 +6,10 @@
  * and updates tick timestamps.
  */
 
-import { env } from "@proliferate/environment/server";
-import { createSyncClient } from "@proliferate/gateway-clients";
-import type { Job, WorkerJobTickPayload } from "@proliferate/queue";
-import { workerJobs, workers as workersService } from "@proliferate/services";
+import { env } from "@breeze/environment/server";
+import { createSyncClient } from "@breeze/gateway-clients";
+import type { Job, WorkerJobTickPayload } from "@breeze/queue";
+import { workerJobs, workers as workersService } from "@breeze/services";
 import { CronExpressionParser } from "cron-parser";
 
 import { logger as rootLogger } from "../lib/logger.js";

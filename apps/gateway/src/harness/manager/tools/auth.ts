@@ -1,4 +1,4 @@
-import { signServiceToken } from "@proliferate/shared";
+import { signServiceToken } from "@breeze/shared";
 import type { ManagerToolContext } from "./types";
 
 export async function getServiceJwt(ctx: ManagerToolContext): Promise<string> {

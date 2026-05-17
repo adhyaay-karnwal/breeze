@@ -5,7 +5,7 @@
  * Used by the web app's Nango webhook handler.
  */
 
-import type { TriggerProvider } from "@proliferate/triggers";
+import type { TriggerProvider } from "@breeze/triggers";
 import * as automationsService from "../automations/service";
 import { getServicesLogger } from "../logger";
 import * as runsService from "../runs/service";

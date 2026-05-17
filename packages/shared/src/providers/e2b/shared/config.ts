@@ -1,4 +1,4 @@
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import type { SandboxApiOpts, SandboxConnectOpts } from "e2b";
 import { SANDBOX_TIMEOUT_MS } from "../../../sandbox";
 

@@ -6,8 +6,8 @@
  */
 
 import path from "node:path";
-import type { SandboxProviderType } from "@proliferate/shared";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+import type { SandboxProviderType } from "@breeze/shared";
+import { getSandboxProvider } from "@breeze/shared/providers";
 import * as configurationsModule from "../configurations/service";
 import { encrypt, getEncryptionKey } from "../db/crypto";
 import { getServicesLogger } from "../logger";
@@ -204,9 +204,9 @@ const SANDBOX_WORKSPACE_ROOT = "/home/user/workspace";
 const SECRET_FILE_WRITE_TIMEOUT_MS = 15_000;
 const WRITE_SECRET_FILE_SCRIPT = `
 set -eu
-target="$PROLIFERATE_SECRET_FILE_TARGET"
+target="$BREEZE_SECRET_FILE_TARGET"
 mkdir -p "$(dirname "$target")"
-printf '%s' "$PROLIFERATE_SECRET_FILE_CONTENT_B64" | base64 -d > "$target"
+printf '%s' "$BREEZE_SECRET_FILE_CONTENT_B64" | base64 -d > "$target"
 `;
 
 /**
@@ -250,8 +250,8 @@ export async function applyToActiveSession(params: {
 		{
 			timeoutMs: SECRET_FILE_WRITE_TIMEOUT_MS,
 			env: {
-				PROLIFERATE_SECRET_FILE_TARGET: targetPath,
-				PROLIFERATE_SECRET_FILE_CONTENT_B64: contentBase64,
+				BREEZE_SECRET_FILE_TARGET: targetPath,
+				BREEZE_SECRET_FILE_CONTENT_B64: contentBase64,
 			},
 		},
 	);

@@ -4,7 +4,7 @@
  * Raw Drizzle queries - no business logic.
  */
 
-import type { InferSelectModel } from "@proliferate/db";
+import type { InferSelectModel } from "@breeze/db";
 import { and, eq, getDb, schedules } from "../db/client";
 import type { CreateScheduleDbInput, UpdateScheduleDbInput } from "../types/schedules";
 

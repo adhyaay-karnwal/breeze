@@ -6,8 +6,8 @@ import {
 	buildSessionListResult,
 	deriveSessionState,
 } from "@/lib/sessions/overall-work-state";
-import type { PendingRunSummary } from "@proliferate/shared/contracts/automations";
-import type { Session } from "@proliferate/shared/contracts/sessions";
+import type { PendingRunSummary } from "@breeze/shared/contracts/automations";
+import type { Session } from "@breeze/shared/contracts/sessions";
 import { useEffect, useMemo } from "react";
 
 const loggedStateKeys = new Set<string>();

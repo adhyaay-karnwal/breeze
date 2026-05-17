@@ -18,7 +18,7 @@ import {
 import { useTriggerProviders } from "@/hooks/automations/use-trigger-providers";
 import { cn } from "@/lib/display/utils";
 import { orpc } from "@/lib/infra/orpc";
-import type { TriggerProvider } from "@proliferate/shared/contracts/triggers";
+import type { TriggerProvider } from "@breeze/shared/contracts/triggers";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CirclePlus, Loader2, Plus } from "lucide-react";
 import { useState } from "react";

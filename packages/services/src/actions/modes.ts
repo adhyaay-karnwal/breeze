@@ -12,7 +12,7 @@
  *   3. Inferred default     (allow for all risk levels unless overridden)
  */
 
-import type { ActionMode, RiskLevel } from "@proliferate/providers";
+import type { ActionMode, RiskLevel } from "@breeze/providers";
 import * as modesDb from "./modes-db";
 
 const VALID_ACTION_MODES = new Set<string>(["allow", "deny", "require_approval"]);

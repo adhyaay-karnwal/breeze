@@ -56,7 +56,7 @@ A session is snapshot-eligible only when `SessionHub.shouldIdleSnapshot()` retur
 - lifecycle middleware
 - tool callback start/end
 - SSE event handling
-- heartbeat route (`apps/gateway/src/api/proliferate/http/session/control/heartbeat.ts`)
+- heartbeat route (`apps/gateway/src/api/breeze/http/session/control/heartbeat.ts`)
 
 ### Known-Idle Fallback
 If SSE drops after the hub observed a busy->idle transition, `lastKnownAgentIdleAt` allows idle snapshotting to proceed even while `runtime.isReady()` is false (`apps/gateway/src/hub/session-hub.ts:1278-1291`, `570-579`).
@@ -113,7 +113,7 @@ Evidence: `apps/gateway/src/hub/session-hub.ts:570-595`, `965-979`, `1278-1291`.
 - Tool callbacks must bracket execution with `trackToolCallStart()` / `trackToolCallEnd()`.
 - Heartbeat only refreshes activity if a hub already exists; it must not implicitly create or resume runtime.
 
-Evidence: `apps/gateway/src/server/middleware/session/ensure-session-ready.ts`, `apps/gateway/src/api/proliferate/ws/devtools/terminal/bridge.ts`, `apps/gateway/src/api/proliferate/ws/devtools/vscode/bridge.ts`, `apps/gateway/src/api/proliferate/http/session/tools/routes.ts`, `apps/gateway/src/api/proliferate/http/session/control/heartbeat.ts`.
+Evidence: `apps/gateway/src/server/middleware/session/ensure-session-ready.ts`, `apps/gateway/src/api/breeze/ws/devtools/terminal/bridge.ts`, `apps/gateway/src/api/breeze/ws/devtools/vscode/bridge.ts`, `apps/gateway/src/api/breeze/http/session/tools/routes.ts`, `apps/gateway/src/api/breeze/http/session/control/heartbeat.ts`.
 
 ### 6.3 Idle Snapshot Execution Invariants
 - `runIdleSnapshot()` must only proceed from `migrationState === "normal"`.
@@ -190,7 +190,7 @@ Correction: current implementation falls back from memory snapshot to pause/file
 Correction: normal timer-driven idle snapshot stops idle monitor but does not evict hub; explicit sweeper-triggered `hub.runIdleSnapshot()` calls `onEvict()` afterward (`apps/gateway/src/hub/session-hub.ts:170-172`, `825-828`).
 
 5. "Heartbeat keeps a session alive even when no hub exists."
-Correction: heartbeat returns 404 if no active hub and does not create one (`apps/gateway/src/api/proliferate/http/session/control/heartbeat.ts:23-27`).
+Correction: heartbeat returns 404 if no active hub and does not create one (`apps/gateway/src/api/breeze/http/session/control/heartbeat.ts:23-27`).
 
 6. "session.idle always clears assistant busy state."
 Correction: `EventProcessor` may retain `currentAssistantMessageId` for text-only responses, but explicit `session.idle` / `session.status(idle)` now still marks known-idle (`lastKnownAgentIdleAt`) for snapshot eligibility (`apps/gateway/src/hub/session-hub.ts`).
@@ -227,7 +227,7 @@ Session status returns to `running`, but stale pause reason may persist in DB un
 If upstream stops emitting `session.idle` / `session.status(idle)`, retained `currentAssistantMessageId` can still suppress idle eligibility (`apps/gateway/src/hub/session-hub.ts`, `apps/gateway/src/hub/session/runtime/event-processor.ts`).
 
 4. Heartbeat route exists, but no direct web caller is evident in this repo.
-Preview-only activity that bypasses gateway websocket/proxy channels may be under-observed without heartbeat adoption (`apps/gateway/src/api/proliferate/http/session/control/heartbeat.ts`; no `apps/web` heartbeat caller found).
+Preview-only activity that bypasses gateway websocket/proxy channels may be under-observed without heartbeat adoption (`apps/gateway/src/api/breeze/http/session/control/heartbeat.ts`; no `apps/web` heartbeat caller found).
 
 5. Local idle snapshot success/failure does not evict hubs by default.
 This preserves fast resume handoff but can accumulate paused hubs and ongoing lease renewal until explicit eviction/shutdown (`apps/gateway/src/hub/session-hub.ts:170-172`, `803-812`).

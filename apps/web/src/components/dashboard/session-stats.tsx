@@ -1,6 +1,6 @@
 "use client";
 
-import type { Session } from "@proliferate/shared/contracts/sessions";
+import type { Session } from "@breeze/shared/contracts/sessions";
 
 /**
  * Compact activity summary for returning users.

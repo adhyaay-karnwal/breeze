@@ -1,7 +1,7 @@
 import { appendFile } from "node:fs/promises";
 import path from "node:path";
-import { nodeEnv } from "@proliferate/environment/runtime";
-import { env } from "@proliferate/environment/server";
+import { nodeEnv } from "@breeze/environment/runtime";
+import { env } from "@breeze/environment/server";
 import { NextResponse } from "next/server";
 
 interface ConsoleLogBody {

@@ -10,8 +10,8 @@ import {
 import { useOrgMembersAndInvitations } from "@/hooks/org/use-orgs";
 import { useSession } from "@/lib/auth/client";
 import { hasRoleOrHigher } from "@/lib/auth/roles";
-import type { ActionApprovalRequestMessage } from "@proliferate/shared";
-import type { PendingRunSummary } from "@proliferate/shared/contracts/automations";
+import type { ActionApprovalRequestMessage } from "@breeze/shared";
+import type { PendingRunSummary } from "@breeze/shared/contracts/automations";
 import {
 	AlertCircle,
 	Check,

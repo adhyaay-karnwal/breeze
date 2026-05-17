@@ -2,10 +2,10 @@
  * Automation workers (runs v2).
  */
 
-import { env } from "@proliferate/environment/server";
-import { createSyncClient } from "@proliferate/gateway-clients";
-import type { SyncClient } from "@proliferate/gateway-clients";
-import type { Logger } from "@proliferate/logger";
+import { env } from "@breeze/environment/server";
+import { createSyncClient } from "@breeze/gateway-clients";
+import type { SyncClient } from "@breeze/gateway-clients";
+import type { Logger } from "@breeze/logger";
 import {
 	createAutomationEnrichQueue,
 	createAutomationEnrichWorker,
@@ -14,8 +14,8 @@ import {
 	getConnectionOptions,
 	queueAutomationEnrich,
 	queueAutomationExecute,
-} from "@proliferate/queue";
-import { notifications, outbox, runs, triggers } from "@proliferate/services";
+} from "@breeze/queue";
+import { notifications, outbox, runs, triggers } from "@breeze/services";
 import type { Worker } from "bullmq";
 import { writeCompletionArtifact, writeEnrichmentArtifact } from "./artifacts";
 import { EnrichmentError, buildEnrichmentPayload } from "./enrich";
@@ -502,7 +502,7 @@ function buildPrompt(instructions: string | null | undefined, runId: string): st
 	if (instructions?.trim()) {
 		parts.push(instructions.trim());
 	}
-	parts.push("The trigger context is available at `.proliferate/trigger-context.json`");
+	parts.push("The trigger context is available at `.breeze/trigger-context.json`");
 	parts.push(
 		[
 			"Completion requirements:",

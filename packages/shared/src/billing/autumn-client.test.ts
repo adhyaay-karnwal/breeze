@@ -5,7 +5,7 @@ const mockedEnv: { AUTUMN_API_URL: string; AUTUMN_API_KEY: string } = {
 	AUTUMN_API_KEY: "am_sk_test_123",
 };
 
-vi.mock("@proliferate/environment/server", () => ({
+vi.mock("@breeze/environment/server", () => ({
 	env: mockedEnv,
 }));
 

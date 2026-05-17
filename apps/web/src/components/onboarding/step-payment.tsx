@@ -41,7 +41,7 @@ export function StepPayment({ onComplete }: StepPaymentProps) {
 		<div className="w-full max-w-4xl">
 			{/* Header */}
 			<div className="text-center mb-8">
-				<h1 className="text-3xl font-bold text-foreground mb-2">Start building with Proliferate</h1>
+				<h1 className="text-3xl font-bold text-foreground mb-2">Start building with Breeze</h1>
 				<p className="text-muted-foreground">
 					Choose the plan that works for you. Upgrade or downgrade anytime.
 				</p>

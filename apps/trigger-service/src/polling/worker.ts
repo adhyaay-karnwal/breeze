@@ -20,10 +20,10 @@ import {
 	createPollGroupQueue,
 	createPollGroupWorker,
 	getRedisClient,
-} from "@proliferate/queue";
-import { integrations, pollGroups } from "@proliferate/services";
-import type { PollingTrigger } from "@proliferate/triggers";
-import { registry } from "@proliferate/triggers";
+} from "@breeze/queue";
+import { integrations, pollGroups } from "@breeze/services";
+import type { PollingTrigger } from "@breeze/triggers";
+import { registry } from "@breeze/triggers";
 import type { Job } from "bullmq";
 import { logger as rootLogger } from "../lib/logger.js";
 import { processTriggerEvents } from "../lib/trigger-processor.js";
@@ -138,7 +138,7 @@ export function startPollGroupWorker() {
  * Called at startup to ensure all groups are scheduled.
  */
 export async function scheduleEnabledPollGroups(): Promise<void> {
-	const { schedulePollGroupJob } = await import("@proliferate/queue");
+	const { schedulePollGroupJob } = await import("@breeze/queue");
 	const queue = createPollGroupQueue();
 	const groups = await pollGroups.listEnabledGroups();
 

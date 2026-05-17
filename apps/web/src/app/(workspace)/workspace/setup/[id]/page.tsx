@@ -8,7 +8,7 @@ import { useCreateConfiguration } from "@/hooks/sessions/use-configurations";
 import { useCreateSession } from "@/hooks/sessions/use-sessions";
 import { orpc } from "@/lib/infra/orpc";
 import { useDashboardStore } from "@/stores/dashboard";
-import { getSetupInitialPrompt } from "@proliferate/shared/prompts";
+import { getSetupInitialPrompt } from "@breeze/shared/prompts";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useParams } from "next/navigation";

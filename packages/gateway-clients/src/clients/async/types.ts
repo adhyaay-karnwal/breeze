@@ -4,7 +4,7 @@
  * Types specific to the async (BullMQ-based) client.
  */
 
-import type { Database } from "@proliferate/db";
+import type { Database } from "@breeze/db";
 import type { ConnectionOptions as BullMQConnectionOptions, JobsOptions } from "bullmq";
 import type { SyncClient } from "../sync";
 

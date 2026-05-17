@@ -5,11 +5,11 @@
  * mark read, dismiss, and bulk operations.
  */
 
-import { notifications } from "@proliferate/services";
+import { notifications } from "@breeze/services";
 import {
 	NotificationFilterSchema,
 	NotificationSchema,
-} from "@proliferate/shared/contracts/notifications";
+} from "@breeze/shared/contracts/notifications";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

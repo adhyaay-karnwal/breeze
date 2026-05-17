@@ -2,8 +2,8 @@
  * automation.complete intercepted tool handler.
  */
 
-import { createLogger } from "@proliferate/logger";
-import { runs, sessions, triggers } from "@proliferate/services";
+import { createLogger } from "@breeze/logger";
+import { runs, sessions, triggers } from "@breeze/services";
 import type { InterceptedToolHandler, InterceptedToolResult } from "./index";
 
 interface AutomationCompleteArgs {

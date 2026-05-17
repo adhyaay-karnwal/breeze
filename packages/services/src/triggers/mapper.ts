@@ -8,7 +8,7 @@ import type {
 	Trigger,
 	TriggerEvent,
 	TriggerWithIntegration,
-} from "@proliferate/shared/contracts/triggers";
+} from "@breeze/shared/contracts/triggers";
 import { toIsoString } from "../db/serialize";
 import type {
 	TriggerEventRow,

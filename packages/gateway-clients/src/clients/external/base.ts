@@ -30,7 +30,7 @@ export interface ExternalClient extends Client {
 	/**
 	 * Get the passthrough URL for direct access to the external system
 	 */
-	getUrl(proliferateSessionId: string): Promise<string>;
+	getUrl(breezeSessionId: string): Promise<string>;
 }
 
 /**
@@ -64,5 +64,5 @@ export abstract class ExternalClientBase implements ExternalClient {
 	/**
 	 * Get the passthrough URL for direct access to the external system
 	 */
-	abstract getUrl(proliferateSessionId: string): Promise<string>;
+	abstract getUrl(breezeSessionId: string): Promise<string>;
 }

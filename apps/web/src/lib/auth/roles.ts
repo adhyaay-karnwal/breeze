@@ -1,7 +1,7 @@
 /**
  * Pure role/permission utilities — safe for client components.
  *
- * Server-only helpers that depend on @proliferate/services live in permissions.ts.
+ * Server-only helpers that depend on @breeze/services live in permissions.ts.
  */
 
 export type OrgRole = "owner" | "admin" | "member";

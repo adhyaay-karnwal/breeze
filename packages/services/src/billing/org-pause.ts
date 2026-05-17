@@ -12,10 +12,10 @@
  * preserving the ability to resume when credits are replenished.
  */
 
-import type { SandboxProviderType } from "@proliferate/shared";
-import type { PauseReason } from "@proliferate/shared/billing";
-import { revokeVirtualKey } from "@proliferate/shared/llm-proxy";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+import type { SandboxProviderType } from "@breeze/shared";
+import type { PauseReason } from "@breeze/shared/billing";
+import { revokeVirtualKey } from "@breeze/shared/llm-proxy";
+import { getSandboxProvider } from "@breeze/shared/providers";
 import { runWithMigrationLock } from "../lib/lock";
 import { getServicesLogger } from "../logger";
 import {

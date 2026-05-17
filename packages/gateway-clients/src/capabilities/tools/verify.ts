@@ -14,7 +14,7 @@ import type { HttpClient, VerificationFile } from "../../types";
 export function createVerificationTools(http: HttpClient): VerificationTools {
 	return {
 		async list(
-			proliferateSessionId: string,
+			breezeSessionId: string,
 			options?: { prefix?: string },
 		): Promise<VerificationFile[]> {
 			const params = new URLSearchParams();
@@ -23,23 +23,23 @@ export function createVerificationTools(http: HttpClient): VerificationTools {
 			}
 
 			const queryString = params.toString();
-			const path = `/proliferate/${proliferateSessionId}/verification-media${queryString ? `?${queryString}` : ""}`;
+			const path = `/breeze/${breezeSessionId}/verification-media${queryString ? `?${queryString}` : ""}`;
 
 			const data = await http.get<{ files: VerificationFile[] }>(path);
 			return data.files;
 		},
 
-		async getUrl(proliferateSessionId: string, key: string): Promise<string> {
-			const path = `/proliferate/${proliferateSessionId}/verification-media?key=${encodeURIComponent(key)}`;
+		async getUrl(breezeSessionId: string, key: string): Promise<string> {
+			const path = `/breeze/${breezeSessionId}/verification-media?key=${encodeURIComponent(key)}`;
 			const data = await http.get<{ url: string }>(path);
 			return data.url;
 		},
 
 		async getStream(
-			proliferateSessionId: string,
+			breezeSessionId: string,
 			key: string,
 		): Promise<{ data: ArrayBuffer; contentType: string }> {
-			const path = `/proliferate/${proliferateSessionId}/verification-media?key=${encodeURIComponent(key)}&stream=true`;
+			const path = `/breeze/${breezeSessionId}/verification-media?key=${encodeURIComponent(key)}&stream=true`;
 
 			// This is a special case - we need the raw response, not JSON
 			// The http client will need to handle this specially based on the stream param

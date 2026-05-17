@@ -13,7 +13,7 @@
 
 import type { Server } from "node:http";
 import { URL } from "node:url";
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 import { type IPty, spawn as ptySpawn } from "node-pty";
 import { WebSocket, WebSocketServer } from "ws";
 import { validateBearerToken } from "./auth.js";

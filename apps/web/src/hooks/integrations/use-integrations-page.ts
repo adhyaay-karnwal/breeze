@@ -121,7 +121,7 @@ export function useIntegrationsPage() {
 		if (!slackConnectChannelName.trim()) return;
 		try {
 			await slackConnect.mutateAsync({
-				channelName: `proliferate-${slackConnectChannelName.trim()}`,
+				channelName: `breeze-${slackConnectChannelName.trim()}`,
 			});
 			setShowSlackConnectForm(false);
 			setSlackConnectChannelName("");

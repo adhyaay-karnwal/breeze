@@ -11,10 +11,10 @@
  * This makes the job safe to run before and after the partitioning migration.
  */
 
-import type { Logger } from "@proliferate/logger";
-import type { BillingPartitionMaintenanceJob, Job } from "@proliferate/queue";
-import { billing } from "@proliferate/services";
-import { METERING_CONFIG } from "@proliferate/shared/billing";
+import type { Logger } from "@breeze/logger";
+import type { BillingPartitionMaintenanceJob, Job } from "@breeze/queue";
+import { billing } from "@breeze/services";
+import { METERING_CONFIG } from "@breeze/shared/billing";
 
 /**
  * Get partition name for a given year/month.

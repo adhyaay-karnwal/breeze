@@ -5,15 +5,15 @@
  * and wakes async clients (like Slack) when messages arrive from other sources.
  */
 
-import type { WakeableClient } from "@proliferate/gateway-clients/server";
-import type { Logger } from "@proliferate/logger";
-import { sessions } from "@proliferate/services";
+import type { WakeableClient } from "@breeze/gateway-clients/server";
+import type { Logger } from "@breeze/logger";
+import { sessions } from "@breeze/services";
 import {
 	type ClientSource,
 	SESSION_EVENTS_CHANNEL,
 	type SessionEventMessage,
 	type WakeOptions,
-} from "@proliferate/shared";
+} from "@breeze/shared";
 import type IORedis from "ioredis";
 
 export class SessionSubscriber {

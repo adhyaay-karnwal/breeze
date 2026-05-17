@@ -1,4 +1,4 @@
-import type { ConnectorRiskPolicy } from "@proliferate/shared";
+import type { ConnectorRiskPolicy } from "@breeze/shared";
 import { describe, expect, it } from "vitest";
 import { type McpToolAnnotations, deriveRiskLevel } from "./risk";
 

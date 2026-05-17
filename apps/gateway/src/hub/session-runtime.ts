@@ -9,17 +9,17 @@
  * passed during ACP session creation.
  */
 
-import { type Logger, createLogger } from "@proliferate/logger";
-import { billing } from "@proliferate/services";
+import { type Logger, createLogger } from "@breeze/logger";
+import { billing } from "@breeze/services";
 import type {
 	AutoStartOutputEntry,
 	ConfigurationServiceCommand,
 	Message,
 	SandboxProvider,
 	SandboxProviderType,
-} from "@proliferate/shared";
-import { BillingGateError } from "@proliferate/shared/billing";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+} from "@breeze/shared";
+import { BillingGateError } from "@breeze/shared/billing";
+import { getSandboxProvider } from "@breeze/shared/providers";
 import { SandboxAgentV2CodingHarnessAdapter } from "../harness/coding/sandbox-agent-v2/adapter";
 import type {
 	CodingHarnessEventStreamHandle,
@@ -437,8 +437,8 @@ export class SessionRuntime {
 			const envVarsWithToken = {
 				...config.envVars,
 				SANDBOX_MCP_AUTH_TOKEN: sandboxMcpToken,
-				PROLIFERATE_GATEWAY_URL: this.env.gatewayUrl,
-				PROLIFERATE_SESSION_ID: this.sessionId,
+				BREEZE_GATEWAY_URL: this.env.gatewayUrl,
+				BREEZE_SESSION_ID: this.sessionId,
 			};
 
 			const ensureSandboxStartMs = Date.now();
@@ -585,7 +585,7 @@ export class SessionRuntime {
 						this.onBroadcast({
 							type: "daemon_stream",
 							payload: envelope,
-						} as import("@proliferate/shared").ServerMessage);
+						} as import("@breeze/shared").ServerMessage);
 					}
 					// Port events
 					if (envelope.stream === "port_opened" || envelope.stream === "port_closed") {
@@ -598,7 +598,7 @@ export class SessionRuntime {
 									port: payload.port,
 									host: typeof payload.host === "string" ? payload.host : undefined,
 								},
-							} as import("@proliferate/shared").ServerMessage);
+							} as import("@breeze/shared").ServerMessage);
 						}
 					}
 					// FS change events
@@ -616,7 +616,7 @@ export class SessionRuntime {
 									path: payload.path,
 									size: typeof payload.size === "number" ? payload.size : undefined,
 								},
-							} as import("@proliferate/shared").ServerMessage);
+							} as import("@breeze/shared").ServerMessage);
 						}
 					}
 				},

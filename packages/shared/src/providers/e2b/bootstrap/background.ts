@@ -1,4 +1,4 @@
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import type { Sandbox } from "e2b";
 import { isValidTargetPath } from "../../../lib/env-parser";
 import { DEFAULT_CADDYFILE, SANDBOX_PATHS, shellEscape } from "../../../sandbox";
@@ -54,10 +54,10 @@ export async function setupAdditionalDependencies(
 	log.debug("Starting sandbox-daemon (async)");
 	const daemonEnvs: Record<string, string> = {
 		NODE_ENV: "production",
-		PROLIFERATE_WORKSPACE_ROOT: "/home/user/workspace",
+		BREEZE_WORKSPACE_ROOT: "/home/user/workspace",
 	};
 	if (opts.envVars.SANDBOX_MCP_AUTH_TOKEN) {
-		daemonEnvs.PROLIFERATE_SESSION_TOKEN = opts.envVars.SANDBOX_MCP_AUTH_TOKEN;
+		daemonEnvs.BREEZE_SESSION_TOKEN = opts.envVars.SANDBOX_MCP_AUTH_TOKEN;
 	}
 	sandbox.commands
 		.run("sandbox-daemon > /tmp/sandbox-daemon.log 2>&1", {
@@ -84,13 +84,13 @@ export async function setupAdditionalDependencies(
 	}
 	// Manager sessions: Pi extension needs gateway connection info to call control-plane API
 	if (opts.sessionKind === "manager") {
-		if (opts.envVars.PROLIFERATE_GATEWAY_URL) {
-			sandboxAgentEnvs.PROLIFERATE_GATEWAY_URL = opts.envVars.PROLIFERATE_GATEWAY_URL;
+		if (opts.envVars.BREEZE_GATEWAY_URL) {
+			sandboxAgentEnvs.BREEZE_GATEWAY_URL = opts.envVars.BREEZE_GATEWAY_URL;
 		}
 		if (opts.envVars.SANDBOX_MCP_AUTH_TOKEN) {
-			sandboxAgentEnvs.PROLIFERATE_GATEWAY_AUTH_TOKEN = opts.envVars.SANDBOX_MCP_AUTH_TOKEN;
+			sandboxAgentEnvs.BREEZE_GATEWAY_AUTH_TOKEN = opts.envVars.SANDBOX_MCP_AUTH_TOKEN;
 		}
-		sandboxAgentEnvs.PROLIFERATE_MANAGER_SESSION_ID = opts.sessionId;
+		sandboxAgentEnvs.BREEZE_MANAGER_SESSION_ID = opts.sessionId;
 		// Memory system env vars
 		sandboxAgentEnvs.MANAGER_MEMORY_DIR = "/home/user/memory";
 		sandboxAgentEnvs.MANAGER_MEMORY_ENABLED = "true";
@@ -184,11 +184,11 @@ async function bootServices(sandbox: Sandbox, opts: CreateSandboxOpts, log: Logg
 
 		sandbox.commands
 			.run(
-				`proliferate services start --name ${shellEscape(cmd.name)} --command ${shellEscape(cmd.command)} --cwd ${shellEscape(cwd)}`,
+				`breeze services start --name ${shellEscape(cmd.name)} --command ${shellEscape(cmd.command)} --cwd ${shellEscape(cwd)}`,
 				{ timeoutMs: 60000 },
 			)
 			.catch((err) => {
-				log.error({ err, serviceName: cmd.name }, "proliferate services start failed");
+				log.error({ err, serviceName: cmd.name }, "breeze services start failed");
 			});
 	}
 }

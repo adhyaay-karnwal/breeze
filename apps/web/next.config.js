@@ -14,13 +14,13 @@ const nextConfig = {
 		root: monorepoRoot,
 	},
 	transpilePackages: [
-		"@proliferate/shared",
-		"@proliferate/gateway-clients",
-		"@proliferate/environment",
-		"@proliferate/services",
-		"@proliferate/queue",
-		"@proliferate/db",
-		"@proliferate/logger",
+		"@breeze/shared",
+		"@breeze/gateway-clients",
+		"@breeze/environment",
+		"@breeze/services",
+		"@breeze/queue",
+		"@breeze/db",
+		"@breeze/logger",
 	],
 	serverExternalPackages: ["bullmq", "ioredis"],
 	// Allow ngrok domains for local dev
@@ -30,7 +30,7 @@ const nextConfig = {
 			{
 				source: "/install.sh",
 				destination:
-					"https://raw.githubusercontent.com/proliferate-ai/cloud/main/scripts/install.sh",
+					"https://raw.githubusercontent.com/adhyaay-karnwal/cloud/main/scripts/install.sh",
 				permanent: false,
 			},
 			{

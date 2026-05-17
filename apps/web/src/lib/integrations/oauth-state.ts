@@ -1,7 +1,7 @@
 import "server-only";
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { randomUUID } from "node:crypto";
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import type { NextRequest } from "next/server";
 
 export type OAuthStateVerificationError =

@@ -1,16 +1,16 @@
 # ElastiCache Subnet Group
 resource "aws_elasticache_subnet_group" "main" {
-  name       = "proliferate-redis-subnet"
+  name       = "breeze-redis-subnet"
   subnet_ids = aws_subnet.private[*].id
 
   tags = {
-    Name = "proliferate-redis-subnet"
+    Name = "breeze-redis-subnet"
   }
 }
 
 # Security Group for Redis
 resource "aws_security_group" "redis" {
-  name        = "proliferate-redis"
+  name        = "breeze-redis"
   description = "Security group for Redis ElastiCache"
   vpc_id      = aws_vpc.main.id
 
@@ -23,7 +23,7 @@ resource "aws_security_group" "redis" {
   }
 
   tags = {
-    Name = "proliferate-redis"
+    Name = "breeze-redis"
   }
 }
 
@@ -31,7 +31,7 @@ resource "aws_security_group" "redis" {
 # BullMQ requires noeviction policy - writes should fail when memory is full
 # rather than silently evicting jobs
 resource "aws_elasticache_parameter_group" "bullmq" {
-  name   = "proliferate-redis-bullmq"
+  name   = "breeze-redis-bullmq"
   family = "redis7"
 
   parameter {
@@ -42,7 +42,7 @@ resource "aws_elasticache_parameter_group" "bullmq" {
 
 # ElastiCache Redis Cluster
 resource "aws_elasticache_cluster" "main" {
-  cluster_id           = "proliferate-redis"
+  cluster_id           = "breeze-redis"
   engine               = "redis"
   node_type            = "cache.t3.micro"
   num_cache_nodes      = 1
@@ -54,7 +54,7 @@ resource "aws_elasticache_cluster" "main" {
   security_group_ids = [aws_security_group.redis.id]
 
   tags = {
-    Name = "proliferate-redis"
+    Name = "breeze-redis"
   }
 }
 

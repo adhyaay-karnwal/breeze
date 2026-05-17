@@ -8,7 +8,7 @@ import { useCreateBaseline, useLatestSetupSession } from "@/hooks/sessions/use-b
 import { useCreateConfiguration } from "@/hooks/sessions/use-configurations";
 import { useCreateSession } from "@/hooks/sessions/use-sessions";
 import { useDashboardStore } from "@/stores/dashboard";
-import { getSetupInitialPrompt } from "@proliferate/shared/prompts";
+import { getSetupInitialPrompt } from "@breeze/shared/prompts";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

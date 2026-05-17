@@ -1,6 +1,6 @@
 # Security Policy
 
-Proliferate takes security reports seriously and appreciates responsible
+Breeze takes security reports seriously and appreciates responsible
 disclosure.
 
 ## Reporting a Vulnerability
@@ -8,7 +8,7 @@ disclosure.
 Please do not open public issues for security vulnerabilities.
 
 1. Preferred: Use GitHub Security Advisories ("Report a vulnerability") for this repository.
-2. If you cannot use GitHub advisories, email [pablo@proliferate.com](mailto:pablo@proliferate.com).
+2. If you cannot use GitHub advisories, email [adhyaay@breeze.engineer](mailto:adhyaay@breeze.engineer).
 
 When reporting, include:
 

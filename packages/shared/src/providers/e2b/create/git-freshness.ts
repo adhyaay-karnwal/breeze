@@ -1,5 +1,5 @@
-import { env } from "@proliferate/environment/server";
-import type { Logger } from "@proliferate/logger";
+import { env } from "@breeze/environment/server";
+import type { Logger } from "@breeze/logger";
 import type { Sandbox } from "e2b";
 import {
 	SANDBOX_PATHS,

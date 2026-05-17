@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCreateSecret, useDeleteSecret, useSecretsGrouped } from "@/hooks/org/use-secrets";
-import type { Secret } from "@proliferate/shared/contracts/secrets";
+import type { Secret } from "@breeze/shared/contracts/secrets";
 import { Pencil, Plus, Search, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { SecretEditModal } from "./secret-edit-modal";

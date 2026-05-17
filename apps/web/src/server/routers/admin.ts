@@ -12,17 +12,17 @@ import {
 	isSuperAdmin,
 	setImpersonationCookie,
 } from "@/lib/auth/super-admin";
-import { os, ORPCError } from "@orpc/server";
-import { type EnvStatus, getEnvStatus } from "@proliferate/environment";
-import { nodeEnv } from "@proliferate/environment/runtime";
-import { admin } from "@proliferate/services";
+import { type EnvStatus, getEnvStatus } from "@breeze/environment";
+import { nodeEnv } from "@breeze/environment/runtime";
+import { admin } from "@breeze/services";
 import {
 	AdminOrganizationSchema,
 	AdminUserSchema,
 	ImpersonatingOrgSchema,
 	ImpersonatingSchema,
 	ImpersonatingUserSchema,
-} from "@proliferate/shared/contracts/admin";
+} from "@breeze/shared/contracts/admin";
+import { os, ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { adminProcedure } from "./middleware";
 

@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import type { Sandbox } from "e2b";
 import { getDefaultAgentConfig, toOpencodeModelId } from "../../../agents";
 import {
@@ -29,11 +29,11 @@ import type { CreateSandboxOpts } from "../../types";
 const ACTIONS_CLI_PROMPT_SECTION = `
 ## External Actions (Integrations)
 
-Use the \`proliferate\` CLI to interact with connected integrations (Linear, Sentry, GitHub, Slack, etc.):
+Use the \`breeze\` CLI to interact with connected integrations (Linear, Sentry, GitHub, Slack, etc.):
 
-- \`proliferate actions list\` — see available integrations and actions
-- \`proliferate actions guide --integration <name>\` — detailed usage guide for a specific integration
-- \`proliferate actions run --integration <name> --action <action> --params '<json>'\` — invoke an action
+- \`breeze actions list\` — see available integrations and actions
+- \`breeze actions guide --integration <name>\` — detailed usage guide for a specific integration
+- \`breeze actions run --integration <name> --action <action> --params '<json>'\` — invoke an action
 
 Actions may require approval depending on their risk level.
 `.trim();
@@ -107,7 +107,7 @@ export async function setupEssentialDependencies(
 	log.debug("Writing OpenCode files (parallel)");
 	const isSetupSession = opts.sessionType === "setup";
 	const writePromises = [
-		writeFile(`${globalPluginDir}/proliferate.mjs`, PLUGIN_MJS),
+		writeFile(`${globalPluginDir}/breeze.mjs`, PLUGIN_MJS),
 		writeFile(`${localToolDir}/verify.ts`, VERIFY_TOOL),
 		writeFile(`${localToolDir}/verify.txt`, VERIFY_TOOL_DESCRIPTION),
 		writeFile(`${localToolDir}/save_snapshot.ts`, SAVE_SNAPSHOT_TOOL),
@@ -117,7 +117,7 @@ export async function setupEssentialDependencies(
 		writeFile(`${globalOpencodeDir}/opencode.json`, globalOpencodeConfig),
 		writeFile(`${repoDir}/opencode.json`, repoOpencodeConfig),
 		writeFile(`${localOpencodeDir}/instructions.md`, instructions),
-		writeFile(`${repoDir}/.proliferate/actions-guide.md`, ACTIONS_BOOTSTRAP),
+		writeFile(`${repoDir}/.breeze/actions-guide.md`, ACTIONS_BOOTSTRAP),
 		(async () => {
 			await sandbox.commands.run(`mkdir -p ${localToolDir}`, { timeoutMs: 10000 });
 			await sandbox.commands.run(
@@ -174,17 +174,14 @@ export async function setupEssentialDependencies(
 		writePromises.push(
 			(async () => {
 				const bundleCheck = await sandbox.commands.run(
-					"ls /home/user/.proliferate/sandbox-memory.cjs > /dev/null 2>&1 && echo exists || echo missing",
+					"ls /home/user/.breeze/sandbox-memory.cjs > /dev/null 2>&1 && echo exists || echo missing",
 					{ timeoutMs: 5000 },
 				);
 				if (bundleCheck.stdout.trim() === "missing") {
 					const bundleContent = resolveLocalBundle("sandbox-memory/dist/sandbox-memory.cjs");
 					if (bundleContent) {
 						try {
-							await sandbox.files.write(
-								"/home/user/.proliferate/sandbox-memory.cjs",
-								bundleContent,
-							);
+							await sandbox.files.write("/home/user/.breeze/sandbox-memory.cjs", bundleContent);
 							log.debug("Wrote sandbox-memory.cjs bundle to sandbox");
 						} catch (err) {
 							log.debug({ err }, "Failed to write sandbox-memory.cjs bundle");
@@ -198,19 +195,19 @@ export async function setupEssentialDependencies(
 			})(),
 		);
 		// Ensure better-sqlite3 is available for sandbox-memory.cjs.
-		// The bundle lives at /home/user/.proliferate/sandbox-memory.cjs and uses
+		// The bundle lives at /home/user/.breeze/sandbox-memory.cjs and uses
 		// require("better-sqlite3") — Node resolves this from the file's directory.
 		// Pre-installed in template via Dockerfile; install at runtime as fallback for dev.
 		writePromises.push(
 			(async () => {
 				const sqliteCheck = await sandbox.commands.run(
-					"node -e \"try { require('/home/user/.proliferate/node_modules/better-sqlite3'); console.log('ok') } catch { try { require('better-sqlite3'); console.log('ok') } catch { console.log('missing') } }\"",
+					"node -e \"try { require('/home/user/.breeze/node_modules/better-sqlite3'); console.log('ok') } catch { try { require('better-sqlite3'); console.log('ok') } catch { console.log('missing') } }\"",
 					{ timeoutMs: 10000 },
 				);
 				if (sqliteCheck.stdout.trim() === "missing") {
 					log.debug("better-sqlite3 not found in sandbox, installing near bundle...");
 					const installResult = await sandbox.commands.run(
-						"cd /home/user/.proliferate && npm init -y > /dev/null 2>&1 && npm install better-sqlite3@11 2>&1",
+						"cd /home/user/.breeze && npm init -y > /dev/null 2>&1 && npm install better-sqlite3@11 2>&1",
 						{ timeoutMs: 120000 },
 					);
 					if (installResult.exitCode === 0) {
@@ -238,7 +235,7 @@ export async function setupEssentialDependencies(
 		// Write system prompt with memory guidance and actions CLI instructions
 		writePromises.push(
 			writeFile(
-				"/home/user/.proliferate/system-prompt.md",
+				"/home/user/.breeze/system-prompt.md",
 				`${basePrompt}\n\n${MEMORY_SYSTEM_PROMPT_SECTION}\n\n${ACTIONS_CLI_PROMPT_SECTION}`,
 			),
 		);

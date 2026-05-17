@@ -1,7 +1,7 @@
 import { requireAuth } from "@/lib/auth/server/session";
 import { logger } from "@/lib/infra/logger";
-import { env } from "@proliferate/environment/server";
-import { signGatewayToken } from "@proliferate/shared";
+import { env } from "@breeze/environment/server";
+import { signGatewayToken } from "@breeze/shared";
 import { NextResponse } from "next/server";
 
 const log = logger.child({ route: "verification-media" });
@@ -54,7 +54,7 @@ export async function GET(req: Request) {
 	const baseUrl = GATEWAY_URL.replace(/^ws:\/\//, "http://")
 		.replace(/^wss:\/\//, "https://")
 		.replace(/\/$/, "");
-	const gatewayUrl = `${baseUrl}/proliferate/${sessionId}/verification-media?key=${encodeURIComponent(
+	const gatewayUrl = `${baseUrl}/breeze/${sessionId}/verification-media?key=${encodeURIComponent(
 		key,
 	)}&stream=true`;
 

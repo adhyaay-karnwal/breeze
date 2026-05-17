@@ -14,18 +14,18 @@ export interface VerificationTools {
 	/**
 	 * List verification files under a prefix
 	 */
-	list(proliferateSessionId: string, options?: { prefix?: string }): Promise<VerificationFile[]>;
+	list(breezeSessionId: string, options?: { prefix?: string }): Promise<VerificationFile[]>;
 
 	/**
 	 * Get a presigned URL for a verification file
 	 */
-	getUrl(proliferateSessionId: string, key: string): Promise<string>;
+	getUrl(breezeSessionId: string, key: string): Promise<string>;
 
 	/**
 	 * Get a verification file as an ArrayBuffer
 	 */
 	getStream(
-		proliferateSessionId: string,
+		breezeSessionId: string,
 		key: string,
 	): Promise<{ data: ArrayBuffer; contentType: string }>;
 }

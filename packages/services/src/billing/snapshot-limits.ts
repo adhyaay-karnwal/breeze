@@ -11,8 +11,8 @@
  * the DB ref is preserved for later cleanup.
  */
 
-import { env } from "@proliferate/environment/server";
-import { type BillingPlan, PLAN_CONFIGS } from "@proliferate/shared/billing";
+import { env } from "@breeze/environment/server";
+import { type BillingPlan, PLAN_CONFIGS } from "@breeze/shared/billing";
 import { getServicesLogger } from "../logger";
 import {
 	clearSnapshotId,

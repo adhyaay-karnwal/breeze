@@ -103,7 +103,7 @@ export const slackConversations = pgTable(
 		// Status
 		status: text("status").default("active"),
 
-		// Pending prompt (for /proliferate new flow)
+		// Pending prompt (for /breeze new flow)
 		pendingPrompt: text("pending_prompt"),
 
 		createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),

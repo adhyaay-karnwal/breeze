@@ -9,7 +9,7 @@ import { INTEGRATION_CATEGORY_LABELS, INTEGRATION_CATEGORY_ORDER } from "@/confi
 import { cn } from "@/lib/display/utils";
 import { orpc } from "@/lib/infra/orpc";
 import { getIntegrationScopeMeta } from "@/lib/integrations/scopes";
-import type { IntegrationCategory } from "@proliferate/shared";
+import type { IntegrationCategory } from "@breeze/shared";
 import { CheckCircle2, Database, Loader2, Search, Send } from "lucide-react";
 import { useMemo, useState } from "react";
 
@@ -17,7 +17,7 @@ import { useMemo, useState } from "react";
 // Shared types & constants (used by page + detail dialog)
 // ====================================================================
 
-export type { IntegrationCategory } from "@proliferate/shared";
+export type { IntegrationCategory } from "@breeze/shared";
 
 export interface CatalogEntry {
 	key: string;

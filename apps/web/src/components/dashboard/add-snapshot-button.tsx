@@ -11,7 +11,7 @@ import {
 import { FolderPlusIcon } from "@/components/ui/icons";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useDashboardStore } from "@/stores/dashboard";
-import { getSetupInitialPrompt } from "@proliferate/shared/prompts";
+import { getSetupInitialPrompt } from "@breeze/shared/prompts";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CreateSnapshotContent } from "./snapshot-selector";

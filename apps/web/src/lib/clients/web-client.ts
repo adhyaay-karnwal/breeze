@@ -8,4 +8,4 @@
 export {
 	createSyncClient as createWebClient,
 	type SyncClient as WebClient,
-} from "@proliferate/gateway-clients";
+} from "@breeze/gateway-clients";

@@ -1,9 +1,9 @@
 # Infra
 
-Infrastructure code (Pulumi, Helm, Terraform) for running Proliferate in the cloud.
+Infrastructure code (Pulumi, Helm, Terraform) for running Breeze in the cloud.
 
 - Spec: `SPEC.md`
-- Docs: https://docs.proliferate.com/self-hosting/overview
+- Docs: https://docs.breeze.engineer/self-hosting/overview
 
 ## Directories
 

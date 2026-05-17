@@ -148,8 +148,8 @@ export const createServerSchema = (env: EnvLike = process.env) => {
 		MISTRAL_API_KEY: optionalString, // Used by LLM proxy for Mistral model routing
 		WEB_PORT: optionalPort(3000),
 		WORKER_PORT: optionalPort(3002),
-		PROLIFERATE_SLACK_BOT_TOKEN: optionalString, // Only needed if using Slack integration
-		PROLIFERATE_SLACK_CONNECT_EMAILS: optionalString,
+		BREEZE_SLACK_BOT_TOKEN: optionalString, // Only needed if using Slack integration
+		BREEZE_SLACK_CONNECT_EMAILS: optionalString,
 		REDIS_URL: requiredString,
 		EMAIL_ENABLED: optionalBoolean,
 		RESEND_API_KEY: requiredWhen(

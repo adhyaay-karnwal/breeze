@@ -4,7 +4,7 @@
  * Token signing and auth configuration.
  */
 
-import { signServiceToken } from "@proliferate/shared/auth";
+import { signServiceToken } from "@breeze/shared/auth";
 
 /**
  * Service-to-service auth (workers, API routes)

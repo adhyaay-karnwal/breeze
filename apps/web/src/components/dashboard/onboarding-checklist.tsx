@@ -22,7 +22,7 @@ export function OnboardingChecklist({
 		<Card>
 			<CardHeader>
 				<CardTitle>Get started</CardTitle>
-				<CardDescription>Complete these steps to start using Proliferate</CardDescription>
+				<CardDescription>Complete these steps to start using Breeze</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<ul className="space-y-4">
@@ -38,7 +38,7 @@ export function OnboardingChecklist({
 								Create account
 							</Text>
 							<Text variant="small" color="muted">
-								Sign up for Proliferate
+								Sign up for Breeze
 							</Text>
 						</div>
 					</li>

@@ -1,4 +1,4 @@
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import type { Sandbox } from "e2b";
 import {
 	SANDBOX_PATHS,

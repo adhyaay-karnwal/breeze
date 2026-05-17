@@ -10,8 +10,8 @@
  */
 
 import { randomUUID } from "crypto";
-import { type Logger, createLogger } from "@proliferate/logger";
-import { sessions } from "@proliferate/services";
+import { type Logger, createLogger } from "@breeze/logger";
+import { sessions } from "@breeze/services";
 import type {
 	ClientMessage,
 	ClientSource,
@@ -19,9 +19,9 @@ import type {
 	Message,
 	SandboxProviderType,
 	ServerMessage,
-} from "@proliferate/shared";
-import type { SessionRuntimeStatus } from "@proliferate/shared/contracts/sessions";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+} from "@breeze/shared";
+import type { SessionRuntimeStatus } from "@breeze/shared/contracts/sessions";
+import { getSandboxProvider } from "@breeze/shared/providers";
 import type { WebSocket } from "ws";
 import type { RuntimeDaemonEvent } from "../harness/contracts/coding";
 import type { GatewayEnv } from "../lib/env";
@@ -1138,7 +1138,7 @@ export class SessionHub {
 
 	private async handleRunAutoStart(runId: string, inlineCommands?: unknown): Promise<void> {
 		await this.ensureRuntimeReady();
-		const { parseConfigurationServiceCommands } = await import("@proliferate/shared/sandbox");
+		const { parseConfigurationServiceCommands } = await import("@breeze/shared/sandbox");
 		const parsed = inlineCommands ? parseConfigurationServiceCommands(inlineCommands) : undefined;
 		const entries = await this.runtime.testAutoStartCommands(
 			runId,

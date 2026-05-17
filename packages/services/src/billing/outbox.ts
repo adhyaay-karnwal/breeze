@@ -10,7 +10,7 @@ import {
 	type BillingEventType,
 	METERING_CONFIG,
 	autumnDeductCredits,
-} from "@proliferate/shared/billing";
+} from "@breeze/shared/billing";
 import { getServicesLogger } from "../logger";
 import { attemptAutoRecharge } from "./auto-topup";
 import {

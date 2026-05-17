@@ -2,8 +2,8 @@ import "server-only";
 
 import { isEmailEnabled, sendInvitationEmail, sendVerificationEmail } from "@/lib/infra/email";
 import { logger } from "@/lib/infra/logger";
-import { env, features } from "@proliferate/environment/server";
-import { customerio } from "@proliferate/services";
+import { env, features } from "@breeze/environment/server";
+import { customerio } from "@breeze/services";
 import { betterAuth } from "better-auth";
 import { apiKey, organization } from "better-auth/plugins";
 import { Pool } from "pg";
@@ -128,7 +128,7 @@ export const auth = betterAuth({
 				before: async (user) => {
 					if (allowedSignupEmails && !allowedSignupEmails.includes(user.email.toLowerCase())) {
 						throw new Error(
-							"Signups are currently invite-only. Join the waitlist at proliferate.com/waitlist",
+							"Signups are currently invite-only. Join the waitlist at breeze.engineer/waitlist",
 						);
 					}
 					return { data: user };

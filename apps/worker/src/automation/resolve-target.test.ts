@@ -20,7 +20,7 @@ const mockLogger = {
 	error: vi.fn(),
 	debug: vi.fn(),
 	child: vi.fn().mockReturnThis(),
-} as unknown as import("@proliferate/logger").Logger;
+} as unknown as import("@breeze/logger").Logger;
 
 import { resolveTarget } from "./resolve-target";
 

@@ -1,4 +1,4 @@
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 import { Queue, Worker } from "bullmq";
 import type { HubManager } from "../../hub";
 import { MigrationConfig } from "../../hub/shared/types";

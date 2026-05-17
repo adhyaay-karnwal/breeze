@@ -3,7 +3,7 @@
 import { GitHubConnectButton } from "@/components/integrations/github-connect-button";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, GithubIcon } from "@/components/ui/icons";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 
 interface StepGitHubConnectProps {
 	onComplete: () => void;
@@ -18,7 +18,7 @@ export function StepGitHubConnect({
 }: StepGitHubConnectProps) {
 	const githubAppSlug = env.NEXT_PUBLIC_GITHUB_APP_SLUG;
 	const hasPlaceholderSlug =
-		!githubAppSlug || githubAppSlug === "local" || githubAppSlug === "proliferate-local-dev";
+		!githubAppSlug || githubAppSlug === "local" || githubAppSlug === "breeze-local-dev";
 
 	// Already connected
 	if (hasGitHubConnection) {
@@ -97,7 +97,7 @@ export function StepGitHubConnect({
 							<p className="mt-1 text-sm text-muted-foreground">
 								Create a GitHub App before connecting.{" "}
 								<a
-									href="https://github.com/proliferate-ai/proliferate#step-2-create-a-github-app-required-for-repo-access"
+									href="https://github.com/adhyaay-karnwal/breeze#step-2-create-a-github-app-required-for-repo-access"
 									target="_blank"
 									rel="noreferrer"
 									className="underline text-foreground"

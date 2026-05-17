@@ -14,9 +14,9 @@ import {
 	S3Client,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { createLogger } from "@breeze/logger";
+import type { FileContent } from "@breeze/shared";
 import { Storage } from "@google-cloud/storage";
-import { createLogger } from "@proliferate/logger";
-import type { FileContent } from "@proliferate/shared";
 import type { GatewayEnv } from "./env";
 
 const logger = createLogger({ service: "gateway" }).child({ module: "s3" });

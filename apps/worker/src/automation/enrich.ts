@@ -4,8 +4,8 @@
  * Pure deterministic extraction from trigger context — no external calls.
  */
 
-import type { runs } from "@proliferate/services";
-import type { ParsedEventContext } from "@proliferate/triggers";
+import type { runs } from "@breeze/services";
+import type { ParsedEventContext } from "@breeze/triggers";
 
 export class EnrichmentError extends Error {
 	constructor(message: string) {

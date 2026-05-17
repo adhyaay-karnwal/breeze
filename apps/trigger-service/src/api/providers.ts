@@ -1,4 +1,4 @@
-import { WebhookTrigger, registry } from "@proliferate/triggers";
+import { WebhookTrigger, registry } from "@breeze/triggers";
 import { type IRouter, Router } from "express";
 import { zodToJsonSchema } from "zod-to-json-schema";
 

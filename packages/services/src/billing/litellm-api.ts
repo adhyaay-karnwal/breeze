@@ -5,7 +5,7 @@
  * Uses GET /spend/logs/v2 with api-key header auth.
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { getServicesLogger } from "../logger";
 
 // ============================================

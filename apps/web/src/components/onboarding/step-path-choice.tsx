@@ -13,9 +13,7 @@ export function StepPathChoice({ onSelect }: StepPathChoiceProps) {
 	return (
 		<div className="w-full max-w-[720px]">
 			<div className="mb-10 text-center">
-				<h1 className="text-2xl sm:text-3xl font-bold text-foreground">
-					How will you use Proliferate?
-				</h1>
+				<h1 className="text-2xl sm:text-3xl font-bold text-foreground">How will you use Breeze?</h1>
 				<p className="mt-3 text-muted-foreground text-sm sm:text-base">
 					AI agents that code in cloud environments. Connect your repos, configure the environment
 					once, and let agents handle the rest.

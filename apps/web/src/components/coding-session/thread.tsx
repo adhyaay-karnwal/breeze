@@ -21,10 +21,10 @@ import {
 	useComposerRuntime,
 	useMessage,
 } from "@assistant-ui/react";
-import type { ActionApprovalRequestMessage } from "@proliferate/shared";
-import type { ModelId } from "@proliferate/shared";
-import type { Session } from "@proliferate/shared/contracts/sessions";
-import type { OverallWorkState } from "@proliferate/shared/sessions";
+import type { ActionApprovalRequestMessage } from "@breeze/shared";
+import type { ModelId } from "@breeze/shared";
+import type { Session } from "@breeze/shared/contracts/sessions";
+import type { OverallWorkState } from "@breeze/shared/sessions";
 import { ArrowUp, Camera, ChevronDown, ChevronRight, Loader2, Square } from "lucide-react";
 import type { FC } from "react";
 import { useCallback, useState } from "react";

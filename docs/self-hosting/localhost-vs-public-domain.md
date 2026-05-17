@@ -1,6 +1,6 @@
 # Self-Hosting: What Works Locally vs What Needs a Public Domain
 
-This doc is for self-hosters running Proliferate via `docker compose up -d`.
+This doc is for self-hosters running Breeze via `docker compose up -d`.
 
 ## What Works on Localhost
 
@@ -17,8 +17,8 @@ No inbound server-to-server traffic is required, so `http://localhost:3000` is f
 | Google OAuth login (optional) | Browser redirect to Google, back to your app | Redirect is browser-based |
 | GitHub OAuth login (optional) | Browser redirect to GitHub, back to your app | Redirect is browser-based |
 | GitHub App installation | User installs the GitHub App, then GitHub redirects the browser to your Setup URL (e.g. `http://localhost:3000/api/integrations/github/callback?installation_id=...`) | Redirect is browser-based |
-| Repo access (clone/push/PRs) | Proliferate mints installation tokens using your GitHub App private key and calls `api.github.com` | Outbound HTTPS calls |
-| Running agents in sandboxes | Proliferate calls Modal/E2B APIs | Outbound HTTPS calls |
+| Repo access (clone/push/PRs) | Breeze mints installation tokens using your GitHub App private key and calls `api.github.com` | Outbound HTTPS calls |
+| Running agents in sandboxes | Breeze calls Modal/E2B APIs | Outbound HTTPS calls |
 | WebSocket streaming | Browser connects to the gateway (e.g. `ws://localhost:8787`) | Local network |
 | LLM proxy (optional) | Proxies requests to Anthropic/OpenAI | Outbound HTTPS calls |
 
@@ -36,14 +36,14 @@ They will not work on `localhost` unless you use a tunnel (ngrok/smee/localtunne
 
 ## GitHub App: Every Self-Hoster Must Create Their Own
 
-You cannot share a single Proliferate GitHub App across self-hosted instances:
+You cannot share a single Breeze GitHub App across self-hosted instances:
 
 - Each instance needs the app's **private key** to mint installation tokens
 - Sharing the private key would let any self-hoster access repos from any org that installed the shared app
 
 ## Setup: Localhost Quickstart (No Webhooks)
 
-Follow [README Step 2](https://github.com/proliferate-ai/proliferate#step-2-create-a-github-app-required-for-repo-access) before first boot to create your GitHub App using the prefilled link.
+Follow [README Step 2](https://github.com/adhyaay-karnwal/breeze#step-2-create-a-github-app-required-for-repo-access) before first boot to create your GitHub App using the prefilled link.
 
 1. Create a GitHub App on GitHub (personal account or org)
 1. Set the GitHub App **Setup URL** to: `http://localhost:3000/api/integrations/github/callback`

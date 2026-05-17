@@ -2,8 +2,8 @@
  * Finalize setup handler — thin wrapper that delegates to configurations service.
  */
 
+import { configurations } from "@breeze/services";
 import { ORPCError } from "@orpc/server";
-import { configurations } from "@proliferate/services";
 
 export type FinalizeSetupInput = configurations.FinalizeSetupInput;
 export type FinalizeSetupResult = configurations.FinalizeSetupResult;

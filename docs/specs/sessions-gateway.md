@@ -97,16 +97,16 @@ Reference: `apps/gateway/src/hub/session-runtime.ts`
 ### Session Creation Paths
 There are two intentional creation paths.
 
-- Gateway HTTP (`POST /proliferate/sessions`): configuration resolution, optional immediate sandbox, integration/session connections, Redis idempotency envelope.
+- Gateway HTTP (`POST /breeze/sessions`): configuration resolution, optional immediate sandbox, integration/session connections, Redis idempotency envelope.
 - Web oRPC (`sessions.create`): lightweight DB-centric path (including scratch sessions) that may trigger eager-start asynchronously.
 
-References: `apps/gateway/src/api/proliferate/http/sessions/routes.ts`, `apps/gateway/src/api/proliferate/http/sessions/session-creator.ts`, `apps/web/src/server/routers/sessions-create.ts`
+References: `apps/gateway/src/api/breeze/http/sessions/routes.ts`, `apps/gateway/src/api/breeze/http/sessions/session-creator.ts`, `apps/web/src/server/routers/sessions-create.ts`
 
 ### SSE Bridge
 SSE is transport-only and unidirectional.
 
-- Gateway coding runtime connects to sandbox daemon `GET /_proliferate/events` and parses events with `eventsource-parser`.
-- Runtime control calls (`resume`, `prompt`, `interrupt`, `messages`) flow through sandbox daemon `/_proliferate/v1/runtime/session/*` endpoints.
+- Gateway coding runtime connects to sandbox daemon `GET /_breeze/events` and parses events with `eventsource-parser`.
+- Runtime control calls (`resume`, `prompt`, `interrupt`, `messages`) flow through sandbox daemon `/_breeze/v1/runtime/session/*` endpoints.
 - Hub owns reconnect strategy and policy; `SseClient` does not reconnect on its own.
 - Heartbeat/read timeout failures map to disconnect reasons that drive hub reconnect logic.
 
@@ -173,11 +173,11 @@ Notes:
 ### Gateway-Intercepted Tool Callbacks
 Intercepted tools execute through HTTP callbacks, not SSE interception.
 
-- Route: `POST /proliferate/:sessionId/tools/:toolName`.
+- Route: `POST /breeze/:sessionId/tools/:toolName`.
 - Auth source must be sandbox HMAC token.
 - Idempotency is per-process (`inflightCalls` + `completedResults` cache with retention).
 
-References: `apps/gateway/src/api/proliferate/http/session/tools/routes.ts`, `apps/gateway/src/hub/capabilities/tools/`
+References: `apps/gateway/src/api/breeze/http/session/tools/routes.ts`, `apps/gateway/src/hub/capabilities/tools/`
 
 ---
 
@@ -217,8 +217,8 @@ Reference: `apps/gateway/src/server/middleware/errors/error-handler.ts`
 - **Migration lock**: Distributed Redis lock prevents concurrent migrations for the same session. Active expiry migrations use a 120s TTL to cover OpenCode stop + scrub/snapshot/re-apply + runtime bring-up critical path.
 - **Expiry triggers**: Hub schedules an in-process expiry timer (primary) plus a BullMQ job as a fallback for evicted hubs.
 - **Expiry timestamp source-of-truth**: Newly created sandboxes use provider-reported expiry only; stored DB expiry is reused only when recovering the same sandbox ID.
-- **Restore-time git freshness ownership**: restore/update freshness is provider-owned (`@proliferate/shared/providers/e2b`); runtime no longer performs a second restore-time `git pull`.
-- **Snapshot secret scrubbing**: All snapshot capture paths (`save_snapshot`, idle snapshot, expiry migration, web `sessions.pause`, web `sessions.snapshot`) run `proliferate env scrub` before capture when env-file spec is configured. Paths that continue running the same sandbox re-apply env files after capture; pause/stop paths skip re-apply.
+- **Restore-time git freshness ownership**: restore/update freshness is provider-owned (`@breeze/shared/providers/e2b`); runtime no longer performs a second restore-time `git pull`.
+- **Snapshot secret scrubbing**: All snapshot capture paths (`save_snapshot`, idle snapshot, expiry migration, web `sessions.pause`, web `sessions.snapshot`) run `breeze env scrub` before capture when env-file spec is configured. Paths that continue running the same sandbox re-apply env files after capture; pause/stop paths skip re-apply.
 - **Scrub failure policy**: Manual snapshots use strict scrub mode (scrub failure aborts capture). Idle/expiry paths use best-effort scrub mode (log and continue) so pause/stop cleanup is not blocked by scrub command failures.
 - **Streaming backpressure**: Token batching (50-100ms) and slow-consumer disconnect based on `ws.bufferedAmount` thresholds.
 - **Idle snapshot failure circuit-breaker**: Force-terminates after repeated failures to prevent runaway spend.
@@ -230,7 +230,7 @@ Reference: `apps/gateway/src/server/middleware/errors/error-handler.ts`
 - Mock sandbox providers and lease/tool dependencies for deterministic lifecycle tests.
 - Validate lease ordering and prompt idempotency behaviors explicitly (existing test patterns).
 
-References: `apps/gateway/src/hub/session-hub.test.ts`, `apps/gateway/src/api/proliferate/ws/ws-handler.test.ts`, `apps/gateway/src/hub/session-telemetry.test.ts`
+References: `apps/gateway/src/hub/session-hub.test.ts`, `apps/gateway/src/api/breeze/ws/ws-handler.test.ts`, `apps/gateway/src/hub/session-telemetry.test.ts`
 
 ---
 
@@ -240,13 +240,13 @@ References: `apps/gateway/src/hub/session-hub.test.ts`, `apps/gateway/src/api/pr
 
 **What it does:** Creates a session record and optionally provisions a sandbox.
 
-**Gateway HTTP path** (`POST /proliferate/sessions`):
+**Gateway HTTP path** (`POST /breeze/sessions`):
 1. Auth middleware validates JWT/CLI token (`apps/gateway/src/server/middleware/auth/require-auth.ts:createRequireAuth`).
-2. Route validates required configuration option (`apps/gateway/src/api/proliferate/http/sessions/routes.ts`).
-3. `resolveConfiguration()` resolves or creates a configuration record (`apps/gateway/src/api/proliferate/http/sessions/configuration-resolver.ts`).
-4. `createSession()` writes DB record, creates session connections, and optionally creates sandbox (`apps/gateway/src/api/proliferate/http/sessions/session-creator.ts`).
+2. Route validates required configuration option (`apps/gateway/src/api/breeze/http/sessions/routes.ts`).
+3. `resolveConfiguration()` resolves or creates a configuration record (`apps/gateway/src/api/breeze/http/sessions/configuration-resolver.ts`).
+4. `createSession()` writes DB record, creates session connections, and optionally creates sandbox (`apps/gateway/src/api/breeze/http/sessions/session-creator.ts`).
 5. For new managed configurations, fires a setup session with auto-generated prompt.
-6. Immediate sandbox boot now injects the same gateway callback env vars used by runtime resume (`SANDBOX_MCP_AUTH_TOKEN`, `PROLIFERATE_GATEWAY_URL`, `PROLIFERATE_SESSION_ID`) so intercepted tools (including `automation.complete`) work on first boot.
+6. Immediate sandbox boot now injects the same gateway callback env vars used by runtime resume (`SANDBOX_MCP_AUTH_TOKEN`, `BREEZE_GATEWAY_URL`, `BREEZE_SESSION_ID`) so intercepted tools (including `automation.complete`) work on first boot.
 7. Immediate sandbox boot persists provider expiry (`sandbox_expires_at`) on the initial session update, instead of waiting for a later runtime reconciliation pass.
 8. `created_by` is preserved from authenticated caller identity when available; headless automation/setup flows may persist `created_by = null` and are treated as system-created sessions in UI.
 
@@ -274,7 +274,7 @@ References: `apps/gateway/src/hub/session-hub.test.ts`, `apps/gateway/src/api/pr
 - The `sessions` table has an `idempotency_key` TEXT column. When provided, callers can detect duplicate creation attempts.
 - Redis-based idempotency (`apps/gateway/src/lib/idempotency.ts`) also exists as a legacy deduplication path for the gateway HTTP route.
 
-**Files touched:** `apps/gateway/src/api/proliferate/http/sessions/routes.ts`, `apps/gateway/src/api/proliferate/http/sessions/session-creator.ts`, `apps/web/src/server/routers/sessions.ts`, `apps/web/src/components/coding-session/setup-session-chrome.tsx`, `apps/web/src/components/coding-session/right-panel.tsx`, `apps/web/src/components/coding-session/environment-panel.tsx`, `apps/web/src/components/coding-session/runtime/message-handlers.ts`
+**Files touched:** `apps/gateway/src/api/breeze/http/sessions/routes.ts`, `apps/gateway/src/api/breeze/http/sessions/session-creator.ts`, `apps/web/src/server/routers/sessions.ts`, `apps/web/src/components/coding-session/setup-session-chrome.tsx`, `apps/web/src/components/coding-session/right-panel.tsx`, `apps/web/src/components/coding-session/environment-panel.tsx`, `apps/web/src/components/coding-session/runtime/message-handlers.ts`
 
 ### 6.2 Session Runtime Lifecycle — `Implemented`
 
@@ -333,7 +333,7 @@ References: `apps/gateway/src/hub/session-hub.test.ts`, `apps/gateway/src/api/pr
 - The SSE tool lifecycle events (`tool_start` / `tool_metadata` / `tool_end`) are forwarded to clients as UI observability.
 - `tool_metadata` deduplication keys on task-summary content (title + per-item status/title signature), not just summary length, so in-place progress changes continue streaming to clients during long-running task tools.
 - If a tool is running with no metadata/output updates, the gateway emits periodic `status: "running"` heartbeat messages with elapsed-time context so clients can show liveness during long tasks.
-- Gateway-mediated tools are executed via synchronous sandbox callbacks (`POST /proliferate/:sessionId/tools/:toolName`) rather than SSE interception. Idempotency is provided by in-memory `inflightCalls` + `completedResults` maps, keyed by `tool_call_id`. Invocations are also persisted in `session_tool_invocations`.
+- Gateway-mediated tools are executed via synchronous sandbox callbacks (`POST /breeze/:sessionId/tools/:toolName`) rather than SSE interception. Idempotency is provided by in-memory `inflightCalls` + `completedResults` maps, keyed by `tool_call_id`. Invocations are also persisted in `session_tool_invocations`.
 - See `agent-contract.md` for the tool callback contract and tool schemas.
 
 **Files touched:** `apps/gateway/src/hub/session/runtime/event-processor.ts`, `apps/gateway/src/hub/session-hub.ts`
@@ -406,7 +406,7 @@ WHERE id = $session_id
 
 **What it does:** Bidirectional real-time communication between browser clients and the gateway.
 
-**Connection**: `WS /proliferate/:sessionId?token=<JWT>` (`apps/gateway/src/api/proliferate/ws/index.ts`).
+**Connection**: `WS /breeze/:sessionId?token=<JWT>` (`apps/gateway/src/api/breeze/ws/index.ts`).
 
 **Multi-instance behavior:** If the request lands on a non-owner gateway instance, the hub will fail to acquire the owner lease and the connection attempt will fail, prompting the client to reconnect. With L7 sticky routing (recommended), this should be rare.
 
@@ -432,7 +432,7 @@ WHERE id = $session_id
 
 **Server → Client messages**: `status`, `message`, `token`, `text_part_complete`, `tool_start`, `tool_metadata`, `tool_end`, `message_complete`, `message_cancelled`, `error`, `snapshot_result`, `init`, `preview_url`, `git_status`, `git_diff`, `git_result`, `auto_start_output`, `pong`.
 
-**Boundary note**: WebSocket transport stays thin in `api/proliferate/ws/session/handler.ts` (parse + delegate only), and git read/write handling in hub delegates to workflow modules, including git diff parity via `session/workflows/git-workflow.ts`.
+**Boundary note**: WebSocket transport stays thin in `api/breeze/ws/session/handler.ts` (parse + delegate only), and git read/write handling in hub delegates to workflow modules, including git diff parity via `session/workflows/git-workflow.ts`.
 
 ### 6.5 Session Migration — `Implemented`
 
@@ -509,12 +509,12 @@ Auth is token-in-path (required for SSE clients that can't set headers). `create
 **Factory**: `createSyncClient({ baseUrl, auth, source })` from `packages/gateway-clients`.
 
 **SyncClient API**:
-- `createSession(request)` → `POST /proliferate/sessions` with optional idempotency key.
+- `createSession(request)` → `POST /breeze/sessions` with optional idempotency key.
 - `connect(sessionId, options)` → WebSocket with auto-reconnection (exponential backoff, max 10 attempts).
-- `postMessage(sessionId, { content, userId, source })` → `POST /proliferate/:sessionId/message`.
-- `postCancel(sessionId)` → `POST /proliferate/:sessionId/cancel`.
-- `getInfo(sessionId)` → `GET /proliferate/:sessionId`.
-- `getSessionStatus(sessionId)` → `GET /proliferate/sessions/:sessionId/status`.
+- `postMessage(sessionId, { content, userId, source })` → `POST /breeze/:sessionId/message`.
+- `postCancel(sessionId)` → `POST /breeze/:sessionId/cancel`.
+- `getInfo(sessionId)` → `GET /breeze/:sessionId`.
+- `getSessionStatus(sessionId)` → `GET /breeze/sessions/:sessionId/status`.
 
 **Auth modes**: `ServiceAuth` (HS256 JWT signing with service name) or `TokenAuth` (pre-existing token string).
 
@@ -529,7 +529,7 @@ Token verification chain: (1) User JWT (signed with `gatewayJwtSecret`), (2) Ser
 
 **CORS** (`apps/gateway/src/server/middleware/transport/cors.ts`): Allows all origins (`*`), methods `GET/POST/PATCH/DELETE/OPTIONS`, headers `Content-Type/Authorization/Accept`, max-age 86400s.
 
-**Error handler** (`apps/gateway/src/server/middleware/errors/error-handler.ts`): Catches `ApiError` for structured JSON responses. Unhandled errors logged via `@proliferate/logger` and returned as 500.
+**Error handler** (`apps/gateway/src/server/middleware/errors/error-handler.ts`): Catches `ApiError` for structured JSON responses. Unhandled errors logged via `@breeze/logger` and returned as 500.
 
 ### 6.10 Session UI Surfaces — `Implemented`
 
@@ -554,9 +554,9 @@ Token verification chain: (1) User JWT (signed with `gatewayJwtSecret`), (2) Ser
 | Dependency | Direction | Interface | Notes |
 |---|---|---|---|
 | `sandbox-providers.md` | This → Provider | `ensureSandbox`, `snapshot`, `pause`, `terminate`, `memorySnapshot` | Runtime and migration delegate all sandbox lifecycle operations via provider abstraction |
-| `agent-contract.md` | This → Tool contract | `/proliferate/:sessionId/tools/:toolName` | Gateway-intercepted tools execute through synchronous HTTP callbacks |
+| `agent-contract.md` | This → Tool contract | `/breeze/:sessionId/tools/:toolName` | Gateway-intercepted tools execute through synchronous HTTP callbacks |
 | `automations-runs.md` | Runs → This | `createSyncClient().createSession/postMessage` | Automation worker bootstraps sessions through gateway client contracts |
-| `actions.md` | Shared surface | `/proliferate/:sessionId/actions/*` | Action invocation and approval lifecycle references session context and hub broadcast |
+| `actions.md` | Shared surface | `/breeze/:sessionId/actions/*` | Action invocation and approval lifecycle references session context and hub broadcast |
 | `repos-prebuilds.md` | This → Config | `resolveConfiguration`, configuration repo/service command APIs | Gateway creation/runtime path depends on configuration resolution outputs |
 | `secrets-environment.md` | This ← Secrets | `sessions.buildSandboxEnvVars`, configuration env file spec | Session runtime/build paths hydrate env vars and file instructions from services |
 | `integrations.md` | This ↔ Integrations | repo/session connection token resolution | Gateway/session-store resolve git + provider tokens through integration services |
@@ -568,7 +568,7 @@ Token verification chain: (1) User JWT (signed with `gatewayJwtSecret`), (2) Ser
 - Sandbox callback/tool routes require sandbox auth source explicitly.
 - Session mutation operations guard against unauthorized user mutation even after connection auth.
 
-References: `apps/gateway/src/server/middleware/auth/require-auth.ts`, `apps/gateway/src/api/proliferate/http/session/tools/routes.ts`, `apps/gateway/src/hub/session-hub.ts`
+References: `apps/gateway/src/server/middleware/auth/require-auth.ts`, `apps/gateway/src/api/breeze/http/session/tools/routes.ts`, `apps/gateway/src/hub/session-hub.ts`
 
 ### Observability
 - Structured logs are namespaced by gateway module (`hub`, `runtime`, `migration`, `sse-client`, etc.).

@@ -1,5 +1,5 @@
 {
-	"name": "proliferate-k8s-gcp",
+	"name": "breeze-k8s-gcp",
 	"private": true,
 	"dependencies": {
 		"@pulumi/gcp": "^7.0.0",

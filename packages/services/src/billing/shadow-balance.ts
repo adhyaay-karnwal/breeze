@@ -9,13 +9,13 @@
  * Key invariant: shadow_balance update MUST be atomic with billing_events insert.
  */
 
-import type { BillingState, ReconciliationType } from "@proliferate/shared/billing";
+import type { BillingState, ReconciliationType } from "@breeze/shared/billing";
 import {
 	GRACE_WINDOW_CONFIG,
 	getStateUpdateFields,
 	normalizeBillingState,
 	processStateTransition,
-} from "@proliferate/shared/billing";
+} from "@breeze/shared/billing";
 import {
 	billingEventKeys,
 	billingEvents,

@@ -9,10 +9,10 @@
  * 5. Handle state transitions (pause sessions if exhausted)
  */
 
-import type { Logger } from "@proliferate/logger";
-import type { BillingLLMSyncOrgJob, Job } from "@proliferate/queue";
-import { billing } from "@proliferate/services";
-import { calculateLLMCredits } from "@proliferate/shared/billing";
+import type { Logger } from "@breeze/logger";
+import type { BillingLLMSyncOrgJob, Job } from "@breeze/queue";
+import { billing } from "@breeze/services";
+import { calculateLLMCredits } from "@breeze/shared/billing";
 
 /** Default lookback window for first-run orgs with no cursor (5 minutes). */
 const LLM_SYNC_DEFAULT_LOOKBACK_MS = 5 * 60 * 1000;

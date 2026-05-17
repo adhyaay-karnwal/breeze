@@ -117,7 +117,7 @@ export function createDataServices(network: NetworkOutputs): DataOutputs {
 	const redis = new aws.elasticache.ReplicationGroup(
 		"redis",
 		{
-			description: "Proliferate Redis",
+			description: "Breeze Redis",
 			engine: "redis",
 			nodeType: redisNodeType,
 			numCacheClusters: redisNumNodes,

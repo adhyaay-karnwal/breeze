@@ -6,7 +6,7 @@
  *
  * Usage: pnpm exec tsx scripts/seed.ts
  *
- * Requires DATABASE_URL to be set (reads from .env.local via @proliferate/environment).
+ * Requires DATABASE_URL to be set (reads from .env.local via @breeze/environment).
  */
 
 import { readFileSync } from "node:fs";

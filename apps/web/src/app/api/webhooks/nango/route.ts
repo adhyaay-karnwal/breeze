@@ -7,8 +7,8 @@
  */
 
 import { logger } from "@/lib/infra/logger";
-import { env } from "@proliferate/environment/server";
-import { integrations } from "@proliferate/services";
+import { env } from "@breeze/environment/server";
+import { integrations } from "@breeze/services";
 import { NextResponse } from "next/server";
 
 const log = logger.child({ handler: "nango-webhook" });

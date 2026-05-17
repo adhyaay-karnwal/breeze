@@ -7,7 +7,7 @@
  * @see https://docs.useautumn.com/api-reference/
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { getSharedLogger } from "../logger";
 import type {
 	AutumnAttachRequest,

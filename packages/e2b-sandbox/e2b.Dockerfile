@@ -1,6 +1,6 @@
 # E2B Custom Sandbox Template
 # Mirrors Modal's BASE_IMAGE for parity
-# Build with: e2b template build --name proliferate-base
+# Build with: e2b template build --name breeze-base
 
 FROM e2bdev/base:latest
 
@@ -56,12 +56,12 @@ RUN OVSCODE_VERSION="1.106.3" \
     && rm /tmp/ovscode.tar.gz
 
 # Install OpenCode CLI + sandbox-mcp
-COPY proliferate-sandbox-mcp.tgz /tmp/proliferate-sandbox-mcp.tgz
-RUN npm install -g opencode-ai@latest /tmp/proliferate-sandbox-mcp.tgz \
-    && rm /tmp/proliferate-sandbox-mcp.tgz
+COPY breeze-sandbox-mcp.tgz /tmp/breeze-sandbox-mcp.tgz
+RUN npm install -g opencode-ai@latest /tmp/breeze-sandbox-mcp.tgz \
+    && rm /tmp/breeze-sandbox-mcp.tgz
 
 # Install sandbox-daemon (bundled CJS — provides FS, PTY, ports, health endpoints)
-# Built via: pnpm --filter @proliferate/sandbox-daemon bundle
+# Built via: pnpm --filter @breeze/sandbox-daemon bundle
 # Then copied into this directory before template build (see prebuild:template script)
 COPY sandbox-daemon.cjs /usr/local/bin/sandbox-daemon
 RUN chmod +x /usr/local/bin/sandbox-daemon
@@ -78,11 +78,11 @@ RUN pip install httpx uv playwright psycopg2-binary redis
 # Memory system: better-sqlite3 + sqlite-vec for durable agent memory
 # better-sqlite3: installed near the bundle so require() resolution works from sandbox-memory.cjs
 # sqlite-vec: vector search extension (.so) loaded at runtime; falls back to FTS-only if unavailable
-RUN mkdir -p /home/user/.proliferate && \
-    cd /home/user/.proliferate && \
+RUN mkdir -p /home/user/.breeze && \
+    cd /home/user/.breeze && \
     printf '%s' '{"name":"sandbox-memory-deps","private":true}' > package.json && \
     npm install better-sqlite3@11 && \
-    chown -R user:user /home/user/.proliferate
+    chown -R user:user /home/user/.breeze
 RUN pip install sqlite-vec
 
 # Create startup script for services
@@ -111,14 +111,14 @@ RUN mkdir -p /home/user/.opencode-tools && \
     chown -R user:user /home/user/.opencode-tools
 
 # Create metadata directory for session/repo tracking across pause/resume
-RUN mkdir -p /home/user/.proliferate && \
-    chown -R user:user /home/user/.proliferate
+RUN mkdir -p /home/user/.breeze && \
+    chown -R user:user /home/user/.breeze
 
 # Copy sandbox-memory bundle for agent memory system
-# Built via: pnpm --filter @proliferate/sandbox-memory bundle
+# Built via: pnpm --filter @breeze/sandbox-memory bundle
 # Then copied into this directory before template build (same pattern as sandbox-daemon)
-COPY sandbox-memory.cjs /home/user/.proliferate/sandbox-memory.cjs
-RUN chown user:user /home/user/.proliferate/sandbox-memory.cjs
+COPY sandbox-memory.cjs /home/user/.breeze/sandbox-memory.cjs
+RUN chown user:user /home/user/.breeze/sandbox-memory.cjs
 
 # Configure SSH for terminal sessions (used by CLI)
 RUN mkdir -p /home/user/.ssh && \
@@ -175,11 +175,11 @@ RUN printf '%s\n' \
     '    echo "username=${GIT_USERNAME:-x-access-token}"' \
     '    echo "password=$token"' \
     'fi' \
-    > /usr/local/bin/git-credential-proliferate
-RUN chmod +x /usr/local/bin/git-credential-proliferate
+    > /usr/local/bin/git-credential-breeze
+RUN chmod +x /usr/local/bin/git-credential-breeze
 
 # Configure git to use per-repo credential helper
-RUN git config --global credential.helper "/usr/local/bin/git-credential-proliferate" \
+RUN git config --global credential.helper "/usr/local/bin/git-credential-breeze" \
     && git config --global credential.useHttpPath true
 
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"

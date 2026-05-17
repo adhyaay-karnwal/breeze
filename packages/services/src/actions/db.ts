@@ -4,9 +4,9 @@
  * Raw Drizzle queries for action_invocations + V1 approval event/resume helpers.
  */
 
-import type { ActionInvocationStatus, CapabilityMode } from "@proliferate/shared/contracts/actions";
-import { TERMINAL_RESUME_INTENT_STATUSES } from "@proliferate/shared/contracts/automations";
-import type { ResumeIntentStatus } from "@proliferate/shared/contracts/automations";
+import type { ActionInvocationStatus, CapabilityMode } from "@breeze/shared/contracts/actions";
+import { TERMINAL_RESUME_INTENT_STATUSES } from "@breeze/shared/contracts/automations";
+import type { ResumeIntentStatus } from "@breeze/shared/contracts/automations";
 import {
 	type InferSelectModel,
 	actionInvocationEvents,

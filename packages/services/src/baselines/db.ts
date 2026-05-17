@@ -4,7 +4,7 @@
  * Raw Drizzle queries for repo_baselines and repo_baseline_targets.
  */
 
-import type { RepoBaselineStatus } from "@proliferate/shared/contracts/baselines";
+import type { RepoBaselineStatus } from "@breeze/shared/contracts/baselines";
 import {
 	type InferSelectModel,
 	and,

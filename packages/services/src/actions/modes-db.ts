@@ -5,7 +5,7 @@
  * organizations and automations tables.
  */
 
-import type { ActionMode } from "@proliferate/providers";
+import type { ActionMode } from "@breeze/providers";
 import { automations, eq, getDb, organization } from "../db/client";
 
 type ActionModesMap = Record<string, string>;

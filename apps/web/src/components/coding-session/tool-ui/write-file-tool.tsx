@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 type WriteFileArgs = {
 	filePath?: string;
@@ -24,7 +24,7 @@ export const WriteFileToolUI = makeAssistantToolUI<WriteFileArgs, string>({
 		const lineCount = content ? content.split("\n").length : 0;
 
 		return (
-			<ProliferateToolCard label="Write file" status={isRunning ? "running" : "success"}>
+			<BreezeToolCard label="Write file" status={isRunning ? "running" : "success"}>
 				<Button
 					variant="ghost"
 					onClick={() => setIsExpanded(!isExpanded)}
@@ -51,7 +51,7 @@ export const WriteFileToolUI = makeAssistantToolUI<WriteFileArgs, string>({
 						))}
 					</div>
 				)}
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

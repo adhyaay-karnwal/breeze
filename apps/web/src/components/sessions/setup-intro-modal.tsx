@@ -12,7 +12,7 @@ import {
 import { KeyRound, Save, Terminal } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const STORAGE_KEY = "proliferate_setup_intro_seen";
+const STORAGE_KEY = "breeze_setup_intro_seen";
 
 export function SetupIntroModal() {
 	const [isOpen, setIsOpen] = useState(false);

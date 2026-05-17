@@ -4,9 +4,8 @@
  * Handles trigger CRUD and event management operations.
  */
 
-import { ORPCError } from "@orpc/server";
-import { env } from "@proliferate/environment/server";
-import { schedules, triggers } from "@proliferate/services";
+import { env } from "@breeze/environment/server";
+import { schedules, triggers } from "@breeze/services";
 import {
 	CreateTriggerInputSchema,
 	TriggerEventSchema,
@@ -15,7 +14,8 @@ import {
 	TriggerSchema,
 	TriggerWithIntegrationSchema,
 	UpdateTriggerInputSchema,
-} from "@proliferate/shared/contracts/triggers";
+} from "@breeze/shared/contracts/triggers";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { orgProcedure, publicProcedure } from "./middleware";
 

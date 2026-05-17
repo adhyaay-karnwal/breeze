@@ -4,10 +4,10 @@
  * Business logic that orchestrates DB operations.
  */
 
-import { env } from "@proliferate/environment/server";
-import { createSyncClient } from "@proliferate/gateway-clients";
-import { FREE_CREDITS } from "@proliferate/shared/billing";
-import type { OnboardingRepo, OnboardingStatus } from "@proliferate/shared/contracts/onboarding";
+import { env } from "@breeze/environment/server";
+import { createSyncClient } from "@breeze/gateway-clients";
+import { FREE_CREDITS } from "@breeze/shared/billing";
+import type { OnboardingRepo, OnboardingStatus } from "@breeze/shared/contracts/onboarding";
 import * as configurationsService from "../configurations/service";
 import { toIsoString } from "../db/serialize";
 import { getServicesLogger } from "../logger";

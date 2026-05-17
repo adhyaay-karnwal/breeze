@@ -6,9 +6,9 @@
  * from an allowlisted set based on context (enrichment data or Slack message).
  */
 
-import { env } from "@proliferate/environment/server";
-import type { Logger } from "@proliferate/logger";
-import { configurations } from "@proliferate/services";
+import { env } from "@breeze/environment/server";
+import type { Logger } from "@breeze/logger";
+import { configurations } from "@breeze/services";
 
 // ============================================
 // Types

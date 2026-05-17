@@ -26,7 +26,7 @@
 - Identity is a composed context, not a single token check. The effective actor is built from auth source resolution (`apps/web/src/lib/auth-helpers.ts`), optional impersonation overlay (`apps/web/src/lib/super-admin.ts`), and active organization context (`apps/web/src/server/routers/middleware.ts`).
 - Organization membership is the primary authorization primitive. Most org-scoped reads re-check membership at service level, even when upstream middleware already required auth (`packages/services/src/orgs/service.ts`).
 - `activeOrganizationId` is a routing hint, not a universal authorization guarantee. It is required for `orgProcedure`, but access to a specific org ID is still validated by membership checks in org services.
-- better-auth owns identity write surfaces for core auth/org tables and plugin routes. The Proliferate service layer mainly adds read composition, enrichment, and product-specific behavior around those primitives.
+- better-auth owns identity write surfaces for core auth/org tables and plugin routes. The Breeze service layer mainly adds read composition, enrichment, and product-specific behavior around those primitives.
 - Onboarding completion is organization state, but UX safety behavior is user-aware: completion can be propagated across all user org memberships to prevent looping (`apps/web/src/server/routers/onboarding.ts`, `packages/services/src/orgs/db.ts`).
 - Impersonation is an overlay on top of a real super-admin session. It does not create a second auth session; it rewrites effective user/org context for downstream handlers.
 
@@ -57,7 +57,7 @@ Auth context is built from middleware helpers, not directly from cookies everywh
 - Reference: `apps/web/src/lib/auth-helpers.ts`, `apps/web/src/server/routers/middleware.ts`
 
 ### Organization Plugin Ownership
-The organization plugin is the write-plane for most organization lifecycle operations. Proliferate-specific oRPC routes primarily expose read composition and app-specific adjunct behavior.
+The organization plugin is the write-plane for most organization lifecycle operations. Breeze-specific oRPC routes primarily expose read composition and app-specific adjunct behavior.
 - Reference: `apps/web/src/lib/auth-client.ts`, `apps/web/src/server/routers/orgs.ts`
 
 ### Invitation + Onboarding Coupling

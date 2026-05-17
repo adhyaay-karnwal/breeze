@@ -1,6 +1,6 @@
 import "server-only";
 import { logger } from "@/lib/infra/logger";
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 
 const log = logger.child({ module: "slack" });
 const SLACK_API_BASE = "https://slack.com/api";
@@ -145,7 +145,7 @@ export async function revokeToken(botToken: string): Promise<{ ok: boolean; erro
 /**
  * Send Slack Connect invite to a customer
  * Creates a dedicated support channel and invites the customer
- * Uses Proliferate's workspace bot token
+ * Uses Breeze's workspace bot token
  */
 export async function sendSlackConnectInvite(
 	customerEmail: string,
@@ -157,10 +157,10 @@ export async function sendSlackConnectInvite(
 	invite_id?: string;
 	invite_url?: string;
 }> {
-	const proliferateBotToken = env.PROLIFERATE_SLACK_BOT_TOKEN;
+	const breezeBotToken = env.BREEZE_SLACK_BOT_TOKEN;
 
-	if (!proliferateBotToken) {
-		log.warn("Slack Connect not configured (missing PROLIFERATE_SLACK_BOT_TOKEN)");
+	if (!breezeBotToken) {
+		log.warn("Slack Connect not configured (missing BREEZE_SLACK_BOT_TOKEN)");
 		return { ok: false, error: "Slack Connect not configured" };
 	}
 
@@ -177,7 +177,7 @@ export async function sendSlackConnectInvite(
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
-			Authorization: `Bearer ${proliferateBotToken}`,
+			Authorization: `Bearer ${breezeBotToken}`,
 		},
 		body: JSON.stringify({
 			name: sanitizedChannelName,
@@ -195,7 +195,7 @@ export async function sendSlackConnectInvite(
 			const listResponse = await fetch(
 				`${SLACK_API_BASE}/conversations.list?types=public_channel&limit=1000`,
 				{
-					headers: { Authorization: `Bearer ${proliferateBotToken}` },
+					headers: { Authorization: `Bearer ${breezeBotToken}` },
 				},
 			);
 			const listResult = await listResponse.json();
@@ -219,7 +219,7 @@ export async function sendSlackConnectInvite(
 	log.info({ channelId }, "Using channel");
 
 	// 2. Add default team members to the channel directly
-	const defaultEmails = (env.PROLIFERATE_SLACK_CONNECT_EMAILS ?? "")
+	const defaultEmails = (env.BREEZE_SLACK_CONNECT_EMAILS ?? "")
 		.split(",")
 		.map((e) => e.trim())
 		.filter(Boolean);
@@ -231,7 +231,7 @@ export async function sendSlackConnectInvite(
 			log.info({ email }, "Looking up Slack user");
 			const userLookup = await fetch(
 				`${SLACK_API_BASE}/users.lookupByEmail?email=${encodeURIComponent(email)}`,
-				{ headers: { Authorization: `Bearer ${proliferateBotToken}` } },
+				{ headers: { Authorization: `Bearer ${breezeBotToken}` } },
 			);
 			const userResult = await userLookup.json();
 			log.info({ email, found: userResult.ok, userId: userResult.user?.id }, "User lookup result");
@@ -242,7 +242,7 @@ export async function sendSlackConnectInvite(
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: `Bearer ${proliferateBotToken}`,
+						Authorization: `Bearer ${breezeBotToken}`,
 					},
 					body: JSON.stringify({
 						channel: channelId,
@@ -267,7 +267,7 @@ export async function sendSlackConnectInvite(
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${proliferateBotToken}`,
+					Authorization: `Bearer ${breezeBotToken}`,
 				},
 				body: JSON.stringify({
 					channel: channelId,

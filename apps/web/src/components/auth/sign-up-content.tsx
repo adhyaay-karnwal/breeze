@@ -48,11 +48,9 @@ export function SignUpContent() {
 			<div className="w-full max-w-[380px]">
 				<div className="mb-8 text-center">
 					<h1 className="text-xl font-semibold tracking-tight text-foreground">
-						Create Your Proliferate Account
+						Create Your Breeze Account
 					</h1>
-					<p className="mt-1.5 text-sm text-muted-foreground">
-						Get started with Proliferate for free
-					</p>
+					<p className="mt-1.5 text-sm text-muted-foreground">Get started with Breeze for free</p>
 				</div>
 
 				{hasGoogleOAuth && (

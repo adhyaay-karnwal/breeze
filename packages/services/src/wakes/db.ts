@@ -14,8 +14,8 @@ import {
 	inArray,
 	sql,
 	wakeEvents,
-} from "@proliferate/services/db/client";
-import type { WakeEventSource, WakeEventStatus } from "@proliferate/shared/contracts/workers";
+} from "@breeze/services/db/client";
+import type { WakeEventSource, WakeEventStatus } from "@breeze/shared/contracts/workers";
 
 // ============================================
 // Type Exports

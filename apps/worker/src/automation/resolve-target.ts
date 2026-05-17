@@ -8,8 +8,8 @@
  * It can only select from existing configurations in the allowed set.
  */
 
-import type { Logger } from "@proliferate/logger";
-import type { runs } from "@proliferate/services";
+import type { Logger } from "@breeze/logger";
+import type { runs } from "@breeze/services";
 import { buildEnrichmentContext, selectConfiguration } from "./configuration-selector";
 
 export interface TargetResolution {

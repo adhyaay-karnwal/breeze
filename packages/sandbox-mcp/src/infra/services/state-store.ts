@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import type { State } from "../../types.js";
 
-export const STATE_FILE = "/tmp/proliferate/state.json";
+export const STATE_FILE = "/tmp/breeze/state.json";
 
 export function loadState(): State {
 	try {
@@ -15,6 +15,6 @@ export function loadState(): State {
 }
 
 export function saveState(state: State): void {
-	mkdirSync("/tmp/proliferate", { recursive: true });
+	mkdirSync("/tmp/breeze", { recursive: true });
 	writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
 }

@@ -2,9 +2,9 @@
  * Redis client for Gateway pubsub and coordination.
  */
 
-import { env } from "@proliferate/environment/server";
-import { createLogger } from "@proliferate/logger";
-import { SESSION_EVENTS_CHANNEL, type SessionEventMessage } from "@proliferate/shared";
+import { env } from "@breeze/environment/server";
+import { createLogger } from "@breeze/logger";
+import { SESSION_EVENTS_CHANNEL, type SessionEventMessage } from "@breeze/shared";
 import type IORedis from "ioredis";
 
 const logger = createLogger({ service: "gateway" }).child({ module: "redis" });

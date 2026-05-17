@@ -12,12 +12,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import type {
-	GitDiffMessage,
-	GitFileChange,
-	GitResultMessage,
-	GitState,
-} from "@proliferate/shared";
+import type { GitDiffMessage, GitFileChange, GitResultMessage, GitState } from "@breeze/shared";
 import {
 	AlertTriangle,
 	ChevronDown,
@@ -79,7 +74,7 @@ function buildDiffCacheKey(workspacePath: string, scope: string, path: string): 
 	return `${workspacePath}:${scope}:${path}`;
 }
 
-const IGNORED_GIT_PATH_PREFIXES = [".opencode/", ".proliferate/"] as const;
+const IGNORED_GIT_PATH_PREFIXES = [".opencode/", ".breeze/"] as const;
 const IGNORED_GIT_PATH_EXACT = ["opencode.json", ".opencode.json"] as const;
 
 function shouldIgnoreGitPath(path: string): boolean {

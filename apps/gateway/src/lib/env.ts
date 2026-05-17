@@ -1,4 +1,4 @@
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 
 const SSE_READ_TIMEOUT_MS = 60_000;
 const HEARTBEAT_TIMEOUT_MS = 45_000;

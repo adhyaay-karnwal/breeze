@@ -9,14 +9,14 @@
  * 2. This worker: parse + match + hydrate + create run (async path)
  */
 
-import type { Job } from "@proliferate/queue";
+import type { Job } from "@breeze/queue";
 import {
 	type WebhookInboxJob,
 	createWebhookInboxQueue,
 	createWebhookInboxWorker,
-} from "@proliferate/queue";
-import { integrations, triggers as triggerService, webhookInbox } from "@proliferate/services";
-import { registry } from "@proliferate/triggers";
+} from "@breeze/queue";
+import { integrations, triggers as triggerService, webhookInbox } from "@breeze/services";
+import { registry } from "@breeze/triggers";
 import type { Request } from "express";
 import { logger as rootLogger } from "../lib/logger.js";
 import { processTriggerEvents } from "../lib/trigger-processor.js";

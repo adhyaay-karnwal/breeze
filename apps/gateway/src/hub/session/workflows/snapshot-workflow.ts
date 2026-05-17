@@ -1,7 +1,7 @@
-import type { Logger } from "@proliferate/logger";
-import { configurations, sessions } from "@proliferate/services";
-import type { SandboxProviderType, SnapshotResultMessage } from "@proliferate/shared";
-import { getSandboxProvider } from "@proliferate/shared/providers";
+import type { Logger } from "@breeze/logger";
+import { configurations, sessions } from "@breeze/services";
+import type { SandboxProviderType, SnapshotResultMessage } from "@breeze/shared";
+import { getSandboxProvider } from "@breeze/shared/providers";
 import { prepareForSnapshot } from "../migration/snapshot-scrub";
 import type { SessionContext } from "../runtime/session-context-store";
 

@@ -19,7 +19,7 @@ import {
 	autumnAutoTopUp,
 	getCurrentCycleMonth,
 	parseBillingSettings,
-} from "@proliferate/shared/billing";
+} from "@breeze/shared/billing";
 import { eq, getDb, organization, sql } from "../db/client";
 import { getServicesLogger } from "../logger";
 import { enforceCreditsExhausted } from "./org-pause";

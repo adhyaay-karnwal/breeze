@@ -35,7 +35,7 @@ import {
 import { useSlackInstallations } from "@/hooks/integrations/use-integrations";
 import { useWsToken } from "@/hooks/sessions/use-ws-token";
 import { cn } from "@/lib/display/utils";
-import type { ModelId } from "@proliferate/shared";
+import type { ModelId } from "@breeze/shared";
 import { formatDistanceToNow } from "date-fns";
 import { Hash, Pencil, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";

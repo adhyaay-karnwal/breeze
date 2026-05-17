@@ -1,7 +1,7 @@
 import "server-only";
 
 import { requireAuth } from "@/lib/auth/server/session";
-import { orgs } from "@proliferate/services";
+import { orgs } from "@breeze/services";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 

@@ -6,7 +6,7 @@
  * SessionHub owns reconnection logic.
  */
 
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import { createParser } from "eventsource-parser";
 import type { GatewayEnv } from "../../../lib/env";
 import type { OpenCodeEvent } from "../../../types";

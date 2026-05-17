@@ -3,7 +3,7 @@
  */
 
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 
 function createS3Client(): S3Client {
 	const region = env.S3_REGION;

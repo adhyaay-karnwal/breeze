@@ -1,4 +1,4 @@
-import type { ClientSource } from "@proliferate/shared";
+import type { ClientSource } from "@breeze/shared";
 import type { ManagerControlFacade } from "../../../../harness/manager/control-facade";
 
 export interface ManagerControlTarget {

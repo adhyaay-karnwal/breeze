@@ -20,18 +20,18 @@ const {
 	mockQueueAutomationExecute: vi.fn(),
 }));
 
-vi.mock("@proliferate/environment/server", () => ({
+vi.mock("@breeze/environment/server", () => ({
 	env: {
 		NEXT_PUBLIC_GATEWAY_URL: "http://localhost:3001",
 		SERVICE_TO_SERVICE_AUTH_TOKEN: "test-token",
 	},
 }));
 
-vi.mock("@proliferate/gateway-clients", () => ({
+vi.mock("@breeze/gateway-clients", () => ({
 	createSyncClient: vi.fn(() => ({})),
 }));
 
-vi.mock("@proliferate/queue", () => ({
+vi.mock("@breeze/queue", () => ({
 	createAutomationEnrichQueue: vi.fn(),
 	createAutomationExecuteQueue: vi.fn(),
 	createAutomationEnrichWorker: vi.fn(),
@@ -41,7 +41,7 @@ vi.mock("@proliferate/queue", () => ({
 	queueAutomationExecute: mockQueueAutomationExecute,
 }));
 
-vi.mock("@proliferate/services", () => ({
+vi.mock("@breeze/services", () => ({
 	outbox: {
 		claimPendingOutbox: mockClaimPendingOutbox,
 		recoverStuckOutbox: mockRecoverStuckOutbox,
@@ -95,10 +95,10 @@ function makeOutboxRow(overrides: Record<string, unknown> = {}) {
 }
 
 const mockEnrichQueue = {} as ReturnType<
-	typeof import("@proliferate/queue").createAutomationEnrichQueue
+	typeof import("@breeze/queue").createAutomationEnrichQueue
 >;
 const mockExecuteQueue = {} as ReturnType<
-	typeof import("@proliferate/queue").createAutomationExecuteQueue
+	typeof import("@breeze/queue").createAutomationExecuteQueue
 >;
 const mockLogger = {
 	info: vi.fn(),
@@ -106,7 +106,7 @@ const mockLogger = {
 	error: vi.fn(),
 	debug: vi.fn(),
 	child: vi.fn().mockReturnThis(),
-} as unknown as import("@proliferate/logger").Logger;
+} as unknown as import("@breeze/logger").Logger;
 
 describe("dispatchOutbox", () => {
 	beforeEach(() => {
@@ -266,7 +266,7 @@ describe("dispatchOutbox", () => {
 		const row = makeOutboxRow({ kind: "write_artifacts" });
 		mockClaimPendingOutbox.mockResolvedValue([row]);
 
-		const { runs } = await import("@proliferate/services");
+		const { runs } = await import("@breeze/services");
 		(runs.findRunWithRelations as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
 			id: "run-1",
 			completionJson: { outcome: "succeeded" },
@@ -283,7 +283,7 @@ describe("dispatchOutbox", () => {
 		const row = makeOutboxRow({ kind: "write_artifacts" });
 		mockClaimPendingOutbox.mockResolvedValue([row]);
 
-		const { runs } = await import("@proliferate/services");
+		const { runs } = await import("@breeze/services");
 		(runs.findRunWithRelations as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
 			id: "run-1",
 			completionJson: null,
@@ -300,7 +300,7 @@ describe("dispatchOutbox", () => {
 		const row = makeOutboxRow({ kind: "write_artifacts" });
 		mockClaimPendingOutbox.mockResolvedValue([row]);
 
-		const { runs } = await import("@proliferate/services");
+		const { runs } = await import("@breeze/services");
 		(runs.findRunWithRelations as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
 			id: "run-1",
 			completionJson: { outcome: "succeeded" },

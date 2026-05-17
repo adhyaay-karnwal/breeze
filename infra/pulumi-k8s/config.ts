@@ -3,7 +3,7 @@ import * as pulumi from "@pulumi/pulumi";
 
 const cfg = new pulumi.Config();
 
-export const projectName = cfg.get("projectName") ?? "proliferate";
+export const projectName = cfg.get("projectName") ?? "breeze";
 export const stack = pulumi.getStack();
 export const namePrefix = `${projectName}-${stack}`;
 
@@ -24,8 +24,8 @@ export const nodeDesiredCapacity = cfg.getNumber("nodeDesiredCapacity") ?? 2;
 export const deployApps = cfg.getBoolean("deployApps") ?? false;
 export const imageTag = cfg.get("imageTag") ?? "latest";
 
-export const dbName = cfg.get("dbName") ?? "proliferate";
-export const dbUsername = cfg.get("dbUsername") ?? "proliferate";
+export const dbName = cfg.get("dbName") ?? "breeze";
+export const dbUsername = cfg.get("dbUsername") ?? "breeze";
 export const dbPassword = cfg.requireSecret("dbPassword");
 export const dbEngineVersion = cfg.get("dbEngineVersion");
 export const dbInstanceClass = cfg.get("dbInstanceClass") ?? "db.t4g.micro";
@@ -37,7 +37,7 @@ export const redisNumNodes = cfg.getNumber("redisNumNodes") ?? 1;
 
 export const s3BucketName = cfg.get("s3BucketName") ?? `${namePrefix}-verification`;
 
-export const namespace = cfg.get("namespace") ?? "proliferate";
+export const namespace = cfg.get("namespace") ?? "breeze";
 export const ingressClassName = cfg.get("ingressClassName") ?? "nginx";
 export const ingressHost = cfg.get("ingressHost") ?? "";
 export const ingressAnnotations = cfg.getObject<Record<string, string>>("ingressAnnotations") ?? {};

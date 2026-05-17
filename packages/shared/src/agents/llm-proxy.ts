@@ -9,7 +9,7 @@
  * per team (org) and user (session) for spend tracking.
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 
 export interface VirtualKeyOptions {
 	/** Key validity duration (e.g., "15m", "1h", "24h"). Default: LLM_PROXY_KEY_DURATION. */

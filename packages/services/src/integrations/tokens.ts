@@ -5,7 +5,7 @@
  * Abstracts over provider-native OAuth apps and GitHub App providers.
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { decrypt, encrypt, getEncryptionKey } from "../db/crypto";
 import { findManyForTokens, updateOAuthCredentials } from "./db";
 import { getInstallationToken } from "./github-app";

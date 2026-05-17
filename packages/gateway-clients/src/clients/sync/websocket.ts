@@ -4,7 +4,7 @@
  * WebSocket with automatic reconnection for real-time communication.
  */
 
-import type { ServerMessage } from "@proliferate/shared";
+import type { ServerMessage } from "@breeze/shared";
 import WS from "ws";
 import type { TokenGetter } from "../../auth";
 import type { ConnectionOptions, ReconnectOptions } from "../../types";
@@ -28,7 +28,7 @@ export interface SyncWebSocket {
 	sendRunAutoStart(
 		runId: string,
 		mode?: "test" | "start",
-		commands?: import("@proliferate/shared").ConfigurationServiceCommand[],
+		commands?: import("@breeze/shared").ConfigurationServiceCommand[],
 	): void;
 	/** Request current git status */
 	sendGetGitStatus(workspacePath?: string): void;
@@ -78,7 +78,7 @@ export interface WebSocketOptions extends ConnectionOptions {
 export class SyncWebSocketImpl implements SyncWebSocket {
 	private ws: InstanceType<typeof WebSocketImpl> | null = null;
 	private baseUrl: string;
-	private proliferateSessionId: string;
+	private breezeSessionId: string;
 	private getToken: TokenGetter;
 	private options: WebSocketOptions;
 	private reconnectConfig: Required<ReconnectOptions>;
@@ -89,12 +89,12 @@ export class SyncWebSocketImpl implements SyncWebSocket {
 
 	constructor(
 		baseUrl: string,
-		proliferateSessionId: string,
+		breezeSessionId: string,
 		getToken: TokenGetter,
 		options: WebSocketOptions,
 	) {
 		this.baseUrl = baseUrl;
-		this.proliferateSessionId = proliferateSessionId;
+		this.breezeSessionId = breezeSessionId;
 		this.getToken = getToken;
 		this.options = options;
 
@@ -138,7 +138,7 @@ export class SyncWebSocketImpl implements SyncWebSocket {
 	sendRunAutoStart(
 		runId: string,
 		mode?: "test" | "start",
-		commands?: import("@proliferate/shared").ConfigurationServiceCommand[],
+		commands?: import("@breeze/shared").ConfigurationServiceCommand[],
 	): void {
 		this.send({ type: "run_auto_start", runId, mode, commands });
 	}
@@ -243,8 +243,8 @@ export class SyncWebSocketImpl implements SyncWebSocket {
 
 	private buildWebSocketUrl(token: string): string {
 		const wsBase = this.baseUrl.replace(/^https:\/\//, "wss://").replace(/^http:\/\//, "ws://");
-		// Updated to use /proliferate route
-		return `${wsBase}/proliferate/${this.proliferateSessionId}?token=${encodeURIComponent(token)}`;
+		// Updated to use /breeze route
+		return `${wsBase}/breeze/${this.breezeSessionId}?token=${encodeURIComponent(token)}`;
 	}
 
 	private handleMessage(data: string): void {

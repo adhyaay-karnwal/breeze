@@ -58,17 +58,17 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         run: |
           docker build --platform linux/amd64 -f apps/worker/Dockerfile \
-            -t ${{ steps.login-ecr.outputs.registry }}/proliferate-worker:${{ github.sha }} \
-            -t ${{ steps.login-ecr.outputs.registry }}/proliferate-worker:latest .
-          docker push ${{ steps.login-ecr.outputs.registry }}/proliferate-worker:${{ github.sha }}
-          docker push ${{ steps.login-ecr.outputs.registry }}/proliferate-worker:latest
+            -t ${{ steps.login-ecr.outputs.registry }}/breeze-worker:${{ github.sha }} \
+            -t ${{ steps.login-ecr.outputs.registry }}/breeze-worker:latest .
+          docker push ${{ steps.login-ecr.outputs.registry }}/breeze-worker:${{ github.sha }}
+          docker push ${{ steps.login-ecr.outputs.registry }}/breeze-worker:latest
 
       - name: Deploy to ECS
         if: steps.changes.outputs.changed == 'true'
         run: |
-          aws ecs update-service --cluster proliferate --service proliferate-worker --force-new-deployment
+          aws ecs update-service --cluster breeze --service breeze-worker --force-new-deployment
           echo "Waiting for deployment to stabilize..."
-          aws ecs wait services-stable --cluster proliferate --services proliferate-worker
+          aws ecs wait services-stable --cluster breeze --services breeze-worker
 
   deploy-llm-proxy:
     name: Deploy LLM Proxy to ECS
@@ -110,18 +110,18 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         run: |
           docker build --platform linux/amd64 -f apps/llm-proxy/Dockerfile \
-            -t ${{ steps.login-ecr.outputs.registry }}/proliferate-llm-proxy:${{ github.sha }} \
-            -t ${{ steps.login-ecr.outputs.registry }}/proliferate-llm-proxy:latest \
+            -t ${{ steps.login-ecr.outputs.registry }}/breeze-llm-proxy:${{ github.sha }} \
+            -t ${{ steps.login-ecr.outputs.registry }}/breeze-llm-proxy:latest \
             apps/llm-proxy
-          docker push ${{ steps.login-ecr.outputs.registry }}/proliferate-llm-proxy:${{ github.sha }}
-          docker push ${{ steps.login-ecr.outputs.registry }}/proliferate-llm-proxy:latest
+          docker push ${{ steps.login-ecr.outputs.registry }}/breeze-llm-proxy:${{ github.sha }}
+          docker push ${{ steps.login-ecr.outputs.registry }}/breeze-llm-proxy:latest
 
       - name: Deploy to ECS
         if: steps.changes.outputs.changed == 'true'
         run: |
-          aws ecs update-service --cluster proliferate --service proliferate-llm-proxy --force-new-deployment
+          aws ecs update-service --cluster breeze --service breeze-llm-proxy --force-new-deployment
           echo "Waiting for deployment to stabilize..."
-          aws ecs wait services-stable --cluster proliferate --services proliferate-llm-proxy
+          aws ecs wait services-stable --cluster breeze --services breeze-llm-proxy
 
   deploy-gateway:
     name: Deploy Gateway to ECS
@@ -163,17 +163,17 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         run: |
           docker build --platform linux/amd64 -f apps/gateway/Dockerfile \
-            -t ${{ steps.login-ecr.outputs.registry }}/proliferate-gateway:${{ github.sha }} \
-            -t ${{ steps.login-ecr.outputs.registry }}/proliferate-gateway:latest .
-          docker push ${{ steps.login-ecr.outputs.registry }}/proliferate-gateway:${{ github.sha }}
-          docker push ${{ steps.login-ecr.outputs.registry }}/proliferate-gateway:latest
+            -t ${{ steps.login-ecr.outputs.registry }}/breeze-gateway:${{ github.sha }} \
+            -t ${{ steps.login-ecr.outputs.registry }}/breeze-gateway:latest .
+          docker push ${{ steps.login-ecr.outputs.registry }}/breeze-gateway:${{ github.sha }}
+          docker push ${{ steps.login-ecr.outputs.registry }}/breeze-gateway:latest
 
       - name: Deploy to ECS
         if: steps.changes.outputs.changed == 'true'
         run: |
-          aws ecs update-service --cluster proliferate --service proliferate-gateway --force-new-deployment
+          aws ecs update-service --cluster breeze --service breeze-gateway --force-new-deployment
           echo "Waiting for deployment to stabilize..."
-          aws ecs wait services-stable --cluster proliferate --services proliferate-gateway
+          aws ecs wait services-stable --cluster breeze --services breeze-gateway
 
   deploy-web:
     name: Deploy Web to ECS
@@ -215,14 +215,14 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         run: |
           docker build --platform linux/amd64 -f apps/web/Dockerfile \
-            -t ${{ steps.login-ecr.outputs.registry }}/proliferate-web:${{ github.sha }} \
-            -t ${{ steps.login-ecr.outputs.registry }}/proliferate-web:latest .
-          docker push ${{ steps.login-ecr.outputs.registry }}/proliferate-web:${{ github.sha }}
-          docker push ${{ steps.login-ecr.outputs.registry }}/proliferate-web:latest
+            -t ${{ steps.login-ecr.outputs.registry }}/breeze-web:${{ github.sha }} \
+            -t ${{ steps.login-ecr.outputs.registry }}/breeze-web:latest .
+          docker push ${{ steps.login-ecr.outputs.registry }}/breeze-web:${{ github.sha }}
+          docker push ${{ steps.login-ecr.outputs.registry }}/breeze-web:latest
 
       - name: Deploy to ECS
         if: steps.changes.outputs.changed == 'true'
         run: |
-          aws ecs update-service --cluster proliferate --service proliferate-web --force-new-deployment
+          aws ecs update-service --cluster breeze --service breeze-web --force-new-deployment
           echo "Waiting for deployment to stabilize..."
-          aws ecs wait services-stable --cluster proliferate --services proliferate-web
+          aws ecs wait services-stable --cluster breeze --services breeze-web

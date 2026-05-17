@@ -20,8 +20,8 @@ import {
 	parsePrUrl,
 } from "@/lib/display/session-display";
 import { cn } from "@/lib/display/utils";
-import type { Session } from "@proliferate/shared/contracts/sessions";
-import { getBlockedReasonText } from "@proliferate/shared/sessions";
+import type { Session } from "@breeze/shared/contracts/sessions";
+import { getBlockedReasonText } from "@breeze/shared/sessions";
 import { formatDistanceToNow } from "date-fns";
 import {
 	AlertTriangle,

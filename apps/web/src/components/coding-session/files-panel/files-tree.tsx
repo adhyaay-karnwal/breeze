@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useSessionFilesTree } from "@/hooks/sessions/use-session-files";
 import { cn } from "@/lib/display/utils";
-import type { FsTreeEntry } from "@proliferate/shared/contracts/harness";
+import type { FsTreeEntry } from "@breeze/shared/contracts/harness";
 import { ChevronDown, ChevronRight, File, Folder, FolderOpen, Link, Loader2 } from "lucide-react";
 import { useMemo } from "react";
 

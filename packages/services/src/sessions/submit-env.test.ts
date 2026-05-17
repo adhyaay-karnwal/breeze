@@ -26,7 +26,7 @@ vi.mock("../secrets", async () => {
 	};
 });
 
-vi.mock("@proliferate/shared/providers", () => {
+vi.mock("@breeze/shared/providers", () => {
 	const writeEnvFile = vi.fn();
 	return {
 		getSandboxProvider: () => ({
@@ -37,7 +37,7 @@ vi.mock("@proliferate/shared/providers", () => {
 	};
 });
 
-import * as providers from "@proliferate/shared/providers";
+import * as providers from "@breeze/shared/providers";
 import * as secrets from "../secrets";
 import * as sessionService from "./service";
 import { submitEnv } from "./submit-env";

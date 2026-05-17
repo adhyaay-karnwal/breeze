@@ -4,8 +4,8 @@ import {
 	addScheduledJob,
 	createScheduledQueue,
 	createScheduledWorker,
-} from "@proliferate/queue";
-import { runs, triggers } from "@proliferate/services";
+} from "@breeze/queue";
+import { runs, triggers } from "@breeze/services";
 import { logger as rootLogger } from "../lib/logger.js";
 
 const logger = rootLogger.child({ module: "scheduled-worker" });

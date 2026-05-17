@@ -5,12 +5,8 @@
  * The idempotency key is derived from interval boundaries, not wall clock time.
  */
 
-import type { SandboxProvider } from "@proliferate/shared";
-import {
-	METERING_CONFIG,
-	type PauseReason,
-	calculateComputeCredits,
-} from "@proliferate/shared/billing";
+import type { SandboxProvider } from "@breeze/shared";
+import { METERING_CONFIG, type PauseReason, calculateComputeCredits } from "@breeze/shared/billing";
 import { getServicesLogger } from "../logger";
 import {
 	findAllRunningForMetering,

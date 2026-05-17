@@ -4,7 +4,7 @@
  * Get installation access tokens for GitHub App integrations.
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { SignJWT } from "jose";
 
 // ============================================

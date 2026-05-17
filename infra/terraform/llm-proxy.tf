@@ -5,7 +5,7 @@
 
 # ECR Repository
 resource "aws_ecr_repository" "llm_proxy" {
-  name                 = "proliferate-llm-proxy"
+  name                 = "breeze-llm-proxy"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -34,7 +34,7 @@ resource "aws_ecr_lifecycle_policy" "llm_proxy" {
 
 # Secrets Manager for LLM Proxy
 resource "aws_secretsmanager_secret" "llm_proxy" {
-  name        = "proliferate-llm-proxy"
+  name        = "breeze-llm-proxy"
   description = "Secrets for LLM Proxy service"
 }
 
@@ -59,13 +59,13 @@ resource "aws_iam_role_policy" "ecs_execution_llm_proxy_secrets" {
 
 # CloudWatch Log Group for LLM Proxy
 resource "aws_cloudwatch_log_group" "llm_proxy" {
-  name              = "/ecs/proliferate-llm-proxy"
+  name              = "/ecs/breeze-llm-proxy"
   retention_in_days = 30
 }
 
 # Security Group for ALB
 resource "aws_security_group" "llm_proxy_alb" {
-  name        = "proliferate-llm-proxy-alb"
+  name        = "breeze-llm-proxy-alb"
   description = "Security group for LLM Proxy ALB"
   vpc_id      = aws_vpc.main.id
 
@@ -93,13 +93,13 @@ resource "aws_security_group" "llm_proxy_alb" {
   }
 
   tags = {
-    Name = "proliferate-llm-proxy-alb"
+    Name = "breeze-llm-proxy-alb"
   }
 }
 
 # Security Group for LLM Proxy ECS Tasks
 resource "aws_security_group" "llm_proxy" {
-  name        = "proliferate-llm-proxy"
+  name        = "breeze-llm-proxy"
   description = "Security group for LLM Proxy ECS tasks"
   vpc_id      = aws_vpc.main.id
 
@@ -119,26 +119,26 @@ resource "aws_security_group" "llm_proxy" {
   }
 
   tags = {
-    Name = "proliferate-llm-proxy"
+    Name = "breeze-llm-proxy"
   }
 }
 
 # Application Load Balancer
 resource "aws_lb" "llm_proxy" {
-  name               = "proliferate-llm-proxy"
+  name               = "breeze-llm-proxy"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.llm_proxy_alb.id]
   subnets            = aws_subnet.public[*].id
 
   tags = {
-    Name = "proliferate-llm-proxy"
+    Name = "breeze-llm-proxy"
   }
 }
 
 # ALB Target Group
 resource "aws_lb_target_group" "llm_proxy" {
-  name        = "proliferate-llm-proxy"
+  name        = "breeze-llm-proxy"
   port        = 4000
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
@@ -197,7 +197,7 @@ resource "aws_lb_listener" "llm_proxy_https" {
 
 # ECS Task Definition
 resource "aws_ecs_task_definition" "llm_proxy" {
-  family                   = "proliferate-llm-proxy"
+  family                   = "breeze-llm-proxy"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = 512
@@ -238,7 +238,7 @@ resource "aws_ecs_task_definition" "llm_proxy" {
 
 # ECS Service
 resource "aws_ecs_service" "llm_proxy" {
-  name            = "proliferate-llm-proxy"
+  name            = "breeze-llm-proxy"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.llm_proxy.arn
   desired_count   = 1

@@ -5,7 +5,7 @@
  * Approve/deny goes through Gateway HTTP (not oRPC) to reuse execution logic.
  */
 
-import { actions } from "@proliferate/services";
+import { actions } from "@breeze/services";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

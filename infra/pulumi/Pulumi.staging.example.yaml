@@ -6,9 +6,9 @@
 config:
   aws:region: us-east-1
 
-  proliferate-infra:environment: staging
-  proliferate-infra:deploymentProfile: cloud
-  proliferate-infra:appUrl: https://staging.example.com
-  proliferate-infra:apiUrl: https://staging.example.com
-  proliferate-infra:imageTag: latest
+  breeze-infra:environment: staging
+  breeze-infra:deploymentProfile: cloud
+  breeze-infra:appUrl: https://staging.example.com
+  breeze-infra:apiUrl: https://staging.example.com
+  breeze-infra:imageTag: latest
 

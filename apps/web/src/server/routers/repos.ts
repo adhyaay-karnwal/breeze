@@ -3,14 +3,14 @@
  */
 
 import { type GitHubIntegration, listGitHubRepos } from "@/lib/integrations/github";
-import { ORPCError } from "@orpc/server";
-import { integrations, repos } from "@proliferate/services";
+import { integrations, repos } from "@breeze/services";
 import {
 	CreateRepoInputSchema,
 	GitHubRepoSchema,
 	RepoSchema,
 	SearchRepoSchema,
-} from "@proliferate/shared/contracts/repos";
+} from "@breeze/shared/contracts/repos";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 
@@ -155,7 +155,7 @@ export const reposRouter = {
 			}
 
 			const row = await repos.getServiceCommands(input.id, context.orgId);
-			const { parseServiceCommands } = await import("@proliferate/shared/sandbox");
+			const { parseServiceCommands } = await import("@breeze/shared/sandbox");
 			const commands = parseServiceCommands(row?.serviceCommands);
 			return { commands };
 		}),

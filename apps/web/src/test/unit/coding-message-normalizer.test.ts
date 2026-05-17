@@ -1,5 +1,5 @@
 import { normalizeServerMessages } from "@/lib/sessions/coding-message-normalizer";
-import type { ServerMessage } from "@proliferate/gateway-clients";
+import type { ServerMessage } from "@breeze/gateway-clients";
 import { describe, expect, it } from "vitest";
 
 describe("normalizeServerMessages", () => {

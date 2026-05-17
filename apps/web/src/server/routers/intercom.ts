@@ -5,7 +5,7 @@
  */
 
 import { createHmac } from "node:crypto";
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { z } from "zod";
 import { protectedProcedure } from "./middleware";
 

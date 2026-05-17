@@ -1,6 +1,6 @@
 import "server-only";
 import { logger } from "@/lib/infra/logger";
-import { env, features } from "@proliferate/environment/server";
+import { env, features } from "@breeze/environment/server";
 import { Resend } from "resend";
 
 const log = logger.child({ module: "email" });
@@ -103,7 +103,7 @@ export async function sendInvitationEmail(data: {
 		html: layout(
 			heading("You're invited!") +
 				paragraph(
-					`${escapeHtml(data.inviter.user.name)} has invited you to join <strong>${escapeHtml(data.organization.name)}</strong> on Proliferate.`,
+					`${escapeHtml(data.inviter.user.name)} has invited you to join <strong>${escapeHtml(data.organization.name)}</strong> on Breeze.`,
 				) +
 				paragraph(`You'll be joining as a <strong>${escapeHtml(data.role)}</strong>.`) +
 				paragraph(ctaButton("Accept Invitation", inviteUrl), "margin: 24px 0;") +

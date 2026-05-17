@@ -87,7 +87,7 @@ interface IconProps {
 }
 
 /**
- * Proliferate brand icon (blocks pattern)
+ * Breeze brand icon (blocks pattern)
  */
 export function BlocksIcon({ className }: IconProps) {
 	return (
@@ -111,7 +111,7 @@ export function BlocksIcon({ className }: IconProps) {
 }
 
 /**
- * Animated loading version of the Proliferate icon
+ * Animated loading version of the Breeze icon
  */
 export function BlocksLoadingIcon({ className }: IconProps) {
 	return (
@@ -205,7 +205,7 @@ export function BlocksLoadingIcon({ className }: IconProps) {
 		</svg>
 	);
 }
-export function ProliferateLoadingIcon2({ className }: IconProps) {
+export function BreezeLoadingIcon2({ className }: IconProps) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -593,9 +593,9 @@ export function LinearIcon({ className }: IconProps) {
 }
 
 /**
- * Proliferate icon — Quick reasoning variant (center block only)
+ * Breeze icon — Quick reasoning variant (center block only)
  */
-export function ProliferateIconQuick({ className }: IconProps) {
+export function BreezeIconQuick({ className }: IconProps) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -609,9 +609,9 @@ export function ProliferateIconQuick({ className }: IconProps) {
 }
 
 /**
- * Proliferate icon — Normal reasoning variant (center + inner ring)
+ * Breeze icon — Normal reasoning variant (center + inner ring)
  */
-export function ProliferateIconNormal({ className }: IconProps) {
+export function BreezeIconNormal({ className }: IconProps) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -629,9 +629,9 @@ export function ProliferateIconNormal({ className }: IconProps) {
 }
 
 /**
- * Proliferate icon — Deep reasoning variant (all blocks, full opacity)
+ * Breeze icon — Deep reasoning variant (all blocks, full opacity)
  */
-export function ProliferateIconDeep({ className }: IconProps) {
+export function BreezeIconDeep({ className }: IconProps) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -731,7 +731,7 @@ export function MistralIcon({ className }: IconProps) {
 
 /**
  * Animated thinking icon with speed-differentiated animation.
- * Uses the same blocks pattern as ProliferateLoadingIcon but with parameterized duration.
+ * Uses the same blocks pattern as BreezeLoadingIcon but with parameterized duration.
  */
 export function ThinkingIcon({
 	className,

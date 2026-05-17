@@ -9,7 +9,7 @@
  * - `runtime:{sessionId}` — sandbox is alive and responsive (short-lived heartbeat)
  */
 
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 import { ensureRedisConnected } from "./redis";
 
 const logger = createLogger({ service: "gateway" }).child({ module: "session-leases" });

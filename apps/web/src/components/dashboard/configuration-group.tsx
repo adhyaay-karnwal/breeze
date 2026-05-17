@@ -20,8 +20,8 @@ import {
 import { useCreateSession } from "@/hooks/sessions/use-sessions";
 import { cn, getRepoShortName } from "@/lib/display/utils";
 import { useDashboardStore } from "@/stores/dashboard";
-import type { Session } from "@proliferate/shared/contracts/sessions";
-import { getSetupInitialPrompt } from "@proliferate/shared/prompts";
+import type { Session } from "@breeze/shared/contracts/sessions";
+import { getSetupInitialPrompt } from "@breeze/shared/prompts";
 import { ChevronRight, Pencil, Plus, Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type KeyboardEvent, useEffect, useRef, useState } from "react";

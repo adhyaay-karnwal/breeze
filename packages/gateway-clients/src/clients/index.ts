@@ -1,7 +1,7 @@
 /**
  * Client Exports (Browser-safe)
  *
- * For server-only exports (AsyncClient, etc.), use "@proliferate/gateway-clients/server"
+ * For server-only exports (AsyncClient, etc.), use "@breeze/gateway-clients/server"
  */
 
 // SyncClient

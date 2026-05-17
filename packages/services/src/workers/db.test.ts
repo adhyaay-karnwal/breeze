@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { afterEach, describe, expect, it } from "vitest";
 import {
 	and,

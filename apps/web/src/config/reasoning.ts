@@ -1,4 +1,4 @@
-import type { ReasoningEffort } from "@proliferate/shared/agents";
+import type { ReasoningEffort } from "@breeze/shared/agents";
 
 export const EFFORT_OPTIONS: { id: ReasoningEffort; label: string; description: string }[] = [
 	{ id: "quick", label: "Quick", description: "Minimal reasoning, fastest responses" },

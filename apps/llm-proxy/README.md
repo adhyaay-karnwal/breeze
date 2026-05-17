@@ -47,7 +47,7 @@ Uses LiteLLM's **virtual keys** (free tier) for authentication and spend trackin
 When a session is created, the API generates a virtual key:
 
 ```typescript
-import { generateSessionAPIKey } from "@proliferate/shared";
+import { generateSessionAPIKey } from "@breeze/shared";
 
 // Generate a session key for this session (duration defaults to LLM_PROXY_KEY_DURATION)
 const apiKey = await generateSessionAPIKey(sessionId, orgId);

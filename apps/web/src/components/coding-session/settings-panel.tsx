@@ -7,7 +7,7 @@ import {
 	useSubscribeNotifications,
 	useUnsubscribeNotifications,
 } from "@/hooks/sessions/use-sessions";
-import type { AutoStartOutputMessage, ConfigurationServiceCommand } from "@proliferate/shared";
+import type { AutoStartOutputMessage, ConfigurationServiceCommand } from "@breeze/shared";
 import { Bell, BellOff } from "lucide-react";
 import { toast } from "sonner";
 import { AutoStartContent } from "./auto-start-panel";

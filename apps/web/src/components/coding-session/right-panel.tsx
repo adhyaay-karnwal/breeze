@@ -8,7 +8,7 @@ import type {
 	GitDiffMessage,
 	GitResultMessage,
 	GitState,
-} from "@proliferate/shared";
+} from "@breeze/shared";
 import { AnimatePresence, motion } from "framer-motion";
 import { KeyRound, Loader2, MousePointerClick } from "lucide-react";
 import Link from "next/link";
@@ -44,7 +44,7 @@ export interface SessionPanelProps {
 	sendRunAutoStart?: (
 		runId: string,
 		mode?: "test" | "start",
-		commands?: import("@proliferate/shared").ConfigurationServiceCommand[],
+		commands?: import("@breeze/shared").ConfigurationServiceCommand[],
 	) => void;
 	gitState?: GitState | null;
 	gitResult?: GitResultMessage["payload"] | null;

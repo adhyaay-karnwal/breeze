@@ -11,8 +11,8 @@ import {
 	verifySignedOAuthState,
 } from "@/lib/integrations/oauth-state";
 import { exchangeCodeForToken } from "@/lib/integrations/slack";
-import { integrations } from "@proliferate/services";
-import { encrypt, getEncryptionKey } from "@proliferate/shared/crypto";
+import { integrations } from "@breeze/services";
+import { encrypt, getEncryptionKey } from "@breeze/shared/crypto";
 import { NextResponse } from "next/server";
 
 const log = logger.child({ handler: "slack-oauth-callback" });

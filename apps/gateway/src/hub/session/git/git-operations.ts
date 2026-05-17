@@ -6,7 +6,7 @@
  */
 
 import path from "path";
-import type { Logger } from "@proliferate/logger";
+import type { Logger } from "@breeze/logger";
 import type {
 	GitCommitSummary,
 	GitFileChange,
@@ -14,8 +14,8 @@ import type {
 	GitState,
 	RepoSpec,
 	SandboxProvider,
-} from "@proliferate/shared";
-import { SANDBOX_PATHS, buildGitCredentialsMap, shellEscape } from "@proliferate/shared/sandbox";
+} from "@breeze/shared";
+import { SANDBOX_PATHS, buildGitCredentialsMap, shellEscape } from "@breeze/shared/sandbox";
 import type { GitIdentity } from "../runtime/git-identity";
 
 const WORKSPACE_DIR = `${SANDBOX_PATHS.home}/workspace`;

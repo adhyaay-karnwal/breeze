@@ -9,8 +9,8 @@ import {
 	isBaseOAuthStatePayload,
 	verifySignedOAuthState,
 } from "@/lib/integrations/oauth-state";
-import { env } from "@proliferate/environment/server";
-import { integrations } from "@proliferate/services";
+import { env } from "@breeze/environment/server";
+import { integrations } from "@breeze/services";
 import { NextResponse } from "next/server";
 
 interface AtlassianResource {

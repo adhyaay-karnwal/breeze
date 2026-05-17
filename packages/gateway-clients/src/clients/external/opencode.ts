@@ -31,12 +31,12 @@ export class OpenCodeClient extends ExternalClientBase {
 	/**
 	 * Get the passthrough URL for direct OpenCode access
 	 *
-	 * Returns URL in format: /proxy/:proliferateSessionId/:token/opencode
+	 * Returns URL in format: /proxy/:breezeSessionId/:token/opencode
 	 * Caller can append paths like /session, /events, etc.
 	 */
-	async getUrl(proliferateSessionId: string): Promise<string> {
+	async getUrl(breezeSessionId: string): Promise<string> {
 		const token = await this.getToken();
-		return `${this.baseUrl}/proxy/${proliferateSessionId}/${encodeURIComponent(token)}/opencode`;
+		return `${this.baseUrl}/proxy/${breezeSessionId}/${encodeURIComponent(token)}/opencode`;
 	}
 }
 

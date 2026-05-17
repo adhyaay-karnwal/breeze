@@ -36,7 +36,7 @@
 | Sandbox-MCP terminal WS | Implemented | `packages/sandbox-mcp/src/terminal.ts` | Terminal WebSocket inside sandbox |
 | Sandbox-MCP service manager | Implemented | `packages/sandbox-mcp/src/service-manager.ts` | Start/stop/expose sandbox services |
 | Sandbox-MCP auth | Implemented | `packages/sandbox-mcp/src/auth.ts` | Token-based sandbox auth |
-| Sandbox-MCP CLI setup | Implemented | `packages/sandbox-mcp/src/proliferate-cli.ts` | Sets up `proliferate` CLI inside sandbox |
+| Sandbox-MCP CLI setup | Implemented | `packages/sandbox-mcp/src/breeze-cli.ts` | Sets up `breeze` CLI inside sandbox |
 | Sandbox env var injection | Implemented | `packages/shared/src/sandbox/config.ts` | Env vars passed at sandbox boot |
 | OpenCode plugin injection | Implemented | `packages/shared/src/sandbox/config.ts:PLUGIN_MJS` | SSE plugin template string |
 | Snapshot version key | Implemented | `packages/shared/src/sandbox/version-key.ts` | Deterministic snapshot versioning |
@@ -54,14 +54,14 @@
 | Session pause | Implemented | `apps/web/src/server/routers/sessions.ts:pause` | Pauses sandbox via provider |
 | Session resume | Implemented | `apps/web/src/server/routers/sessions.ts:resume` | Resumes from snapshot |
 | Session snapshot | Implemented | `apps/web/src/server/routers/sessions.ts:snapshot` | Saves current state |
-| Gateway session creation | Implemented | `apps/gateway/src/api/proliferate/http/sessions/session-creator.ts` | HTTP route + provider orchestration |
+| Gateway session creation | Implemented | `apps/gateway/src/api/breeze/http/sessions/session-creator.ts` | HTTP route + provider orchestration |
 | Gateway hub manager | Implemented | `apps/gateway/src/hub/manager/hub-manager.ts` | Creates/retrieves session hubs |
 | Session hub | Implemented | `apps/gateway/src/hub/session-hub.ts` | Per-session runtime management |
 | Session runtime | Implemented | `apps/gateway/src/hub/session-runtime.ts` | Runtime state coordination |
 | Event processor | Implemented | `apps/gateway/src/hub/session/runtime/event-processor.ts` | Processes sandbox SSE events |
-| WebSocket streaming | Implemented | `apps/gateway/src/api/proliferate/ws/` | Bidirectional real-time |
-| HTTP message route | Implemented | `apps/gateway/src/api/proliferate/http/session/runtime/message.ts` | `POST /:sessionId/message` |
-| Session status route | Implemented | `apps/gateway/src/api/proliferate/http/sessions/routes.ts` | `GET /sessions/:sessionId/status` |
+| WebSocket streaming | Implemented | `apps/gateway/src/api/breeze/ws/` | Bidirectional real-time |
+| HTTP message route | Implemented | `apps/gateway/src/api/breeze/http/session/runtime/message.ts` | `POST /:sessionId/message` |
+| Session status route | Implemented | `apps/gateway/src/api/breeze/http/sessions/routes.ts` | `GET /sessions/:sessionId/status` |
 | SSE bridge to OpenCode | Implemented | `apps/gateway/src/hub/session/runtime/sse-client.ts` | Connects gateway to sandbox OpenCode |
 | Session migration controller | Implemented | `apps/gateway/src/hub/session/migration/migration-controller.ts` | Auto-migration on sandbox expiry |
 | Preview/sharing URLs | Implemented | `apps/web/src/app/preview/[id]/page.tsx` | Public preview via `previewTunnelUrl` |
@@ -76,7 +76,7 @@
 | Gateway auth middleware | Implemented | `apps/gateway/src/server/middleware/auth/require-auth.ts` | Token verification |
 | Gateway CORS | Implemented | `apps/gateway/src/server/middleware/transport/cors.ts` | CORS policy |
 | Gateway error handler | Implemented | `apps/gateway/src/server/middleware/errors/error-handler.ts` | Centralized error handling |
-| Gateway request logging | Implemented | `apps/gateway/src/` | pino-http via `@proliferate/logger` |
+| Gateway request logging | Implemented | `apps/gateway/src/` | pino-http via `@breeze/logger` |
 | Session telemetry in list rows | Implemented | `apps/web/src/components/sessions/session-card.tsx` | latestTask subtitle, outcome badge, PR indicator, compact metrics, dedicated configuration column |
 | Session peek drawer (URL-routable) | Implemented | `apps/web/src/components/sessions/session-peek-drawer.tsx` | `?peek=sessionId` URL param on sessions page |
 | Summary markdown sanitization | Implemented | `apps/web/src/components/ui/sanitized-markdown.tsx` | AST-based via rehype-sanitize |
@@ -167,8 +167,8 @@
 | Risk classification (read/write/danger) | Implemented | `packages/services/src/actions/db.ts` | Three-level risk model |
 | Action grants | Implemented | `packages/services/src/actions/grants.ts` | Scoped reusable permissions with call budgets |
 | Grant CRUD + evaluation | Implemented | `packages/services/src/actions/grants.ts` | Create, list, evaluate, revoke |
-| Gateway action routes | Implemented | `apps/gateway/src/api/proliferate/http/` | Invoke, approve, deny, list, grants |
-| Provider guide/bootstrap | Implemented | `apps/gateway/src/api/proliferate/http/` | `GET /:sessionId/actions/guide/:integration` |
+| Gateway action routes | Implemented | `apps/gateway/src/api/breeze/http/` | Invoke, approve, deny, list, grants |
+| Provider guide/bootstrap | Implemented | `apps/gateway/src/api/breeze/http/` | `GET /:sessionId/actions/guide/:integration` |
 | Linear adapter | Implemented | `packages/services/src/actions/adapters/linear.ts` | Linear API operations |
 | Sentry adapter | Implemented | `packages/services/src/actions/adapters/sentry.ts` | Sentry API operations |
 | Slack adapter | Implemented | `packages/services/src/actions/adapters/slack.ts` | Slack `send_message` action via `chat.postMessage` |
@@ -176,7 +176,7 @@
 | Sandbox-MCP grants handler | Implemented | `packages/sandbox-mcp/src/actions-grants.ts` | Grant handling inside sandbox |
 | Actions list (web) | Implemented | `apps/web/src/server/routers/actions.ts` | Org-level actions inbox (oRPC route) |
 | Inline attention inbox tray | Implemented | `apps/web/src/components/coding-session/inbox-tray.tsx`, `apps/web/src/hooks/use-attention-inbox.ts` | Merges WS approvals, org-polled approvals, and pending runs into inline tray in thread |
-| Connector-backed action sources (`remote_http` MCP via Actions) | Implemented | `packages/services/src/actions/connectors/`, `apps/gateway/src/api/proliferate/http/actions.ts` | Gateway-mediated remote MCP connectors through Actions pipeline (connector source: org-scoped `org_connectors` table) |
+| Connector-backed action sources (`remote_http` MCP via Actions) | Implemented | `packages/services/src/actions/connectors/`, `apps/gateway/src/api/breeze/http/actions.ts` | Gateway-mediated remote MCP connectors through Actions pipeline (connector source: org-scoped `org_connectors` table) |
 | MCP connector 404 session recovery (re-init + retry-once) | Implemented | `packages/services/src/actions/connectors/client.ts:callConnectorTool` | Stateless per call; SDK handles session ID internally; 404 triggers fresh re-init |
 
 ---
@@ -227,7 +227,7 @@
 | Effective service commands | Implemented | `apps/web/src/server/routers/configurations.ts:getEffectiveServiceCommands` | Resolved config |
 | Base snapshot builds | Implemented | `apps/worker/src/base-snapshots/index.ts` | Worker queue, deduplication |
 | Configuration snapshot builds | Implemented | `apps/worker/src/configuration-snapshots/index.ts` | Multi-repo, tightly coupled to configuration creation |
-| Configuration resolver | Implemented | `apps/gateway/src/api/proliferate/http/sessions/configuration-resolver.ts` | Resolves config at session start |
+| Configuration resolver | Implemented | `apps/gateway/src/api/breeze/http/sessions/configuration-resolver.ts` | Resolves config at session start |
 | Service commands persistence | Implemented | `packages/db/src/schema/configurations.ts:serviceCommands` | JSONB on configurations |
 | Env file persistence | Implemented | `packages/db/src/schema/configurations.ts:envFiles` | JSONB on configurations |
 | Configuration connector configuration (deprecated) | Deprecated | `packages/db/src/schema/configurations.ts:connectors` | Legacy JSONB on configurations table; migrated to org-scoped `org_connectors` table via `0022_org_connectors.sql` |
@@ -317,7 +317,7 @@
 | Checkout flow | Implemented | `apps/web/src/server/routers/billing.ts:startCheckout` | Initiate payment |
 | Credit usage | Implemented | `apps/web/src/server/routers/billing.ts:useCredits` | Deduct credits |
 | Usage metering | Implemented | `packages/services/src/billing/metering.ts` | Real-time compute metering |
-| Credit gating | Implemented | `packages/shared/src/billing/gating.ts`, `packages/services/src/billing/gate.ts`, `apps/gateway/src/api/proliferate/http/sessions/routes.ts` | Enforced in oRPC session creation, gateway session creation, setup sessions, and runtime resume |
+| Credit gating | Implemented | `packages/shared/src/billing/gating.ts`, `packages/services/src/billing/gate.ts`, `apps/gateway/src/api/breeze/http/sessions/routes.ts` | Enforced in oRPC session creation, gateway session creation, setup sessions, and runtime resume |
 | Shadow balance | Implemented | `packages/services/src/billing/shadow-balance.ts` | Fast balance approximation |
 | Org pause on zero balance | Implemented | `packages/services/src/billing/org-pause.ts` | Auto-pause all sessions |
 | Trial credits | Implemented | `packages/services/src/billing/trial-activation.ts` | Auto-provision on signup |

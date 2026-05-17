@@ -10,8 +10,8 @@
  * - Nightly reconciliation (00:00 UTC)
  */
 
-import { env } from "@proliferate/environment/server";
-import type { Logger } from "@proliferate/logger";
+import { env } from "@breeze/environment/server";
+import type { Logger } from "@breeze/logger";
 import {
 	createBillingFastReconcileQueue,
 	createBillingFastReconcileWorker,
@@ -32,7 +32,7 @@ import {
 	createBillingSnapshotCleanupQueue,
 	createBillingSnapshotCleanupWorker,
 	getConnectionOptions,
-} from "@proliferate/queue";
+} from "@breeze/queue";
 import { processFastReconcileJob } from "../jobs/billing/fast-reconcile.job";
 import { processGraceJob } from "../jobs/billing/grace.job";
 import { processLLMSyncDispatchJob } from "../jobs/billing/llm-sync-dispatcher.job";

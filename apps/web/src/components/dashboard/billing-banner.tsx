@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { useBillingState } from "@/hooks/org/use-billing";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import { AlertOctagon, AlertTriangle, Clock, CreditCard, X } from "lucide-react";
 import { useState } from "react";
 
@@ -42,7 +42,7 @@ export function BillingBanner() {
 					asChild
 					className="h-7 px-3 bg-destructive-foreground/10 hover:bg-destructive-foreground/20 text-destructive-foreground"
 				>
-					<a href="mailto:support@proliferate.com">Contact Support</a>
+					<a href="mailto:support@breeze.engineer">Contact Support</a>
 				</Button>
 			</div>
 		);

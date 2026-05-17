@@ -3,7 +3,7 @@
 ## 1. Scope & Purpose
 
 ### In Scope
-- In-sandbox `proliferate` CLI behavior provided by `packages/sandbox-mcp`
+- In-sandbox `breeze` CLI behavior provided by `packages/sandbox-mcp`
 - Service management commands (`services list|start|stop|restart|logs|expose`)
 - Env spec application and scrub commands (`env apply|scrub`)
 - Actions commands against gateway (`actions list|guide|run`)
@@ -15,7 +15,7 @@
 - Provider sandbox boot internals (`sandbox-providers.md`)
 
 ### Mental Models
-- `proliferate` in this repo is a sandbox-side operator CLI, not a user-installed desktop CLI.
+- `breeze` in this repo is a sandbox-side operator CLI, not a user-installed desktop CLI.
 - Services/env commands call sandbox-mcp HTTP endpoints (`127.0.0.1:4000`).
 - Actions commands call gateway endpoints using session-scoped auth.
 - The CLI is a thin transport layer over sandbox and gateway APIs.
@@ -42,7 +42,7 @@
 
 ### 2.4 Auth and Endpoints
 - Sandbox API commands require `SANDBOX_MCP_AUTH_TOKEN` (or service token fallback).
-- Actions commands require `PROLIFERATE_GATEWAY_URL` and `PROLIFERATE_SESSION_ID`.
+- Actions commands require `BREEZE_GATEWAY_URL` and `BREEZE_SESSION_ID`.
 - Token resolution happens server-side for provider integrations.
 
 ---
@@ -107,8 +107,8 @@ Evidence:
 - `packages/sandbox-mcp/src/api/routes/services-routes.ts`
 
 ### 6.3 Service Runtime Invariants
-- Service runtime state persists in `/tmp/proliferate/state.json`.
-- Logs are persisted under `/tmp/proliferate/logs`.
+- Service runtime state persists in `/tmp/breeze/state.json`.
+- Logs are persisted under `/tmp/breeze/logs`.
 - Exposed port updates write caddy user snippet and signal reload.
 
 Evidence:
@@ -123,7 +123,7 @@ Evidence:
 | Dependency | Direction | Interface | Notes |
 |---|---|---|---|
 | `sandbox-providers.md` | provider -> sandbox-mcp | sidecar startup and env wiring | Defines runtime boot contracts |
-| `actions.md` | CLI -> Gateway | `/proliferate/:sessionId/actions/*` | Approval and invoke lifecycle |
+| `actions.md` | CLI -> Gateway | `/breeze/:sessionId/actions/*` | Approval and invoke lifecycle |
 | `repos-prebuilds.md` | env/app -> workspace | env spec path resolution | Workspace safety constraints |
 
 ### Security

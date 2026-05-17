@@ -8,13 +8,12 @@
 import { isEmailEnabled, sendIntegrationRequestEmail } from "@/lib/infra/email";
 import { logger } from "@/lib/infra/logger";
 import { sendSlackConnectInvite } from "@/lib/integrations/slack";
-import { ORPCError } from "@orpc/server";
-import { connectors, integrations } from "@proliferate/services";
+import { connectors, integrations } from "@breeze/services";
 import {
 	ConnectorAuthSchema,
 	ConnectorConfigSchema,
 	ConnectorRiskPolicySchema,
-} from "@proliferate/shared/connectors";
+} from "@breeze/shared/connectors";
 import {
 	GitHubStatusSchema,
 	IntegrationSchema,
@@ -23,7 +22,8 @@ import {
 	LinearMetadataSchema,
 	SentryMetadataSchema,
 	SlackStatusSchema,
-} from "@proliferate/shared/contracts/integrations";
+} from "@breeze/shared/contracts/integrations";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

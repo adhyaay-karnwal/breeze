@@ -38,7 +38,7 @@ let managerPromise: Promise<MemoryManagerLike> | null = null;
 async function getManager() {
 	if (!managerPromise) {
 		managerPromise = (async () => {
-			const mod = require("/home/user/.proliferate/sandbox-memory.cjs") as {
+			const mod = require("/home/user/.breeze/sandbox-memory.cjs") as {
 				MemoryManager: new (opts: {
 					memoryDir: string;
 					dbPath: string;

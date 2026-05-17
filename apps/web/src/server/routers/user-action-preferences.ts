@@ -6,8 +6,8 @@
  */
 
 import { isOrgActionDenied } from "@/lib/integrations/action-permissions";
+import { orgs, userActionPreferences } from "@breeze/services";
 import { ORPCError } from "@orpc/server";
-import { orgs, userActionPreferences } from "@proliferate/services";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

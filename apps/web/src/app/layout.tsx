@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-	title: "Proliferate | The Autonomous Engineering Organization",
+	title: "Breeze | The Autonomous Engineering Organization",
 	description:
 		"A single workspace for coding agents, engineers, and operators to build together, faster. Ship features, fix bugs, and automate maintenance with AI agents.",
 	keywords: [
@@ -20,25 +20,25 @@ export const metadata: Metadata = {
 		"AI code generation",
 		"engineering automation",
 	],
-	authors: [{ name: "Proliferate" }],
-	creator: "Proliferate",
-	publisher: "Proliferate",
+	authors: [{ name: "Breeze" }],
+	creator: "Breeze",
+	publisher: "Breeze",
 
 	// Open Graph meta tags for social media sharing
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		url: "https://proliferate.com",
-		title: "Proliferate | The Autonomous Engineering Organization",
+		url: "https://breeze.engineer",
+		title: "Breeze | The Autonomous Engineering Organization",
 		description:
 			"A single workspace for coding agents, engineers, and operators to build together, faster. Ship features, fix bugs, and automate maintenance with AI agents.",
-		siteName: "Proliferate",
+		siteName: "Breeze",
 		images: [
 			{
 				url: "https://d1uh4o7rpdqkkl.cloudfront.net/og.png?v=3",
 				width: 1200,
 				height: 630,
-				alt: "Proliferate - The Autonomous Engineering Organization",
+				alt: "Breeze - The Autonomous Engineering Organization",
 				type: "image/png",
 			},
 		],
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
 	// Twitter Card meta tags
 	twitter: {
 		card: "summary_large_image",
-		site: "@proliferateai",
-		creator: "@proliferateai",
-		title: "Proliferate | The Autonomous Engineering Organization",
+		site: "@breezeengineer",
+		creator: "@breezeengineer",
+		title: "Breeze | The Autonomous Engineering Organization",
 		description:
 			"A single workspace for coding agents, engineers, and operators to build together, faster.",
 		images: ["https://d1uh4o7rpdqkkl.cloudfront.net/og.png?v=3"],

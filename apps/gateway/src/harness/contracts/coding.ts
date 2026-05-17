@@ -1,5 +1,5 @@
-import type { Logger } from "@proliferate/logger";
-import type { Message } from "@proliferate/shared";
+import type { Logger } from "@breeze/logger";
+import type { Message } from "@breeze/shared";
 import type {
 	CodingHarnessCollectOutputsInput,
 	CodingHarnessInterruptInput,
@@ -10,7 +10,7 @@ import type {
 	CodingHarnessStartInput,
 	CodingHarnessStartResult,
 	RuntimeDaemonEvent,
-} from "@proliferate/shared/contracts/harness";
+} from "@breeze/shared/contracts/harness";
 import type { GatewayEnv } from "../../lib/env";
 
 export type {
@@ -24,7 +24,7 @@ export type {
 	CodingHarnessShutdownInput,
 	CodingHarnessSendPromptInput,
 	CodingHarnessCollectOutputsInput,
-} from "@proliferate/shared/contracts/harness";
+} from "@breeze/shared/contracts/harness";
 
 export interface CodingHarnessStreamInput {
 	baseUrl: string;
@@ -35,7 +35,7 @@ export interface CodingHarnessStreamInput {
 	logger: Logger;
 	onEvent: (event: RuntimeDaemonEvent) => void;
 	onDaemonEnvelope?: (
-		event: import("@proliferate/shared/contracts/harness").DaemonStreamEnvelope,
+		event: import("@breeze/shared/contracts/harness").DaemonStreamEnvelope,
 	) => void;
 	onDisconnect: (reason: string) => void;
 }

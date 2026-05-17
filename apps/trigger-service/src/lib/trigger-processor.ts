@@ -1,5 +1,5 @@
-import { automations, runs, triggers, wakes } from "@proliferate/services";
-import type { TriggerDefinition, TriggerEvent } from "@proliferate/triggers";
+import { automations, runs, triggers, wakes } from "@breeze/services";
+import type { TriggerDefinition, TriggerEvent } from "@breeze/triggers";
 import { logger as rootLogger } from "./logger.js";
 
 const logger = rootLogger.child({ module: "trigger-processor" });

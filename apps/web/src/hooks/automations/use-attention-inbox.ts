@@ -3,8 +3,8 @@
 import { useOrgActions } from "@/hooks/actions/use-actions";
 import { useOrgPendingRuns } from "@/hooks/automations/use-automations";
 import { orpc } from "@/lib/infra/orpc";
-import type { ActionApprovalRequestMessage } from "@proliferate/shared";
-import type { PendingRunSummary } from "@proliferate/shared/contracts/automations";
+import type { ActionApprovalRequestMessage } from "@breeze/shared";
+import type { PendingRunSummary } from "@breeze/shared/contracts/automations";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 

@@ -2,7 +2,7 @@
 
 import { captureUtms, getCookieDomain, getUtms } from "@/lib/analytics/utm";
 import { useSession } from "@/lib/auth/client";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import posthog from "posthog-js";
 import { PostHogProvider as PHProvider, usePostHog } from "posthog-js/react";
 import { useEffect } from "react";

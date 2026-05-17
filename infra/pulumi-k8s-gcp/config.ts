@@ -13,7 +13,7 @@ export const zone = cfg.get("zone") ?? gcp.config.zone ?? "us-west1-a";
 export const location = cfg.get("location") ?? region;
 
 export const stack = pulumi.getStack();
-export const projectName = cfg.get("projectName") ?? "proliferate";
+export const projectName = cfg.get("projectName") ?? "breeze";
 export const namePrefix = `${projectName}-${stack}`;
 
 export const networkName = cfg.get("networkName") ?? `${namePrefix}-vpc`;
@@ -32,8 +32,8 @@ export const nodeInitialCount = cfg.getNumber("nodeInitialCount") ?? 1;
 export const deployApps = cfg.getBoolean("deployApps") ?? false;
 export const imageTag = cfg.get("imageTag") ?? "latest";
 
-export const dbName = cfg.get("dbName") ?? "proliferate";
-export const dbUsername = cfg.get("dbUsername") ?? "proliferate";
+export const dbName = cfg.get("dbName") ?? "breeze";
+export const dbUsername = cfg.get("dbUsername") ?? "breeze";
 export const dbPassword = cfg.requireSecret("dbPassword");
 export const dbTier = cfg.get("dbTier") ?? "db-custom-2-4096";
 export const dbDiskSizeGb = cfg.getNumber("dbDiskSizeGb") ?? 20;
@@ -49,7 +49,7 @@ export const artifactRepositoryId = cfg.get("artifactRepositoryId") ?? `${namePr
 
 export const bucketName = cfg.get("bucketName") ?? `${namePrefix}-verification`;
 
-export const namespace = cfg.get("namespace") ?? "proliferate";
+export const namespace = cfg.get("namespace") ?? "breeze";
 export const ingressClassName = cfg.get("ingressClassName") ?? "nginx";
 export const ingressHost = cfg.get("ingressHost") ?? "";
 export const ingressAnnotations = cfg.getObject<Record<string, string>>("ingressAnnotations") ?? {};

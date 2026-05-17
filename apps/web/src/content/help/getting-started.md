@@ -31,4 +31,4 @@ Click **New Session**, pick your snapshot, and start building. The AI agent can 
 
 - Click the **?** icon anywhere to learn more about that feature
 - Check out the other help topics in this menu
-- Something broken? Let us know at support@proliferate.com
+- Something broken? Let us know at support@breeze.engineer

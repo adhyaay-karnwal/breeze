@@ -1,7 +1,7 @@
 "use client";
 
 import { makeAssistantToolUI } from "@assistant-ui/react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 interface ServiceCommand {
 	name: string;
@@ -32,13 +32,11 @@ export const SaveServiceCommandsToolUI = makeAssistantToolUI<SaveServiceCommands
 		const commands = args?.commands ?? [];
 
 		if (isRunning) {
-			return <ProliferateToolCard label="Saving service commands..." status="running" />;
+			return <BreezeToolCard label="Saving service commands..." status="running" />;
 		}
 
 		if (isError(result)) {
-			return (
-				<ProliferateToolCard label="Save service commands" status="error" errorMessage={result} />
-			);
+			return <BreezeToolCard label="Save service commands" status="error" errorMessage={result} />;
 		}
 
 		const count = commands.length;
@@ -46,9 +44,9 @@ export const SaveServiceCommandsToolUI = makeAssistantToolUI<SaveServiceCommands
 		const names = commands.map((c) => c.name).join(", ");
 
 		return (
-			<ProliferateToolCard label={label} status="success">
+			<BreezeToolCard label={label} status="success">
 				{names && <span>{names}</span>}
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

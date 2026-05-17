@@ -12,5 +12,5 @@ Shared libraries used by the runnable services in `../apps`.
 
 ## Docs
 
-- https://docs.proliferate.com
+- https://docs.breeze.engineer
 - Agent guidelines: `../AGENTS.md`

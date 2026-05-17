@@ -122,7 +122,7 @@ export default function IntegrationsPage() {
 				<>
 					Connect services and tools to extend your agents&apos; capabilities.{" "}
 					<a
-						href="https://docs.proliferate.com/integrations"
+						href="https://docs.breeze.engineer/integrations"
 						target="_blank"
 						rel="noopener noreferrer"
 						className="underline hover:text-foreground transition-colors"
@@ -386,7 +386,7 @@ export default function IntegrationsPage() {
 							</p>
 							<div className="flex items-center gap-0">
 								<span className="bg-muted px-3 h-8 flex items-center text-xs text-muted-foreground border border-r-0 border-input rounded-l-md">
-									proliferate-
+									breeze-
 								</span>
 								<Input
 									placeholder="your-company"

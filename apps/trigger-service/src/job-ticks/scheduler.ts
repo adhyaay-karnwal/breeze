@@ -11,8 +11,8 @@ import {
 	type WorkerJobTickPayload,
 	createWorkerJobTickQueue,
 	createWorkerJobTickWorker,
-} from "@proliferate/queue";
-import { workerJobs, workers as workersService } from "@proliferate/services";
+} from "@breeze/queue";
+import { workerJobs, workers as workersService } from "@breeze/services";
 import { logger as rootLogger } from "../lib/logger.js";
 import { processJobTick } from "./processor.js";
 

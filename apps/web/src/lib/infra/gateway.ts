@@ -2,7 +2,7 @@
 // The gateway URL is computed from session ID rather than stored in the database
 // Uses NEXT_PUBLIC_ prefix so it's available on both client and server
 
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 
 export const GATEWAY_URL = env.NEXT_PUBLIC_GATEWAY_URL;
 

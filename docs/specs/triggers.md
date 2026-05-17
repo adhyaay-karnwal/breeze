@@ -64,7 +64,7 @@
 
 ### Provider Contracts (Current vs Target)
 - Current trigger-service runtime uses class-based `WebhookTrigger` / `PollingTrigger` and a runtime registry.
-- Target architecture defines `ProviderTriggers` + `NormalizedTriggerEvent` in `@proliferate/providers`.
+- Target architecture defines `ProviderTriggers` + `NormalizedTriggerEvent` in `@breeze/providers`.
 - Both coexist; trigger-service runtime still depends on class-based registry.
 - Evidence: `packages/triggers/src/service/base.ts`, `packages/triggers/src/service/registry.ts`, `packages/providers/src/types.ts`.
 
@@ -174,7 +174,7 @@ _Sections 3 (File Tree) and 4 (Data Models) are intentionally removed. Code and 
   Evidence: `apps/trigger-service/src/index.ts`, `packages/triggers/src/service/register.ts`.
 - Invariant: Runtime-registered defaults are GitHub/Linear/Sentry webhooks, plus Gmail polling only when Composio API key is configured.
   Evidence: `packages/triggers/src/service/register.ts`.
-- Rule: `ProviderTriggers` in `@proliferate/providers` is the target architecture, but trigger-service currently runs class-based adapters.
+- Rule: `ProviderTriggers` in `@breeze/providers` is the target architecture, but trigger-service currently runs class-based adapters.
   Evidence: `packages/providers/src/types.ts`, `packages/triggers/src/service/base.ts`.
 
 ### 6.9 Scheduled and Manual Trigger Invariants (Status: Implemented)
@@ -211,8 +211,8 @@ _Sections 3 (File Tree) and 4 (Data Models) are intentionally removed. Code and 
 | Integrations | Triggers → Integrations | `findByConnectionIdAndProvider()`, `findById()` | Nango `connectionId` resolution and poll-group connection lookup. |
 | Queue/BullMQ | Triggers → Queue | `createWebhookInboxWorker`, `createPollGroupWorker`, repeatables | Inbox drain, poll groups, and GC scheduling. |
 | Redis | Triggers → Redis | `REDIS_KEYS.pollGroupLock()`, `REDIS_KEYS.tickLock()` | Distributed locks for per-group poll mutual exclusion and global tick-cycle coordination. |
-| Providers Runtime | Trigger-service → `@proliferate/triggers` | `registry`, `WebhookTrigger`, `PollingTrigger` | Current runtime matching/parsing contract. |
-| Providers Target Contract | Triggers ↔ `@proliferate/providers` | `ProviderTriggers`, `NormalizedTriggerEvent` | Migration target; not yet trigger-service runtime path. |
+| Providers Runtime | Trigger-service → `@breeze/triggers` | `registry`, `WebhookTrigger`, `PollingTrigger` | Current runtime matching/parsing contract. |
+| Providers Target Contract | Triggers ↔ `@breeze/providers` | `ProviderTriggers`, `NormalizedTriggerEvent` | Migration target; not yet trigger-service runtime path. |
 | Web App Lifecycle Webhooks | Web app ↔ Integrations | `/api/webhooks/nango`, `/api/webhooks/github-app` | Handles auth/sync and installation lifecycle, not trigger event execution. |
 
 ### Security & Auth

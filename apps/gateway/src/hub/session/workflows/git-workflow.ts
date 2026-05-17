@@ -1,4 +1,4 @@
-import type { GitResultCode } from "@proliferate/shared";
+import type { GitResultCode } from "@breeze/shared";
 import type { WebSocket } from "ws";
 import type { GitOperations } from "../git/git-operations";
 

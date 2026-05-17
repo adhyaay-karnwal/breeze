@@ -81,7 +81,7 @@ Both gateway runtime and worker build paths prefer repo-linked integrations, the
 ### Do
 - Route all DB access through services (`packages/services/src/repos`, `packages/services/src/configurations`, `packages/services/src/base-snapshots`).
 - Use org checks that traverse repo ownership (`configurationBelongsToOrg`, `repoExists`) before serving configuration/repo data.
-- Use shared command parsing/resolution from `@proliferate/shared/sandbox` (`parseServiceCommands`, `resolveServiceCommands`).
+- Use shared command parsing/resolution from `@breeze/shared/sandbox` (`parseServiceCommands`, `resolveServiceCommands`).
 - Treat snapshot job dispatch as fire-and-forget; make queue failures non-fatal to repo/config creation (`requestConfigurationSnapshotBuild`).
 - Use status transition helpers in `packages/services/src/configurations/db.ts` rather than ad-hoc updates in worker code.
 

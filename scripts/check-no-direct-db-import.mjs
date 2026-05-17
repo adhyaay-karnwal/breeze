@@ -9,7 +9,7 @@ const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)),
 const scanExtensions = new Set([".ts", ".tsx", ".js", ".jsx"]);
 
 const dbImportPattern =
-	/(?:from|import)\s+['"]@proliferate\/db(?:\/[^'"]*)?['"]|(?:import|require)\s*\(\s*['"]@proliferate\/db(?:\/[^'"]*)?['"]\s*\)/g;
+	/(?:from|import)\s+['"]@breeze\/db(?:\/[^'"]*)?['"]|(?:import|require)\s*\(\s*['"]@breeze\/db(?:\/[^'"]*)?['"]\s*\)/g;
 
 function lineFromIndex(content, index) {
 	let line = 1;
@@ -90,15 +90,15 @@ async function main() {
 	}
 
 	if (findings.length === 0) {
-		console.log("No direct @proliferate/db imports found outside allowed packages.");
+		console.log("No direct @breeze/db imports found outside allowed packages.");
 		return;
 	}
 
-	console.error("Found forbidden direct @proliferate/db imports:");
+	console.error("Found forbidden direct @breeze/db imports:");
 	for (const finding of findings) {
 		console.error(`- ${finding.file}:${finding.line} ${finding.snippet}`);
 	}
-	console.error("\nImport from @proliferate/services instead of @proliferate/db directly.");
+	console.error("\nImport from @breeze/services instead of @breeze/db directly.");
 	console.error("DB operations must live in packages/services/src/**/db.ts files.");
 	process.exit(1);
 }

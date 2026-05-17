@@ -1,4 +1,4 @@
-interface ProliferateCommandSegment {
+interface BreezeCommandSegment {
 	type: "command";
 	command: string;
 	actionLabel: string;
@@ -10,9 +10,9 @@ interface MarkdownSegment {
 	text: string;
 }
 
-export type AssistantContentSegment = ProliferateCommandSegment | MarkdownSegment;
+export type AssistantContentSegment = BreezeCommandSegment | MarkdownSegment;
 
-export function getProliferateCommandFromLine(line: string): string | null {
+export function getBreezeCommandFromLine(line: string): string | null {
 	const trimmed = line.trim();
 	if (!trimmed) return null;
 
@@ -20,12 +20,12 @@ export function getProliferateCommandFromLine(line: string): string | null {
 		.replace(/^[-*]\s+/, "")
 		.replace(/^\d+\.\s+/, "")
 		.replace(/^`+|`+$/g, "");
-	const match = unwrapped.match(/(?:^|\()((?:@?proliferate)\s+[^\n)`]+)/i);
+	const match = unwrapped.match(/(?:^|\()((?:@?breeze)\s+[^\n)`]+)/i);
 	if (!match) return null;
 	return match[1].replace(/^@/i, "").trim();
 }
 
-export function getProliferateActionLabel(command: string): string {
+export function getBreezeActionLabel(command: string): string {
 	const normalized = command.toLowerCase();
 	if (normalized.includes("actions list")) return "List actions";
 	if (normalized.includes("sentry action")) return "Run Sentry action";
@@ -33,7 +33,7 @@ export function getProliferateActionLabel(command: string): string {
 		return "Create pull request";
 	if (normalized.includes("env set")) return "Set environment values";
 	if (normalized.includes("save_snapshot")) return "Save snapshot";
-	return "Proliferate command";
+	return "Breeze command";
 }
 
 export function parseAssistantContentSegments(text: string): AssistantContentSegment[] {
@@ -50,7 +50,7 @@ export function parseAssistantContentSegments(text: string): AssistantContentSeg
 	let index = 0;
 	while (index < lines.length) {
 		const line = lines[index];
-		const command = getProliferateCommandFromLine(line);
+		const command = getBreezeCommandFromLine(line);
 		if (!command) {
 			markdownBuffer.push(line);
 			index += 1;
@@ -72,7 +72,7 @@ export function parseAssistantContentSegments(text: string): AssistantContentSeg
 		segments.push({
 			type: "command",
 			command,
-			actionLabel: getProliferateActionLabel(command),
+			actionLabel: getBreezeActionLabel(command),
 			url: nextUrl,
 		});
 		index += 1;

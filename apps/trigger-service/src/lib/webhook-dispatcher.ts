@@ -1,5 +1,5 @@
-import { runtimeEnv } from "@proliferate/environment/runtime";
-import { getRawBody, parseNangoForwardWebhook, verifyNangoSignature } from "@proliferate/triggers";
+import { runtimeEnv } from "@breeze/environment/runtime";
+import { getRawBody, parseNangoForwardWebhook, verifyNangoSignature } from "@breeze/triggers";
 import type { Request } from "express";
 
 export interface WebhookDispatchResult {

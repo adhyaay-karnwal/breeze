@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/display/utils";
-import type { Session } from "@proliferate/shared/contracts/sessions";
-import type { OverallWorkState } from "@proliferate/shared/sessions";
+import type { Session } from "@breeze/shared/contracts/sessions";
+import type { OverallWorkState } from "@breeze/shared/sessions";
 import { CheckCircle2, Loader2, Pause, XCircle } from "lucide-react";
 
 // ---------------------------------------------------------------------------

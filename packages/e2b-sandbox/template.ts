@@ -1,7 +1,7 @@
 import { Template } from "e2b";
 
 /**
- * Proliferate Base Template
+ * Breeze Base Template
  *
  * Full development environment with:
  * - Node.js 20 with pnpm/yarn

@@ -7,13 +7,13 @@
  */
 
 import { randomUUID } from "crypto";
-import { env } from "@proliferate/environment/server";
-import { createSyncClient } from "@proliferate/gateway-clients";
-import type { AgentConfig, SandboxProviderType } from "@proliferate/shared";
-import { getDefaultAgentConfig, isValidModelId, parseModelId } from "@proliferate/shared";
-import type { Session } from "@proliferate/shared/contracts/sessions";
-import { getSandboxProvider } from "@proliferate/shared/providers";
-import { getBlockedReasonText, sanitizePromptSnippet } from "@proliferate/shared/sessions";
+import { env } from "@breeze/environment/server";
+import { createSyncClient } from "@breeze/gateway-clients";
+import type { AgentConfig, SandboxProviderType } from "@breeze/shared";
+import { getDefaultAgentConfig, isValidModelId, parseModelId } from "@breeze/shared";
+import type { Session } from "@breeze/shared/contracts/sessions";
+import { getSandboxProvider } from "@breeze/shared/providers";
+import { getBlockedReasonText, sanitizePromptSnippet } from "@breeze/shared/sessions";
 import * as billing from "../billing";
 import * as configurations from "../configurations";
 import { toIsoString } from "../db/serialize";

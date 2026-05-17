@@ -41,7 +41,7 @@ export function StepSlackConnect({
 
 		try {
 			await slackConnect.mutateAsync({
-				channelName: `proliferate-${channelName.trim()}`,
+				channelName: `breeze-${channelName.trim()}`,
 			});
 		} catch (err) {
 			console.error("Failed to setup Slack Connect:", err);
@@ -87,7 +87,7 @@ export function StepSlackConnect({
 						<div className="space-y-4">
 							<div className="flex items-center gap-0">
 								<span className="bg-muted px-3 h-11 flex items-center text-sm text-muted-foreground border border-r-0 border-input rounded-l-lg">
-									proliferate-
+									breeze-
 								</span>
 								<Input
 									ref={inputRef}

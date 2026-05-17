@@ -4,12 +4,12 @@
  * Business rules around worker lifecycle, wake/run orchestration, and run events.
  */
 
-import { env } from "@proliferate/environment/server";
-import { createSyncClient } from "@proliferate/gateway-clients";
-import type { CapabilityMode } from "@proliferate/shared/contracts/actions";
-import type { CoworkerCapabilityInput } from "@proliferate/shared/contracts/automations";
-import { type WorkerStatus, isValidWorkerTransition } from "@proliferate/shared/contracts/workers";
-import { decrypt, getEncryptionKey } from "@proliferate/shared/crypto";
+import { env } from "@breeze/environment/server";
+import { createSyncClient } from "@breeze/gateway-clients";
+import type { CapabilityMode } from "@breeze/shared/contracts/actions";
+import type { CoworkerCapabilityInput } from "@breeze/shared/contracts/automations";
+import { type WorkerStatus, isValidWorkerTransition } from "@breeze/shared/contracts/workers";
+import { decrypt, getEncryptionKey } from "@breeze/shared/crypto";
 import {
 	TemplateIntegrationBindingMismatchError,
 	TemplateIntegrationInactiveError,

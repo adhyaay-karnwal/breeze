@@ -6,7 +6,7 @@
  * notification lifecycle (create, deliver, read, dismiss).
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import {
 	CATEGORY_ROUTING,
 	IMMEDIATE_CATEGORIES,
@@ -15,7 +15,7 @@ import {
 	type NotificationChannel,
 	type NotificationPayload,
 	SUPPRESSION_WINDOW_MS,
-} from "@proliferate/shared/contracts/notifications";
+} from "@breeze/shared/contracts/notifications";
 import * as integrationsService from "../integrations/service";
 import { getServicesLogger } from "../logger";
 import { enqueueOutbox } from "../outbox/service";
@@ -74,7 +74,7 @@ export class SessionNotificationSlackInstallMissingError extends Error {
 export class SessionNotificationSlackUserMissingError extends Error {
 	constructor(email: string) {
 		super(
-			`Could not find a Slack account for ${email}. Make sure you use the same email in Slack and Proliferate.`,
+			`Could not find a Slack account for ${email}. Make sure you use the same email in Slack and Breeze.`,
 		);
 		this.name = "SessionNotificationSlackUserMissingError";
 	}
@@ -141,7 +141,7 @@ export async function subscribeCurrentUserToSessionNotifications(input: {
 	});
 
 	// Send immediate confirmation DM (best-effort — don't fail the subscription if DM fails)
-	const appUrl = env.NEXT_PUBLIC_APP_URL ?? "https://app.proliferate.com";
+	const appUrl = env.NEXT_PUBLIC_APP_URL ?? "https://app.breeze.engineer";
 	const sessionUrl = `${appUrl}/dashboard/sessions/${input.sessionId}`;
 	const title = session.title ?? "Coding Session";
 	try {

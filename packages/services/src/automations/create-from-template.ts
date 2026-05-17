@@ -8,7 +8,7 @@
  */
 
 import { randomBytes, randomUUID } from "crypto";
-import type { AutomationListItem } from "@proliferate/shared/contracts/automations";
+import type { AutomationListItem } from "@breeze/shared/contracts/automations";
 import { automationConnections, automations, eq, getDb, triggers } from "../db/client";
 import { findForBindingValidation } from "../integrations/service";
 import { getTemplateById } from "../templates/catalog";

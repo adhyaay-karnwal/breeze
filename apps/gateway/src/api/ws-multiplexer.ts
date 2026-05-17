@@ -7,7 +7,7 @@
 
 import type { IncomingMessage, Server } from "node:http";
 import type { Duplex } from "node:stream";
-import { createLogger } from "@proliferate/logger";
+import { createLogger } from "@breeze/logger";
 
 const logger = createLogger({ service: "gateway" }).child({ module: "ws-mux" });
 

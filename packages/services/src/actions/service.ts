@@ -4,8 +4,8 @@
  * Business logic for agent-initiated external actions.
  */
 
-import { truncateJson } from "@proliferate/providers/helpers/truncation";
-import type { ActionInvocationStatus, CapabilityMode } from "@proliferate/shared/contracts/actions";
+import { truncateJson } from "@breeze/providers/helpers/truncation";
+import type { ActionInvocationStatus, CapabilityMode } from "@breeze/shared/contracts/actions";
 import { getServicesLogger } from "../logger";
 import { getDisabledPreferences } from "../user-action-preferences";
 import type {

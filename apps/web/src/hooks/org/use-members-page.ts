@@ -3,7 +3,7 @@
 import { useOrgMembersAndInvitations } from "@/hooks/org/use-orgs";
 import { organization, useActiveOrganization, useSession } from "@/lib/auth/client";
 import { orpc } from "@/lib/infra/orpc";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 

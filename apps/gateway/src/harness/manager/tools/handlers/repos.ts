@@ -1,5 +1,5 @@
-import type { Logger } from "@proliferate/logger";
-import { configurations } from "@proliferate/services";
+import type { Logger } from "@breeze/logger";
+import { configurations } from "@breeze/services";
 import type { ManagerToolContext } from "../types";
 
 export async function handleListRepos(ctx: ManagerToolContext, log: Logger): Promise<string> {

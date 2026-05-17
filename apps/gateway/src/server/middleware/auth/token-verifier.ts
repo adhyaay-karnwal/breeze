@@ -1,5 +1,5 @@
-import { createLogger } from "@proliferate/logger";
-import { verifyToken as verifyJwt } from "@proliferate/shared";
+import { createLogger } from "@breeze/logger";
+import { verifyToken as verifyJwt } from "@breeze/shared";
 import type { Request } from "express";
 import type { GatewayEnv } from "../../../lib/env";
 import type { AuthResult } from "../../../types";
@@ -23,7 +23,7 @@ const SESSION_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-
  * so fall back to the first URL segment when needed.
  */
 export function getSessionIdForSandboxAuth(req: Request): string | undefined {
-	const paramValue = req.params.proliferateSessionId;
+	const paramValue = req.params.breezeSessionId;
 	if (paramValue && SESSION_ID_PATTERN.test(paramValue)) {
 		return paramValue;
 	}

@@ -5,9 +5,9 @@
  */
 
 import { logger } from "@/lib/infra/logger";
+import { secretFiles } from "@breeze/services";
+import { SecretFileMetaSchema } from "@breeze/shared/contracts/secrets";
 import { ORPCError } from "@orpc/server";
-import { secretFiles } from "@proliferate/services";
-import { SecretFileMetaSchema } from "@proliferate/shared/contracts/secrets";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

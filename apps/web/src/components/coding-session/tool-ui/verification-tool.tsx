@@ -14,7 +14,7 @@ import {
 	type VerificationArgs,
 	type VerificationFile,
 	type VerificationResult,
-} from "@proliferate/shared/verification";
+} from "@breeze/shared/verification";
 import {
 	ChevronDown,
 	ChevronRight,
@@ -27,7 +27,7 @@ import {
 	Video,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 // Get icon for file based on content type
 function getFileIcon(contentType: string) {
@@ -175,7 +175,7 @@ export const VerificationToolUI = makeAssistantToolUI<
 		const fileCount = files.length;
 
 		return (
-			<ProliferateToolCard
+			<BreezeToolCard
 				label="Verification"
 				status={isRunning ? "running" : errorMessage ? "error" : "success"}
 				errorMessage={errorMessage ?? undefined}
@@ -291,7 +291,7 @@ export const VerificationToolUI = makeAssistantToolUI<
 						)}
 					</div>
 				)}
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

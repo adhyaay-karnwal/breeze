@@ -4,8 +4,7 @@
  * Handles organization secrets CRUD operations.
  */
 
-import { ORPCError } from "@orpc/server";
-import { secrets } from "@proliferate/services";
+import { secrets } from "@breeze/services";
 import {
 	BulkImportInputSchema,
 	BulkImportResultSchema,
@@ -13,7 +12,8 @@ import {
 	CheckSecretsResultSchema,
 	CreateSecretInputSchema,
 	SecretSchema,
-} from "@proliferate/shared/contracts/secrets";
+} from "@breeze/shared/contracts/secrets";
+import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { orgProcedure } from "./middleware";
 

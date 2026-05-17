@@ -5,15 +5,15 @@
  * Uses gateway SDK for session creation.
  */
 
-import { env } from "@proliferate/environment/server";
-import type { ServerMessage } from "@proliferate/gateway-clients";
-import { AsyncClient } from "@proliferate/gateway-clients/server";
-import type { AsyncClientDeps } from "@proliferate/gateway-clients/server";
-import type { Logger } from "@proliferate/logger";
-import { ensureSlackReceiver } from "@proliferate/queue";
-import type { SlackMessageJob, SlackReceiverJob } from "@proliferate/queue";
-import { integrations, sessions, workers } from "@proliferate/services";
-import type { ClientSource, WakeOptions } from "@proliferate/shared";
+import { env } from "@breeze/environment/server";
+import type { ServerMessage } from "@breeze/gateway-clients";
+import { AsyncClient } from "@breeze/gateway-clients/server";
+import type { AsyncClientDeps } from "@breeze/gateway-clients/server";
+import type { Logger } from "@breeze/logger";
+import { ensureSlackReceiver } from "@breeze/queue";
+import type { SlackMessageJob, SlackReceiverJob } from "@breeze/queue";
+import { integrations, sessions, workers } from "@breeze/services";
+import type { ClientSource, WakeOptions } from "@breeze/shared";
 import {
 	buildSlackMessageContext,
 	selectConfiguration,

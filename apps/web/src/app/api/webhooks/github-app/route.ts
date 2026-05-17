@@ -7,9 +7,9 @@
  */
 
 import { logger } from "@/lib/infra/logger";
-import { env } from "@proliferate/environment/server";
-import { integrations } from "@proliferate/services";
-import { GitHubProvider } from "@proliferate/triggers";
+import { env } from "@breeze/environment/server";
+import { integrations } from "@breeze/services";
+import { GitHubProvider } from "@breeze/triggers";
 import { NextResponse } from "next/server";
 
 const log = logger.child({ handler: "github-app" });

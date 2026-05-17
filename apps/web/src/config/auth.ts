@@ -1,5 +1,5 @@
 import { GithubIcon, LinearIcon, PostHogIcon, SentryIcon, SlackIcon } from "@/components/ui/icons";
-import { env } from "@proliferate/environment/public";
+import { env } from "@breeze/environment/public";
 import type { CSSProperties, ComponentType, SVGProps } from "react";
 
 export const REQUIRE_EMAIL_VERIFICATION = env.NEXT_PUBLIC_ENFORCE_EMAIL_VERIFICATION;

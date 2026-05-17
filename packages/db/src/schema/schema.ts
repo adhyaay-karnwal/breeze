@@ -19,8 +19,8 @@ import {
 } from "drizzle-orm/pg-core";
 
 // Typed status unions for V1 worker tables.
-// These mirror the canonical types in @proliferate/shared/contracts/entities.ts.
-// Defined inline because @proliferate/db cannot depend on @proliferate/shared.
+// These mirror the canonical types in @breeze/shared/contracts/entities.ts.
+// Defined inline because @breeze/db cannot depend on @breeze/shared.
 type WorkerStatus = "active" | "automations_paused" | "degraded" | "failed" | "archived";
 type WakeEventSource = "tick" | "webhook" | "manual" | "manual_message";
 type WakeEventStatus = "queued" | "claimed" | "consumed" | "coalesced" | "cancelled" | "failed";

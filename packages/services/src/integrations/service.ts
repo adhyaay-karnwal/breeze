@@ -5,10 +5,7 @@
  */
 
 import { randomUUID } from "crypto";
-import type {
-	Integration,
-	IntegrationWithCreator,
-} from "@proliferate/shared/contracts/integrations";
+import type { Integration, IntegrationWithCreator } from "@breeze/shared/contracts/integrations";
 import * as configurationsModule from "../configurations";
 import { decrypt, encrypt, getEncryptionKey } from "../db/crypto";
 import { toIsoString } from "../db/serialize";
@@ -689,7 +686,7 @@ export async function findSlackUserIdByEmail(
 	const botToken = await integrationsDb.getSlackInstallationBotToken(installationId);
 	if (!botToken) return null;
 
-	const { decrypt, getEncryptionKey } = await import("@proliferate/shared/crypto");
+	const { decrypt, getEncryptionKey } = await import("@breeze/shared/crypto");
 	const token = decrypt(botToken, getEncryptionKey());
 
 	try {
@@ -717,7 +714,7 @@ export async function listSlackMembers(
 	const botToken = await integrationsDb.getSlackInstallationBotToken(installationId);
 	if (!botToken) return [];
 
-	const { decrypt, getEncryptionKey } = await import("@proliferate/shared/crypto");
+	const { decrypt, getEncryptionKey } = await import("@breeze/shared/crypto");
 	const token = decrypt(botToken, getEncryptionKey());
 
 	const members: Array<{
@@ -780,7 +777,7 @@ export async function listSlackChannels(
 	const botToken = await integrationsDb.getSlackInstallationBotToken(installationId);
 	if (!botToken) return [];
 
-	const { decrypt, getEncryptionKey } = await import("@proliferate/shared/crypto");
+	const { decrypt, getEncryptionKey } = await import("@breeze/shared/crypto");
 	const token = decrypt(botToken, getEncryptionKey());
 
 	const channels: Array<{ id: string; name: string; isPrivate: boolean }> = [];
@@ -1231,7 +1228,7 @@ export async function sendSlackDm(
 		throw new SlackDmDeliveryError("No bot token for installation");
 	}
 
-	const { decrypt, getEncryptionKey } = await import("@proliferate/shared/crypto");
+	const { decrypt, getEncryptionKey } = await import("@breeze/shared/crypto");
 	const botToken = decrypt(encryptedToken, getEncryptionKey());
 
 	// Open DM channel

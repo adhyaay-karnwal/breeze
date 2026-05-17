@@ -5,13 +5,13 @@ const { mockGetConfigurationCandidates, mockFetch } = vi.hoisted(() => ({
 	mockFetch: vi.fn(),
 }));
 
-vi.mock("@proliferate/services", () => ({
+vi.mock("@breeze/services", () => ({
 	configurations: {
 		getConfigurationCandidates: mockGetConfigurationCandidates,
 	},
 }));
 
-vi.mock("@proliferate/environment/server", () => ({
+vi.mock("@breeze/environment/server", () => ({
 	env: {
 		LLM_PROXY_URL: "http://localhost:4000",
 		LLM_PROXY_ADMIN_URL: null,
@@ -28,7 +28,7 @@ const mockLogger = {
 	error: vi.fn(),
 	debug: vi.fn(),
 	child: vi.fn().mockReturnThis(),
-} as unknown as import("@proliferate/logger").Logger;
+} as unknown as import("@breeze/logger").Logger;
 
 import {
 	buildEnrichmentContext,

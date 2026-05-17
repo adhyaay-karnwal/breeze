@@ -5,7 +5,7 @@ import type { TaskToolMetadata } from "@/lib/sessions/coding-message-converter";
 import { makeAssistantToolUI } from "@assistant-ui/react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { ProliferateToolCard } from "./proliferate-tool-card";
+import { BreezeToolCard } from "./breeze-tool-card";
 
 type TaskArgs = {
 	description?: string;
@@ -39,7 +39,7 @@ export const TaskToolUI = makeAssistantToolUI<TaskArgs, string>({
 		);
 
 		return (
-			<ProliferateToolCard
+			<BreezeToolCard
 				label={`${capitalizeFirst(agentType)} task`}
 				status={isRunning ? "running" : "success"}
 			>
@@ -102,7 +102,7 @@ export const TaskToolUI = makeAssistantToolUI<TaskArgs, string>({
 						{result.length > 2000 && "\n..."}
 					</pre>
 				)}
-			</ProliferateToolCard>
+			</BreezeToolCard>
 		);
 	},
 });

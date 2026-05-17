@@ -12,7 +12,7 @@
  *   E2B_API_KEY=xxx E2B_DOMAIN=e2b.company.com pnpm tsx scripts/test-e2b.ts
  */
 
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 import { Sandbox } from "e2b";
 
 const TEMPLATE = env.E2B_TEMPLATE;
@@ -204,10 +204,10 @@ async function main() {
 			}
 		});
 
-		await runTest("Proliferate metadata directory exists", async () => {
-			const result = await sandbox!.commands.run("ls -la /home/user/.proliferate");
+		await runTest("Breeze metadata directory exists", async () => {
+			const result = await sandbox!.commands.run("ls -la /home/user/.breeze");
 			if (result.exitCode !== 0) {
-				throw new Error("Proliferate metadata directory not found");
+				throw new Error("Breeze metadata directory not found");
 			}
 		});
 

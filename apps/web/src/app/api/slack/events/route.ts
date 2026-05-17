@@ -7,15 +7,11 @@
 
 import { createHmac, timingSafeEqual } from "crypto";
 import { logger } from "@/lib/infra/logger";
-import { env } from "@proliferate/environment/server";
+import { env } from "@breeze/environment/server";
 
 const log = logger.child({ handler: "slack-events" });
-import {
-	type SlackMessageJob,
-	createSlackMessagesQueue,
-	queueSlackMessage,
-} from "@proliferate/queue";
-import { integrations, workers } from "@proliferate/services";
+import { type SlackMessageJob, createSlackMessagesQueue, queueSlackMessage } from "@breeze/queue";
+import { integrations, workers } from "@breeze/services";
 
 const SLACK_SIGNING_SECRET = env.SLACK_SIGNING_SECRET;
 

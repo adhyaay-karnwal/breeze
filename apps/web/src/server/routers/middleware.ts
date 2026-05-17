@@ -10,10 +10,10 @@ import {
 } from "@/lib/auth/server/session";
 import { isSuperAdmin } from "@/lib/auth/super-admin";
 import { logger } from "@/lib/infra/logger";
+import { nodeEnv, runtimeEnv } from "@breeze/environment/runtime";
+import { orgs } from "@breeze/services";
+import { BillingGateError } from "@breeze/shared/billing";
 import { os, ORPCError } from "@orpc/server";
-import { nodeEnv, runtimeEnv } from "@proliferate/environment/runtime";
-import { orgs } from "@proliferate/services";
-import { BillingGateError } from "@proliferate/shared/billing";
 
 const log = logger.child({ module: "orpc-middleware" });
 const enableTimingLogs = nodeEnv === "development" && runtimeEnv.ORPC_TIMING !== "0";

@@ -11,7 +11,7 @@ import {
 	eq,
 	getDb,
 	workerJobs,
-} from "@proliferate/services/db/client";
+} from "@breeze/services/db/client";
 
 // ============================================
 // Type Exports

@@ -5,7 +5,7 @@
  * the auto-start commands to the configuration.
  */
 
-import { configurations } from "@proliferate/services";
+import { configurations } from "@breeze/services";
 import { z } from "zod";
 import type { SessionHub } from "../../session-hub";
 import type { InterceptedToolHandler, InterceptedToolResult } from "./index";

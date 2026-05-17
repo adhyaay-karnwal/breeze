@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth/server";
 import { getDevUserId } from "@/lib/auth/server/session";
 import { logger } from "@/lib/infra/logger";
-import { orgs, users } from "@proliferate/services";
+import { orgs, users } from "@breeze/services";
 import { toNextJsHandler } from "better-auth/next-js";
 
 const log = logger.child({ route: "auth" });
