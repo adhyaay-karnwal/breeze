@@ -5,12 +5,14 @@ import { openIntercomMessenger } from "@/components/providers/intercom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
+	BlocksIcon,
 	BreezeLoadingIcon2,
 	CoworkersIcon,
 	IntegrationsIcon,
 	OpenCodeIcon,
 	SessionsGridIcon,
 	SidebarCollapseIcon,
+	SidebarExpandIcon,
 } from "@/components/ui/icons";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -87,6 +89,27 @@ export function MobileSidebar() {
 	);
 }
 
+function BrandIcon({ className, collapsed = false }: { className?: string; collapsed?: boolean }) {
+	const [hovered, setHovered] = useState(false);
+	return (
+		<span
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
+			className="flex"
+		>
+			{hovered ? (
+				collapsed ? (
+					<SidebarExpandIcon className="h-4 w-4" />
+				) : (
+					<BreezeLoadingIcon2 className={className} />
+				)
+			) : (
+				<BlocksIcon className={className} />
+			)}
+		</span>
+	);
+}
+
 // Desktop sidebar - hidden on mobile
 export function Sidebar() {
 	const { sidebarCollapsed, toggleSidebar } = useDashboardStore();
@@ -118,14 +141,14 @@ export function Sidebar() {
 				<Button
 					variant="ghost"
 					size="icon"
-					className="h-8 w-8 text-muted-foreground hover:text-foreground"
+					className="h-8 w-8 text-foreground"
 					onClick={(e) => {
 						e.stopPropagation();
 						toggleSidebar();
 					}}
-					title="Breeze"
+					title="Expand sidebar"
 				>
-					<BreezeLoadingIcon2 className="h-5 w-5" />
+					<BrandIcon className="h-5 w-5" collapsed />
 				</Button>
 				<div className="my-1" />
 				<Button
@@ -185,9 +208,35 @@ export function Sidebar() {
 					sidebarCollapsed ? "opacity-0 pointer-events-none" : "opacity-100",
 				)}
 			>
-				<SidebarShell showCollapseButton>
-					{isSettingsPage ? <SettingsNav /> : <DashboardNav />}
-				</SidebarShell>
+				{isSettingsPage ? (
+					<SidebarShell showCollapseButton>
+						<SettingsNav />
+					</SidebarShell>
+				) : (
+					<>
+						<div className="px-3 pt-2 pb-1 flex items-center justify-between shrink-0">
+							<div className="flex items-center gap-2">
+								<BrandIcon className="h-5 w-5 shrink-0" />
+								<span className="text-sm font-semibold">Breeze</span>
+							</div>
+							<Button
+								variant="ghost"
+								size="icon"
+								className="h-7 w-7 text-muted-foreground hover:text-foreground"
+								onClick={toggleSidebar}
+								title="Collapse sidebar"
+							>
+								<SidebarCollapseIcon className="h-4 w-4" />
+							</Button>
+						</div>
+						<div className="px-3 mb-1 shrink-0">
+							<CoreNav />
+						</div>
+						<SidebarShell hideHeader>
+							<DashboardNav secondaryOnly />
+						</SidebarShell>
+					</>
+				)}
 			</div>
 		</aside>
 	);
@@ -240,10 +289,12 @@ export function SidebarShell({
 	children,
 	onClose,
 	showCollapseButton = false,
+	hideHeader = false,
 }: {
 	children: React.ReactNode;
 	onClose?: () => void;
 	showCollapseButton?: boolean;
+	hideHeader?: boolean;
 }) {
 	const handleSignOut = useSignOut();
 	const { data: authSession } = useSession();
@@ -267,37 +318,38 @@ export function SidebarShell({
 
 	return (
 		<>
-			{/* Header: Logo + actions */}
-			<div className="p-3 flex items-center justify-between gap-2">
-				<div className="flex items-center gap-2">
-					<BreezeLoadingIcon2 className="h-6 w-6 shrink-0" />
-					<span className="text-sm font-semibold">Breeze</span>
+			{!hideHeader && (
+				<div className="p-3 flex items-center justify-between gap-2">
+					<div className="flex items-center gap-2">
+						<BrandIcon className="h-6 w-6 shrink-0" />
+						<span className="text-sm font-semibold">Breeze</span>
+					</div>
+					<div className="flex items-center gap-1">
+						{showCollapseButton && (
+							<Button
+								variant="ghost"
+								size="icon"
+								className="h-8 w-8 text-muted-foreground hover:text-foreground"
+								onClick={toggleSidebar}
+								title="Collapse sidebar"
+							>
+								<SidebarCollapseIcon className="h-4 w-4" />
+							</Button>
+						)}
+						{onClose && (
+							<Button
+								variant="ghost"
+								size="icon"
+								className="h-8 w-8 text-muted-foreground hover:text-foreground"
+								onClick={onClose}
+								title="Close menu"
+							>
+								<X className="h-4 w-4" />
+							</Button>
+						)}
+					</div>
 				</div>
-				<div className="flex items-center gap-1">
-					{showCollapseButton && (
-						<Button
-							variant="ghost"
-							size="icon"
-							className="h-8 w-8 text-muted-foreground hover:text-foreground"
-							onClick={toggleSidebar}
-							title="Collapse sidebar"
-						>
-							<SidebarCollapseIcon className="h-4 w-4" />
-						</Button>
-					)}
-					{onClose && (
-						<Button
-							variant="ghost"
-							size="icon"
-							className="h-8 w-8 text-muted-foreground hover:text-foreground"
-							onClick={onClose}
-							title="Close menu"
-						>
-							<X className="h-4 w-4" />
-						</Button>
-					)}
-				</div>
-			</div>
+			)}
 
 			{/* Organization switcher */}
 			<div className="px-3 mb-2">
@@ -403,17 +455,60 @@ export function SidebarShell({
 	);
 }
 
-// Dashboard-specific nav items
-function DashboardNav({ onNavigate }: { onNavigate?: () => void }) {
+function CoreNav({ onNavigate }: { onNavigate?: () => void }) {
 	const pathname = usePathname();
 	const router = useRouter();
-	const { sidebarRecentsOpen, toggleSidebarRecents } = useDashboardStore();
 
 	const isHomePage = pathname === "/" || pathname === "/dashboard";
 	const isSessionsPage = pathname?.startsWith("/sessions") || pathname?.startsWith("/workspace");
 	const isCoworkersPage = pathname?.startsWith("/coworkers");
 	const isIntegrationsPage = pathname?.startsWith("/integrations");
 	const isSettingsPage = pathname?.startsWith("/settings");
+
+	const handleNavigate = (path: string) => {
+		router.push(path);
+		onNavigate?.();
+	};
+
+	return (
+		<div className="flex flex-col gap-1">
+			<NavItem icon={Home} label="Home" active={!!isHomePage} onClick={() => handleNavigate("/")} />
+			<NavItem
+				icon={SessionsGridIcon}
+				label="Sessions"
+				active={!!isSessionsPage}
+				onClick={() => handleNavigate("/sessions")}
+			/>
+			<NavItem
+				icon={CoworkersIcon}
+				label="Coworkers"
+				active={!!isCoworkersPage}
+				onClick={() => handleNavigate("/coworkers")}
+			/>
+			<NavItem
+				icon={IntegrationsIcon}
+				label="Integrations"
+				active={!!isIntegrationsPage}
+				onClick={() => handleNavigate("/integrations")}
+			/>
+			<NavItem
+				icon={Settings}
+				label="Settings"
+				active={!!isSettingsPage}
+				onClick={() => handleNavigate("/settings/profile")}
+			/>
+		</div>
+	);
+}
+
+// Dashboard-specific nav items
+function DashboardNav({
+	onNavigate,
+	secondaryOnly,
+}: { onNavigate?: () => void; secondaryOnly?: boolean }) {
+	const pathname = usePathname();
+	const router = useRouter();
+	const { sidebarRecentsOpen, toggleSidebarRecents } = useDashboardStore();
 
 	const { data: recentSessions } = useSessions({
 		limit: 8,
@@ -434,39 +529,7 @@ function DashboardNav({ onNavigate }: { onNavigate?: () => void }) {
 
 	return (
 		<>
-			{/* Top-level nav */}
-			<div className="flex flex-col gap-1">
-				<NavItem
-					icon={Home}
-					label="Home"
-					active={!!isHomePage}
-					onClick={() => handleNavigate("/")}
-				/>
-				<NavItem
-					icon={SessionsGridIcon}
-					label="Sessions"
-					active={!!isSessionsPage}
-					onClick={() => handleNavigate("/sessions")}
-				/>
-				<NavItem
-					icon={CoworkersIcon}
-					label="Coworkers"
-					active={!!isCoworkersPage}
-					onClick={() => handleNavigate("/coworkers")}
-				/>
-				<NavItem
-					icon={IntegrationsIcon}
-					label="Integrations"
-					active={!!isIntegrationsPage}
-					onClick={() => handleNavigate("/integrations")}
-				/>
-				<NavItem
-					icon={Settings}
-					label="Settings"
-					active={!!isSettingsPage}
-					onClick={() => handleNavigate("/settings/profile")}
-				/>
-			</div>
+			{!secondaryOnly && <CoreNav onNavigate={onNavigate} />}
 
 			{/* Coworkers */}
 			{workers && workers.length > 0 && (
