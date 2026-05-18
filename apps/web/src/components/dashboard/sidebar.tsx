@@ -38,6 +38,7 @@ import {
 	LogOut,
 	Menu,
 	Moon,
+	Search,
 	Settings,
 	Sun,
 	User,
@@ -89,14 +90,13 @@ export function MobileSidebar() {
 	);
 }
 
-function BrandIcon({ className, collapsed = false }: { className?: string; collapsed?: boolean }) {
-	const [hovered, setHovered] = useState(false);
+function BrandIcon({
+	className,
+	hovered,
+	collapsed = false,
+}: { className?: string; hovered: boolean; collapsed?: boolean }) {
 	return (
-		<span
-			onMouseEnter={() => setHovered(true)}
-			onMouseLeave={() => setHovered(false)}
-			className="flex"
-		>
+		<span className="flex items-center gap-2">
 			{hovered ? (
 				collapsed ? (
 					<SidebarExpandIcon className="h-4 w-4" />
@@ -106,15 +106,18 @@ function BrandIcon({ className, collapsed = false }: { className?: string; colla
 			) : (
 				<BlocksIcon className={className} />
 			)}
+			{!collapsed && <span className="text-sm font-semibold">Breeze</span>}
 		</span>
 	);
 }
 
 // Desktop sidebar - hidden on mobile
 export function Sidebar() {
-	const { sidebarCollapsed, toggleSidebar } = useDashboardStore();
+	const { sidebarCollapsed, toggleSidebar, setCommandSearchOpen } = useDashboardStore();
 	const pathname = usePathname();
 	const router = useRouter();
+	const { data: authSession } = useSession();
+	const billing = useBillingState();
 
 	const isSettingsPage = pathname?.startsWith("/settings");
 	const isHomePage = pathname === "/" || pathname === "/dashboard";
@@ -122,11 +125,21 @@ export function Sidebar() {
 	const isCoworkersPage = pathname?.startsWith("/coworkers");
 	const isIntegrationsPage = pathname?.startsWith("/integrations");
 
+	const user = authSession?.user;
+	const userInitials = user?.name
+		? user.name
+				.split(" ")
+				.map((n) => n[0])
+				.join("")
+				.toUpperCase()
+				.slice(0, 2)
+		: user?.email?.[0]?.toUpperCase() || "?";
+
 	return (
 		<aside
 			className={cn(
 				"hidden md:flex h-full flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground overflow-hidden",
-				"transition-[width] duration-200 ease-out",
+				"transition-all duration-200 ease-out",
 				sidebarCollapsed ? "w-12 cursor-pointer hover:bg-accent/50 transition-colors" : "w-64",
 			)}
 			onClick={sidebarCollapsed ? toggleSidebar : undefined}
@@ -134,111 +147,189 @@ export function Sidebar() {
 			{/* Collapsed view — icon-only nav */}
 			<div
 				className={cn(
-					"flex flex-col items-center h-full py-2 gap-1 transition-opacity duration-150",
+					"flex flex-col items-center h-full gap-1 transition-opacity duration-200 ease-out",
 					sidebarCollapsed ? "opacity-100" : "opacity-0 pointer-events-none absolute inset-0",
 				)}
 			>
-				<Button
-					variant="ghost"
-					size="icon"
-					className="h-8 w-8 text-foreground"
-					onClick={(e) => {
-						e.stopPropagation();
-						toggleSidebar();
-					}}
-					title="Expand sidebar"
-				>
-					<BrandIcon className="h-5 w-5" collapsed />
-				</Button>
-				<div className="my-1" />
-				<Button
-					variant={isHomePage ? "secondary" : "ghost"}
-					size="icon"
-					className="h-8 w-8 text-muted-foreground hover:text-foreground"
-					onClick={(e) => {
-						e.stopPropagation();
-						router.push("/");
-					}}
-					title="Home"
-				>
-					<Home className="h-4 w-4" />
-				</Button>
-				<Button
-					variant={isSessionsPage ? "secondary" : "ghost"}
-					size="icon"
-					className="h-8 w-8 text-muted-foreground hover:text-foreground"
-					onClick={(e) => {
-						e.stopPropagation();
-						router.push("/sessions");
-					}}
-					title="Sessions"
-				>
-					<SessionsGridIcon className="h-4 w-4" />
-				</Button>
-				<Button
-					variant={isCoworkersPage ? "secondary" : "ghost"}
-					size="icon"
-					className="h-8 w-8 text-muted-foreground hover:text-foreground"
-					onClick={(e) => {
-						e.stopPropagation();
-						router.push("/coworkers");
-					}}
-					title="Coworkers"
-				>
-					<CoworkersIcon className="h-4 w-4" />
-				</Button>
-				<Button
-					variant={isIntegrationsPage ? "secondary" : "ghost"}
-					size="icon"
-					className="h-8 w-8 text-muted-foreground hover:text-foreground"
-					onClick={(e) => {
-						e.stopPropagation();
-						router.push("/integrations");
-					}}
-					title="Integrations"
-				>
-					<IntegrationsIcon className="h-4 w-4" />
-				</Button>
+				<div className="flex flex-col items-center gap-1 pt-2">
+					<SidebarCollapsedBrandButton toggleSidebar={toggleSidebar} />
+					<div className="my-1" />
+					<Button
+						variant={isHomePage ? "secondary" : "ghost"}
+						size="icon"
+						className={cn(
+							"h-8 w-8 text-muted-foreground hover:text-foreground",
+							isHomePage && "bg-foreground/[0.07]",
+						)}
+						onClick={(e) => {
+							e.stopPropagation();
+							router.push("/");
+						}}
+						title="Home"
+					>
+						<Home className="h-4 w-4" />
+					</Button>
+					<Button
+						variant={isSessionsPage ? "secondary" : "ghost"}
+						size="icon"
+						className={cn(
+							"h-8 w-8 text-muted-foreground hover:text-foreground",
+							isSessionsPage && "bg-foreground/[0.07]",
+						)}
+						onClick={(e) => {
+							e.stopPropagation();
+							router.push("/sessions");
+						}}
+						title="Sessions"
+					>
+						<SessionsGridIcon className="h-4 w-4" />
+					</Button>
+					<Button
+						variant={isCoworkersPage ? "secondary" : "ghost"}
+						size="icon"
+						className={cn(
+							"h-8 w-8 text-muted-foreground hover:text-foreground",
+							isCoworkersPage && "bg-foreground/[0.07]",
+						)}
+						onClick={(e) => {
+							e.stopPropagation();
+							router.push("/coworkers");
+						}}
+						title="Coworkers"
+					>
+						<CoworkersIcon className="h-4 w-4" />
+					</Button>
+					<Button
+						variant={isIntegrationsPage ? "secondary" : "ghost"}
+						size="icon"
+						className={cn(
+							"h-8 w-8 text-muted-foreground hover:text-foreground",
+							isIntegrationsPage && "bg-foreground/[0.07]",
+						)}
+						onClick={(e) => {
+							e.stopPropagation();
+							router.push("/integrations");
+						}}
+						title="Integrations"
+					>
+						<IntegrationsIcon className="h-4 w-4" />
+					</Button>
+					<Button
+						variant={isSettingsPage ? "secondary" : "ghost"}
+						size="icon"
+						className={cn(
+							"h-8 w-8 text-muted-foreground hover:text-foreground",
+							isSettingsPage && "bg-foreground/[0.07]",
+						)}
+						onClick={(e) => {
+							e.stopPropagation();
+							router.push("/settings/profile");
+						}}
+						title="Settings"
+					>
+						<Settings className="h-4 w-4" />
+					</Button>
+				</div>
+				<div className="border-t border-sidebar-border w-full flex flex-col items-center gap-1 pt-2 pb-1 mt-auto">
+					<Button
+						variant="ghost"
+						size="icon"
+						className="h-8 w-8 text-muted-foreground hover:text-foreground"
+						onClick={(e) => {
+							e.stopPropagation();
+							setCommandSearchOpen(true);
+						}}
+						title="Search"
+					>
+						<Search className="h-4 w-4" />
+					</Button>
+					{billing.isLoaded && (
+						<Button
+							variant="ghost"
+							size="icon"
+							className="h-8 w-8 text-muted-foreground hover:text-foreground"
+							onClick={(e) => {
+								e.stopPropagation();
+								router.push("/settings/billing");
+							}}
+							title={`${billing.creditBalance} credits`}
+						>
+							<Coins className="h-4 w-4" />
+						</Button>
+					)}
+					{user && (
+						<Avatar className="h-6 w-6">
+							<AvatarImage src={user.image || undefined} alt={user.name || "User"} />
+							<AvatarFallback className="text-[9px]">{userInitials}</AvatarFallback>
+						</Avatar>
+					)}
+				</div>
 			</div>
 
 			{/* Full content - fixed width, fades in when expanded */}
 			<div
 				className={cn(
-					"w-64 flex flex-col h-full transition-opacity duration-200",
-					sidebarCollapsed ? "opacity-0 pointer-events-none" : "opacity-100",
+					"flex flex-col transition-opacity duration-200 ease-out",
+					sidebarCollapsed
+						? "opacity-0 pointer-events-none absolute inset-0"
+						: "opacity-100 w-64 h-full",
 				)}
 			>
-				{isSettingsPage ? (
-					<SidebarShell showCollapseButton>
-						<SettingsNav />
-					</SidebarShell>
-				) : (
-					<>
-						<div className="px-3 pt-2 pb-1 flex items-center justify-between shrink-0">
-							<div className="flex items-center gap-2">
-								<BrandIcon className="h-5 w-5 shrink-0" />
-								<span className="text-sm font-semibold">Breeze</span>
-							</div>
-							<Button
-								variant="ghost"
-								size="icon"
-								className="h-7 w-7 text-muted-foreground hover:text-foreground"
-								onClick={toggleSidebar}
-								title="Collapse sidebar"
-							>
-								<SidebarCollapseIcon className="h-4 w-4" />
-							</Button>
-						</div>
-						<div className="px-3 mb-1 shrink-0">
-							<CoreNav />
-						</div>
-						<SidebarShell hideHeader>
-							<DashboardNav secondaryOnly />
-						</SidebarShell>
-					</>
+				<div className="px-3 pt-2 pb-1 mb-1 flex items-center justify-between shrink-0">
+					<SidebarExpandedBrand />
+					<Button
+						variant="ghost"
+						size="icon"
+						className="h-7 w-7 text-muted-foreground hover:text-foreground"
+						onClick={toggleSidebar}
+						title="Collapse sidebar"
+					>
+						<SidebarCollapseIcon className="h-4 w-4" />
+					</Button>
+				</div>
+				{!isSettingsPage && (
+					<div className="px-3 mt-2 mb-1 shrink-0">
+						<CoreNav />
+					</div>
 				)}
+				<SidebarShell hideHeader>
+					{isSettingsPage ? <SettingsNav /> : <DashboardNav secondaryOnly />}
+				</SidebarShell>
 			</div>
 		</aside>
+	);
+}
+
+function SidebarCollapsedBrandButton({ toggleSidebar }: { toggleSidebar: () => void }) {
+	const [hovered, setHovered] = useState(false);
+	return (
+		<Button
+			variant="ghost"
+			size="icon"
+			className="h-8 w-8 text-foreground"
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
+			onClick={(e) => {
+				e.stopPropagation();
+				toggleSidebar();
+			}}
+			title="Expand sidebar"
+		>
+			<BrandIcon className="h-5 w-5" collapsed hovered={hovered} />
+		</Button>
+	);
+}
+
+function SidebarExpandedBrand() {
+	const [hovered, setHovered] = useState(false);
+	return (
+		<div
+			className="flex items-center gap-2"
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
+		>
+			<BrandIcon className="h-5 w-5 shrink-0" hovered={hovered} />
+		</div>
 	);
 }
 
@@ -306,6 +397,8 @@ export function SidebarShell({
 	// Fetch Slack status for support popup
 	const { toggleSidebar, setCommandSearchOpen } = useDashboardStore();
 
+	const [brandHovered, setBrandHovered] = useState(false);
+
 	const user = authSession?.user;
 	const userInitials = user?.name
 		? user.name
@@ -320,9 +413,12 @@ export function SidebarShell({
 		<>
 			{!hideHeader && (
 				<div className="p-3 flex items-center justify-between gap-2">
-					<div className="flex items-center gap-2">
-						<BrandIcon className="h-6 w-6 shrink-0" />
-						<span className="text-sm font-semibold">Breeze</span>
+					<div
+						className="flex items-center gap-2"
+						onMouseEnter={() => setBrandHovered(true)}
+						onMouseLeave={() => setBrandHovered(false)}
+					>
+						<BrandIcon className="h-6 w-6 shrink-0" hovered={brandHovered} />
 					</div>
 					<div className="flex items-center gap-1">
 						{showCollapseButton && (
@@ -351,20 +447,15 @@ export function SidebarShell({
 				</div>
 			)}
 
-			{/* Organization switcher */}
-			<div className="px-3 mb-2">
-				<OrgSwitcher />
-			</div>
+			{/* Scrollable nav — content provided by caller */}
+			<nav className="flex-1 overflow-y-auto overflow-x-hidden px-3">
+				<div className="flex flex-col gap-5">{children}</div>
+			</nav>
 
 			{/* Search */}
 			<div className="px-3 mb-2">
 				<SearchTrigger onClick={() => setCommandSearchOpen(true)} />
 			</div>
-
-			{/* Scrollable nav — content provided by caller */}
-			<nav className="flex-1 overflow-y-auto overflow-x-hidden px-3">
-				<div className="flex flex-col gap-5">{children}</div>
-			</nav>
 
 			{/* Footer */}
 			<div className="border-t border-sidebar-border px-3 py-3 flex flex-col gap-2">
@@ -395,6 +486,9 @@ export function SidebarShell({
 					<LifeBuoy className="h-4 w-4" />
 					<span>Support</span>
 				</Button>
+
+				{/* Organization switcher */}
+				<OrgSwitcher />
 
 				{/* User card */}
 				<Popover open={userMenuOpen} onOpenChange={setUserMenuOpen}>
