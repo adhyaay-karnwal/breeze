@@ -138,17 +138,17 @@ export function Sidebar() {
 	return (
 		<aside
 			className={cn(
-				"hidden md:flex h-full flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground overflow-hidden",
+				"hidden md:grid grid-cols-1 grid-rows-1 h-full border-r border-sidebar-border bg-sidebar text-sidebar-foreground overflow-hidden",
 				"transition-all duration-200 ease-out",
 				sidebarCollapsed ? "w-12 cursor-pointer hover:bg-accent/50 transition-colors" : "w-64",
 			)}
 			onClick={sidebarCollapsed ? toggleSidebar : undefined}
 		>
-			{/* Collapsed view — icon-only nav */}
+			{/* Collapsed view — icon-only nav, overlaid in same grid cell */}
 			<div
 				className={cn(
-					"flex flex-col items-center h-full gap-1 transition-opacity duration-200 ease-out",
-					sidebarCollapsed ? "opacity-100" : "opacity-0 pointer-events-none absolute inset-0",
+					"col-start-1 row-start-1 flex flex-col items-center gap-1 overflow-hidden transition-opacity duration-200 ease-out",
+					sidebarCollapsed ? "opacity-100" : "opacity-0 pointer-events-none",
 				)}
 			>
 				<div className="flex flex-col items-center gap-1 pt-2">
@@ -266,13 +266,11 @@ export function Sidebar() {
 				</div>
 			</div>
 
-			{/* Full content - fixed width, fades in when expanded */}
+			{/* Full content - overlaid in same grid cell */}
 			<div
 				className={cn(
-					"flex flex-col transition-opacity duration-200 ease-out",
-					sidebarCollapsed
-						? "opacity-0 pointer-events-none absolute inset-0"
-						: "opacity-100 w-64 h-full",
+					"col-start-1 row-start-1 flex flex-col transition-opacity duration-200 ease-out",
+					sidebarCollapsed ? "opacity-0 pointer-events-none" : "opacity-100",
 				)}
 			>
 				<div className="px-3 pt-2 pb-1 mb-1 flex items-center justify-between shrink-0">
