@@ -1,4 +1,4 @@
-export function setLastAuthMethod(method: "google" | "email") {
+export function setLastAuthMethod(method: "google" | "github" | "email") {
 	try {
 		localStorage.setItem("breeze:last-auth-method", method);
 	} catch {

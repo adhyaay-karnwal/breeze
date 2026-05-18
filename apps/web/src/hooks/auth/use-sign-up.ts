@@ -9,7 +9,7 @@ import posthog from "posthog-js";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-function trackSignup(method: "google" | "email") {
+function trackSignup(method: "google" | "github" | "email") {
 	const utms = getUtms() ?? {};
 	posthog.capture("user_signed_up", { method, ...utms });
 }
@@ -20,6 +20,7 @@ export function useSignUp() {
 	const { data: session, isPending } = useSession();
 	const { data: authProviders } = useAuthProviders();
 	const [googleLoading, setGoogleLoading] = useState(false);
+	const [githubLoading, setGithubLoading] = useState(false);
 	const [formLoading, setFormLoading] = useState(false);
 	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
@@ -30,6 +31,7 @@ export function useSignUp() {
 	const [email, setEmail] = useState(prefilledEmail);
 
 	const hasGoogleOAuth = authProviders?.providers.google ?? false;
+	const hasGitHubOAuth = authProviders?.providers.github ?? false;
 
 	useEffect(() => {
 		if (session && !isPending) {
@@ -54,6 +56,20 @@ export function useSignUp() {
 		} catch {
 			toast.error("Google sign up failed. Please try again.");
 			setGoogleLoading(false);
+		}
+	};
+
+	const handleGitHubSignIn = async () => {
+		setGithubLoading(true);
+		setLastAuthMethod("github");
+		try {
+			await signIn.social({
+				provider: "github",
+				callbackURL: redirectUrl,
+			});
+		} catch {
+			toast.error("GitHub sign up failed. Please try again.");
+			setGithubLoading(false);
 		}
 	};
 
@@ -105,10 +121,13 @@ export function useSignUp() {
 		showPassword,
 		setShowPassword,
 		googleLoading,
+		githubLoading,
 		formLoading,
 		hasGoogleOAuth,
+		hasGitHubOAuth,
 		redirectUrl,
 		handleGoogleSignIn,
+		handleGitHubSignIn,
 		handleEmailSignUp,
 	};
 }

@@ -2,7 +2,7 @@
 
 import { AuthLayout } from "@/components/auth/auth-layout";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff, GoogleIcon } from "@/components/ui/icons";
+import { Eye, EyeOff, GithubIcon, GoogleIcon } from "@/components/ui/icons";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSignIn } from "@/hooks/auth/use-sign-in";
@@ -20,10 +20,13 @@ export function SignInContent() {
 		showPassword,
 		setShowPassword,
 		googleLoading,
+		githubLoading,
 		formLoading,
 		hasGoogleOAuth,
+		hasGitHubOAuth,
 		redirectUrl,
 		handleGoogleSignIn,
+		handleGitHubSignIn,
 		handleEmailSignIn,
 	} = useSignIn();
 
@@ -51,25 +54,39 @@ export function SignInContent() {
 					</p>
 				</div>
 
-				{hasGoogleOAuth && (
-					<>
-						<Button
-							variant="outline"
-							className="h-10 w-full gap-2.5 rounded-lg text-sm font-medium"
-							onClick={handleGoogleSignIn}
-							disabled={googleLoading || formLoading}
-							type="button"
-						>
-							<GoogleIcon className="h-4 w-4" />
-							{googleLoading ? "..." : "Google"}
-						</Button>
+				{(hasGitHubOAuth || hasGoogleOAuth) && (
+					<div className="space-y-2.5">
+						{hasGitHubOAuth && (
+							<Button
+								type="button"
+								variant="outline"
+								className="h-10 w-full gap-2.5 rounded-lg border-border bg-white text-sm font-medium text-[#24292e] hover:bg-white/90 hover:text-[#24292e]"
+								onClick={handleGitHubSignIn}
+								disabled={githubLoading || formLoading}
+							>
+								<GithubIcon className="h-4 w-4" />
+								{githubLoading ? "Redirecting..." : "Continue with GitHub"}
+							</Button>
+						)}
+						{hasGoogleOAuth && (
+							<Button
+								variant="outline"
+								className="h-10 w-full gap-2.5 rounded-lg text-sm font-medium"
+								onClick={handleGoogleSignIn}
+								disabled={googleLoading || formLoading}
+								type="button"
+							>
+								<GoogleIcon className="h-4 w-4" />
+								{googleLoading ? "..." : "Continue with Google"}
+							</Button>
+						)}
 
 						<div className="my-6 flex items-center gap-3">
 							<div className="h-px flex-1 bg-border" />
 							<span className="text-xs text-muted-foreground">or</span>
 							<div className="h-px flex-1 bg-border" />
 						</div>
-					</>
+					</div>
 				)}
 
 				<form onSubmit={handleEmailSignIn} className="space-y-4">

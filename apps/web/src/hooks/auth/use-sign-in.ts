@@ -12,6 +12,7 @@ export function useSignIn() {
 	const { data: session, isPending } = useSession();
 	const { data: authProviders } = useAuthProviders();
 	const [googleLoading, setGoogleLoading] = useState(false);
+	const [githubLoading, setGithubLoading] = useState(false);
 	const [formLoading, setFormLoading] = useState(false);
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
@@ -21,6 +22,7 @@ export function useSignIn() {
 	const [email, setEmail] = useState(prefilledEmail);
 
 	const hasGoogleOAuth = authProviders?.providers.google ?? false;
+	const hasGitHubOAuth = authProviders?.providers.github ?? false;
 
 	useEffect(() => {
 		if (session && !isPending) {
@@ -39,6 +41,20 @@ export function useSignIn() {
 		} catch {
 			toast.error("Google sign in failed. Please try again.");
 			setGoogleLoading(false);
+		}
+	};
+
+	const handleGitHubSignIn = async () => {
+		setGithubLoading(true);
+		setLastAuthMethod("github");
+		try {
+			await signIn.social({
+				provider: "github",
+				callbackURL: redirectUrl,
+			});
+		} catch {
+			toast.error("GitHub sign in failed. Please try again.");
+			setGithubLoading(false);
 		}
 	};
 
@@ -70,10 +86,13 @@ export function useSignIn() {
 		showPassword,
 		setShowPassword,
 		googleLoading,
+		githubLoading,
 		formLoading,
 		hasGoogleOAuth,
+		hasGitHubOAuth,
 		redirectUrl,
 		handleGoogleSignIn,
+		handleGitHubSignIn,
 		handleEmailSignIn,
 	};
 }
